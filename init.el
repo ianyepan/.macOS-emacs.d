@@ -25,6 +25,10 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
+  (setq scroll-margin 0
+        scroll-conservatively 10000
+        scroll-preserve-screen-position t
+        auto-window-vscroll nil)
   (blink-cursor-mode t)
   (setq blink-cursor-blinks 0)
   (setq show-paren-delay 0)
@@ -38,10 +42,12 @@
   (add-hook 'prog-mode-hook 'electric-pair-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup)
   (set-register ?e '(file . "~/.emacs.d/init.el"))
+
   (defun ian/load-init()
     "Reload `.emacs.d/init.el'."
     (interactive)
     (load-file "~/.emacs.d/init.el"))
+
   (defun ian/split-and-follow-horizontally ()
     "Split below."
     (interactive)
@@ -105,9 +111,10 @@
 
   (use-package flycheck
     :ensure t
-    :defer t
-    :hook (after-init . global-flycheck-mode)
-    :config (setq ispell-program-name "/usr/local/bin/aspell"))
+    :defer 2
+    :config
+    (global-flycheck-mode)
+    (setq ispell-program-name "/usr/local/bin/aspell"))
 
   (use-package ido-vertical-mode
     :ensure t
@@ -129,7 +136,7 @@
     :ensure t
     :defer t
     :hook
-    (org-mode . (lambda () (org-bullets-mode 1)))
+    (org-mode . org-bullets-mode)
     (org-mode . visual-line-mode)
     (org-mode . org-indent-mode))
 
@@ -153,24 +160,11 @@
     :defer t
     :hook (prog-mode . hes-mode))
 
-  (use-package smooth-scrolling
-    :ensure t
-    :defer t
-    :hook (after-init . smooth-scrolling-mode)
-    :config
-    (setq scroll-margin 1
-          smooth-scroll-margin 1
-          scroll-conservatively 0
-          scroll-up-aggressively 0.01
-          scroll-down-aggressively 0.01)
-    (setq-default scroll-up-aggressively 0.01
-                  scroll-down-aggressively 0.01))
-
   (use-package which-key
     :ensure t
-    :defer t
-    :hook (after-init . which-key-mode)
+    :defer 1
     :config
+    (which-key-mode)
     (setq which-key-idle-delay 0.4)
     (setq which-key-idle-secondary-delay 0.4))
 
@@ -178,16 +172,16 @@
     :ensure t
     :config
     (dashboard-setup-startup-hook)
-    (setq dashboard-startup-banner 'logo)
-    (setq dashboard-banner-logo-title "Welcome to Emacs. Happy Hacking!")
-    (setq dashboard-items nil)
-    (setq dashboard-set-footer nil))
+    (setq dashboard-startup-banner 'logo
+          dashboard-banner-logo-title "Welcome to Emacs. Happy Hacking!"
+          dashboard-items nil
+          dashboard-set-footer nil))
 
   (use-package yasnippet-snippets
     :ensure t
-    :defer t
-    :hook (after-init . yas-global-mode)
+    :defer 1
     :config
+    (yas-global-mode)
     (advice-add 'company-complete-common :before
                 (lambda ()
                   (setq my-company-point (point))))
@@ -195,6 +189,7 @@
                 (lambda ()
                   (when (equal my-company-point (point))
                     (yas-expand)))))
+
   (use-package markdown-mode
     :ensure t
     :defer t
