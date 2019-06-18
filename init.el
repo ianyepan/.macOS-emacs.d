@@ -74,7 +74,7 @@
   (global-set-key (kbd "RET") 'ian/newline-and-push-brace)
 
   (use-package doom-themes
-    :defer nil
+    :ensure t
     :config (load-theme 'doom-tomorrow-night t))
 
   (use-package evil
