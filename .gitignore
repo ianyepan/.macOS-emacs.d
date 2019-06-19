@@ -3,3 +3,4 @@
 # Except for..
 !.gitignore
 !init.el
+!README.md
