@@ -94,6 +94,7 @@
     :hook (after-init . evil-mode)
     :init (setq evil-want-C-u-scroll t)
     :config
+    (evil-set-initial-state 'term-mode 'emacs)
     (evil-ex-define-cmd "q" 'kill-this-buffer)
 
     (defun ian/save-and-kill-this-buffer ()
