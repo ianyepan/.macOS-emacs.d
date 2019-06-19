@@ -111,7 +111,7 @@
 
   (use-package flycheck
     :ensure t
-    :defer 2
+    :defer 1
     :config
     (global-flycheck-mode)
     (setq ispell-program-name "/usr/local/bin/aspell"))
@@ -179,9 +179,9 @@
 
   (use-package yasnippet-snippets
     :ensure t
-    :defer 1
+    :defer t
+    :hook (prog-mode . yas-global-mode)
     :config
-    (yas-global-mode)
     (advice-add 'company-complete-common :before
                 (lambda ()
                   (setq my-company-point (point))))
