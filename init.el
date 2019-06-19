@@ -41,7 +41,8 @@
   (set-frame-font "Menlo-13" nil t)
   (add-hook 'prog-mode-hook 'electric-pair-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup)
-  (setq auto-revert-interval 1)
+  (setq auto-revert-interval 2)
+  (setq auto-revert-check-vc-info t)
   (add-hook 'after-init-hook 'global-auto-revert-mode)
   (set-register ?e '(file . "~/.emacs.d/init.el"))
 
