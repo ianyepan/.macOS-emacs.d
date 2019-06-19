@@ -199,6 +199,14 @@
     :defer t
     :hook (markdown-mode . visual-line-mode))
 
+  (use-package shell-pop
+    :ensure t
+    :bind (("C-`" . shell-pop))
+    :config
+    (setq shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))))
+    (setq shell-pop-term-shell "/bin/zsh")
+    (shell-pop--set-shell-type 'shell-pop-shell-type shell-pop-shell-type))
+
   ) ;; file-name-handler-alist ENDS HERE
 
 (setq gc-cons-threshold 16777216

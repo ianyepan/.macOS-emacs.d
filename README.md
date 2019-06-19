@@ -34,8 +34,9 @@ I will constantly push new commits since *a real Emacser* is never completely sa
 - org (use most recent version instead of the built-in one)
 - org-bullets
 
-#### File management
+#### Terminal habits
 - ranger
+- shell-pop
 
 #### Friendly warnings
 - flycheck
