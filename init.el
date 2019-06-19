@@ -41,6 +41,8 @@
   (set-frame-font "Menlo-13" nil t)
   (add-hook 'prog-mode-hook 'electric-pair-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup)
+  (setq auto-revert-interval 1)
+  (add-hook 'after-init-hook 'global-auto-revert-mode)
   (set-register ?e '(file . "~/.emacs.d/init.el"))
 
   (defun ian/load-init()
@@ -60,6 +62,7 @@
     (split-window-right)
     (other-window 1))
   (global-set-key (kbd "C-x 3") 'ian/split-and-follow-vertically)
+
   (setq-default tab-width 4)
   (setq-default indent-tabs-mode nil)
   (setq js-indent-level 2)
