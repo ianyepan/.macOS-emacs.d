@@ -37,6 +37,7 @@ I will constantly push new commits since *a real Emacser* is never completely sa
 #### Terminal habits
 - ranger
 - shell-pop
+- exec-path-from-shell
 
 #### Friendly warnings
 - flycheck

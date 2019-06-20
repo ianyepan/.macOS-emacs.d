@@ -22,6 +22,7 @@
 
   (server-start)
   (setq ring-bell-function 'ignore)
+  (setq confirm-kill-processes nil)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
@@ -206,6 +207,12 @@
     (setq shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))))
     (setq shell-pop-term-shell "/bin/zsh")
     (shell-pop--set-shell-type 'shell-pop-shell-type shell-pop-shell-type))
+
+  (use-package exec-path-from-shell
+    :ensure t
+    :config
+    (when (memq window-system '(mac ns x))
+      (exec-path-from-shell-initialize)))
 
   ) ;; file-name-handler-alist ENDS HERE
 
