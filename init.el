@@ -44,7 +44,6 @@
   (setq auto-revert-interval 2)
   (setq auto-revert-check-vc-info t)
   (add-hook 'after-init-hook 'global-auto-revert-mode)
-  (set-register ?e '(file . "~/.emacs.d/init.el"))
 
   (defun ian/load-init()
     "Reload `.emacs.d/init.el'."
