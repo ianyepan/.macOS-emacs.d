@@ -19,6 +19,8 @@
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure t)
 
   (server-start)
   (setq ring-bell-function 'ignore)
@@ -85,11 +87,9 @@
   (global-set-key (kbd "RET") 'ian/newline-and-push-brace)
 
   (use-package doom-themes
-    :ensure t
     :config (load-theme 'doom-tomorrow-night t))
 
   (use-package evil
-    :ensure t
     :defer t
     :hook (after-init . evil-mode)
     :init (setq evil-want-C-u-scroll t)
@@ -104,7 +104,6 @@
     (evil-ex-define-cmd "wq" 'ian/save-and-kill-this-buffer))
 
   (use-package company
-    :ensure t
     :defer t
     :hook (prog-mode . company-mode)
     :config
@@ -115,14 +114,12 @@
       (define-key company-active-map (kbd "C-p") 'company-select-previous)))
 
   (use-package flycheck
-    :ensure t
     :defer 1
     :config
     (global-flycheck-mode)
     (setq ispell-program-name "/usr/local/bin/aspell"))
 
   (use-package ido-vertical-mode
-    :ensure t
     :defer t
     :hook
     (after-init . ido-mode)
@@ -133,12 +130,10 @@
     (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
 
   (use-package magit
-    :ensure t
     :defer t
     :bind ("C-x g" . magit-status))
 
   (use-package org-bullets
-    :ensure t
     :defer t
     :hook
     (org-mode . org-bullets-mode)
@@ -146,27 +141,22 @@
     (org-mode . org-indent-mode))
 
   (use-package ranger
-    :ensure t
     :defer t
     :config (setq ranger-width-preview 0.5))
 
   (use-package highlight-numbers
-    :ensure t
     :defer t
     :hook (prog-mode . highlight-numbers-mode))
 
   (use-package highlight-operators
-    :ensure t
     :defer t
     :hook (prog-mode . highlight-operators-mode))
 
   (use-package highlight-escape-sequences
-    :ensure t
     :defer t
     :hook (prog-mode . hes-mode))
 
   (use-package which-key
-    :ensure t
     :defer 1
     :config
     (which-key-mode)
@@ -174,7 +164,6 @@
     (setq which-key-idle-secondary-delay 0.4))
 
   (use-package dashboard
-    :ensure t
     :config
     (dashboard-setup-startup-hook)
     (setq dashboard-startup-banner 'logo
@@ -183,7 +172,6 @@
           dashboard-set-footer nil))
 
   (use-package yasnippet-snippets
-    :ensure t
     :defer t
     :hook (prog-mode . yas-global-mode)
     :config
@@ -196,12 +184,10 @@
                     (yas-expand)))))
 
   (use-package markdown-mode
-    :ensure t
     :defer t
     :hook (markdown-mode . visual-line-mode))
 
   (use-package shell-pop
-    :ensure t
     :bind (("C-`" . shell-pop))
     :config
     (setq shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))))
@@ -209,7 +195,6 @@
     (shell-pop--set-shell-type 'shell-pop-shell-type shell-pop-shell-type))
 
   (use-package exec-path-from-shell
-    :ensure t
     :config
     (when (memq window-system '(mac ns x))
       (exec-path-from-shell-initialize)))
