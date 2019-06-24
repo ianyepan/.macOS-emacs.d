@@ -114,7 +114,8 @@
   (use-package flycheck
     :hook (after-init . global-flycheck-mode)
     :config
-    (setq ispell-program-name "/usr/local/bin/aspell"))
+    (setq ispell-program-name "/usr/local/bin/aspell")
+    (setq flycheck-python-flake8-executable "python3"))
 
   (use-package ido-vertical-mode
     :hook
@@ -163,8 +164,8 @@
           dashboard-set-footer nil))
 
   (use-package yasnippet-snippets
-    :hook (prog-mode . yas-global-mode)
     :config
+    (yas-global-mode)
     (advice-add 'company-complete-common
                 :before
                 (lambda ()
