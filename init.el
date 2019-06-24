@@ -106,7 +106,7 @@
     :hook (prog-mode . company-mode)
     :config
     (setq company-minimum-prefix-length 2)
-    (setq company-idle-delay 0)
+    (setq company-idle-delay 0.1)
     (with-eval-after-load 'company
       (define-key company-active-map (kbd "C-n") 'company-select-next)
       (define-key company-active-map (kbd "C-p") 'company-select-previous)))
