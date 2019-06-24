@@ -39,8 +39,8 @@
   (setq make-backup-files nil)
   (setq-default indicate-empty-lines t)
   (setq-default line-spacing 3)
-  (setq frame-title-format '("Emacs"))
-  (setq initial-frame-alist (quote ((fullscreen . maximized))))
+  (setq frame-title-format '("Emacs")
+        initial-frame-alist (quote ((fullscreen . maximized))))
   (set-frame-font "Menlo-13" nil t)
   (add-hook 'prog-mode-hook 'electric-pair-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -105,8 +105,8 @@
   (use-package company
     :hook (prog-mode . company-mode)
     :config
-    (setq company-minimum-prefix-length 2)
-    (setq company-idle-delay 0.1)
+    (setq company-minimum-prefix-length 2
+          company-idle-delay 0.1)
     (with-eval-after-load 'company
       (define-key company-active-map (kbd "C-n") 'company-select-next)
       (define-key company-active-map (kbd "C-p") 'company-select-previous)))
@@ -122,9 +122,9 @@
     (after-init . ido-mode)
     (after-init . ido-vertical-mode)
     :config
-    (setq ido-everywhere t)
-    (setq ido-enable-flex-matching t)
-    (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
+    (setq ido-everywhere t
+          ido-enable-flex-matching t
+          ido-vertical-define-keys 'C-n-C-p-up-and-down))
 
   (use-package magit
     :bind ("C-x g" . magit-status))
@@ -152,8 +152,8 @@
     :defer 1
     :config
     (which-key-mode)
-    (setq which-key-idle-delay 0.4)
-    (setq which-key-idle-secondary-delay 0.4))
+    (setq which-key-idle-delay 0.4
+          which-key-idle-secondary-delay 0.4))
 
   (use-package dashboard
     :config
