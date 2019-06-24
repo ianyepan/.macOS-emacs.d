@@ -90,7 +90,6 @@
     :config (load-theme 'doom-tomorrow-night t))
 
   (use-package evil
-    :defer t
     :hook (after-init . evil-mode)
     :init (setq evil-want-C-u-scroll t)
     :config
@@ -104,7 +103,6 @@
     (evil-ex-define-cmd "wq" 'ian/save-and-kill-this-buffer))
 
   (use-package company
-    :defer t
     :hook (prog-mode . company-mode)
     :config
     (setq company-minimum-prefix-length 2)
@@ -114,13 +112,11 @@
       (define-key company-active-map (kbd "C-p") 'company-select-previous)))
 
   (use-package flycheck
-    :defer 1
+    :hook (after-init . global-flycheck-mode)
     :config
-    (global-flycheck-mode)
     (setq ispell-program-name "/usr/local/bin/aspell"))
 
   (use-package ido-vertical-mode
-    :defer t
     :hook
     (after-init . ido-mode)
     (after-init . ido-vertical-mode)
@@ -130,11 +126,9 @@
     (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
 
   (use-package magit
-    :defer t
     :bind ("C-x g" . magit-status))
 
   (use-package org-bullets
-    :defer t
     :hook
     (org-mode . org-bullets-mode)
     (org-mode . visual-line-mode)
@@ -145,15 +139,12 @@
     :config (setq ranger-width-preview 0.5))
 
   (use-package highlight-numbers
-    :defer t
     :hook (prog-mode . highlight-numbers-mode))
 
   (use-package highlight-operators
-    :defer t
     :hook (prog-mode . highlight-operators-mode))
 
   (use-package highlight-escape-sequences
-    :defer t
     :hook (prog-mode . hes-mode))
 
   (use-package which-key
@@ -172,19 +163,19 @@
           dashboard-set-footer nil))
 
   (use-package yasnippet-snippets
-    :defer t
     :hook (prog-mode . yas-global-mode)
     :config
-    (advice-add 'company-complete-common :before
+    (advice-add 'company-complete-common
+                :before
                 (lambda ()
                   (setq my-company-point (point))))
-    (advice-add 'company-complete-common :after
+    (advice-add 'company-complete-common
+                :after
                 (lambda ()
                   (when (equal my-company-point (point))
                     (yas-expand)))))
 
   (use-package markdown-mode
-    :defer t
     :hook (markdown-mode . visual-line-mode))
 
   (use-package shell-pop
