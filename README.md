@@ -33,6 +33,7 @@ I will constantly push new commits since *a real Emacser* is never completely sa
 
 #### Better Emacs defaults
 - company (autocompletion)
+- format-all (code formatting)
 - ido-vertical-mode
 - yasnippets
 - dashboard (welcome screen)

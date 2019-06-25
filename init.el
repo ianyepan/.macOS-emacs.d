@@ -66,8 +66,8 @@
     (other-window 1))
   (global-set-key (kbd "C-x 3") 'ian/split-and-follow-vertically)
 
-  (setq-default tab-width 4)
-  (setq-default indent-tabs-mode nil)
+  (setq-default indent-tabs-mode nil
+                tab-width 4)
   (setq js-indent-level 2)
   (setq c-default-style
         '((java-mode . "java")
@@ -75,7 +75,7 @@
           (other . "k&r")))
   (setq-default c-basic-offset 4)
 
-  (defun ian/newline-and-push-brace ()
+  (defun ian/newline-indent-and-maybe-push-brace ()
     "`newline-and-indent', but bracket aware."
     (interactive)
     (insert "\n")
@@ -84,7 +84,7 @@
       (indent-according-to-mode)
       (forward-line -1))
     (indent-according-to-mode))
-  (global-set-key (kbd "RET") 'ian/newline-and-push-brace)
+  (global-set-key (kbd "RET") 'ian/newline-indent-and-maybe-push-brace)
 
   (use-package doom-themes
     :config (load-theme 'doom-tomorrow-night t))
@@ -191,6 +191,12 @@
     (when (memq window-system '(mac ns x))
       (exec-path-from-shell-initialize)))
 
+  (use-package format-all
+    :config
+    (defun ian/format-code()
+      "Auto-format whole buffer"
+      (interactive)
+      (format-all-buffer)))
   ) ;; file-name-handler-alist ENDS HERE
 
 (setq gc-cons-threshold 16777216
