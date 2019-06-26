@@ -23,8 +23,9 @@
   (setq use-package-always-ensure t)
 
   (server-start)
-  (setq ring-bell-function 'ignore)
-  (setq confirm-kill-processes nil)
+  (setq ring-bell-function 'ignore
+        confirm-kill-processes nil
+        make-backup-files nil)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
@@ -32,21 +33,27 @@
         scroll-conservatively 10000
         scroll-preserve-screen-position t
         auto-window-vscroll nil)
-  (blink-cursor-mode t)
-  (setq blink-cursor-blinks 0)
-  (setq show-paren-delay 0)
-  (show-paren-mode 1)
-  (setq make-backup-files nil)
+  (setq blink-cursor-blinks 0
+        show-paren-delay 0)
+  (show-paren-mode)
   (setq-default indicate-empty-lines t)
-  (setq-default line-spacing 3)
   (setq frame-title-format '("Emacs")
         initial-frame-alist (quote ((fullscreen . maximized))))
   (set-frame-font "Menlo-13" nil t)
+  (setq-default line-spacing 3)
   (add-hook 'prog-mode-hook 'electric-pair-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup)
-  (setq auto-revert-interval 2)
-  (setq auto-revert-check-vc-info t)
+  (setq auto-revert-interval 2
+        auto-revert-check-vc-info t)
   (add-hook 'after-init-hook 'global-auto-revert-mode)
+  (setq-default indent-tabs-mode nil
+                tab-width 4
+                c-basic-offset 4)
+  (setq js-indent-level 2)
+  (setq c-default-style
+        '((java-mode . "java")
+          (awk-mode . "awk")
+          (other . "k&r")))
 
   (defun ian/load-init()
     "Reload `.emacs.d/init.el'."
@@ -58,48 +65,40 @@
     (interactive)
     (split-window-below)
     (other-window 1))
-  (global-set-key (kbd "C-x 2") 'ian/split-and-follow-horizontally)
+
   (defun ian/split-and-follow-vertically ()
     "Split right."
     (interactive)
     (split-window-right)
     (other-window 1))
+
+  (global-set-key (kbd "C-x 2") 'ian/split-and-follow-horizontally)
   (global-set-key (kbd "C-x 3") 'ian/split-and-follow-vertically)
 
-  (setq-default indent-tabs-mode nil
-                tab-width 4)
-  (setq js-indent-level 2)
-  (setq c-default-style
-        '((java-mode . "java")
-          (awk-mode . "awk")
-          (other . "k&r")))
-  (setq-default c-basic-offset 4)
-
   (defun ian/newline-indent-and-maybe-push-brace ()
-    "`newline-and-indent', but bracket aware."
+    "insert newline and indent, but bracket aware."
     (interactive)
-    (insert "\n")
+    (newline)
     (when (looking-at "}")
-      (insert "\n")
-      (indent-according-to-mode)
+      (newline-and-indent)
       (forward-line -1))
     (indent-according-to-mode))
+
   (global-set-key (kbd "RET") 'ian/newline-indent-and-maybe-push-brace)
 
   (use-package doom-themes
     :config (load-theme 'doom-tomorrow-night t))
 
   (use-package evil
-    :hook (after-init . evil-mode)
     :init (setq evil-want-C-u-scroll t)
+    :hook (after-init . evil-mode)
     :config
     (evil-set-initial-state 'term-mode 'emacs)
-    (evil-ex-define-cmd "q" 'kill-this-buffer)
-
     (defun ian/save-and-kill-this-buffer ()
       (interactive)
       (save-buffer)
       (kill-this-buffer))
+    (evil-ex-define-cmd "q" 'kill-this-buffer)
     (evil-ex-define-cmd "wq" 'ian/save-and-kill-this-buffer))
 
   (use-package company
@@ -197,6 +196,7 @@
       "Auto-format whole buffer"
       (interactive)
       (format-all-buffer)))
+
   ) ;; file-name-handler-alist ENDS HERE
 
 (setq gc-cons-threshold 16777216
