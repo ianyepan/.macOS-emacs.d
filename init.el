@@ -45,15 +45,16 @@
   (add-hook 'before-save-hook 'whitespace-cleanup)
   (setq auto-revert-interval 2
         auto-revert-check-vc-info t)
+  (defvar ian/tab-size-normal 4)
+  (defvar ian/tab-size-shallow 2)
   (add-hook 'after-init-hook 'global-auto-revert-mode)
   (setq-default indent-tabs-mode nil
-                tab-width 4
-                c-basic-offset 4)
-  (setq js-indent-level 2)
-  (setq c-default-style
-        '((java-mode . "java")
-          (awk-mode . "awk")
-          (other . "k&r")))
+                tab-width ian/tab-size-normal
+                c-basic-offset ian/tab-size-normal)
+  (setq js-indent-level ian/tab-size-shallow)
+  (setq c-default-style '((java-mode . "java")
+                          (awk-mode . "awk")
+                          (other . "k&r")))
 
   (defun ian/load-init()
     "Reload `.emacs.d/init.el'."
@@ -177,18 +178,6 @@
 
   (use-package markdown-mode
     :hook (markdown-mode . visual-line-mode))
-
-  (use-package shell-pop
-    :bind (("C-`" . shell-pop))
-    :config
-    (setq shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))))
-    (setq shell-pop-term-shell "/bin/zsh")
-    (shell-pop--set-shell-type 'shell-pop-shell-type shell-pop-shell-type))
-
-  (use-package exec-path-from-shell
-    :config
-    (when (memq window-system '(mac ns x))
-      (exec-path-from-shell-initialize)))
 
   (use-package format-all
     :config
