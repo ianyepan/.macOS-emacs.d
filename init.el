@@ -22,13 +22,13 @@
   (require 'use-package-ensure)
   (setq use-package-always-ensure t)
 
-  (server-start)
   (setq ring-bell-function 'ignore
         confirm-kill-processes nil
         make-backup-files nil)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
+  (column-number-mode)
   (setq scroll-margin 0
         scroll-conservatively 10000
         scroll-preserve-screen-position t
@@ -39,7 +39,7 @@
   (setq-default indicate-empty-lines t)
   (setq frame-title-format '("Emacs")
         initial-frame-alist (quote ((fullscreen . maximized))))
-  (set-frame-font "Menlo-13" nil t)
+  (set-frame-font "Source Code Pro-13" nil t)
   (setq-default line-spacing 3)
   (add-hook 'prog-mode-hook 'electric-pair-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -166,15 +166,8 @@
   (use-package yasnippet-snippets
     :config
     (yas-global-mode)
-    (advice-add 'company-complete-common
-                :before
-                (lambda ()
-                  (setq my-company-point (point))))
-    (advice-add 'company-complete-common
-                :after
-                (lambda ()
-                  (when (equal my-company-point (point))
-                    (yas-expand)))))
+    (advice-add 'company-complete-common :before (lambda () (setq my-company-point (point))))
+    (advice-add 'company-complete-common :after (lambda () (when (equal my-company-point (point)) (yas-expand)))))
 
   (use-package markdown-mode
     :hook (markdown-mode . visual-line-mode))
@@ -185,6 +178,10 @@
       "Auto-format whole buffer"
       (interactive)
       (format-all-buffer)))
+
+  (use-package exec-path-from-shell
+    :config (when (memq window-system '(mac ns x))
+              (exec-path-from-shell-initialize)))
 
   ) ;; file-name-handler-alist ENDS HERE
 
