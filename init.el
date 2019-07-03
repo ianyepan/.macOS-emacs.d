@@ -159,7 +159,7 @@
     :config
     (dashboard-setup-startup-hook)
     (setq dashboard-startup-banner 'logo
-          dashboard-banner-logo-title "Welcome to Emacs. Happy Hacking!"
+          dashboard-banner-logo-title "Dangerously powerful"
           dashboard-items nil
           dashboard-set-footer nil))
 
