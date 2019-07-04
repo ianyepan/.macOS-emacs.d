@@ -193,7 +193,14 @@
   (use-package eglot
     :hook
     (c-mode . eglot-ensure)
-    (python-mode . eglot-ensure))
+    (python-mode . eglot-ensure)
+    :config
+    (setq eglot-ignored-server-capabilites :documentHighlightProvider))
+
+  (use-package highlight-symbol
+    :init (add-hook 'prog-mode-hook (lambda() (highlight-symbol-mode 1)))
+    :config
+    (setq highlight-symbol-idle-delay 0.3))
 
   ) ;; file-name-handler-alist ENDS HERE
 
