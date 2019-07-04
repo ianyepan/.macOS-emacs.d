@@ -87,13 +87,19 @@
 
   (global-set-key (kbd "RET") 'ian/newline-indent-and-maybe-push-brace)
 
-  (use-package doom-themes
-    :config (load-theme 'doom-tomorrow-night t))
+  ;; (use-package doom-themes
+  ;;   :config (load-theme 'doom-tomorrow-night t))
+
+  (use-package zenburn-theme
+    :config (load-theme 'zenburn t))
 
   (use-package evil
     :init (setq evil-want-C-u-scroll t)
     :hook (after-init . evil-mode)
     :config
+    (with-eval-after-load 'evil-maps
+      (define-key evil-insert-state-map (kbd "C-n") nil)
+      (define-key evil-insert-state-map (kbd "C-p") nil))
     (evil-set-initial-state 'term-mode 'emacs)
     (defun ian/save-and-kill-this-buffer ()
       (interactive)
@@ -106,7 +112,8 @@
     :hook (prog-mode . company-mode)
     :config
     (setq company-minimum-prefix-length 2
-          company-idle-delay 0.1)
+          company-idle-delay 0
+          company-selection-wrap-around t)
     (with-eval-after-load 'company
       (define-key company-active-map (kbd "C-n") 'company-select-next)
       (define-key company-active-map (kbd "C-p") 'company-select-previous)))
@@ -182,6 +189,11 @@
   (use-package exec-path-from-shell
     :config (when (memq window-system '(mac ns x))
               (exec-path-from-shell-initialize)))
+
+  (use-package eglot
+    :hook
+    (c-mode . eglot-ensure)
+    (python-mode . eglot-ensure))
 
   ) ;; file-name-handler-alist ENDS HERE
 
