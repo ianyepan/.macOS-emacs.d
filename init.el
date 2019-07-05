@@ -46,6 +46,7 @@
   (add-hook 'before-save-hook 'whitespace-cleanup)
   (global-set-key (kbd "s-b") 'xref-find-definitions)
   (global-set-key (kbd "s-[") 'xref-pop-marker-stack)
+  (global-set-key (kbd "s-w") 'kill-this-buffer)
   (setq auto-revert-interval 2
         auto-revert-check-vc-info t)
   (defvar ian/tab-size-normal 4)
@@ -90,11 +91,11 @@
 
   (global-set-key (kbd "RET") 'ian/newline-indent-and-maybe-push-brace)
 
-  ;; (use-package doom-themes
-  ;;   :config (load-theme 'doom-opera t))
+  (use-package doom-themes
+    :config (load-theme 'doom-tomorrow-night t))
 
-  (use-package zenburn-theme
-    :config (load-theme 'zenburn t))
+  ;; (use-package zenburn-theme
+  ;;   :config (load-theme 'zenburn t))
 
   (use-package evil
     :init (setq evil-want-C-u-scroll t)
@@ -196,7 +197,7 @@
               (exec-path-from-shell-initialize)))
 
   (use-package highlight-symbol
-    :init (add-hook 'prog-mode-hook (lambda() (highlight-symbol-mode 1)))
+    :hook (prog-mode . highlight-symbol-mode)
     :config
     (setq highlight-symbol-idle-delay 0.3))
 
@@ -208,12 +209,13 @@
     (setq eglot-ignored-server-capabilites (quote (:documentHighlightProvider))))
 
   (use-package lsp-mode
-    :hook (java-mode . lsp)
+    :hook
+    (java-mode . lsp)
     :commands lsp
     :config (setq lsp-enable-symbol-highlighting nil))
 
   (use-package company-lsp
-    :config (push 'company-lsp company-backends))
+    :commands (company-lsp))
 
   (use-package lsp-java
     :after lsp)
