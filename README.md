@@ -36,28 +36,28 @@ I will constantly push new commits since *a real Emacser* is never completely sa
 - magit
 
 #### Better Emacs defaults
-- company (autocompletion)
-- format-all (code formatting)
 - ido-vertical-mode
-- yasnippets
-- dashboard (welcome screen)
-
-#### Org mode
-- org (use most recent version instead of the built-in one)
-- org-bullets
-
-#### Terminal habits
-- ranger
-- shell-pop
+- markdown-mode
 - exec-path-from-shell
-
-#### Friendly warnings
-- flycheck
-
-#### Lightweight syntax highlight improvement for all languages
 - highlight-operators
 - highlight-numbers
 - highlight-escape-sequences
 
+#### Lighweight IDE-like features
+- eglot (client for language server protocal servers)
+- company (autocompletion)
+- flycheck
+- format-all (code formatting)
+- yasnippets
+- highlight-symbol (highlight things at cursor point)
+- dashboard (welcome screen)
+
+#### Org mode
+- org-bullets
+
+#### Terminal habits
+- ranger
+
 #### Theme
-- doom-themes (I use doom-tomorrow-night)
+- doom-themes (doom-tomorrow-night: one of my favorite themes)
+- zenburn-theme (low contrast and easy on the eyes)
