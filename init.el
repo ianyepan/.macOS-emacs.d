@@ -27,7 +27,8 @@
         make-backup-files nil)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (scroll-bar-mode -1)
+  (scroll-bar-mode 1)
+  (fringe-mode '(nil . 0))
   (column-number-mode)
   (setq scroll-margin 0
         scroll-conservatively 10000
@@ -43,6 +44,8 @@
   (setq-default line-spacing 3)
   (add-hook 'prog-mode-hook 'electric-pair-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup)
+  (global-set-key (kbd "s-b") 'xref-find-definitions)
+  (global-set-key (kbd "s-[") 'xref-pop-marker-stack)
   (setq auto-revert-interval 2
         auto-revert-check-vc-info t)
   (defvar ian/tab-size-normal 4)
@@ -87,11 +90,11 @@
 
   (global-set-key (kbd "RET") 'ian/newline-indent-and-maybe-push-brace)
 
-  ;; (use-package doom-themes
-  ;;   :config (load-theme 'doom-tomorrow-night t))
+  (use-package doom-themes
+    :config (load-theme 'doom-opera t))
 
-  (use-package zenburn-theme
-    :config (load-theme 'zenburn t))
+  ;; (use-package zenburn-theme
+  ;;   :config (load-theme 'zenburn t))
 
   (use-package evil
     :init (setq evil-want-C-u-scroll t)
@@ -111,9 +114,11 @@
   (use-package company
     :hook (prog-mode . company-mode)
     :config
-    (setq company-minimum-prefix-length 2
+    (setq company-minimum-prefix-length 1
           company-idle-delay 0
-          company-selection-wrap-around t)
+          company-selection-wrap-around t
+          company-frontends '(company-pseudo-tooltip-frontend
+                              company-echo-metadata-frontend))
     (with-eval-after-load 'company
       (define-key company-active-map (kbd "C-n") 'company-select-next)
       (define-key company-active-map (kbd "C-p") 'company-select-previous)))
@@ -195,7 +200,7 @@
     (c-mode . eglot-ensure)
     (python-mode . eglot-ensure)
     :config
-    (setq eglot-ignored-server-capabilites :documentHighlightProvider))
+    (setq eglot-ignored-server-capabilites (quote (:documentHighlightProvider))))
 
   (use-package highlight-symbol
     :init (add-hook 'prog-mode-hook (lambda() (highlight-symbol-mode 1)))
