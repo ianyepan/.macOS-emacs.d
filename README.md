@@ -44,13 +44,16 @@ I will constantly push new commits since *a real Emacser* is never completely sa
 - highlight-escape-sequences
 
 #### Lighweight IDE-like features
-- eglot (client for language server protocal servers)
 - company (autocompletion)
 - flycheck
 - format-all (code formatting)
 - yasnippets
 - highlight-symbol (highlight things at cursor point)
 - dashboard (welcome screen)
+
+### Language Server Protocal (LSP) clients
+- eglot (for C and Python)
+- lsp-mode, lsp-java, and company-lsp (for Java)
 
 #### Org mode
 - org-bullets

@@ -90,11 +90,11 @@
 
   (global-set-key (kbd "RET") 'ian/newline-indent-and-maybe-push-brace)
 
-  (use-package doom-themes
-    :config (load-theme 'doom-opera t))
+  ;; (use-package doom-themes
+  ;;   :config (load-theme 'doom-opera t))
 
-  ;; (use-package zenburn-theme
-  ;;   :config (load-theme 'zenburn t))
+  (use-package zenburn-theme
+    :config (load-theme 'zenburn t))
 
   (use-package evil
     :init (setq evil-want-C-u-scroll t)
@@ -195,6 +195,11 @@
     :config (when (memq window-system '(mac ns x))
               (exec-path-from-shell-initialize)))
 
+  (use-package highlight-symbol
+    :init (add-hook 'prog-mode-hook (lambda() (highlight-symbol-mode 1)))
+    :config
+    (setq highlight-symbol-idle-delay 0.3))
+
   (use-package eglot
     :hook
     (c-mode . eglot-ensure)
@@ -202,10 +207,16 @@
     :config
     (setq eglot-ignored-server-capabilites (quote (:documentHighlightProvider))))
 
-  (use-package highlight-symbol
-    :init (add-hook 'prog-mode-hook (lambda() (highlight-symbol-mode 1)))
-    :config
-    (setq highlight-symbol-idle-delay 0.3))
+  (use-package lsp-mode
+    :hook (java-mode . lsp)
+    :commands lsp
+    :config (setq lsp-enable-symbol-highlighting nil))
+
+  (use-package company-lsp
+    :config (push 'company-lsp company-backends))
+
+  (use-package lsp-java
+    :after lsp)
 
   ) ;; file-name-handler-alist ENDS HERE
 
