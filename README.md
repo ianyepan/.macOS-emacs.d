@@ -1,13 +1,11 @@
-## Ian's use-package Emacs configuration
+### Ian's Emacs configuration
 
 <p align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/EmacsIcon.svg/120px-EmacsIcon.svg.png" />
 </p>
 
 ### Thanks for dropping by!
-This is my personal Emacs configuration (on GNU Emacs 26.2). It's unopinionated and was created for general use in mind.
-
-This Emacs config starts up **super fast** with an average init time of 0.4 to 0.6 seconds.
+This is my personal Emacs configuration (on GNU Emacs 26.2). If you wish for an unopiniated Emacs "distro" that you could build upon, check out this page: https://github.com/ianpan870102/.emacs.d
 
 ### Installation
 Back up your `~/.emacs.d/` first (if you have one):
@@ -29,7 +27,7 @@ I will constantly push new commits since *a real Emacser* is never completely sa
 #### Package Manger
 - use-package
 
-#### Vim Editing habits (Optional depending on your preferences)
+#### Vim Editing habits
 - evil
 
 #### Git integration
@@ -38,6 +36,7 @@ I will constantly push new commits since *a real Emacser* is never completely sa
 #### Better Emacs defaults
 - ido-vertical-mode
 - markdown-mode
+- rjsx-mode
 - exec-path-from-shell
 - highlight-operators
 - highlight-numbers
@@ -52,7 +51,7 @@ I will constantly push new commits since *a real Emacser* is never completely sa
 - dashboard (welcome screen)
 
 ### Language Server Protocal (LSP) clients
-- eglot (for C and Python)
+- eglot (for C, Python, and JS)
 - lsp-mode, lsp-java, and company-lsp (for Java)
 
 #### Org mode
@@ -62,5 +61,5 @@ I will constantly push new commits since *a real Emacser* is never completely sa
 - ranger
 
 #### Theme
-- doom-themes (doom-tomorrow-night: one of my favorite themes)
 - zenburn-theme (low contrast and easy on the eyes)
+- doom-themes (doom-tomorrow-night: one of my favorite themes)
