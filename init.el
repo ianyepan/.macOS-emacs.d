@@ -44,18 +44,16 @@
   (setq-default line-spacing 3)
   (add-hook 'prog-mode-hook 'electric-pair-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup)
-  (global-set-key (kbd "s-b") 'xref-find-definitions)
-  (global-set-key (kbd "s-[") 'xref-pop-marker-stack)
+  (define-key prog-mode-map (kbd "s-b") 'xref-find-definitions)
+  (define-key prog-mode-map (kbd "s-[") 'xref-pop-marker-stack)
   (global-set-key (kbd "s-w") 'kill-this-buffer)
   (setq auto-revert-interval 2
         auto-revert-check-vc-info t)
-  (defvar ian/tab-size-normal 4)
-  (defvar ian/tab-size-shallow 2)
   (add-hook 'after-init-hook 'global-auto-revert-mode)
   (setq-default indent-tabs-mode nil
-                tab-width ian/tab-size-normal
-                c-basic-offset ian/tab-size-normal)
-  (setq js-indent-level ian/tab-size-shallow)
+                tab-width 4
+                c-basic-offset 4)
+  (setq js-indent-level 2)
   (setq c-default-style '((java-mode . "java")
                           (awk-mode . "awk")
                           (other . "k&r")))
@@ -66,13 +64,13 @@
     (load-file "~/.emacs.d/init.el"))
 
   (defun ian/split-and-follow-horizontally ()
-    "Split below."
+    "Split window below."
     (interactive)
     (split-window-below)
     (other-window 1))
 
   (defun ian/split-and-follow-vertically ()
-    "Split right."
+    "Split window right."
     (interactive)
     (split-window-right)
     (other-window 1))
@@ -91,11 +89,11 @@
 
   (global-set-key (kbd "RET") 'ian/newline-indent-and-maybe-push-brace)
 
-  (use-package doom-themes
-    :config (load-theme 'doom-tomorrow-night t))
+  ;; (use-package doom-themes
+  ;; :config (load-theme 'doom-tomorrow-night t))
 
-  ;; (use-package zenburn-theme
-  ;;   :config (load-theme 'zenburn t))
+  (use-package zenburn-theme
+    :config (load-theme 'zenburn t))
 
   (use-package evil
     :init (setq evil-want-C-u-scroll t)
@@ -118,6 +116,7 @@
     (setq company-minimum-prefix-length 1
           company-idle-delay 0
           company-selection-wrap-around t
+          company-tooltip-align-annotations t
           company-frontends '(company-pseudo-tooltip-frontend
                               company-echo-metadata-frontend))
     (with-eval-after-load 'company
@@ -204,21 +203,39 @@
   (use-package eglot
     :hook
     (c-mode . eglot-ensure)
+    (c-or-c++-mode . eglot-ensure) ; header files (.h)
     (python-mode . eglot-ensure)
+    (rjsx-mode . eglot-ensure)
     :config
     (setq eglot-ignored-server-capabilites (quote (:documentHighlightProvider))))
 
   (use-package lsp-mode
-    :hook
-    (java-mode . lsp)
+    :hook (java-mode . lsp)
     :commands lsp
-    :config (setq lsp-enable-symbol-highlighting nil))
+    :config
+    (setq lsp-enable-symbol-highlighting nil))
 
   (use-package company-lsp
     :commands (company-lsp))
 
   (use-package lsp-java
     :after lsp)
+
+  (use-package rjsx-mode
+    :config
+    (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+    (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
+    (setq js2-strict-missing-semi-warning nil))
+
+  ;; (use-package tide
+  ;;   :after (rjsx-mode company flycheck)
+  ;;   :hook (rjsx-mode . tide-setup)
+  ;;   :config
+  ;;   (define-key rjsx-mode-map (kbd "s-b") 'tide-jump-to-definition)
+  ;;   (define-key rjsx-mode-map (kbd "s-[") 'tide-jump-back)
+  ;;   (define-key typescript-mode-map (kbd "s-b") 'tide-jump-to-definition)
+  ;;   (define-key typescript-mode-map (kbd "s-[") 'tide-jump-back))
+
 
   ) ;; file-name-handler-alist ENDS HERE
 
