@@ -52,7 +52,6 @@
   (setq-default indent-tabs-mode nil
                 tab-width 4
                 c-basic-offset 4)
-  (setq js-indent-level 2)
   (setq c-default-style '((java-mode . "java")
                           (awk-mode . "awk")
                           (other . "k&r")))
@@ -98,7 +97,7 @@
     :init (setq evil-want-C-u-scroll t)
     :hook (after-init . evil-mode)
     :config
-    (with-eval-after-load 'evil-maps
+    (with-eval-after-load 'evil-maps ; avoid conflict with company tooltip selection
       (define-key evil-insert-state-map (kbd "C-n") nil)
       (define-key evil-insert-state-map (kbd "C-p") nil))
     (evil-set-initial-state 'term-mode 'emacs)
@@ -116,7 +115,7 @@
           company-idle-delay 0
           company-selection-wrap-around t
           company-tooltip-align-annotations t
-          company-frontends '(company-pseudo-tooltip-frontend
+          company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even when single candidate
                               company-echo-metadata-frontend))
     (with-eval-after-load 'company
       (define-key company-active-map (kbd "C-n") 'company-select-next)
@@ -153,8 +152,8 @@
   (use-package highlight-numbers
     :hook (prog-mode . highlight-numbers-mode))
 
-  (use-package highlight-operators
-    :hook (prog-mode . highlight-operators-mode))
+  ;; (use-package highlight-operators
+  ;; :hook (prog-mode . highlight-operators-mode))
 
   (use-package highlight-escape-sequences
     :hook (prog-mode . hes-mode))
@@ -225,6 +224,7 @@
   (use-package lsp-java :after lsp)
 
   (use-package rjsx-mode
+    :hook (rjsx-mode . (lambda () (setq js-indent-level 2)))
     :config
     (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
     (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
