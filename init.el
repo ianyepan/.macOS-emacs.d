@@ -46,7 +46,6 @@
   (add-hook 'before-save-hook 'whitespace-cleanup)
   (define-key prog-mode-map (kbd "s-b") 'xref-find-definitions)
   (define-key prog-mode-map (kbd "s-[") 'xref-pop-marker-stack)
-  (global-set-key (kbd "s-w") 'kill-this-buffer)
   (setq auto-revert-interval 2
         auto-revert-check-vc-info t)
   (add-hook 'after-init-hook 'global-auto-revert-mode)
@@ -181,8 +180,11 @@
     (advice-add 'company-complete-common :before (lambda () (setq my-company-point (point))))
     (advice-add 'company-complete-common :after (lambda () (when (equal my-company-point (point)) (yas-expand)))))
 
-  (use-package markdown-mode
-    :hook (markdown-mode . visual-line-mode))
+  (use-package markdown-mode :hook (markdown-mode . visual-line-mode))
+
+  (use-package kotlin-mode)
+
+  (use-package json-mode)
 
   (use-package format-all
     :config
@@ -201,25 +203,26 @@
     (setq highlight-symbol-idle-delay 0.3))
 
   (use-package eglot
-    :hook
-    (c-mode . eglot-ensure)
-    (c-or-c++-mode . eglot-ensure) ; header files (.h)
-    (python-mode . eglot-ensure)
-    (rjsx-mode . eglot-ensure)
+    ;; :hook
+    ;; (c-mode . eglot-ensure)
+    ;; (c-or-c++-mode . eglot-ensure)
+    ;; (python-mode . eglot-ensure)
+    ;; (rjsx-mode . eglot-ensure)
     :config
     (setq eglot-ignored-server-capabilites (quote (:documentHighlightProvider))))
 
   (use-package lsp-mode
-    :hook (java-mode . lsp)
+    :hook
+    (c-mode . lsp)
+    (c-orc++-mode . lsp)
+    (java-mode . lsp)
+    (python-mode . lsp)
     :commands lsp
-    :config
-    (setq lsp-enable-symbol-highlighting nil))
+    :config (setq lsp-enable-symbol-highlighting nil))
 
-  (use-package company-lsp
-    :commands (company-lsp))
+  (use-package company-lsp :commands (company-lsp))
 
-  (use-package lsp-java
-    :after lsp)
+  (use-package lsp-java :after lsp)
 
   (use-package rjsx-mode
     :config
@@ -227,14 +230,24 @@
     (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
     (setq js2-strict-missing-semi-warning nil))
 
-  ;; (use-package tide
-  ;;   :after (rjsx-mode company flycheck)
-  ;;   :hook (rjsx-mode . tide-setup)
-  ;;   :config
-  ;;   (define-key rjsx-mode-map (kbd "s-b") 'tide-jump-to-definition)
-  ;;   (define-key rjsx-mode-map (kbd "s-[") 'tide-jump-back)
-  ;;   (define-key typescript-mode-map (kbd "s-b") 'tide-jump-to-definition)
-  ;;   (define-key typescript-mode-map (kbd "s-[") 'tide-jump-back))
+  (use-package tide
+    :after (rjsx-mode company flycheck)
+    :hook (rjsx-mode . tide-setup)
+    :config
+    (define-key rjsx-mode-map (kbd "s-b") 'tide-jump-to-definition)
+    (define-key rjsx-mode-map (kbd "s-[") 'tide-jump-back)
+    (define-key typescript-mode-map (kbd "s-b") 'tide-jump-to-definition)
+    (define-key typescript-mode-map (kbd "s-[") 'tide-jump-back))
+
+  (use-package web-mode
+    :mode ("\\.html\\'" . web-mode)
+    :config
+    (setq web-mode-markup-indent-offset 2
+          web-mode-code-indent-offset 2
+          web-mode-css-indent-offset 2
+          web-mode-enable-auto-pairing t
+          web-mode-enable-auto-expanding t
+          web-mode-enable-css-colorization t))
 
 
   ) ;; file-name-handler-alist ENDS HERE
