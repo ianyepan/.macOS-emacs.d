@@ -91,7 +91,12 @@
   ;; :config (load-theme 'doom-tomorrow-night t))
 
   (use-package zenburn-theme
-    :config (load-theme 'zenburn t))
+    :config
+    (load-theme 'zenburn t)
+    (mapc (lambda (face)
+            (when (eq (face-attribute face :weight) 'bold)
+              (set-face-attribute face nil :weight 'normal)))
+          (face-list)))
 
   (use-package evil
     :init (setq evil-want-C-u-scroll t)
