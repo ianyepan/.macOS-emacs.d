@@ -76,20 +76,6 @@
   (global-set-key (kbd "C-x 2") 'ian/split-and-follow-horizontally)
   (global-set-key (kbd "C-x 3") 'ian/split-and-follow-vertically)
 
-  (defun ian/newline-indent-and-maybe-push-brace ()
-    "insert newline and indent, but bracket aware."
-    (interactive)
-    (newline)
-    (when (looking-at "}")
-      (newline-and-indent)
-      (forward-line -1))
-    (indent-according-to-mode))
-
-  (global-set-key (kbd "RET") 'ian/newline-indent-and-maybe-push-brace)
-
-  ;; (use-package doom-themes
-  ;; :config (load-theme 'doom-tomorrow-night t))
-
   (use-package zenburn-theme
     :config
     (load-theme 'zenburn t)
