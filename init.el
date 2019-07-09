@@ -91,7 +91,10 @@
       (load-theme 'wombat t))
     )
 
+  (use-package diminish)
+
   (use-package evil
+    :diminish undo-tree-mode
     :init (setq evil-want-C-u-scroll t)
     :hook (after-init . evil-mode)
     :config
@@ -107,6 +110,7 @@
     (evil-ex-define-cmd "wq" 'ian/save-and-kill-this-buffer))
 
   (use-package company
+    :diminish company-mode eldoc-mode
     :hook (prog-mode . company-mode)
     :config
     (setq company-minimum-prefix-length 1
@@ -157,6 +161,7 @@
     :hook (prog-mode . hes-mode))
 
   (use-package which-key
+    :diminish which-key-mode
     :defer 1
     :config
     (which-key-mode)
@@ -195,6 +200,7 @@
               (exec-path-from-shell-initialize)))
 
   (use-package highlight-symbol
+    :diminish highlight-symbol-mode
     :hook (prog-mode . highlight-symbol-mode)
     :config
     (setq highlight-symbol-idle-delay 0.3))
@@ -208,15 +214,11 @@
     (setq eglot-ignored-server-capabilites (quote (:documentHighlightProvider))))
 
   (use-package lsp-mode
-    :hook
-    (c-mode . lsp)
-    (c-orc++-mode . lsp)
-    (java-mode . lsp)
-    (python-mode . lsp)
+    :hook ((c-mode c-or-c++-mode java-mode python-mode) . lsp)
     :commands lsp
     :config (setq lsp-enable-symbol-highlighting nil))
 
-  (use-package company-lsp :commands (company-lsp))
+  (use-package company-lsp :commands company-lsp)
 
   (use-package lsp-java :after lsp)
 
@@ -246,14 +248,15 @@
           web-mode-enable-auto-expanding t
           web-mode-enable-css-colorization t))
 
-  (use-package treemacs-evil
+  (use-package treemacs
     :config
     (global-set-key (kbd "s-1") 'treemacs)
-    (setq treemacs-no-png-images t)
+    (setq treemacs-no-png-images t
+          treemacs-fringe-indicator-mode nil)
     (define-key treemacs-mode-map (kbd "l") nil)
     (define-key treemacs-mode-map (kbd "h") nil)
     (define-key treemacs-mode-map [mouse-1] 'treemacs-single-click-expand-action)
-    )
+    (use-package treemacs-evil :after treemacs))
 
 
   ) ;; file-name-handler-alist ENDS HERE
