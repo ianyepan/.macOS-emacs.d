@@ -76,13 +76,18 @@
   (global-set-key (kbd "C-x 2") 'ian/split-and-follow-horizontally)
   (global-set-key (kbd "C-x 3") 'ian/split-and-follow-vertically)
 
-  (use-package zenburn-theme
-    :config
-    (load-theme 'zenburn t)
+  (defun ian/disable-bold-face-globally ()
+    "disable bold face in Emacs"
+    (interactive)
     (mapc (lambda (face)
             (when (eq (face-attribute face :weight) 'bold)
-              (set-face-attribute face nil :weight 'normal)))
-          (face-list)))
+              (set-face-attribute face nil :weight 'normal))) (face-list)))
+
+  (use-package zenburn-theme
+    :config
+    (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
+    (load-theme 'zenburn t)
+    )
 
   (use-package evil
     :init (setq evil-want-C-u-scroll t)
@@ -197,7 +202,6 @@
     ;; (c-mode . eglot-ensure)
     ;; (c-or-c++-mode . eglot-ensure)
     ;; (python-mode . eglot-ensure)
-    ;; (rjsx-mode . eglot-ensure)
     :config
     (setq eglot-ignored-server-capabilites (quote (:documentHighlightProvider))))
 
@@ -242,6 +246,8 @@
 
 
   ) ;; file-name-handler-alist ENDS HERE
+
+(ian/disable-bold-face-globally)
 
 (setq gc-cons-threshold 16777216
       gc-cons-percentage 0.1)
