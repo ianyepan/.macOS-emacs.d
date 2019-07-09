@@ -246,6 +246,15 @@
           web-mode-enable-auto-expanding t
           web-mode-enable-css-colorization t))
 
+  (use-package treemacs-evil
+    :config
+    (global-set-key (kbd "s-1") 'treemacs)
+    (setq treemacs-no-png-images t)
+    (define-key treemacs-mode-map (kbd "l") nil)
+    (define-key treemacs-mode-map (kbd "h") nil)
+    (define-key treemacs-mode-map [mouse-1] 'treemacs-single-click-expand-action)
+    )
+
 
   ) ;; file-name-handler-alist ENDS HERE
 
