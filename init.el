@@ -86,7 +86,9 @@
   (use-package zenburn-theme
     :config
     (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
-    (load-theme 'zenburn t)
+    (if window-system
+        (load-theme 'zenburn t)
+      (load-theme 'wombat t))
     )
 
   (use-package evil
