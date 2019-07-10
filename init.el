@@ -77,23 +77,23 @@
   (global-set-key (kbd "C-x 2") 'ian/split-and-follow-horizontally)
   (global-set-key (kbd "C-x 3") 'ian/split-and-follow-vertically)
 
-  (defun ian/disable-bold-face-globally ()
-    "disable bold face in Emacs"
+  (defun ian/disable-bold-and-fringe-bg-face-globally ()
+    "disable bold face and fringe backgroung in Emacs"
     (interactive)
+    (set-face-attribute 'fringe nil :background nil)
     (mapc (lambda (face)
             (when (eq (face-attribute face :weight) 'bold)
               (set-face-attribute face nil :weight 'normal))) (face-list)))
 
-  (use-package doom-themes
-    :config (load-theme 'doom-city-lights t))
+  ;; (use-package doom-themes
+  ;; :config (load-theme 'doom-opera t) (set-cursor-color "#aaaaaa"))
 
-  ;; (use-package zenburn-theme
-  ;;   :config
-  ;;   (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
-  ;;   (if window-system
-  ;;       (load-theme 'zenburn t)
-  ;;     (load-theme 'wombat t))
-  ;;   (set-face-attribute 'fringe nil :background nil))
+  (use-package zenburn-theme
+    :config
+    (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
+    (if window-system
+        (load-theme 'zenburn t)
+      (load-theme 'wombat t)))
 
   (use-package diminish)
 
@@ -155,15 +155,11 @@
     :defer t
     :config (setq ranger-width-preview 0.5))
 
-  (use-package highlight-numbers
-    :hook (prog-mode . highlight-numbers-mode))
+  (use-package highlight-numbers :hook (prog-mode . highlight-numbers-mode))
 
-  ;;; disable for Zenburn
-  ;; (use-package highlight-operators
-  ;; :hook (prog-mode . highlight-operators-mode))
+  (use-package highlight-operators :hook (prog-mode . highlight-operators-mode))
 
-  (use-package highlight-escape-sequences
-    :hook (prog-mode . hes-mode))
+  (use-package highlight-escape-sequences :hook (prog-mode . hes-mode))
 
   (use-package which-key
     :diminish which-key-mode
@@ -232,7 +228,10 @@
     :config
     (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
     (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
-    (setq js2-strict-missing-semi-warning nil))
+    (setq js2-strict-missing-semi-warning nil)
+    (with-eval-after-load 'rjsx-mode
+      (define-key rjsx-mode-map "<" nil)
+      (define-key rjsx-mode-map ">" nil)))
 
   (use-package tide
     :after (rjsx-mode company flycheck)
@@ -285,7 +284,7 @@
 
   ) ;; file-name-handler-alist ENDS HERE
 
-(ian/disable-bold-face-globally)
+(ian/disable-bold-and-fringe-bg-face-globally)
 
 (setq gc-cons-threshold 16777216
       gc-cons-percentage 0.1)
