@@ -28,7 +28,6 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (scroll-bar-mode 1)
-  (fringe-mode '(nil . 0))
   (setq mouse-highlight nil)
   (column-number-mode)
   (global-set-key (kbd "s-w") 'kill-this-buffer)
@@ -85,12 +84,16 @@
             (when (eq (face-attribute face :weight) 'bold)
               (set-face-attribute face nil :weight 'normal))) (face-list)))
 
-  (use-package zenburn-theme
-    :config
-    (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
-    (if window-system
-        (load-theme 'zenburn t)
-      (load-theme 'wombat t)))
+  (use-package doom-themes
+    :config (load-theme 'doom-city-lights t))
+
+  ;; (use-package zenburn-theme
+  ;;   :config
+  ;;   (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
+  ;;   (if window-system
+  ;;       (load-theme 'zenburn t)
+  ;;     (load-theme 'wombat t))
+  ;;   (set-face-attribute 'fringe nil :background nil))
 
   (use-package diminish)
 
@@ -251,6 +254,8 @@
           web-mode-enable-css-colorization t))
 
   (use-package treemacs
+    :after evil
+    ;; :hook (treemacs-mode . (lambda() (set-background-color "#333333")))
     :config
     (global-set-key (kbd "s-1") 'treemacs)
     (setq treemacs-no-png-images t
@@ -259,7 +264,11 @@
     (define-key treemacs-mode-map [mouse-1] 'treemacs-single-click-expand-action)
     (evil-define-key 'treemacs treemacs-mode-map (kbd "l") 'treemacs-RET-action)
     (evil-define-key 'treemacs treemacs-mode-map (kbd "h") 'treemacs-TAB-action)
-    (use-package treemacs-evil :after treemacs))
+    (use-package treemacs-evil
+      :after treemacs
+      :config
+      (evil-define-key 'treemacs treemacs-mode-map (kbd "l") 'treemacs-RET-action)
+      (evil-define-key 'treemacs treemacs-mode-map (kbd "h") 'treemacs-TAB-action)))
 
   (use-package centaur-tabs
     :demand
@@ -268,7 +277,7 @@
     (setq centaur-tabs-set-modified-marker t
           centaur-tabs-modified-marker "●"
           centaur-tabs-cycle-scope 'tabs
-          centaur-tabs-height 28)
+          centaur-tabs-height 32)
     :bind
     ("C-S-<tab>" . centaur-tabs-backward)
     ("C-<tab>" . centaur-tabs-forward))
