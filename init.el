@@ -14,7 +14,7 @@
   (setq package-enable-at-startup nil)
   (package-initialize)
 
-  (setq custom-file "~/.emacs.d/package-selected-packages.el")
+  (setq custom-file "~/.emacs.d/to-be-dumped.el") ; custom generated, don't load
 
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
@@ -29,7 +29,9 @@
   (menu-bar-mode -1)
   (scroll-bar-mode 1)
   (fringe-mode '(nil . 0))
+  (setq mouse-highlight nil)
   (column-number-mode)
+  (global-set-key (kbd "s-w") 'kill-this-buffer)
   (setq scroll-margin 0
         scroll-conservatively 10000
         scroll-preserve-screen-position t
@@ -88,8 +90,7 @@
     (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
     (if window-system
         (load-theme 'zenburn t)
-      (load-theme 'wombat t))
-    )
+      (load-theme 'wombat t)))
 
   (use-package diminish)
 
@@ -154,6 +155,7 @@
   (use-package highlight-numbers
     :hook (prog-mode . highlight-numbers-mode))
 
+  ;;; disable for Zenburn
   ;; (use-package highlight-operators
   ;; :hook (prog-mode . highlight-operators-mode))
 
@@ -252,11 +254,24 @@
     :config
     (global-set-key (kbd "s-1") 'treemacs)
     (setq treemacs-no-png-images t
-          treemacs-fringe-indicator-mode nil)
-    (define-key treemacs-mode-map (kbd "l") nil)
-    (define-key treemacs-mode-map (kbd "h") nil)
+          treemacs-fringe-indicator-mode nil
+          treemacs-width 40)
     (define-key treemacs-mode-map [mouse-1] 'treemacs-single-click-expand-action)
+    (evil-define-key 'treemacs treemacs-mode-map (kbd "l") 'treemacs-RET-action)
+    (evil-define-key 'treemacs treemacs-mode-map (kbd "h") 'treemacs-TAB-action)
     (use-package treemacs-evil :after treemacs))
+
+  (use-package centaur-tabs
+    :demand
+    :config
+    (centaur-tabs-mode)
+    (setq centaur-tabs-set-modified-marker t
+          centaur-tabs-modified-marker "●"
+          centaur-tabs-cycle-scope 'tabs
+          centaur-tabs-height 28)
+    :bind
+    ("C-S-<tab>" . centaur-tabs-backward)
+    ("C-<tab>" . centaur-tabs-forward))
 
 
   ) ;; file-name-handler-alist ENDS HERE
