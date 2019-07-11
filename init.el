@@ -86,14 +86,12 @@
               (set-face-attribute face nil :weight 'normal))) (face-list)))
 
   ;; (use-package doom-themes
-  ;; :config (load-theme 'doom-opera t) (set-cursor-color "#aaaaaa"))
+  ;;   :config (load-theme 'doom-one t) (set-cursor-color "#aaaaaa"))
 
   (use-package zenburn-theme
     :config
     (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
-    (if window-system
-        (load-theme 'zenburn t)
-      (load-theme 'wombat t)))
+    (load-theme 'zenburn t))
 
   (use-package diminish)
 
@@ -118,7 +116,7 @@
     :hook (prog-mode . company-mode)
     :config
     (setq company-minimum-prefix-length 1
-          company-idle-delay 0
+          company-idle-delay 0.1
           company-selection-wrap-around t
           company-tooltip-align-annotations t
           company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even when single candidate
@@ -271,12 +269,13 @@
 
   (use-package centaur-tabs
     :demand
+    :init (setq centaur-tabs-set-bar 'over)
     :config
     (centaur-tabs-mode)
     (setq centaur-tabs-set-modified-marker t
           centaur-tabs-modified-marker "●"
           centaur-tabs-cycle-scope 'tabs
-          centaur-tabs-height 32)
+          centaur-tabs-height 30)
     :bind
     ("C-S-<tab>" . centaur-tabs-backward)
     ("C-<tab>" . centaur-tabs-forward))
