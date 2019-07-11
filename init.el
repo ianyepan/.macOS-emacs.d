@@ -86,7 +86,14 @@
               (set-face-attribute face nil :weight 'normal))) (face-list)))
 
   ;; (use-package doom-themes
-  ;;   :config (load-theme 'doom-one t) (set-cursor-color "#aaaaaa"))
+  ;;   :config (load-theme 'doom-one t)
+  ;;   (use-package solaire-mode
+  ;;     :hook
+  ;;     ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+  ;;     (minibuffer-setup . solaire-mode-in-minibuffer)
+  ;;     :config
+  ;;     (solaire-global-mode)
+  ;;     (solaire-mode-swap-bg)))
 
   (use-package zenburn-theme
     :config
@@ -109,7 +116,8 @@
       (save-buffer)
       (kill-this-buffer))
     (evil-ex-define-cmd "q" 'kill-this-buffer)
-    (evil-ex-define-cmd "wq" 'ian/save-and-kill-this-buffer))
+    (evil-ex-define-cmd "wq" 'ian/save-and-kill-this-buffer)
+    (use-package evil-commentary :after evil :config (evil-commentary-mode)))
 
   (use-package company
     :diminish company-mode eldoc-mode
@@ -252,7 +260,6 @@
 
   (use-package treemacs
     :after evil
-    ;; :hook (treemacs-mode . (lambda() (set-background-color "#333333")))
     :config
     (global-set-key (kbd "s-1") 'treemacs)
     (setq treemacs-no-png-images t
