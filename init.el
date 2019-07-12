@@ -30,7 +30,6 @@
   (scroll-bar-mode 1)
   (setq mouse-highlight nil)
   (column-number-mode)
-  (global-set-key (kbd "s-w") 'kill-this-buffer)
   (setq scroll-margin 0
         scroll-conservatively 10000
         scroll-preserve-screen-position t
@@ -85,20 +84,20 @@
             (when (eq (face-attribute face :weight) 'bold)
               (set-face-attribute face nil :weight 'normal))) (face-list)))
 
-  ;; (use-package doom-themes
-  ;;   :config (load-theme 'doom-one t)
-  ;;   (use-package solaire-mode
-  ;;     :hook
-  ;;     ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
-  ;;     (minibuffer-setup . solaire-mode-in-minibuffer)
-  ;;     :config
-  ;;     (solaire-global-mode)
-  ;;     (solaire-mode-swap-bg)))
+  (use-package doom-themes
+    :config (load-theme 'doom-tomorrow-night t)
+    (use-package solaire-mode
+      :hook
+      ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+      (minibuffer-setup . solaire-mode-in-minibuffer)
+      :config
+      (solaire-global-mode)
+      (solaire-mode-swap-bg)))
 
-  (use-package zenburn-theme
-    :config
-    (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
-    (load-theme 'zenburn t))
+  ;; (use-package zenburn-theme
+  ;;   :config
+  ;;   (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
+  ;;   (load-theme 'zenburn t))
 
   (use-package diminish)
 
@@ -265,9 +264,6 @@
     (setq treemacs-no-png-images t
           treemacs-fringe-indicator-mode nil
           treemacs-width 40)
-    (define-key treemacs-mode-map [mouse-1] 'treemacs-single-click-expand-action)
-    (evil-define-key 'treemacs treemacs-mode-map (kbd "l") 'treemacs-RET-action)
-    (evil-define-key 'treemacs treemacs-mode-map (kbd "h") 'treemacs-TAB-action)
     (use-package treemacs-evil
       :after treemacs
       :config
@@ -286,6 +282,8 @@
     :bind
     ("C-S-<tab>" . centaur-tabs-backward)
     ("C-<tab>" . centaur-tabs-forward))
+
+  (use-package emmet-mode :hook (rjsx-mode . emmet-mode) (web-mode . emmet-mode))
 
 
   ) ;; file-name-handler-alist ENDS HERE
