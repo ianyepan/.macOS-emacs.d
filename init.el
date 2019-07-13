@@ -27,7 +27,7 @@
         make-backup-files nil)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (scroll-bar-mode 1)
+  (scroll-bar-mode +1)
   (setq mouse-highlight nil)
   (column-number-mode)
   (setq scroll-margin 0
@@ -85,19 +85,20 @@
               (set-face-attribute face nil :weight 'normal))) (face-list)))
 
   (use-package doom-themes
-    :config (load-theme 'doom-tomorrow-night t)
-    (use-package solaire-mode
-      :hook
-      ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
-      (minibuffer-setup . solaire-mode-in-minibuffer)
-      :config
-      (solaire-global-mode)
-      (solaire-mode-swap-bg)))
+    :config (load-theme 'doom-tomorrow-night t))
 
-  ;; (use-package zenburn-theme
-  ;;   :config
-  ;;   (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
-  ;;   (load-theme 'zenburn t))
+  (use-package zenburn-theme
+    :config
+    (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
+    (load-theme 'zenburn t))
+
+  (use-package solaire-mode
+    :hook
+    ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+    (minibuffer-setup . solaire-mode-in-minibuffer)
+    :config
+    (solaire-global-mode)
+    (solaire-mode-swap-bg))
 
   (use-package diminish)
 
@@ -284,7 +285,6 @@
     ("C-<tab>" . centaur-tabs-forward))
 
   (use-package emmet-mode :hook (rjsx-mode . emmet-mode) (web-mode . emmet-mode))
-
 
   ) ;; file-name-handler-alist ENDS HERE
 
