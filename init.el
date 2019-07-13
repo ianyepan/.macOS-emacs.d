@@ -84,20 +84,20 @@
             (when (eq (face-attribute face :weight) 'bold)
               (set-face-attribute face nil :weight 'normal))) (face-list)))
 
-  (use-package doom-themes
-    :config (load-theme 'doom-tomorrow-night t)
-    (use-package solaire-mode
-      :hook
-      ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
-      (minibuffer-setup . solaire-mode-in-minibuffer)
-      :config
-      (solaire-global-mode)
-      (solaire-mode-swap-bg)))
+  ;; (use-package doom-themes
+  ;;   :config (load-theme 'doom-tomorrow-night t)
+  ;;   (use-package solaire-mode
+  ;;     :hook
+  ;;     ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+  ;;     (minibuffer-setup . solaire-mode-in-minibuffer)
+  ;;     :config
+  ;;     (solaire-global-mode)
+  ;;     (solaire-mode-swap-bg)))
 
-  ;; (use-package zenburn-theme
-  ;;   :config
-  ;;   (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
-  ;;   (load-theme 'zenburn t))
+  (use-package zenburn-theme
+    :config
+    (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
+    (load-theme 'zenburn t))
 
   (use-package diminish)
 
