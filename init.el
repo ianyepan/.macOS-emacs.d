@@ -27,7 +27,7 @@
         make-backup-files nil)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (scroll-bar-mode 1)
+  (scroll-bar-mode +1)
   (setq mouse-highlight nil)
   (column-number-mode)
   (setq scroll-margin 0
@@ -37,7 +37,6 @@
   (setq blink-cursor-blinks 0
         show-paren-delay 0)
   (show-paren-mode)
-  (setq-default indicate-empty-lines t)
   (setq frame-title-format '("Emacs")
         initial-frame-alist (quote ((fullscreen . maximized))))
   (set-frame-font "Source Code Pro-13" nil t)
@@ -85,19 +84,20 @@
               (set-face-attribute face nil :weight 'normal))) (face-list)))
 
   ;; (use-package doom-themes
-  ;;   :config (load-theme 'doom-tomorrow-night t)
-  ;;   (use-package solaire-mode
-  ;;     :hook
-  ;;     ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
-  ;;     (minibuffer-setup . solaire-mode-in-minibuffer)
-  ;;     :config
-  ;;     (solaire-global-mode)
-  ;;     (solaire-mode-swap-bg)))
+  ;;   :config (load-theme 'doom-tomorrow-night t))
 
   (use-package zenburn-theme
     :config
-    (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaaa"))) ; dim cursor color
+    (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaa0"))) ; dim cursor color
     (load-theme 'zenburn t))
+
+  (use-package solaire-mode
+    :hook
+    ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+    (minibuffer-setup . solaire-mode-in-minibuffer)
+    :config
+    (solaire-global-mode)
+    (solaire-mode-swap-bg))
 
   (use-package diminish)
 
@@ -116,7 +116,10 @@
       (kill-this-buffer))
     (evil-ex-define-cmd "q" 'kill-this-buffer)
     (evil-ex-define-cmd "wq" 'ian/save-and-kill-this-buffer)
-    (use-package evil-commentary :after evil :config (evil-commentary-mode)))
+    (use-package evil-commentary
+      :after evil
+      :diminish evil-commentary-mode
+      :config (evil-commentary-mode)))
 
   (use-package company
     :diminish company-mode eldoc-mode
@@ -275,6 +278,7 @@
     :init (setq centaur-tabs-set-bar 'over)
     :config
     (centaur-tabs-mode)
+    (centaur-tabs-headline-match)
     (setq centaur-tabs-set-modified-marker t
           centaur-tabs-modified-marker "●"
           centaur-tabs-cycle-scope 'tabs
@@ -284,7 +288,6 @@
     ("C-<tab>" . centaur-tabs-forward))
 
   (use-package emmet-mode :hook (rjsx-mode . emmet-mode) (web-mode . emmet-mode))
-
 
   ) ;; file-name-handler-alist ENDS HERE
 
