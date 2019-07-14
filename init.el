@@ -83,13 +83,30 @@
             (when (eq (face-attribute face :weight) 'bold)
               (set-face-attribute face nil :weight 'normal))) (face-list)))
 
-  (use-package doom-themes
-    :config (load-theme 'doom-tomorrow-night t))
+  ;; (use-package doom-themes
+  ;;   :config (load-theme 'doom-tomorrow-night t))
 
   ;; (use-package zenburn-theme
   ;;   :config
   ;;   (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaa0"))) ; dim cursor color
   ;;   (load-theme 'zenburn t))
+
+  (set-background-color "#151515")
+  (set-foreground-color "#eeeeee")
+  (custom-set-faces
+   `(region ((t (:background "#333D46"))))
+   `(solaire-default-face ((t (:inherit default :background "black"))))
+   `(solaire-minibuffer-face ((t (:inherit default :background "black"))))
+   `(solaire-hl-line-face ((t (:hl-line :background "2e2e2e"))))
+   '(mode-line ((t (:background "#2b2b2b" :foreground "white"))))
+   '(ido-only-match ((t (:foreground "white"))))
+   '(company-preview ((t (:underline t :weight bold))))
+   '(company-preview-common ((t (:inherit company-preview))))
+   '(company-scrollbar-bg ((t (:background "lightgray"))))
+   '(company-scrollbar-fg ((t (:background "darkgray"))))
+   '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
+   '(company-tooltip-common ((t (:inherit company-preview-common))))
+   '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
 
   (use-package solaire-mode
     :hook
@@ -214,20 +231,14 @@
     :config
     (setq highlight-symbol-idle-delay 0.3))
 
-  (use-package eglot
-    ;; :hook
-    ;; (c-mode . eglot-ensure)
-    ;; (c-or-c++-mode . eglot-ensure)
-    ;; (python-mode . eglot-ensure)
-    :config
-    (setq eglot-ignored-server-capabilites (quote (:documentHighlightProvider))))
-
   (use-package lsp-mode
     :hook ((c-mode c-or-c++-mode java-mode python-mode) . lsp)
     :commands lsp
     :config (setq lsp-enable-symbol-highlighting nil))
 
-  (use-package company-lsp :commands company-lsp)
+  (use-package company-lsp
+    :commands company-lsp
+    :config (setq company-lsp-cache-candidates 'auto))
 
   (use-package lsp-java :after lsp)
 
