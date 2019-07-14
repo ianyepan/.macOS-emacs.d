@@ -283,7 +283,8 @@
     (global-set-key (kbd "s-1") 'treemacs)
     (setq treemacs-no-png-images t
           treemacs-fringe-indicator-mode nil
-          treemacs-width 40)
+          treemacs-width 40
+          treemacs-silent-refresh t)
     (use-package treemacs-evil
       :after treemacs
       :config
