@@ -267,15 +267,26 @@
       (define-key rjsx-mode-map ">" nil)))
 
   (use-package web-mode
-    :mode ("\\.tsx$" . web-mode)
-    :hook (web-mode . tide-setup)
     :config
-    (define-key web-mode-map (kbd "s-b") 'tide-jump-to-definition)
-    (define-key web-mode-map (kbd "s-[") 'tide-jump-back)
-    (setq web-mode-markup-indent-offset 2
-          web-mode-code-indent-offset 2
-          web-mode-css-indent-offset 2
-          web-mode-enable-css-colorization t))
+    (define-derived-mode web-tsx-mode web-mode "Web-TSX")
+    (add-to-list 'auto-mode-alist '("\\.tsx$" . web-tsx-mode))
+    (add-hook 'web-tsx-mode-hook 'tide-setup)
+    (define-key web-tsx-mode-map (kbd "s-b") 'tide-jump-to-definition)
+    (define-key web-tsx-mode-map (kbd "s-[") 'tide-jump-back)
+
+    (define-derived-mode web-html-mode web-mode "Web-HTML")
+    (add-to-list 'auto-mode-alist '("\\.html?$" . web-html-mode))
+    (define-key web-html-mode-map (kbd "s-b") 'xref-find-definitions)
+    (define-key web-html-mode-map (kbd "s-[") 'xref-pop-marker-stack)
+
+    (define-derived-mode web-css-mode web-mode "Web-CSS")
+    (add-to-list 'auto-mode-alist '("\\.css$" . web-css-mode))
+    (define-key web-css-mode-map (kbd "s-b") 'xref-find-definitions)
+    (define-key web-css-mode-map (kbd "s-[") 'xref-pop-marker-stack)
+
+    (setq web-mode-markup-indent-offset 2 ; web-html-mode
+          web-mode-code-indent-offset 2   ; web-tsx-mode
+          web-mode-css-indent-offset 2))  ; web-css-mode
 
   (use-package treemacs
     :after evil
@@ -306,7 +317,9 @@
     ("C-<tab>" . centaur-tabs-forward))
 
   (use-package emmet-mode
-    :hook (rjsx-mode . emmet-mode) (web-mode . emmet-mode)
+    :hook
+    (rjsx-mode . emmet-mode) ; js, jsx
+    (web-mode . emmet-mode)  ; tsx, html, & css
     :config (setq emmet-expand-jsx-className? t))
 
   (use-package projectile
@@ -314,11 +327,11 @@
     :config
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
     (define-key projectile-mode-map (kbd "s-p") 'projectile-find-file)
-    (setq projectile-sort-order 'recentf)
-    (setq projectile-indexing-method 'hybrid)
+    (setq projectile-sort-order 'recentf
+          projectile-indexing-method 'hybrid)
     (projectile-mode +1))
 
-  ) ;; file-name-handler-alist ENDS HERE
+  ) ;; file-name-handler-alist ends here
 
 (ian/disable-bold-and-fringe-bg-face-globally)
 
