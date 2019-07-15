@@ -24,18 +24,19 @@
 
   (setq ring-bell-function 'ignore
         confirm-kill-processes nil
-        make-backup-files nil)
+        make-backup-files nil
+        default-directory "~/")
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (scroll-bar-mode +1)
+  (blink-cursor-mode -1)
   (setq mouse-highlight nil)
   (column-number-mode)
   (setq scroll-margin 0
         scroll-conservatively 10000
         scroll-preserve-screen-position t
         auto-window-vscroll nil)
-  (setq blink-cursor-blinks 0
-        show-paren-delay 0)
+  (setq show-paren-delay 0)
   (show-paren-mode)
   (setq frame-title-format '("Emacs")
         initial-frame-alist (quote ((fullscreen . maximized))))
@@ -94,7 +95,7 @@
   (set-background-color "#151515")
   (set-foreground-color "#eeeeee")
   (custom-set-faces
-   `(region ((t (:background "#333D46"))))
+   `(region ((t (:background "#333D48"))))
    `(solaire-default-face ((t (:inherit default :background "black"))))
    `(solaire-minibuffer-face ((t (:inherit default :background "black"))))
    `(solaire-hl-line-face ((t (:hl-line :background "2e2e2e"))))
@@ -254,7 +255,9 @@
 
   (use-package tide
     :after (rjsx-mode company flycheck)
-    :hook (rjsx-mode . tide-setup)
+    :hook
+    (rjsx-mode . tide-setup)
+    (typescript-mode . tide-setup)
     :config
     (define-key rjsx-mode-map (kbd "s-b") 'tide-jump-to-definition)
     (define-key rjsx-mode-map (kbd "s-[") 'tide-jump-back)
@@ -305,7 +308,7 @@
 
 (ian/disable-bold-and-fringe-bg-face-globally)
 
-(setq gc-cons-threshold 16777216
+(setq gc-cons-threshold 30000000
       gc-cons-percentage 0.1)
 
 (provide 'init)
