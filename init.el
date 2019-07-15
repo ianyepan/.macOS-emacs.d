@@ -147,7 +147,7 @@
           company-idle-delay 0
           company-selection-wrap-around t
           company-tooltip-align-annotations t
-          company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even when single candidate
+          company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even if single candidate
                               company-echo-metadata-frontend))
     (with-eval-after-load 'company
       (define-key company-active-map (kbd "C-n") 'company-select-next)
@@ -219,7 +219,7 @@
 
   (use-package format-all
     :config
-    (defun ian/format-code()
+    (defun ian/format-code ()
       "Auto-format whole buffer"
       (interactive)
       (format-all-buffer)))
@@ -245,38 +245,36 @@
 
   (use-package lsp-java :after lsp)
 
-  (use-package rjsx-mode
+  (use-package tide :after (company flycheck))
+
+  (use-package typescript-mode
+    :mode ("\\.ts\\'" . typescript-mode)
+    :hook (typescript-mode . tide-setup)
     :config
-    (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
-    (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
+    (define-key typescript-mode-map (kbd "s-b") 'tide-jump-to-definition)
+    (define-key typescript-mode-map (kbd "s-[") 'tide-jump-back))
+
+  (use-package rjsx-mode
+    :mode ("\\.js\\'" . rjsx-mode) ("\\.jsx\\'" . rjsx-mode)
+    :hook (rjsx-mode . tide-setup)
+    :config
+    (define-key rjsx-mode-map (kbd "s-b") 'tide-jump-to-definition)
+    (define-key rjsx-mode-map (kbd "s-[") 'tide-jump-back)
     (setq js-indent-level 2
           js2-strict-missing-semi-warning nil)
     (with-eval-after-load 'rjsx-mode
       (define-key rjsx-mode-map "<" nil)
       (define-key rjsx-mode-map ">" nil)))
 
-  (use-package tide
-    :after (rjsx-mode web-mode company flycheck)
-    :hook
-    (rjsx-mode . tide-setup)
-    (typescript-mode . tide-setup)
-    (web-mode . tide-setup)
-    :config
-    (define-key rjsx-mode-map (kbd "s-b") 'tide-jump-to-definition)
-    (define-key rjsx-mode-map (kbd "s-[") 'tide-jump-back)
-    (define-key web-mode-map (kbd "s-b") 'tide-jump-to-definition)
-    (define-key web-mode-map (kbd "s-[") 'tide-jump-back)
-    (define-key typescript-mode-map (kbd "s-b") 'tide-jump-to-definition)
-    (define-key typescript-mode-map (kbd "s-[") 'tide-jump-back))
-
   (use-package web-mode
     :mode ("\\.tsx\\'" . web-mode)
+    :hook (web-mode . tide-setup)
     :config
+    (define-key web-mode-map (kbd "s-b") 'tide-jump-to-definition)
+    (define-key web-mode-map (kbd "s-[") 'tide-jump-back)
     (setq web-mode-markup-indent-offset 2
           web-mode-code-indent-offset 2
           web-mode-css-indent-offset 2
-          web-mode-enable-auto-pairing t
-          web-mode-enable-auto-expanding t
           web-mode-enable-css-colorization t))
 
   (use-package treemacs
