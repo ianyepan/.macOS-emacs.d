@@ -248,14 +248,14 @@
   (use-package tide :after (company flycheck))
 
   (use-package typescript-mode
-    :mode ("\\.ts\\'" . typescript-mode)
+    :mode ("\\.ts$" . typescript-mode)
     :hook (typescript-mode . tide-setup)
     :config
     (define-key typescript-mode-map (kbd "s-b") 'tide-jump-to-definition)
     (define-key typescript-mode-map (kbd "s-[") 'tide-jump-back))
 
   (use-package rjsx-mode
-    :mode ("\\.js\\'" . rjsx-mode) ("\\.jsx\\'" . rjsx-mode)
+    :mode ("\\.jsx?$" . rjsx-mode)
     :hook (rjsx-mode . tide-setup)
     :config
     (define-key rjsx-mode-map (kbd "s-b") 'tide-jump-to-definition)
@@ -267,7 +267,7 @@
       (define-key rjsx-mode-map ">" nil)))
 
   (use-package web-mode
-    :mode ("\\.tsx\\'" . web-mode)
+    :mode ("\\.tsx$" . web-mode)
     :hook (web-mode . tide-setup)
     :config
     (define-key web-mode-map (kbd "s-b") 'tide-jump-to-definition)
