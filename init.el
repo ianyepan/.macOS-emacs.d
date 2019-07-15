@@ -168,6 +168,8 @@
           ido-enable-flex-matching t
           ido-vertical-define-keys 'C-n-C-p-up-and-down))
 
+  (use-package flx-ido :config (setq flx-ido-mode t))
+
   (use-package magit
     :bind ("C-x g" . magit-status))
 
@@ -244,28 +246,31 @@
   (use-package lsp-java :after lsp)
 
   (use-package rjsx-mode
-    :hook (rjsx-mode . (lambda () (setq js-indent-level 2)))
     :config
     (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
     (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
-    (setq js2-strict-missing-semi-warning nil)
+    (setq js-indent-level 2
+          js2-strict-missing-semi-warning nil)
     (with-eval-after-load 'rjsx-mode
       (define-key rjsx-mode-map "<" nil)
       (define-key rjsx-mode-map ">" nil)))
 
   (use-package tide
-    :after (rjsx-mode company flycheck)
+    :after (rjsx-mode web-mode company flycheck)
     :hook
     (rjsx-mode . tide-setup)
     (typescript-mode . tide-setup)
+    (web-mode . tide-setup)
     :config
     (define-key rjsx-mode-map (kbd "s-b") 'tide-jump-to-definition)
     (define-key rjsx-mode-map (kbd "s-[") 'tide-jump-back)
+    (define-key web-mode-map (kbd "s-b") 'tide-jump-to-definition)
+    (define-key web-mode-map (kbd "s-[") 'tide-jump-back)
     (define-key typescript-mode-map (kbd "s-b") 'tide-jump-to-definition)
     (define-key typescript-mode-map (kbd "s-[") 'tide-jump-back))
 
   (use-package web-mode
-    :mode ("\\.html\\'" . web-mode)
+    :mode ("\\.tsx\\'" . web-mode)
     :config
     (setq web-mode-markup-indent-offset 2
           web-mode-code-indent-offset 2
@@ -302,7 +307,18 @@
     ("C-S-<tab>" . centaur-tabs-backward)
     ("C-<tab>" . centaur-tabs-forward))
 
-  (use-package emmet-mode :hook (rjsx-mode . emmet-mode) (web-mode . emmet-mode))
+  (use-package emmet-mode
+    :hook (rjsx-mode . emmet-mode) (web-mode . emmet-mode)
+    :config (setq emmet-expand-jsx-className? t))
+
+  (use-package projectile
+    :diminish projectile-mode
+    :config
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (define-key projectile-mode-map (kbd "s-p") 'projectile-find-file)
+    (setq projectile-sort-order 'recentf)
+    (setq projectile-indexing-method 'hybrid)
+    (projectile-mode +1))
 
   ) ;; file-name-handler-alist ENDS HERE
 
