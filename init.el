@@ -98,9 +98,9 @@
    `(region ((t (:background "#333D48"))))
    `(solaire-default-face ((t (:inherit default :background "black"))))
    `(solaire-minibuffer-face ((t (:inherit default :background "black"))))
-   `(solaire-hl-line-face ((t (:hl-line :background "2e2e2e"))))
+   `(solaire-hl-line-face ((t (:inherit hl-line))))
    '(mode-line ((t (:background "#2b2b2b" :foreground "white"))))
-   '(ido-only-match ((t (:foreground "white"))))
+   '(ido-only-match ((t (:foreground "#98FB98"))))
    '(company-preview ((t (:underline t :weight bold))))
    '(company-preview-common ((t (:inherit company-preview))))
    '(company-scrollbar-bg ((t (:background "lightgray"))))
@@ -170,8 +170,7 @@
 
   (use-package flx-ido :config (setq flx-ido-mode t))
 
-  (use-package magit
-    :bind ("C-x g" . magit-status))
+  (use-package magit :bind ("C-x g" . magit-status))
 
   (use-package org-bullets
     :hook
@@ -267,26 +266,22 @@
       (define-key rjsx-mode-map ">" nil)))
 
   (use-package web-mode
+    :mode
+    ("\\.html?$". web-mode)
+    ("\\.css$". web-mode)
+    ("\\.tsx$". web-mode)
     :config
-    (define-derived-mode web-tsx-mode web-mode "Web-TSX")
-    (add-to-list 'auto-mode-alist '("\\.tsx$" . web-tsx-mode))
-    (add-hook 'web-tsx-mode-hook 'tide-setup)
-    (define-key web-tsx-mode-map (kbd "s-b") 'tide-jump-to-definition)
-    (define-key web-tsx-mode-map (kbd "s-[") 'tide-jump-back)
+    (defun my/tsx-setup ()
+      (when (and (stringp buffer-file-name)
+                 (string-match "\\.tsx$" buffer-file-name))
+        (tide-setup)))
+    (add-hook 'web-mode-hook 'my/tsx-setup)
+    (define-key tide-mode-map (kbd "s-b") 'tide-jump-to-definition)
+    (define-key tide-mode-map (kbd "s-[") 'tide-jump-back)
 
-    (define-derived-mode web-html-mode web-mode "Web-HTML")
-    (add-to-list 'auto-mode-alist '("\\.html?$" . web-html-mode))
-    (define-key web-html-mode-map (kbd "s-b") 'xref-find-definitions)
-    (define-key web-html-mode-map (kbd "s-[") 'xref-pop-marker-stack)
-
-    (define-derived-mode web-css-mode web-mode "Web-CSS")
-    (add-to-list 'auto-mode-alist '("\\.css$" . web-css-mode))
-    (define-key web-css-mode-map (kbd "s-b") 'xref-find-definitions)
-    (define-key web-css-mode-map (kbd "s-[") 'xref-pop-marker-stack)
-
-    (setq web-mode-markup-indent-offset 2 ; web-html-mode
-          web-mode-code-indent-offset 2   ; web-tsx-mode
-          web-mode-css-indent-offset 2))  ; web-css-mode
+    (setq web-mode-markup-indent-offset 2 ; html
+          web-mode-code-indent-offset 4   ; tsx
+          web-mode-css-indent-offset 2))  ; css
 
   (use-package treemacs
     :after evil
