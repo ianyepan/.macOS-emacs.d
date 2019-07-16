@@ -38,8 +38,8 @@
         auto-window-vscroll nil)
   (setq show-paren-delay 0)
   (show-paren-mode)
-  (setq frame-title-format '("Emacs")
-        initial-frame-alist (quote ((fullscreen . maximized))))
+  (setq frame-title-format '("Emacs"))
+  ;; (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (set-frame-font "Source Code Pro-13" nil t)
   (setq-default line-spacing 3)
   (add-hook 'prog-mode-hook 'electric-pair-mode)
@@ -84,30 +84,29 @@
             (when (eq (face-attribute face :weight) 'bold)
               (set-face-attribute face nil :weight 'normal))) (face-list)))
 
-  ;; (use-package doom-themes
-  ;;   :config (load-theme 'doom-tomorrow-night t))
+  (use-package doom-themes :config (load-theme 'doom-tomorrow-night t))
 
   ;; (use-package zenburn-theme
   ;;   :config
   ;;   (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaa0"))) ; dim cursor color
   ;;   (load-theme 'zenburn t))
 
-  (set-background-color "#151515")
-  (set-foreground-color "#eeeeee")
-  (custom-set-faces
-   `(region ((t (:background "#333D48"))))
-   `(solaire-default-face ((t (:inherit default :background "black"))))
-   `(solaire-minibuffer-face ((t (:inherit default :background "black"))))
-   `(solaire-hl-line-face ((t (:inherit hl-line))))
-   '(mode-line ((t (:background "#2b2b2b" :foreground "white"))))
-   '(ido-only-match ((t (:foreground "#98FB98"))))
-   '(company-preview ((t (:underline t :weight bold))))
-   '(company-preview-common ((t (:inherit company-preview))))
-   '(company-scrollbar-bg ((t (:background "lightgray"))))
-   '(company-scrollbar-fg ((t (:background "darkgray"))))
-   '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
-   '(company-tooltip-common ((t (:inherit company-preview-common))))
-   '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
+  ;; (set-background-color "#151515")
+  ;; (set-foreground-color "#eeeeee")
+  ;; (custom-set-faces
+  ;;  `(region ((t (:background "#333D48"))))
+  ;;  `(solaire-default-face ((t (:inherit default :background "black"))))
+  ;;  `(solaire-minibuffer-face ((t (:inherit default :background "black"))))
+  ;;  `(solaire-hl-line-face ((t (:inherit hl-line))))
+  ;;  '(mode-line ((t (:background "#2b2b2b" :foreground "white"))))
+  ;;  '(ido-only-match ((t (:foreground "#98FB98"))))
+  ;;  '(company-preview ((t (:underline t :weight bold))))
+  ;;  '(company-preview-common ((t (:inherit company-preview))))
+  ;;  '(company-scrollbar-bg ((t (:background "lightgray"))))
+  ;;  '(company-scrollbar-fg ((t (:background "darkgray"))))
+  ;;  '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
+  ;;  '(company-tooltip-common ((t (:inherit company-preview-common))))
+  ;;  '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
 
   (use-package solaire-mode
     :hook
@@ -329,6 +328,14 @@
   ) ;; file-name-handler-alist ends here
 
 (ian/disable-bold-and-fringe-bg-face-globally)
+
+;; keyubindings for railwaycat's macport
+(setq-default mac-option-modifier 'meta)
+(setq-default mac-command-modifier 'super)
+(global-set-key (kbd "s-c") 'kill-ring-save)
+(global-set-key (kbd "s-v") 'yank)
+(global-set-key (kbd "s-n") 'make-frame)
+(global-set-key (kbd "s-w") 'delete-frame)
 
 (setq gc-cons-threshold 30000000
       gc-cons-percentage 0.1)
