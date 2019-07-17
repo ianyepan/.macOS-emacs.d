@@ -35,11 +35,13 @@
   (setq scroll-margin 0
         scroll-conservatively 10000
         scroll-preserve-screen-position t
-        auto-window-vscroll nil)
+        auto-window-vscroll nil
+        mouse-wheel-scroll-amount '(1 ((shift) . 1))
+        mouse-wheel-progressive-speed nil)
   (setq show-paren-delay 0)
   (show-paren-mode)
-  (setq frame-title-format '("Emacs"))
-  (setq initial-frame-alist (quote ((fullscreen . maximized))))
+  (setq frame-title-format '("Emacs")
+        initial-frame-alist (quote ((fullscreen . maximized))))
   (set-frame-font "Source Code Pro-13" nil t)
   (setq-default line-spacing 3)
   (add-hook 'prog-mode-hook 'electric-pair-mode)
