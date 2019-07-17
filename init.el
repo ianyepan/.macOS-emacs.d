@@ -229,8 +229,7 @@
   (use-package highlight-symbol
     :diminish highlight-symbol-mode
     :hook (prog-mode . highlight-symbol-mode)
-    :config
-    (setq highlight-symbol-idle-delay 0.3))
+    :config (setq highlight-symbol-idle-delay 0.3))
 
   (use-package lsp-mode
     :hook ((c-mode c-or-c++-mode java-mode python-mode) . lsp)
@@ -325,19 +324,11 @@
           projectile-indexing-method 'hybrid)
     (projectile-mode +1))
 
+  (use-package smart-mode-line :config (setq sml/no-confirm-load-theme t) (sml/setup))
+
   ) ;; file-name-handler-alist ends here
 
 (ian/disable-bold-and-fringe-bg-face-globally)
-
-;; keyubindings for Macport (doesn't conflict with NS port)
-(setq-default mac-option-modifier 'meta)
-(setq-default mac-command-modifier 'super)
-(global-set-key (kbd "s-c") 'kill-ring-save)
-(global-set-key (kbd "s-v") 'yank)
-(global-set-key (kbd "s-n") 'make-frame)
-(global-set-key (kbd "s-w") 'delete-frame)
-(global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
-(global-set-key (kbd "s-k") 'kill-this-buffer)
 
 (setq gc-cons-threshold 30000000
       gc-cons-percentage 0.1)
