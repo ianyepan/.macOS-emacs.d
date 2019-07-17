@@ -39,7 +39,7 @@
   (setq show-paren-delay 0)
   (show-paren-mode)
   (setq frame-title-format '("Emacs"))
-  ;; (setq initial-frame-alist (quote ((fullscreen . maximized))))
+  (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (set-frame-font "Source Code Pro-13" nil t)
   (setq-default line-spacing 3)
   (add-hook 'prog-mode-hook 'electric-pair-mode)
@@ -329,7 +329,7 @@
 
 (ian/disable-bold-and-fringe-bg-face-globally)
 
-;; keyubindings for railwaycat's macport
+;; keyubindings for Macport (doesn't conflict with NS port)
 (setq-default mac-option-modifier 'meta)
 (setq-default mac-command-modifier 'super)
 (global-set-key (kbd "s-c") 'kill-ring-save)
