@@ -336,6 +336,8 @@
 (global-set-key (kbd "s-v") 'yank)
 (global-set-key (kbd "s-n") 'make-frame)
 (global-set-key (kbd "s-w") 'delete-frame)
+(global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
+(global-set-key (kbd "s-k") 'kill-this-buffer)
 
 (setq gc-cons-threshold 30000000
       gc-cons-percentage 0.1)
