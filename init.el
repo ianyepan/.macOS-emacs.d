@@ -244,21 +244,22 @@
 
   (use-package lsp-java :after lsp)
 
-  (use-package tide :after (company flycheck))
+  (use-package tide
+    :after (company flycheck)
+    :config
+    (setq tide-completion-ignore-case t)
+    (define-key tide-mode-map (kbd "s-b") 'tide-jump-to-definition)
+    (define-key tide-mode-map (kbd "s-[") 'tide-jump-back))
 
   (use-package typescript-mode
     :mode ("\\.ts$" . typescript-mode)
     :hook (typescript-mode . tide-setup)
-    :config
-    (define-key typescript-mode-map (kbd "s-b") 'tide-jump-to-definition)
-    (define-key typescript-mode-map (kbd "s-[") 'tide-jump-back))
+    :config (setq typescript-indent-level 2))
 
   (use-package rjsx-mode
     :mode ("\\.jsx?$" . rjsx-mode)
     :hook (rjsx-mode . tide-setup)
     :config
-    (define-key rjsx-mode-map (kbd "s-b") 'tide-jump-to-definition)
-    (define-key rjsx-mode-map (kbd "s-[") 'tide-jump-back)
     (setq js-indent-level 2
           js2-strict-missing-semi-warning nil)
     (with-eval-after-load 'rjsx-mode
@@ -276,11 +277,9 @@
                  (string-match "\\.tsx$" buffer-file-name))
         (tide-setup)))
     (add-hook 'web-mode-hook 'my/tsx-setup)
-    (define-key tide-mode-map (kbd "s-b") 'tide-jump-to-definition)
-    (define-key tide-mode-map (kbd "s-[") 'tide-jump-back)
 
     (setq web-mode-markup-indent-offset 2 ; html
-          web-mode-code-indent-offset 4   ; tsx
+          web-mode-code-indent-offset 2   ; tsx
           web-mode-css-indent-offset 2))  ; css
 
   (use-package treemacs
@@ -297,6 +296,8 @@
       (evil-define-key 'treemacs treemacs-mode-map (kbd "l") 'treemacs-RET-action)
       (evil-define-key 'treemacs treemacs-mode-map (kbd "h") 'treemacs-TAB-action)))
 
+  (use-package all-the-icons)
+
   (use-package centaur-tabs
     :demand
     :init (setq centaur-tabs-set-bar 'over)
@@ -306,7 +307,8 @@
     (setq centaur-tabs-set-modified-marker t
           centaur-tabs-modified-marker "●"
           centaur-tabs-cycle-scope 'tabs
-          centaur-tabs-height 30)
+          centaur-tabs-height 30
+          centaur-tabs-set-icons t)
     :bind
     ("C-S-<tab>" . centaur-tabs-backward)
     ("C-<tab>" . centaur-tabs-forward))
