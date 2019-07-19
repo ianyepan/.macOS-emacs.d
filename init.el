@@ -49,7 +49,8 @@
   (define-key prog-mode-map (kbd "s-b") 'xref-find-definitions)
   (define-key prog-mode-map (kbd "s-[") 'xref-pop-marker-stack)
   (setq auto-revert-interval 2
-        auto-revert-check-vc-info t)
+        auto-revert-check-vc-info t
+        auto-revert-verbose nil)
   (add-hook 'after-init-hook 'global-auto-revert-mode)
   (setq-default indent-tabs-mode nil
                 tab-width 4
@@ -96,10 +97,10 @@
   ;; (set-background-color "#151515")
   ;; (set-foreground-color "#eeeeee")
   ;; (custom-set-faces
-  ;;  `(region ((t (:background "#333D48"))))
-  ;;  `(solaire-default-face ((t (:inherit default :background "black"))))
-  ;;  `(solaire-minibuffer-face ((t (:inherit default :background "black"))))
-  ;;  `(solaire-hl-line-face ((t (:inherit hl-line))))
+  ;;  '(region ((t (:background "#333D48"))))
+  ;;  '(solaire-default-face ((t (:inherit default :background "black"))))
+  ;;  '(solaire-minibuffer-face ((t (:inherit default :background "black"))))
+  ;;  '(solaire-hl-line-face ((t (:inherit hl-line))))
   ;;  '(mode-line ((t (:background "#2b2b2b" :foreground "white"))))
   ;;  '(ido-only-match ((t (:foreground "#98FB98"))))
   ;;  '(company-preview ((t (:underline t :weight bold))))
@@ -160,9 +161,9 @@
     (setq flycheck-python-flake8-executable "python3"))
 
   (use-package ido-vertical-mode
+    :hook ((after-init . ido-mode)
+           (after-init . ido-vertical-mode))
     :config
-    (ido-mode)
-    (ido-vertical-mode)
     (setq ido-everywhere t
           ido-enable-flex-matching t
           ido-vertical-define-keys 'C-n-C-p-up-and-down))
@@ -249,12 +250,12 @@
     (define-key tide-mode-map (kbd "s-[") 'tide-jump-back))
 
   (use-package typescript-mode
-    :mode ("\\.ts$" . typescript-mode)
+    :mode ("\\.ts\\'" . typescript-mode)
     :hook (typescript-mode . tide-setup)
     :config (setq typescript-indent-level 2))
 
   (use-package rjsx-mode
-    :mode ("\\.jsx?$" . rjsx-mode)
+    :mode ("\\.jsx?\\'" . rjsx-mode)
     :hook (rjsx-mode . tide-setup)
     :config
     (setq js-indent-level 2
@@ -264,14 +265,12 @@
       (define-key rjsx-mode-map ">" nil)))
 
   (use-package web-mode
-    :mode
-    ("\\.html?$". web-mode)
-    ("\\.css$". web-mode)
-    ("\\.tsx$". web-mode)
-    :hook
-    (web-mode . (lambda ()
-                  (when (string-match "\\.tsx$" buffer-file-name)
-                    (tide-setup))))
+    :mode (("\\.html?\\'". web-mode)
+           ("\\.css\\'". web-mode)
+           ("\\.tsx\\'". web-mode))
+    :hook (web-mode . (lambda ()
+                        (when (string-match "\\.tsx\\'" buffer-file-name)
+                          (tide-setup))))
     :config
     (setq web-mode-markup-indent-offset 2 ; html
           web-mode-code-indent-offset 2   ; tsx
@@ -281,17 +280,22 @@
     :after evil
     :config
     (global-set-key (kbd "s-1") 'treemacs)
-    (setq treemacs-no-png-images t
-          treemacs-fringe-indicator-mode nil
+    (setq treemacs-fringe-indicator-mode nil
+          treemacs-no-png-images t
           treemacs-width 40
-          treemacs-silent-refresh t)
+          treemacs-silent-refresh t
+          treemacs-silent-filewatch t
+          treemacs-file-event-delay 1000
+          treemacs-file-follow-delay 0.1)
     (use-package treemacs-evil
       :after treemacs
       :config
       (evil-define-key 'treemacs treemacs-mode-map (kbd "l") 'treemacs-RET-action)
       (evil-define-key 'treemacs treemacs-mode-map (kbd "h") 'treemacs-TAB-action)))
 
-  (use-package all-the-icons)
+  (use-package treemacs-projectile)
+
+  (use-package all-the-icons :config (setq all-the-icons-scale-factor 1.0))
 
   (use-package centaur-tabs
     :demand
