@@ -111,9 +111,8 @@
   ;;  '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
 
   (use-package solaire-mode
-    :hook
-    ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
-    (minibuffer-setup . solaire-mode-in-minibuffer)
+    :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+           (minibuffer-setup . solaire-mode-in-minibuffer))
     :config
     (solaire-global-mode)
     (solaire-mode-swap-bg))
@@ -161,23 +160,21 @@
     (setq flycheck-python-flake8-executable "python3"))
 
   (use-package ido-vertical-mode
-    :hook
-    (after-init . ido-mode)
-    (after-init . ido-vertical-mode)
     :config
+    (ido-mode)
+    (ido-vertical-mode)
     (setq ido-everywhere t
           ido-enable-flex-matching t
           ido-vertical-define-keys 'C-n-C-p-up-and-down))
 
-  (use-package flx-ido :config (setq flx-ido-mode t))
+  (use-package flx-ido :config (flx-ido-mode))
 
   (use-package magit :bind ("C-x g" . magit-status))
 
   (use-package org-bullets
-    :hook
-    (org-mode . org-bullets-mode)
-    (org-mode . visual-line-mode)
-    (org-mode . org-indent-mode))
+    :hook ((org-mode . org-bullets-mode)
+           (org-mode . visual-line-mode)
+           (org-mode . org-indent-mode)))
 
   (use-package ranger
     :defer t
@@ -271,13 +268,11 @@
     ("\\.html?$". web-mode)
     ("\\.css$". web-mode)
     ("\\.tsx$". web-mode)
+    :hook
+    (web-mode . (lambda ()
+                  (when (string-match "\\.tsx$" buffer-file-name)
+                    (tide-setup))))
     :config
-    (defun my/tsx-setup ()
-      (when (and (stringp buffer-file-name)
-                 (string-match "\\.tsx$" buffer-file-name))
-        (tide-setup)))
-    (add-hook 'web-mode-hook 'my/tsx-setup)
-
     (setq web-mode-markup-indent-offset 2 ; html
           web-mode-code-indent-offset 2   ; tsx
           web-mode-css-indent-offset 2))  ; css
@@ -314,9 +309,8 @@
     ("C-<tab>" . centaur-tabs-forward))
 
   (use-package emmet-mode
-    :hook
-    (rjsx-mode . emmet-mode) ; js, jsx
-    (web-mode . emmet-mode)  ; tsx, html, & css
+    :hook ((rjsx-mode . emmet-mode) ; js, jsx
+           (web-mode . emmet-mode)) ; tsx, html, & css
     :config (setq emmet-expand-jsx-className? t))
 
   (use-package projectile
@@ -334,7 +328,7 @@
 
 (ian/disable-bold-and-fringe-bg-face-globally)
 
-(setq gc-cons-threshold 30000000
+(setq gc-cons-threshold 20000000
       gc-cons-percentage 0.1)
 
 (provide 'init)
