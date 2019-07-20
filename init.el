@@ -64,6 +64,12 @@
     (interactive)
     (load-file "~/.emacs.d/init.el"))
 
+  (defun ian/hide-dos-eol ()
+    "Do not show ^M in files containing mixed UNIX and DOS line endings."
+    (interactive)
+    (setq buffer-display-table (make-display-table))
+    (aset buffer-display-table ?\^M []))
+
   (defun ian/split-and-follow-horizontally ()
     "Split window below."
     (interactive)
@@ -87,12 +93,9 @@
             (when (eq (face-attribute face :weight) 'bold)
               (set-face-attribute face nil :weight 'normal))) (face-list)))
 
-  (use-package doom-themes :config (load-theme 'doom-tomorrow-night t))
+  ;; (use-package doom-themes :config (load-theme 'doom-tomorrow-night t))
 
-  ;; (use-package zenburn-theme
-  ;;   :config
-  ;;   (setq zenburn-override-colors-alist '(("zenburn-fg+1" . "#aaaaa0"))) ; dim cursor color
-  ;;   (load-theme 'zenburn t))
+  (use-package zenburn-theme :config (load-theme 'zenburn t))
 
   ;; (set-background-color "#151515")
   ;; (set-foreground-color "#eeeeee")
@@ -254,15 +257,23 @@
     :hook (typescript-mode . tide-setup)
     :config (setq typescript-indent-level 2))
 
-  (use-package rjsx-mode
-    :mode ("\\.jsx?\\'" . rjsx-mode)
-    :hook (rjsx-mode . tide-setup)
+  ;; (use-package rjsx-mode
+  ;;   :mode ("\\.jsx?\\'" . rjsx-mode)
+  ;;   :hook (rjsx-mode . tide-setup)
+  ;;   :config
+  ;;   (setq js-indent-level 2
+  ;;         js2-strict-missing-semi-warning nil)
+  ;;   (with-eval-after-load 'rjsx-mode
+  ;;     (define-key rjsx-mode-map "<" nil)
+  ;;     (define-key rjsx-mode-map ">" nil)))
+
+  (use-package js2-mode
+    :mode ("\\.jsx?\\'" . js-mode)
+    :hook ((js-mode . js2-minor-mode)
+           (js-mode . tide-setup))
     :config
     (setq js-indent-level 2
-          js2-strict-missing-semi-warning nil)
-    (with-eval-after-load 'rjsx-mode
-      (define-key rjsx-mode-map "<" nil)
-      (define-key rjsx-mode-map ">" nil)))
+          js2-strict-missing-semi-warning nil))
 
   (use-package web-mode
     :mode (("\\.html?\\'". web-mode)
