@@ -291,9 +291,9 @@
       :after treemacs
       :config
       (evil-define-key 'treemacs treemacs-mode-map (kbd "l") 'treemacs-RET-action)
-      (evil-define-key 'treemacs treemacs-mode-map (kbd "h") 'treemacs-TAB-action)))
+      (evil-define-key 'treemacs treemacs-mode-map (kbd "h") 'treemacs-TAB-action))
+    (use-package treemacs-projectile :after (treemacs projectile)))
 
-  (use-package treemacs-projectile)
 
   (use-package all-the-icons :config (setq all-the-icons-scale-factor 1.0))
 
