@@ -266,7 +266,7 @@
 
   (use-package web-mode
     :mode (("\\.html?\\'". web-mode)
-           ("\\.css\\'". web-mode)
+           ("\\.s?css\\'". web-mode)
            ("\\.tsx\\'". web-mode))
     ;; :hook (web-mode . (lambda ()
     ;;                     (when (string-match "\\.tsx\\'" buffer-file-name)
