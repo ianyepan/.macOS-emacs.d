@@ -25,7 +25,8 @@
   (setq ring-bell-function 'ignore
         confirm-kill-processes nil
         make-backup-files nil
-        default-directory "~/")
+        default-directory "~/"
+        eldoc-idle-delay 0.4)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (scroll-bar-mode +1)
@@ -235,7 +236,13 @@
     :config (setq highlight-symbol-idle-delay 0.3))
 
   (use-package lsp-mode
-    :hook ((c-mode c-or-c++-mode java-mode python-mode) . lsp)
+    :hook ((c-mode
+            c-or-c++-mode
+            java-mode
+            python-mode
+            js-mode
+            web-mode
+            typescript-mode) . lsp)
     :commands lsp
     :config (setq lsp-enable-symbol-highlighting nil))
 
@@ -245,32 +252,14 @@
 
   (use-package lsp-java :after lsp)
 
-  (use-package tide
-    :after (company flycheck)
-    :config
-    (setq tide-completion-ignore-case t)
-    (define-key tide-mode-map (kbd "s-b") 'tide-jump-to-definition)
-    (define-key tide-mode-map (kbd "s-[") 'tide-jump-back))
-
   (use-package typescript-mode
     :mode ("\\.ts\\'" . typescript-mode)
-    :hook (typescript-mode . tide-setup)
     :config (setq typescript-indent-level 2))
-
-  ;; (use-package rjsx-mode
-  ;;   :mode ("\\.jsx?\\'" . rjsx-mode)
-  ;;   :hook (rjsx-mode . tide-setup)
-  ;;   :config
-  ;;   (setq js-indent-level 2
-  ;;         js2-strict-missing-semi-warning nil)
-  ;;   (with-eval-after-load 'rjsx-mode
-  ;;     (define-key rjsx-mode-map "<" nil)
-  ;;     (define-key rjsx-mode-map ">" nil)))
 
   (use-package js2-mode
     :mode ("\\.jsx?\\'" . js-mode)
-    :hook ((js-mode . js2-minor-mode)
-           (js-mode . tide-setup))
+    :diminish js2-minor-mode
+    :hook ((js-mode . js2-minor-mode))
     :config
     (setq js-indent-level 2
           js2-strict-missing-semi-warning nil))
@@ -279,9 +268,9 @@
     :mode (("\\.html?\\'". web-mode)
            ("\\.css\\'". web-mode)
            ("\\.tsx\\'". web-mode))
-    :hook (web-mode . (lambda ()
-                        (when (string-match "\\.tsx\\'" buffer-file-name)
-                          (tide-setup))))
+    ;; :hook (web-mode . (lambda ()
+    ;;                     (when (string-match "\\.tsx\\'" buffer-file-name)
+    ;;                       (add-hook 'web-mode-hook 'lsp))))
     :config
     (setq web-mode-markup-indent-offset 2 ; html
           web-mode-code-indent-offset 2   ; tsx
@@ -324,7 +313,7 @@
     ("C-<tab>" . centaur-tabs-forward))
 
   (use-package emmet-mode
-    :hook ((rjsx-mode . emmet-mode) ; js, jsx
+    :hook ((js-mode . emmet-mode) ; js, jsx
            (web-mode . emmet-mode)) ; tsx, html, & css
     :config (setq emmet-expand-jsx-className? t))
 
