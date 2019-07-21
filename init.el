@@ -293,7 +293,20 @@
       (evil-define-key 'treemacs treemacs-mode-map (kbd "l") 'treemacs-RET-action)
       (evil-define-key 'treemacs treemacs-mode-map (kbd "h") 'treemacs-TAB-action))
     (use-package treemacs-projectile :after treemacs projectile)
-    (use-package treemacs-magit :after treemacs magit))
+    (use-package treemacs-magit :after treemacs magit)
+    (dolist (face '(treemacs-root-face
+                    treemacs-git-unmodified-face
+                    treemacs-git-modified-face
+                    treemacs-git-renamed-face
+                    treemacs-git-ignored-face
+                    treemacs-git-untracked-face
+                    treemacs-git-added-face
+                    treemacs-git-conflict-face
+                    treemacs-directory-face
+                    treemacs-directory-collapsed-face
+                    treemacs-file-face
+                    treemacs-tags-face))
+      (set-face-attribute face nil :family "San Francisco" :height 140)))
 
 
   (use-package all-the-icons :config (setq all-the-icons-scale-factor 1.0))
