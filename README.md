@@ -5,7 +5,7 @@
 </p>
 
 ### Thanks for dropping by!
-This is my personal Emacs configuration (on GNU Emacs 26.2). If you wish for an unopiniated Emacs "distro" that you could build upon, check out this page: https://github.com/ianpan870102/.emacs.d
+This is my personal Emacs configuration (on GNU Emacs 26.2). If you wish for an unopinionated Emacs "distro" that you could build upon, check out this page: https://github.com/ianpan870102/.emacs.d
 
 ### Installation
 Back up your `~/.emacs.d/` first (if you have one):
