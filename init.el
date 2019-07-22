@@ -22,7 +22,8 @@
   (require 'use-package-ensure)
   (setq use-package-always-ensure t)
 
-  (setq ring-bell-function 'ignore
+  (setq inhibit-startup-screen t
+        ring-bell-function 'ignore
         confirm-kill-processes nil
         make-backup-files nil
         default-directory "~/"
