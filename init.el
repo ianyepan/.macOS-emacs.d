@@ -318,10 +318,16 @@
     (centaur-tabs-mode)
     (centaur-tabs-headline-match)
     (setq centaur-tabs-set-modified-marker t
-          centaur-tabs-modified-marker "●"
+          centaur-tabs-modified-marker " ● "
           centaur-tabs-cycle-scope 'tabs
           centaur-tabs-height 30
-          centaur-tabs-set-icons t)
+          centaur-tabs-set-icons t
+          centaur-tabs-close-button " × ")
+    (dolist (centaur-face '(centaur-tabs-selected
+                            centaur-tabs-selected-modified
+                            centaur-tabs-unselected
+                            centaur-tabs-unselected-modified))
+      (set-face-attribute centaur-face nil :family "Arial" :height 140))
     :bind
     ("C-S-<tab>" . centaur-tabs-backward)
     ("C-<tab>" . centaur-tabs-forward))
