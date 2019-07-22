@@ -94,26 +94,9 @@
             (when (eq (face-attribute face :weight) 'bold)
               (set-face-attribute face nil :weight 'normal))) (face-list)))
 
-  ;; (use-package doom-themes :config (load-theme 'doom-tomorrow-night t))
+  (use-package doom-themes :config (load-theme 'doom-solarized-dark t))
 
-  (use-package zenburn-theme :config (load-theme 'zenburn t))
-
-  ;; (set-background-color "#151515")
-  ;; (set-foreground-color "#eeeeee")
-  ;; (custom-set-faces
-  ;;  '(region ((t (:background "#333D48"))))
-  ;;  '(solaire-default-face ((t (:inherit default :background "black"))))
-  ;;  '(solaire-minibuffer-face ((t (:inherit default :background "black"))))
-  ;;  '(solaire-hl-line-face ((t (:inherit hl-line))))
-  ;;  '(mode-line ((t (:background "#2b2b2b" :foreground "white"))))
-  ;;  '(ido-only-match ((t (:foreground "#98FB98"))))
-  ;;  '(company-preview ((t (:underline t :weight bold))))
-  ;;  '(company-preview-common ((t (:inherit company-preview))))
-  ;;  '(company-scrollbar-bg ((t (:background "lightgray"))))
-  ;;  '(company-scrollbar-fg ((t (:background "darkgray"))))
-  ;;  '(company-tooltip ((t (:background "lightgray" :foreground "black"))))
-  ;;  '(company-tooltip-common ((t (:inherit company-preview-common))))
-  ;;  '(company-tooltip-selection ((t (:background "steelblue" :foreground "white")))))
+  ;; (use-package zenburn-theme :config (load-theme 'zenburn t))
 
   (use-package solaire-mode
     :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -240,41 +223,25 @@
             c-or-c++-mode
             java-mode
             python-mode
-            js-mode
-            web-mode
-            typescript-mode) . lsp)
+            web-mode) . lsp)
     :commands lsp
-    :config (setq lsp-enable-symbol-highlighting nil))
+    :config
+    (setq lsp-enable-symbol-highlighting nil)
+    (use-package lsp-java :after lsp))
 
   (use-package company-lsp
     :commands company-lsp
     :config (setq company-lsp-cache-candidates 'auto))
 
-  (use-package lsp-java :after lsp)
-
-  (use-package typescript-mode
-    :mode ("\\.ts\\'" . typescript-mode)
-    :config (setq typescript-indent-level 2))
-
-  (use-package js2-mode
-    :mode ("\\.jsx?\\'" . js-mode)
-    :diminish js2-minor-mode
-    :hook ((js-mode . js2-minor-mode))
-    :config
-    (setq js-indent-level 2
-          js2-strict-missing-semi-warning nil))
-
   (use-package web-mode
-    :mode (("\\.html?\\'". web-mode)
-           ("\\.s?css\\'". web-mode)
-           ("\\.tsx\\'". web-mode))
-    ;; :hook (web-mode . (lambda ()
-    ;;                     (when (string-match "\\.tsx\\'" buffer-file-name)
-    ;;                       (add-hook 'web-mode-hook 'lsp))))
+    :mode ("\\.[jt]sx?\\'" . web-mode)
     :config
-    (setq web-mode-markup-indent-offset 2 ; html
-          web-mode-code-indent-offset 2   ; tsx
-          web-mode-css-indent-offset 2))  ; css
+    (with-eval-after-load 'flycheck
+      (flycheck-add-mode 'javascript-eslint 'web-mode)
+      (flycheck-add-mode 'typescript-tslint 'web-mode))
+    (setq web-mode-markup-indent-offset 2
+          web-mode-code-indent-offset 2
+          web-mode-css-indent-offset 2))
 
   (use-package treemacs
     :after evil
@@ -308,7 +275,6 @@
                     treemacs-tags-face))
       (set-face-attribute face nil :family "San Francisco" :height 140)))
 
-
   (use-package all-the-icons :config (setq all-the-icons-scale-factor 1.0))
 
   (use-package centaur-tabs
@@ -333,8 +299,9 @@
     ("C-<tab>" . centaur-tabs-forward))
 
   (use-package emmet-mode
-    :hook ((js-mode . emmet-mode) ; js, jsx
-           (web-mode . emmet-mode)) ; tsx, html, & css
+    :hook ((html-mode . emmet-mode)
+           (css-mode . emmet-mode)
+           (web-mode . emmet-mode))
     :config (setq emmet-expand-jsx-className? t))
 
   (use-package projectile
