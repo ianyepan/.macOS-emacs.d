@@ -60,6 +60,11 @@
   (setq c-default-style '((java-mode . "java")
                           (awk-mode . "awk")
                           (other . "k&r")))
+  (setq ediff-split-window-function 'split-window-horizontally)
+  (defvar pre-ediff-window-config nil
+    "Window configuration before entering Ediff, possibly stored for later restore.")
+  (add-hook 'ediff-before-setup-hook (lambda () (setq pre-ediff-window-config (current-window-configuration))))
+  (add-hook 'ediff-quit-hook (lambda () (set-window-configuration pre-ediff-window-config)))
 
   (defun ian/load-init()
     "Reload `.emacs.d/init.el'."
@@ -136,7 +141,7 @@
           company-idle-delay 0
           company-selection-wrap-around t
           company-tooltip-align-annotations t
-          company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even if single candidate
+          company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
                               company-echo-metadata-frontend))
     (with-eval-after-load 'company
       (define-key company-active-map (kbd "C-n") 'company-select-next)
@@ -217,7 +222,7 @@
   (use-package highlight-symbol
     :diminish highlight-symbol-mode
     :hook (prog-mode . highlight-symbol-mode)
-    :config (setq highlight-symbol-idle-delay 0.3))
+    :config (setq highlight-symbol-idle-delay 0.4))
 
   (use-package lsp-mode
     :hook ((c-mode
@@ -274,7 +279,7 @@
                     treemacs-directory-collapsed-face
                     treemacs-file-face
                     treemacs-tags-face))
-      (set-face-attribute face nil :family "San Francisco" :height 140)))
+      (set-face-attribute face nil :family "San Francisco" :height 130)))
 
   (use-package all-the-icons :config (setq all-the-icons-scale-factor 1.0))
 
@@ -294,7 +299,7 @@
                             centaur-tabs-selected-modified
                             centaur-tabs-unselected
                             centaur-tabs-unselected-modified))
-      (set-face-attribute centaur-face nil :family "Arial" :height 140))
+      (set-face-attribute centaur-face nil :family "Arial" :height 130))
     :bind
     ("C-S-<tab>" . centaur-tabs-backward)
     ("C-<tab>" . centaur-tabs-forward))
