@@ -217,7 +217,7 @@
   (use-package highlight-symbol
     :diminish highlight-symbol-mode
     :hook (prog-mode . highlight-symbol-mode)
-    :config (setq highlight-symbol-idle-delay 0.3))
+    :config (setq highlight-symbol-idle-delay 0.4))
 
   (use-package lsp-mode
     :hook ((c-mode
