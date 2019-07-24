@@ -3,26 +3,27 @@
 ;;; Commentary:
 ;;; A use-package lightweight Emacs config containing only the essentials.
 ;;; Code:
+(defvar file-name-handler-alist-original file-name-handler-alist)
+
 (setq gc-cons-threshold 402653184
       gc-cons-percentage 0.6
-      file-name-handler-alist-original file-name-handler-alist
       file-name-handler-alist nil
       site-run-file nil)
 
-(add-hook 'emacs-startup-hook
+(add-hook 'emacs-startup-hook ; hook run after loading init files
           (lambda ()
             (setq gc-cons-threshold 20000000
                   gc-cons-percentage 0.1
-                  file-name-handler-alist file-name-handler-alist-original)
-            (makunbound 'file-name-handler-alist-original)))
+                  file-name-handler-alist file-name-handler-alist-original)))
 
-(add-hook 'minibuffer-setup-hook (lambda () (setq gc-cons-threshold (* 40000000))))
+(add-hook 'minibuffer-setup-hook (lambda () (setq gc-cons-threshold 40000000)))
 (add-hook 'minibuffer-exit-hook (lambda ()
                                   (garbage-collect)
                                   (setq gc-cons-threshold 20000000)))
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -35,50 +36,21 @@
   (setq use-package-always-ensure t))
 
 (setq user-full-name "Ian Y.E. Pan"
-      user-mail-address "ianpan870102@gmail.com")
-(setq inhibit-startup-screen t
+      frame-title-format '("Emacs")
       ring-bell-function 'ignore
-      confirm-kill-processes nil
-      make-backup-files nil
       default-directory "~/"
-      eldoc-idle-delay 0.4)
+      mouse-highlight nil)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode +1)
-(blink-cursor-mode -1)
-(setq mouse-highlight nil)
-(column-number-mode)
+(column-number-mode +1)
 (setq scroll-margin 0
       scroll-conservatively 10000
       scroll-preserve-screen-position t
-      auto-window-vscroll nil
-      mouse-wheel-scroll-amount '(1 ((shift) . 1))
-      mouse-wheel-progressive-speed nil)
-(setq show-paren-delay 0)
-(show-paren-mode)
-(setq frame-title-format '("Emacs")
-      initial-frame-alist (quote ((fullscreen . maximized))))
-(set-frame-font "Source Code Pro-13" nil t)
-(setq-default line-spacing 3)
-(add-hook 'prog-mode-hook 'electric-pair-mode)
-(add-hook 'before-save-hook 'whitespace-cleanup)
-(define-key prog-mode-map (kbd "s-b") 'xref-find-definitions)
-(define-key prog-mode-map (kbd "s-[") 'xref-pop-marker-stack)
-(setq auto-revert-interval 2
-      auto-revert-check-vc-info t
-      auto-revert-verbose nil)
-(add-hook 'after-init-hook 'global-auto-revert-mode)
-(setq-default indent-tabs-mode nil
-              tab-width 4
-              c-basic-offset 4)
-(setq c-default-style '((java-mode . "java")
-                        (awk-mode . "awk")
-                        (other . "k&r")))
-(setq ediff-split-window-function 'split-window-horizontally)
-(defvar pre-ediff-window-config nil
-  "Window configuration before entering Ediff, possibly stored for later restore.")
-(add-hook 'ediff-before-setup-hook (lambda () (setq pre-ediff-window-config (current-window-configuration))))
-(add-hook 'ediff-quit-hook (lambda () (set-window-configuration pre-ediff-window-config)))
+      auto-window-vscroll nil)
+(setq-default line-spacing 3
+              indent-tabs-mode nil
+              tab-width 4)
 
 (defun ian/load-init()
   "Reload `.emacs.d/init.el'."
@@ -91,31 +63,113 @@
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
 
-(defun ian/split-and-follow-horizontally ()
-  "Split window below."
-  (interactive)
-  (split-window-below)
-  (other-window 1))
+;;; Third-party packages
 
-(defun ian/split-and-follow-vertically ()
-  "Split window right."
-  (interactive)
-  (split-window-right)
-  (other-window 1))
+(use-package "startup"
+  :ensure nil
+  :config (setq inhibit-startup-screen t))
 
-(global-set-key (kbd "C-x 2") 'ian/split-and-follow-horizontally)
-(global-set-key (kbd "C-x 3") 'ian/split-and-follow-vertically)
+(use-package "window"
+  :ensure nil
+  :config
+  (defun ian/split-and-follow-horizontally ()
+    "Split window below."
+    (interactive)
+    (split-window-below)
+    (other-window 1))
 
-(defun ian/disable-bold-and-fringe-bg-face-globally ()
-  "disable bold face and fringe backgroung in Emacs"
-  (interactive)
-  (set-face-attribute 'fringe nil :background nil)
-  (mapc (lambda (face)
-          (when (eq (face-attribute face :weight) 'bold)
-            (set-face-attribute face nil :weight 'normal))) (face-list)))
+  (defun ian/split-and-follow-vertically ()
+    "Split window right."
+    (interactive)
+    (split-window-right)
+    (other-window 1))
+
+  (global-set-key (kbd "C-x 2") 'ian/split-and-follow-horizontally)
+  (global-set-key (kbd "C-x 3") 'ian/split-and-follow-vertically))
+
+(use-package files
+  :ensure nil
+  :config
+  (setq confirm-kill-processes nil
+        make-backup-files nil))
+
+(use-package autorevert
+  :ensure nil
+  :config
+  (setq auto-revert-interval 2
+        auto-revert-check-vc-info t
+        auto-revert-verbose nil)
+  (add-hook 'after-init-hook 'global-auto-revert-mode))
+
+(use-package eldoc
+  :ensure nil
+  :diminish eldoc-mode
+  :config (setq eldoc-idle-delay 0.4))
+
+(use-package xref
+  :ensure nil
+  :config
+  (define-key prog-mode-map (kbd "s-b") 'xref-find-definitions)
+  (define-key prog-mode-map (kbd "s-[") 'xref-pop-marker-stack))
+
+(use-package cc-vars
+  :ensure nil
+  :config
+  (setq-default c-basic-offset 4)
+  (setq c-default-style '((java-mode . "java")
+                          (awk-mode . "awk")
+                          (other . "k&r"))))
+
+(use-package mwheel
+  :ensure nil
+  :config (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))
+                mouse-wheel-progressive-speed nil))
+
+(use-package paren
+  :ensure nil
+  :config
+  (setq show-paren-delay 0)
+  (show-paren-mode))
+
+(use-package frame
+  :ensure nil
+  :config
+  (setq initial-frame-alist (quote ((fullscreen . maximized))))
+  (blink-cursor-mode -1)
+  (set-frame-font "Source Code Pro-13" nil t))
+
+(use-package ediff
+  :ensure nil
+  :config (setq ediff-split-window-function 'split-window-horizontally))
+
+(use-package faces
+  :ensure nil
+  :config
+  (defun ian/disable-bold-and-fringe-bg-face-globally ()
+    "disable bold face and fringe backgroung in Emacs"
+    (interactive)
+    (set-face-attribute 'fringe nil :background nil)
+    (mapc (lambda (face)
+            (when (eq (face-attribute face :weight) 'bold)
+              (set-face-attribute face nil :weight 'normal))) (face-list)))
+  (add-hook 'after-init-hook 'ian/disable-bold-and-fringe-bg-face-globally))
+
+(use-package flyspell
+  :ensure nil
+  :hook (prog-mode . flyspell-prog-mode)
+  :config (setq ispell-program-name "/usr/local/bin/aspell"))
+
+(use-package elec-pair
+  :ensure nil
+  :config (add-hook 'prog-mode-hook 'electric-pair-mode))
+
+(use-package whitespace
+  :ensure nil
+  :config (add-hook 'before-save-hook 'whitespace-cleanup))
+
+;;; Downloaded Packages
 
 (use-package doom-themes :config (load-theme 'doom-solarized-dark t))
-
 ;; (use-package zenburn-theme :config (load-theme 'zenburn t))
 
 (use-package solaire-mode
@@ -125,7 +179,7 @@
   (solaire-global-mode)
   (solaire-mode-swap-bg))
 
-(use-package diminish)
+(use-package diminish :demand t)
 
 (use-package evil
   :diminish undo-tree-mode
@@ -148,7 +202,7 @@
     :config (evil-commentary-mode)))
 
 (use-package company
-  :diminish company-mode eldoc-mode
+  :diminish company-mode
   :hook (prog-mode . company-mode)
   :config
   (setq company-minimum-prefix-length 1
@@ -163,9 +217,7 @@
 
 (use-package flycheck
   :hook (after-init . global-flycheck-mode)
-  :config
-  (setq ispell-program-name "/usr/local/bin/aspell")
-  (setq flycheck-python-flake8-executable "python3"))
+  :config (setq flycheck-python-flake8-executable "python3"))
 
 (use-package ido-vertical-mode
   :hook ((after-init . ido-mode)
@@ -273,13 +325,6 @@
         treemacs-silent-filewatch t
         treemacs-file-event-delay 1000
         treemacs-file-follow-delay 0.1)
-  (use-package treemacs-evil
-    :after treemacs
-    :config
-    (evil-define-key 'treemacs treemacs-mode-map (kbd "l") 'treemacs-RET-action)
-    (evil-define-key 'treemacs treemacs-mode-map (kbd "h") 'treemacs-TAB-action))
-  (use-package treemacs-projectile :after treemacs projectile)
-  (use-package treemacs-magit :after treemacs magit)
   (dolist (face '(treemacs-root-face
                   treemacs-git-unmodified-face
                   treemacs-git-modified-face
@@ -292,7 +337,14 @@
                   treemacs-directory-collapsed-face
                   treemacs-file-face
                   treemacs-tags-face))
-    (set-face-attribute face nil :family "San Francisco" :height 130)))
+    (set-face-attribute face nil :family "San Francisco" :height 130))
+  (use-package treemacs-evil
+    :after treemacs
+    :config
+    (evil-define-key 'treemacs treemacs-mode-map (kbd "l") 'treemacs-RET-action)
+    (evil-define-key 'treemacs treemacs-mode-map (kbd "h") 'treemacs-TAB-action))
+  (use-package treemacs-projectile :after treemacs projectile)
+  (use-package treemacs-magit :after treemacs magit))
 
 (use-package all-the-icons :config (setq all-the-icons-scale-factor 1.0))
 
@@ -332,9 +384,10 @@
         projectile-indexing-method 'hybrid)
   (projectile-mode +1))
 
-(use-package smart-mode-line :config (setq sml/no-confirm-load-theme t) (sml/setup))
-
-(ian/disable-bold-and-fringe-bg-face-globally)
+(use-package smart-mode-line
+  :config
+  (setq sml/no-confirm-load-theme t)
+  (sml/setup))
 
 (provide 'init)
 ;;; init.el ends here

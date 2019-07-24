@@ -1,4 +1,8 @@
-### Ian's Emacs configuration
+<div align="center">
+ <h3>Ian's Emacs Configuration</h3>
+</div>
+
+<hr>
 
 <p align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/EmacsIcon.svg/120px-EmacsIcon.svg.png" />
