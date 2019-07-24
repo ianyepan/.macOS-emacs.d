@@ -182,7 +182,10 @@
 (use-package org-bullets
   :hook ((org-mode . org-bullets-mode)
          (org-mode . visual-line-mode)
-         (org-mode . org-indent-mode)))
+         (org-mode . org-indent-mode))
+  :config
+  (with-eval-after-load 'org
+    (define-key org-mode-map (kbd "C-<tab>") nil)))
 
 (use-package ranger
   :defer t
