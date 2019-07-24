@@ -1,7 +1,7 @@
 ;;; init.el --- Emacs init file
 ;;  Author: Ian Y.E. Pan
 ;;; Commentary:
-;;; A use-package lightweight Emacs config containing only the essentials.
+;;  This is my personal Emacs configuration
 ;;; Code:
 (defvar file-name-handler-alist-original file-name-handler-alist)
 
@@ -104,7 +104,10 @@
 (use-package eldoc
   :ensure nil
   :diminish eldoc-mode
-  :config (setq eldoc-idle-delay 0.4))
+  :config
+  (global-eldoc-mode -1)
+  (add-hook 'prog-mode-hook 'eldoc-mode)
+  (setq eldoc-idle-delay 0.4))
 
 (use-package xref
   :ensure nil
