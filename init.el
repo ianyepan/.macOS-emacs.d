@@ -77,13 +77,11 @@
     (interactive)
     (split-window-below)
     (other-window 1))
-
   (defun ian/split-and-follow-vertically ()
     "Split window right."
     (interactive)
     (split-window-right)
     (other-window 1))
-
   (global-set-key (kbd "C-x 2") 'ian/split-and-follow-horizontally)
   (global-set-key (kbd "C-x 3") 'ian/split-and-follow-vertically))
 
@@ -95,11 +93,11 @@
 
 (use-package autorevert
   :ensure nil
+  :hook (after-init . global-auto-revert-mode)
   :config
   (setq auto-revert-interval 2
         auto-revert-check-vc-info t
-        auto-revert-verbose nil)
-  (add-hook 'after-init-hook 'global-auto-revert-mode))
+        auto-revert-verbose nil))
 
 (use-package eldoc
   :ensure nil
