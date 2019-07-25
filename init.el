@@ -63,7 +63,7 @@
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
 
-;;; Third-party packages
+;;; Built-in packages
 
 (use-package "startup"
   :ensure nil
