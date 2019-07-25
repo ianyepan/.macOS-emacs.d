@@ -170,7 +170,7 @@
   :ensure nil
   :config (add-hook 'before-save-hook 'whitespace-cleanup))
 
-;;; Downloaded Packages
+;;; Third-party Packages
 
 (use-package doom-themes :config (load-theme 'doom-solarized-dark t))
 ;; (use-package zenburn-theme :config (load-theme 'zenburn t))
@@ -391,6 +391,9 @@
   :config
   (setq sml/no-confirm-load-theme t)
   (sml/setup))
+
+;; Fix "failed to download gnu archive" bug in Emacs 26.2
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 (provide 'init)
 ;;; init.el ends here
