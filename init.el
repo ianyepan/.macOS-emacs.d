@@ -232,13 +232,13 @@
 
 (use-package magit :bind ("C-x g" . magit-status))
 
-(use-package org-bullets
-  :hook ((org-mode . org-bullets-mode)
-         (org-mode . visual-line-mode)
+(use-package org
+  :hook ((org-mode . visual-line-mode)
          (org-mode . org-indent-mode))
   :config
   (with-eval-after-load 'org
-    (define-key org-mode-map (kbd "C-<tab>") nil)))
+    (define-key org-mode-map (kbd "C-<tab>") nil))
+  (use-package org-bullets :hook (org-mode . org-bullets-mode)))
 
 (use-package ranger
   :defer t
