@@ -85,6 +85,10 @@
   (global-set-key (kbd "C-x 2") 'ian/split-and-follow-horizontally)
   (global-set-key (kbd "C-x 3") 'ian/split-and-follow-vertically))
 
+(use-package delsel
+  :ensure nil
+  :config (delete-selection-mode +1))
+
 (use-package files
   :ensure nil
   :config
