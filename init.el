@@ -161,6 +161,7 @@
 
 (use-package flyspell
   :ensure nil
+  :diminish flyspell-mode
   :hook (prog-mode . flyspell-prog-mode)
   :config (setq ispell-program-name "/usr/local/bin/aspell"))
 
@@ -302,6 +303,7 @@
           web-mode) . lsp)
   :commands lsp
   :config
+  (setq lsp-prefer-flymake nil)
   (setq lsp-enable-symbol-highlighting nil)
   (use-package lsp-java :after lsp))
 
