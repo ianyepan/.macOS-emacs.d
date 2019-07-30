@@ -134,7 +134,7 @@
   :ensure nil
   :config
   (setq show-paren-delay 0)
-  (show-paren-mode))
+  (show-paren-mode +1))
 
 (use-package frame
   :ensure nil
@@ -205,7 +205,7 @@
   (use-package evil-commentary
     :after evil
     :diminish evil-commentary-mode
-    :config (evil-commentary-mode)))
+    :config (evil-commentary-mode +1)))
 
 (use-package company
   :diminish company-mode
@@ -233,7 +233,7 @@
         ido-enable-flex-matching t
         ido-vertical-define-keys 'C-n-C-p-up-and-down))
 
-(use-package flx-ido :config (flx-ido-mode))
+(use-package flx-ido :config (flx-ido-mode +1))
 
 (use-package magit :bind ("C-x g" . magit-status))
 
@@ -257,7 +257,7 @@
   :diminish which-key-mode
   :defer 1
   :config
-  (which-key-mode)
+  (which-key-mode +1)
   (setq which-key-idle-delay 0.4
         which-key-idle-secondary-delay 0.4))
 
@@ -271,9 +271,16 @@
 
 (use-package yasnippet-snippets
   :config
-  (yas-global-mode)
-  (advice-add 'company-complete-common :before (lambda () (setq my-company-point (point))))
-  (advice-add 'company-complete-common :after (lambda () (when (equal my-company-point (point)) (yas-expand)))))
+  (yas-global-mode +1)
+  (advice-add 'company-complete-common
+              :before
+              (lambda ()
+                (setq my-company-point (point))))
+  (advice-add 'company-complete-common
+              :after
+              (lambda ()
+                (when (equal my-company-point (point))
+                  (yas-expand)))))
 
 (use-package markdown-mode :hook (markdown-mode . visual-line-mode))
 (use-package kotlin-mode)
@@ -359,7 +366,7 @@
   :demand
   :init (setq centaur-tabs-set-bar 'over)
   :config
-  (centaur-tabs-mode)
+  (centaur-tabs-mode +1)
   (centaur-tabs-headline-match)
   (setq centaur-tabs-set-modified-marker t
         centaur-tabs-modified-marker " ● "
