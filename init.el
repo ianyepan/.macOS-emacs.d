@@ -63,6 +63,12 @@
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
 
+(defun ian/align-whitespace (start end)
+  "Align columns by whitespace"
+  (interactive "r")
+  (align-regexp start end
+                "\\(\\s-*\\)\\s-" 1 0 t))
+
 ;;; Built-in packages
 
 (use-package "startup"
