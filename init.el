@@ -334,38 +334,6 @@
         web-mode-code-indent-offset 2
         web-mode-css-indent-offset 2))
 
-(use-package treemacs
-  :after evil
-  :config
-  (global-set-key (kbd "s-1") 'treemacs)
-  (setq treemacs-fringe-indicator-mode nil
-        treemacs-no-png-images t
-        treemacs-width 40
-        treemacs-silent-refresh t
-        treemacs-silent-filewatch t
-        treemacs-file-event-delay 1000
-        treemacs-file-follow-delay 0.1)
-  (dolist (face '(treemacs-root-face
-                  treemacs-git-unmodified-face
-                  treemacs-git-modified-face
-                  treemacs-git-renamed-face
-                  treemacs-git-ignored-face
-                  treemacs-git-untracked-face
-                  treemacs-git-added-face
-                  treemacs-git-conflict-face
-                  treemacs-directory-face
-                  treemacs-directory-collapsed-face
-                  treemacs-file-face
-                  treemacs-tags-face))
-    (set-face-attribute face nil :family "San Francisco" :height 130))
-  (use-package treemacs-evil
-    :after treemacs
-    :config
-    (evil-define-key 'treemacs treemacs-mode-map (kbd "l") 'treemacs-RET-action)
-    (evil-define-key 'treemacs treemacs-mode-map (kbd "h") 'treemacs-TAB-action))
-  (use-package treemacs-projectile :after treemacs projectile)
-  (use-package treemacs-magit :after treemacs magit))
-
 (use-package all-the-icons :config (setq all-the-icons-scale-factor 1.0))
 
 (use-package centaur-tabs
