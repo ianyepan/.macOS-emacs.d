@@ -117,6 +117,11 @@
   (add-hook 'prog-mode-hook 'eldoc-mode)
   (setq eldoc-idle-delay 0.4))
 
+(use-package js
+  :ensure nil
+  :mode ("\\.jsx?\\'" . js-mode)
+  :config (setq js-indent-level 2))
+
 (use-package xref
   :ensure nil
   :config
@@ -312,6 +317,7 @@
   :hook ((c-mode
           c-or-c++-mode
           java-mode
+          js-mode
           python-mode
           web-mode) . lsp)
   :commands lsp
@@ -325,11 +331,9 @@
   :config (setq company-lsp-cache-candidates 'auto))
 
 (use-package web-mode
-  :mode ("\\.[jt]sx?\\'" . web-mode)
+  :mode (("\\.tsx?\\'" . web-mode)
+         ("\\.html?\\'" . web-mode))
   :config
-  (with-eval-after-load 'flycheck
-    (flycheck-add-mode 'javascript-eslint 'web-mode)
-    (flycheck-add-mode 'typescript-tslint 'web-mode))
   (setq web-mode-markup-indent-offset 2
         web-mode-code-indent-offset 2
         web-mode-css-indent-offset 2))
@@ -348,11 +352,7 @@
         centaur-tabs-height 30
         centaur-tabs-set-icons t
         centaur-tabs-close-button " × ")
-  (dolist (centaur-face '(centaur-tabs-selected
-                          centaur-tabs-selected-modified
-                          centaur-tabs-unselected
-                          centaur-tabs-unselected-modified))
-    (set-face-attribute centaur-face nil :family "Arial" :height 130))
+  (centaur-tabs-change-fonts "Arial" 130)
   :bind
   ("C-S-<tab>" . centaur-tabs-backward)
   ("C-<tab>" . centaur-tabs-forward))
@@ -360,6 +360,7 @@
 (use-package emmet-mode
   :hook ((html-mode . emmet-mode)
          (css-mode . emmet-mode)
+         (js-mode . emmet-mode)
          (web-mode . emmet-mode))
   :config (setq emmet-expand-jsx-className? t))
 
