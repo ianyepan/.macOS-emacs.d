@@ -186,7 +186,7 @@
 
 ;;; Third-party Packages
 
-(use-package doom-themes :config (load-theme 'doom-solarized-dark t))
+(use-package doom-themes :config (load-theme 'doom-wilmersdorf t))
 ;; (use-package zenburn-theme :config (load-theme 'zenburn t))
 
 (use-package solaire-mode
