@@ -152,7 +152,7 @@
   :config
   (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (blink-cursor-mode -1)
-  (set-frame-font "Source Code Pro-13" nil t))
+  (set-frame-font "menlo-12:weight=normal" nil t))
 
 (use-package ediff
   :ensure nil
@@ -173,7 +173,6 @@
 (use-package flyspell
   :ensure nil
   :diminish flyspell-mode
-  :hook (prog-mode . flyspell-prog-mode)
   :config (setq ispell-program-name "/usr/local/bin/aspell"))
 
 (use-package elec-pair
@@ -314,11 +313,11 @@
   :config (setq highlight-symbol-idle-delay 0.3))
 
 (use-package lsp-mode
-  :hook ((c-mode
-          c-or-c++-mode
-          java-mode
-          js-mode
-          python-mode
+  :hook ((c-mode ; clangd
+          c-or-c++-mode ; clangd
+          java-mode ; eclipse
+          js-mode ; typescript-language-server
+          python-mode ; pyls
           web-mode) . lsp)
   :commands lsp
   :config
