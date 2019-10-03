@@ -352,6 +352,7 @@
         centaur-tabs-set-icons t
         centaur-tabs-close-button " × ")
   (centaur-tabs-change-fonts "Arial" 130)
+  (centaur-tabs-group-by-projectile-project)
   :bind
   ("C-S-<tab>" . centaur-tabs-backward)
   ("C-<tab>" . centaur-tabs-forward))
