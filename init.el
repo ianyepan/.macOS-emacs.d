@@ -42,7 +42,7 @@
       mouse-highlight nil)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-(scroll-bar-mode +1)
+(scroll-bar-mode -1)
 (column-number-mode +1)
 (setq scroll-margin 0
       scroll-conservatively 10000
@@ -50,7 +50,7 @@
       auto-window-vscroll nil)
 (setq-default line-spacing 3
               indent-tabs-mode nil
-              tab-width 4)
+              tab-width 2)
 
 (defun ian/load-init()
   "Reload `.emacs.d/init.el'."
@@ -131,10 +131,14 @@
 (use-package cc-vars
   :ensure nil
   :config
-  (setq-default c-basic-offset 4)
+  (setq-default c-basic-offset 2)
   (setq c-default-style '((java-mode . "java")
                           (awk-mode . "awk")
                           (other . "k&r"))))
+
+(use-package python
+  :ensure nil
+  :config (setq python-indent-offset 2))
 
 (use-package mwheel
   :ensure nil
@@ -185,8 +189,10 @@
 
 ;;; Third-party Packages
 
-(use-package doom-themes :config (load-theme 'doom-wilmersdorf t))
+;; (use-package doom-themes :config (load-theme 'doom-wilmersdorf t))
 ;; (use-package zenburn-theme :config (load-theme 'zenburn t))
+(set-background-color "#111111")
+(set-foreground-color "#dddddd")
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -202,6 +208,7 @@
   :init (setq evil-want-C-u-scroll t)
   :hook (after-init . evil-mode)
   :config
+  (setq evil-shift-width 2)
   (with-eval-after-load 'evil-maps ; avoid conflict with company tooltip selection
     (define-key evil-insert-state-map (kbd "C-n") nil)
     (define-key evil-insert-state-map (kbd "C-p") nil))
@@ -315,7 +322,7 @@
 (use-package lsp-mode
   :hook ((c-mode ; clangd
           c-or-c++-mode ; clangd
-          java-mode ; eclipse
+          java-mode ; eclipse-jdtls
           js-mode ; typescript-language-server
           python-mode ; pyls
           web-mode) . lsp)
