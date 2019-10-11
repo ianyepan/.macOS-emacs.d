@@ -187,12 +187,23 @@
   :ensure nil
   :config (add-hook 'before-save-hook 'whitespace-cleanup))
 
+(use-package display-line-numbers
+  :ensure nil
+  :bind ("s-j" . global-display-line-numbers-mode))
+
 ;;; Third-party Packages
 
 ;; (use-package doom-themes :config (load-theme 'doom-wilmersdorf t))
 ;; (use-package zenburn-theme :config (load-theme 'zenburn t))
 (set-background-color "#111111")
 (set-foreground-color "#dddddd")
+(custom-set-faces
+  '(company-preview-common ((t (:foreground unspecified :background "#111111"))))
+  '(company-scrollbar-bg ((t (:background "#111111"))))
+  '(company-scrollbar-fg ((t (:background "#555555"))))
+  '(company-tooltip ((t (:inherit default :background "#222222"))))
+  '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
+  '(company-tooltip-selection ((t (:inherit company-tooltip-common :background "#2a2a2a" )))))
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -229,7 +240,7 @@
   :hook (prog-mode . company-mode)
   :config
   (setq company-minimum-prefix-length 1
-        company-idle-delay 0
+        company-idle-delay 0.1
         company-selection-wrap-around t
         company-tooltip-align-annotations t
         company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
