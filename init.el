@@ -156,7 +156,7 @@
   :config
   (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (blink-cursor-mode -1)
-  (set-frame-font "menlo-12:weight=normal" nil t))
+  (set-frame-font "droid sans mono slashed-12:weight=regular" nil t))
 
 (use-package ediff
   :ensure nil
@@ -198,12 +198,12 @@
 (set-background-color "#111111")
 (set-foreground-color "#dddddd")
 (custom-set-faces
-  '(company-preview-common ((t (:foreground unspecified :background "#111111"))))
-  '(company-scrollbar-bg ((t (:background "#111111"))))
-  '(company-scrollbar-fg ((t (:background "#555555"))))
-  '(company-tooltip ((t (:inherit default :background "#222222"))))
-  '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
-  '(company-tooltip-selection ((t (:inherit company-tooltip-common :background "#2a2a2a" )))))
+ '(company-preview-common ((t (:foreground unspecified :background "#111111"))))
+ '(company-scrollbar-bg ((t (:background "#111111"))))
+ '(company-scrollbar-fg ((t (:background "#555555"))))
+ '(company-tooltip ((t (:inherit default :background "#222222"))))
+ '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
+ '(company-tooltip-selection ((t (:inherit company-tooltip-common :background "#2a2a2a" )))))
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
