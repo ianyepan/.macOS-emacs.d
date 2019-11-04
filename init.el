@@ -193,17 +193,18 @@
 
 ;;; Third-party Packages
 
-;; (use-package doom-themes :config (load-theme 'doom-wilmersdorf t))
+(use-package doom-themes :config (load-theme 'doom-tomorrow-night t))
 ;; (use-package zenburn-theme :config (load-theme 'zenburn t))
-(set-background-color "#111111")
-(set-foreground-color "#dddddd")
-(custom-set-faces
- '(company-preview-common ((t (:foreground unspecified :background "#111111"))))
- '(company-scrollbar-bg ((t (:background "#111111"))))
- '(company-scrollbar-fg ((t (:background "#555555"))))
- '(company-tooltip ((t (:inherit default :background "#222222"))))
- '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
- '(company-tooltip-selection ((t (:inherit company-tooltip-common :background "#2a2a2a" )))))
+
+;; (set-background-color "#111111")
+;; (set-foreground-color "#dddddd")
+;; (custom-set-faces
+;;  '(company-preview-common ((t (:foreground unspecified :background "#111111"))))
+;;  '(company-scrollbar-bg ((t (:background "#111111"))))
+;;  '(company-scrollbar-fg ((t (:background "#555555"))))
+;;  '(company-tooltip ((t (:inherit default :background "#222222"))))
+;;  '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
+;;  '(company-tooltip-selection ((t (:inherit company-tooltip-common :background "#2a2a2a" )))))
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -312,6 +313,7 @@
 
 (use-package markdown-mode :hook (markdown-mode . visual-line-mode))
 (use-package kotlin-mode)
+(use-package dart-mode)
 (use-package json-mode)
 
 (use-package format-all
@@ -336,6 +338,7 @@
           java-mode ; eclipse-jdtls
           js-mode ; typescript-language-server
           python-mode ; pyls
+          dart-mode
           web-mode) . lsp)
   :commands lsp
   :config
