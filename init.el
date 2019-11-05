@@ -194,7 +194,6 @@
 ;;; Third-party Packages
 
 (use-package doom-themes :config (load-theme 'doom-tomorrow-night t))
-;; (use-package zenburn-theme :config (load-theme 'zenburn t))
 
 ;; (set-background-color "#111111")
 ;; (set-foreground-color "#dddddd")
@@ -273,10 +272,6 @@
   (with-eval-after-load 'org
     (define-key org-mode-map (kbd "C-<tab>") nil))
   (use-package org-bullets :hook (org-mode . org-bullets-mode)))
-
-(use-package ranger
-  :defer t
-  :config (setq ranger-width-preview 0.5))
 
 (use-package highlight-numbers :hook (prog-mode . highlight-numbers-mode))
 (use-package highlight-operators :hook (prog-mode . highlight-operators-mode))
