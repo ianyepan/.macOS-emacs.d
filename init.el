@@ -216,10 +216,10 @@
 
 (use-package evil
   :diminish undo-tree-mode
-  :init (setq evil-want-C-u-scroll t)
+  :init ((setq evil-want-C-u-scroll t)
+         (setq evil-shift-width 2))
   :hook (after-init . evil-mode)
   :config
-  (setq evil-shift-width 2)
   (with-eval-after-load 'evil-maps ; avoid conflict with company tooltip selection
     (define-key evil-insert-state-map (kbd "C-n") nil)
     (define-key evil-insert-state-map (kbd "C-p") nil))
