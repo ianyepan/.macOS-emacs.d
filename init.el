@@ -156,7 +156,7 @@
   :config
   (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (blink-cursor-mode -1)
-  (set-frame-font "droid sans mono slashed-12:weight=regular" nil t))
+  (set-frame-font "source code pro-13:weight=regular" nil t))
 
 (use-package ediff
   :ensure nil
@@ -193,17 +193,7 @@
 
 ;;; Third-party Packages
 
-(use-package doom-themes :config (load-theme 'doom-tomorrow-night t))
-
-;; (set-background-color "#111111")
-;; (set-foreground-color "#dddddd")
-;; (custom-set-faces
-;;  '(company-preview-common ((t (:foreground unspecified :background "#111111"))))
-;;  '(company-scrollbar-bg ((t (:background "#111111"))))
-;;  '(company-scrollbar-fg ((t (:background "#555555"))))
-;;  '(company-tooltip ((t (:inherit default :background "#222222"))))
-;;  '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
-;;  '(company-tooltip-selection ((t (:inherit company-tooltip-common :background "#2a2a2a" )))))
+(use-package doom-themes :config (load-theme 'doom-nord t))
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -216,8 +206,9 @@
 
 (use-package evil
   :diminish undo-tree-mode
-  :init ((setq evil-want-C-u-scroll t)
-         (setq evil-shift-width 2))
+  :init
+  (setq evil-want-C-u-scroll t)
+  (setq evil-shift-width 2)
   :hook (after-init . evil-mode)
   :config
   (with-eval-after-load 'evil-maps ; avoid conflict with company tooltip selection
