@@ -136,6 +136,10 @@
                           (awk-mode . "awk")
                           (other . "k&r"))))
 
+(use-package prolog
+  :ensure nil
+  :mode (("\\.pl\\'" . prolog-mode)))
+
 (use-package python
   :ensure nil
   :config (setq python-indent-offset 2))
@@ -193,7 +197,7 @@
 
 ;;; Third-party Packages
 
-(use-package doom-themes :config (load-theme 'doom-nord t))
+(use-package doom-themes :config (load-theme 'doom-wilmersdorf t))
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
