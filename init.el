@@ -44,6 +44,7 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (column-number-mode +1)
+(setq frame-resize-pixelwise t)
 (setq scroll-margin 0
       scroll-conservatively 10000
       scroll-preserve-screen-position t
@@ -160,7 +161,7 @@
   :config
   (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (blink-cursor-mode -1)
-  (set-frame-font "source code pro-13:weight=regular" nil t))
+  (set-frame-font "sf mono-13:weight=regular" nil t))
 
 (use-package ediff
   :ensure nil
