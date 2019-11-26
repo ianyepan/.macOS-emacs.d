@@ -65,7 +65,7 @@
   (aset buffer-display-table ?\^M []))
 
 (defun ian/align-whitespace (start end)
-  "Align columns by whitespace"
+  "Align columns by whitespace."
   (interactive "r")
   (align-regexp start end
                 "\\(\\s-*\\)\\s-" 1 0 t))
@@ -161,7 +161,7 @@
   :config
   (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (blink-cursor-mode -1)
-  (set-frame-font "sf mono-13:weight=regular" nil t))
+  (set-frame-font "source code pro-13:weight=regular" nil t))
 
 (use-package ediff
   :ensure nil
@@ -198,7 +198,7 @@
 
 ;;; Third-party Packages
 
-(use-package doom-themes :config (load-theme 'doom-wilmersdorf t))
+(use-package doom-themes :config (load-theme 'doom-dracula t))
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
