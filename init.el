@@ -307,6 +307,7 @@
 (use-package kotlin-mode)
 (use-package dart-mode)
 (use-package json-mode)
+(use-package csv-mode)
 
 (use-package format-all
   :config
