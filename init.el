@@ -139,7 +139,8 @@
 
 (use-package prolog
   :ensure nil
-  :mode (("\\.pl\\'" . prolog-mode)))
+  :mode (("\\.pl\\'" . prolog-mode))
+  :config (setq prolog-indent-width 2))
 
 (use-package python
   :ensure nil
@@ -312,7 +313,9 @@
   (defun ian/format-code ()
     "Auto-format whole buffer"
     (interactive)
-    (format-all-buffer)))
+    (if (derived-mode-p 'prolog-mode)
+        (prolog-indent-buffer)
+      (format-all-buffer))))
 
 (use-package exec-path-from-shell
   :config (when (memq window-system '(mac ns x))
