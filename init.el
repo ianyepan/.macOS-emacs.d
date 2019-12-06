@@ -339,6 +339,7 @@
   :config
   (setq lsp-prefer-flymake nil)
   (setq lsp-enable-symbol-highlighting nil)
+  (setq lsp-signature-auto-activate nil)
   (use-package lsp-java :after lsp))
 
 (use-package company-lsp
