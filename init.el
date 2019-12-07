@@ -114,8 +114,7 @@
   :ensure nil
   :diminish eldoc-mode
   :config
-  (global-eldoc-mode -1)
-  (add-hook 'prog-mode-hook 'eldoc-mode)
+  (global-eldoc-mode +1)
   (setq eldoc-idle-delay 0.4))
 
 (use-package js
