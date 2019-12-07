@@ -247,7 +247,10 @@
 
 (use-package flycheck
   :hook (after-init . global-flycheck-mode)
-  :config (setq flycheck-python-flake8-executable "python3"))
+  :config
+  (setq flycheck-python-flake8-executable "python3")
+  (setq flycheck-flake8rc "~/.config/flake8")
+  (setq-default flycheck-disabled-checkers '(python-pylint)))
 
 (use-package ido-vertical-mode
   :hook ((after-init . ido-mode)
