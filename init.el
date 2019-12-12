@@ -39,16 +39,14 @@
       frame-title-format '("Emacs")
       ring-bell-function 'ignore
       default-directory "~/"
-      mouse-highlight nil)
+      frame-resize-pixelwise t
+      scroll-conservatively 10000
+      scroll-preserve-screen-position t
+      auto-window-vscroll nil)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (column-number-mode +1)
-(setq frame-resize-pixelwise t)
-(setq scroll-margin 0
-      scroll-conservatively 10000
-      scroll-preserve-screen-position t
-      auto-window-vscroll nil)
 (setq-default line-spacing 3
               indent-tabs-mode nil
               tab-width 2)
@@ -57,18 +55,6 @@
   "Reload `.emacs.d/init.el'."
   (interactive)
   (load-file "~/.emacs.d/init.el"))
-
-(defun ian/hide-dos-eol ()
-  "Do not show ^M in files containing mixed UNIX and DOS line endings."
-  (interactive)
-  (setq buffer-display-table (make-display-table))
-  (aset buffer-display-table ?\^M []))
-
-(defun ian/align-whitespace (start end)
-  "Align columns by whitespace."
-  (interactive "r")
-  (align-regexp start end
-                "\\(\\s-*\\)\\s-" 1 0 t))
 
 ;;; Built-in packages
 
@@ -171,7 +157,7 @@
   :ensure nil
   :config
   (defun ian/disable-bold-and-fringe-bg-face-globally ()
-    "disable bold face and fringe backgroung in Emacs"
+    "Disable bold face and fringe backgroung in Emacs."
     (interactive)
     (set-face-attribute 'fringe nil :background nil)
     (mapc (lambda (face)
