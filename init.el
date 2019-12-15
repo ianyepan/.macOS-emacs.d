@@ -51,11 +51,6 @@
               indent-tabs-mode nil
               tab-width 2)
 
-(defun ian/load-init()
-  "Reload `.emacs.d/init.el'."
-  (interactive)
-  (load-file "~/.emacs.d/init.el"))
-
 ;;; Built-in packages
 
 (use-package "startup"
@@ -172,7 +167,7 @@
 
 (use-package elec-pair
   :ensure nil
-  :config (add-hook 'prog-mode-hook 'electric-pair-mode))
+  :hook (prog-mode . electric-pair-mode))
 
 (use-package whitespace
   :ensure nil
@@ -264,7 +259,7 @@
 
 (use-package which-key
   :diminish which-key-mode
-  :defer 1
+  :defer t
   :config
   (which-key-mode +1)
   (setq which-key-idle-delay 0.4
