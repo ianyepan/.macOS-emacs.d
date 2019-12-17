@@ -378,8 +378,5 @@
   (setq sml/no-confirm-load-theme t)
   (sml/setup))
 
-;; Fix "failed to download gnu archive" bug in Emacs 26.2
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-
 (provide 'init)
 ;;; init.el ends here
