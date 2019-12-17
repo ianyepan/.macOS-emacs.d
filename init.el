@@ -142,7 +142,8 @@
   :config
   (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (blink-cursor-mode -1)
-  (set-frame-font "source code pro-13:weight=regular" nil t))
+  (when (member "Source Code Pro" (font-family-list))
+    (set-frame-font "source code pro-13:weight=light" t t)))
 
 (use-package ediff
   :ensure nil
@@ -316,7 +317,7 @@
           java-mode ; eclipse-jdtls
           js-mode ; typescript-language-server
           python-mode ; pyls
-          dart-mode
+          dart-mode ; dart analysis server
           web-mode) . lsp)
   :commands lsp
   :config
