@@ -260,7 +260,6 @@
 
 (use-package which-key
   :diminish which-key-mode
-  :defer t
   :config
   (which-key-mode +1)
   (setq which-key-idle-delay 0.4
