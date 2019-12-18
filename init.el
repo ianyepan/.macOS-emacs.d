@@ -143,7 +143,7 @@
   (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (blink-cursor-mode -1)
   (when (member "Source Code Pro" (font-family-list))
-    (set-frame-font "source code pro-13:weight=light" t t)))
+    (set-frame-font "source code pro-13:weight=regular" t t)))
 
 (use-package ediff
   :ensure nil
@@ -377,6 +377,9 @@
   :config
   (setq sml/no-confirm-load-theme t)
   (sml/setup))
+
+(use-package smex
+  :config (global-set-key (kbd "M-x") 'smex))
 
 (provide 'init)
 ;;; init.el ends here
