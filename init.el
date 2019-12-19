@@ -142,8 +142,8 @@
   :config
   (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (blink-cursor-mode -1)
-  (when (member "Source Code Pro" (font-family-list))
-    (set-frame-font "source code pro-13:weight=regular" t t)))
+  (when (member "Input" (font-family-list))
+    (set-frame-font "input-12:weight=regular" t t)))
 
 (use-package ediff
   :ensure nil
