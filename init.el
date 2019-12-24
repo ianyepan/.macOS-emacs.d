@@ -5,21 +5,24 @@
 ;;; Code:
 (defvar file-name-handler-alist-original file-name-handler-alist)
 
-(setq gc-cons-threshold 402653184
+(setq gc-cons-threshold most-positive-fixnum
       gc-cons-percentage 0.6
       file-name-handler-alist nil
       site-run-file nil)
 
+(defvar ian/gc-cons-threshold 20000000)
+
 (add-hook 'emacs-startup-hook ; hook run after loading init files
           (lambda ()
-            (setq gc-cons-threshold 20000000
+            (setq gc-cons-threshold ian/gc-cons-threshold
                   gc-cons-percentage 0.1
                   file-name-handler-alist file-name-handler-alist-original)))
 
-(add-hook 'minibuffer-setup-hook (lambda () (setq gc-cons-threshold 40000000)))
+(add-hook 'minibuffer-setup-hook (lambda ()
+                                   (setq gc-cons-threshold (* ian/gc-cons-threshold 2))))
 (add-hook 'minibuffer-exit-hook (lambda ()
                                   (garbage-collect)
-                                  (setq gc-cons-threshold 20000000)))
+                                  (setq gc-cons-threshold ian/gc-cons-threshold)))
 
 (require 'package)
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
@@ -34,7 +37,8 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (eval-and-compile
-  (setq use-package-always-ensure t))
+  (setq use-package-always-ensure t
+        use-package-expand-minimally t))
 
 (setq user-full-name "Ian Y.E. Pan"
       frame-title-format '("Emacs")
@@ -43,7 +47,8 @@
       frame-resize-pixelwise t
       scroll-conservatively 10000
       scroll-preserve-screen-position t
-      auto-window-vscroll nil)
+      auto-window-vscroll nil
+      load-prefer-newer t)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -91,6 +96,7 @@
   (global-auto-revert-mode +1)
   (setq auto-revert-interval 2
         auto-revert-check-vc-info t
+        global-auto-revert-non-file-buffers t
         auto-revert-verbose nil))
 
 (use-package eldoc
@@ -179,9 +185,17 @@
   :ensure nil
   :bind ("s-j" . global-display-line-numbers-mode))
 
+(use-package dired
+  :ensure nil
+  :config
+  (put 'dired-find-alternate-file 'disabled nil) ; reuse same buffer when navigating
+  (setq delete-by-moving-to-trash t))
+
 ;;; Third-party Packages
 
-(use-package doom-themes :config (load-theme 'doom-dracula t))
+(use-package doom-themes
+  :custom-face (cursor ((t (:background "#eeaf2c"))))
+  :config (load-theme 'doom-dracula t))
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -388,11 +402,13 @@
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
   :config
-  (setq inhibit-compacting-font-caches t)
-  (setq doom-modeline-buffer-file-name-style 'relative-from-project)
-  (setq doom-modeline-bar-width 1)
-  (setq doom-modeline-indent-info t)
-  (setq doom-modeline-env-python-executable "python3"))
+  (setq inhibit-compacting-font-caches t
+        doom-modeline-buffer-file-name-style 'relative-from-project
+        doom-modeline-bar-width 1
+        doom-modeline-minor-modes t
+        doom-modeline-indent-info t
+        doom-modeline-height 15
+        doom-modeline-env-python-executable "python3"))
 
 (provide 'init)
 ;;; init.el ends here
