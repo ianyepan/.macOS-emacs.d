@@ -252,7 +252,9 @@
 
 (use-package magit
   :bind ("C-x g" . magit-status)
-  :config (add-hook 'with-editor-mode-hook 'evil-emacs-state))
+  :config (add-hook 'with-editor-mode-hook 'evil-insert-state))
+
+(use-package evil-magit)
 
 (use-package org
   :hook ((org-mode . visual-line-mode)
