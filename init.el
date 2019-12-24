@@ -22,8 +22,9 @@
                                   (setq gc-cons-threshold 20000000)))
 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -85,8 +86,8 @@
 
 (use-package autorevert
   :ensure nil
-  :hook (after-init . global-auto-revert-mode)
   :config
+  (global-auto-revert-mode +1)
   (setq auto-revert-interval 2
         auto-revert-check-vc-info t
         auto-revert-verbose nil))
@@ -142,8 +143,8 @@
   :config
   (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (blink-cursor-mode -1)
-  (when (member "Input" (font-family-list))
-    (set-frame-font "input-12:weight=regular" t t)))
+  (when (member "Source Code Pro" (font-family-list))
+    (set-frame-font "source code pro-13:weight=regular" t t)))
 
 (use-package ediff
   :ensure nil
@@ -196,8 +197,8 @@
   :init
   (setq evil-want-C-u-scroll t)
   (setq evil-shift-width 2)
-  :hook (after-init . evil-mode)
   :config
+  (evil-mode +1)
   (with-eval-after-load 'evil-maps ; avoid conflict with company tooltip selection
     (define-key evil-insert-state-map (kbd "C-n") nil)
     (define-key evil-insert-state-map (kbd "C-p") nil))
@@ -228,23 +229,30 @@
     (define-key company-active-map (kbd "C-p") 'company-select-previous)))
 
 (use-package flycheck
-  :hook (after-init . global-flycheck-mode)
   :config
+  (global-flycheck-mode +1)
   (setq flycheck-python-flake8-executable "python3")
   (setq flycheck-flake8rc "~/.config/flake8")
   (setq-default flycheck-disabled-checkers '(python-pylint)))
 
-(use-package ido-vertical-mode
-  :hook ((after-init . ido-mode)
-         (after-init . ido-vertical-mode))
+(use-package ido
   :config
+  (ido-mode +1)
   (setq ido-everywhere t
-        ido-enable-flex-matching t
-        ido-vertical-define-keys 'C-n-C-p-up-and-down))
+        ido-enable-flex-matching t))
+
+(use-package ido-vertical-mode
+  :config
+  (ido-vertical-mode +1)
+  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
+
+(use-package ido-completing-read+ :config (ido-ubiquitous-mode +1))
 
 (use-package flx-ido :config (flx-ido-mode +1))
 
-(use-package magit :bind ("C-x g" . magit-status))
+(use-package magit
+  :bind ("C-x g" . magit-status)
+  :config (add-hook 'with-editor-mode-hook 'evil-emacs-state))
 
 (use-package org
   :hook ((org-mode . visual-line-mode)
@@ -295,7 +303,7 @@
 (use-package format-all
   :config
   (defun ian/format-code ()
-    "Auto-format whole buffer"
+    "Auto-format whole buffer."
     (interactive)
     (if (derived-mode-p 'prolog-mode)
         (prolog-indent-buffer)
@@ -378,8 +386,7 @@
   (setq sml/no-confirm-load-theme t)
   (sml/setup))
 
-(use-package smex
-  :config (global-set-key (kbd "M-x") 'smex))
+(use-package smex :config (global-set-key (kbd "M-x") 'smex))
 
 (provide 'init)
 ;;; init.el ends here
