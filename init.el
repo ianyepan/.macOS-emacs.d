@@ -197,8 +197,8 @@
   :init
   (setq evil-want-C-u-scroll t)
   (setq evil-shift-width 2)
+  :hook (after-init . evil-mode)
   :config
-  (evil-mode +1)
   (with-eval-after-load 'evil-maps ; avoid conflict with company tooltip selection
     (define-key evil-insert-state-map (kbd "C-n") nil)
     (define-key evil-insert-state-map (kbd "C-p") nil))
@@ -229,8 +229,8 @@
     (define-key company-active-map (kbd "C-p") 'company-select-previous)))
 
 (use-package flycheck
+  :hook (prog-mode . flycheck-mode)
   :config
-  (global-flycheck-mode +1)
   (setq flycheck-python-flake8-executable "python3")
   (setq flycheck-flake8rc "~/.config/flake8")
   (setq-default flycheck-disabled-checkers '(python-pylint)))
@@ -383,12 +383,20 @@
         projectile-indexing-method 'hybrid)
   (projectile-mode +1))
 
-(use-package smart-mode-line
-  :config
-  (setq sml/no-confirm-load-theme t)
-  (sml/setup))
+;; (use-package smart-mode-line
+;;   :config
+;;   (setq sml/no-confirm-load-theme t)
+;;   (sml/setup))
 
 (use-package smex :config (global-set-key (kbd "M-x") 'smex))
+
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
+  :config
+  (setq inhibit-compacting-font-caches t)
+  (setq doom-modeline-bar-width 1)
+  (setq doom-modeline-indent-info t)
+  (setq doom-modeline-env-python-executable "python3"))
 
 (provide 'init)
 ;;; init.el ends here
