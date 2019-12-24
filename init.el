@@ -48,9 +48,10 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (column-number-mode +1)
+(defvar ian/indent-width 2)
 (setq-default line-spacing 3
               indent-tabs-mode nil
-              tab-width 2)
+              tab-width ian/indent-width)
 
 ;;; Built-in packages
 
@@ -95,14 +96,13 @@
 (use-package eldoc
   :ensure nil
   :diminish eldoc-mode
-  :config
-  (global-eldoc-mode +1)
-  (setq eldoc-idle-delay 0.4))
+  :hook (prog-mode . eldoc-mode)
+  :config (setq eldoc-idle-delay 0.4))
 
 (use-package js
   :ensure nil
   :mode ("\\.jsx?\\'" . js-mode)
-  :config (setq js-indent-level 2))
+  :config (setq js-indent-level ian/indent-width))
 
 (use-package xref
   :ensure nil
@@ -113,7 +113,7 @@
 (use-package cc-vars
   :ensure nil
   :config
-  (setq-default c-basic-offset 2)
+  (setq-default c-basic-offset ian/indent-width)
   (setq c-default-style '((java-mode . "java")
                           (awk-mode . "awk")
                           (other . "k&r"))))
@@ -121,11 +121,11 @@
 (use-package prolog
   :ensure nil
   :mode (("\\.pl\\'" . prolog-mode))
-  :config (setq prolog-indent-width 2))
+  :config (setq prolog-indent-width ian/indent-width))
 
 (use-package python
   :ensure nil
-  :config (setq python-indent-offset 2))
+  :config (setq python-indent-offset ian/indent-width))
 
 (use-package mwheel
   :ensure nil
@@ -196,7 +196,7 @@
   :diminish undo-tree-mode
   :init
   (setq evil-want-C-u-scroll t)
-  (setq evil-shift-width 2)
+  (setq evil-shift-width ian/indent-width)
   :hook (after-init . evil-mode)
   :config
   (with-eval-after-load 'evil-maps ; avoid conflict with company tooltip selection
@@ -343,9 +343,9 @@
   :mode (("\\.tsx?\\'" . web-mode)
          ("\\.html?\\'" . web-mode))
   :config
-  (setq web-mode-markup-indent-offset 2
-        web-mode-code-indent-offset 2
-        web-mode-css-indent-offset 2))
+  (setq web-mode-markup-indent-offset ian/indent-width
+        web-mode-code-indent-offset ian/indent-width
+        web-mode-css-indent-offset ian/indent-width))
 
 (use-package all-the-icons :config (setq all-the-icons-scale-factor 1.0))
 
