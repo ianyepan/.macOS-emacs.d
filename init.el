@@ -383,17 +383,13 @@
         projectile-indexing-method 'hybrid)
   (projectile-mode +1))
 
-;; (use-package smart-mode-line
-;;   :config
-;;   (setq sml/no-confirm-load-theme t)
-;;   (sml/setup))
-
 (use-package smex :config (global-set-key (kbd "M-x") 'smex))
 
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
   :config
   (setq inhibit-compacting-font-caches t)
+  (setq doom-modeline-buffer-file-name-style 'relative-from-project)
   (setq doom-modeline-bar-width 1)
   (setq doom-modeline-indent-info t)
   (setq doom-modeline-env-python-executable "python3"))
