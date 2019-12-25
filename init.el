@@ -101,7 +101,7 @@
 
 (use-package eldoc
   :ensure nil
-  :diminish eldoc-mode
+  :diminish
   :hook (prog-mode . eldoc-mode)
   :config (setq eldoc-idle-delay 0.4))
 
@@ -170,7 +170,7 @@
 
 (use-package flyspell
   :ensure nil
-  :diminish flyspell-mode
+  :diminish
   :config (setq ispell-program-name "/usr/local/bin/aspell"))
 
 (use-package elec-pair
@@ -225,11 +225,11 @@
   (evil-ex-define-cmd "wq" 'ian/save-and-kill-this-buffer)
   (use-package evil-commentary
     :after evil
-    :diminish evil-commentary-mode
+    :diminish
     :config (evil-commentary-mode +1)))
 
 (use-package company
-  :diminish company-mode
+  :diminish
   :hook (prog-mode . company-mode)
   :config
   (setq company-minimum-prefix-length 1
@@ -283,7 +283,7 @@
 (use-package highlight-escape-sequences :hook (prog-mode . hes-mode))
 
 (use-package which-key
-  :diminish which-key-mode
+  :diminish
   :config
   (which-key-mode +1)
   (setq which-key-idle-delay 0.4
@@ -330,7 +330,7 @@
             (exec-path-from-shell-initialize)))
 
 (use-package highlight-symbol
-  :diminish highlight-symbol-mode
+  :diminish
   :hook (prog-mode . highlight-symbol-mode)
   :config (setq highlight-symbol-idle-delay 0.3))
 
@@ -389,7 +389,7 @@
   :config (setq emmet-expand-jsx-className? t))
 
 (use-package projectile
-  :diminish projectile-mode
+  :diminish
   :config
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "s-p") 'projectile-find-file)
@@ -413,6 +413,7 @@
 
 (use-package highlight-indent-guides
   :hook (prog-mode . highlight-indent-guides-mode)
+  :diminish
   :config
   (setq highlight-indent-guides-method 'character)
   (setq highlight-indent-guides-character 9615) ; left-align vertical bar
