@@ -179,7 +179,7 @@
 
 (use-package whitespace
   :ensure nil
-  :config (add-hook 'before-save-hook 'whitespace-cleanup))
+  :hook (before-save . whitespace-cleanup))
 
 (use-package display-line-numbers
   :ensure nil
@@ -187,9 +187,9 @@
 
 (use-package dired
   :ensure nil
-  :config
-  (put 'dired-find-alternate-file 'disabled nil) ; reuse same buffer when navigating
-  (setq delete-by-moving-to-trash t))
+  :config (setq delete-by-moving-to-trash t))
+
+(use-package saveplace :config (save-place-mode +1))
 
 ;;; Third-party Packages
 
