@@ -191,6 +191,8 @@
 
 (use-package saveplace :config (save-place-mode +1))
 
+(use-package recentf :config (recentf-mode +1))
+
 ;;; Third-party Packages
 
 (use-package doom-themes
@@ -249,20 +251,38 @@
   (setq flycheck-flake8rc "~/.config/flake8")
   (setq-default flycheck-disabled-checkers '(python-pylint)))
 
-(use-package ido
+(use-package flx)
+
+(use-package counsel
+  :diminish
   :config
-  (ido-mode +1)
-  (setq ido-everywhere t
-        ido-enable-flex-matching t))
+  (counsel-mode +1)
+  (global-set-key (kbd "s-P") 'counsel-M-x))
 
-(use-package ido-vertical-mode
+(use-package counsel-projectile :config (counsel-projectile-mode))
+
+(use-package ivy
+  :diminish
   :config
-  (ido-vertical-mode +1)
-  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
+  (ivy-mode +1)
+  (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit) ; quit out of minibuffer
+  (setq ivy-use-virtual-buffers t
+        ivy-count-format "(%d/%d) "
+        ivy-re-builders-alist '((t . ivy--regex-fuzzy))
+        ivy-initial-inputs-alist nil))
 
-(use-package ido-completing-read+ :config (ido-ubiquitous-mode +1))
+(use-package all-the-icons-ivy :config (all-the-icons-ivy-setup))
 
-(use-package flx-ido :config (flx-ido-mode +1))
+(use-package ivy-posframe
+  :after ivy
+  :diminish
+  :config
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center))
+        ivy-posframe-height-alist '((t . 20))
+        ivy-posframe-parameters '((internal-border-width . 10)))
+  (setq ivy-posframe-width 70)
+  (ivy-posframe-mode +1))
 
 (use-package magit
   :bind ("C-x g" . magit-status)
@@ -394,7 +414,8 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "s-p") 'projectile-find-file)
   (setq projectile-sort-order 'recentf
-        projectile-indexing-method 'hybrid)
+        projectile-indexing-method 'hybrid
+        projectile-completion-system 'ivy)
   (projectile-mode +1))
 
 (use-package smex :config (global-set-key (kbd "M-x") 'smex))
@@ -417,7 +438,7 @@
   :config
   (setq highlight-indent-guides-method 'character)
   (setq highlight-indent-guides-character 9615) ; left-align vertical bar
-  (setq highlight-indent-guides-auto-character-face-perc 25))
+  (setq highlight-indent-guides-auto-character-face-perc 20))
 
 (use-package diff-hl
   :config
