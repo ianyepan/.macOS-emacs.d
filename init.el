@@ -407,6 +407,7 @@
         doom-modeline-bar-width 1
         doom-modeline-minor-modes t
         doom-modeline-indent-info t
+        doom-modeline-modal-icon nil
         doom-modeline-height 15
         doom-modeline-env-python-executable "python3"))
 
