@@ -377,7 +377,11 @@
     (interactive)
     (if (derived-mode-p 'prolog-mode)
         (prolog-indent-buffer)
-      (format-all-buffer))))
+      (format-all-buffer)))
+  (defun format-document()
+    "Auto-format whole buffer (VSCode syntax)."
+    (interactive)
+    (ian/format-code)))
 
 (use-package exec-path-from-shell
   :config (when (memq window-system '(mac ns x))
