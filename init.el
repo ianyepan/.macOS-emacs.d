@@ -266,7 +266,7 @@
   :config
   (ivy-mode +1)
   (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit) ; quit out of minibuffer
+  (define-key ivy-minibuffer-map (kbd "<escape>") #'minibuffer-keyboard-quit)
   (setq ivy-use-virtual-buffers t
         ivy-count-format "(%d/%d) "
         ivy-re-builders-alist '((t . ivy--regex-fuzzy))
