@@ -257,9 +257,10 @@
   :diminish
   :config
   (counsel-mode +1)
-  (global-set-key (kbd "s-P") 'counsel-M-x))
+  (global-set-key (kbd "s-P") 'counsel-M-x)
+  (setq counsel-rg-base-command "rg --vimgrep %s"))
 
-(use-package counsel-projectile :config (counsel-projectile-mode))
+(use-package counsel-projectile :config (counsel-projectile-mode +1))
 
 (use-package ivy
   :diminish
@@ -267,9 +268,14 @@
   (ivy-mode +1)
   (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
   (define-key ivy-minibuffer-map (kbd "<escape>") #'minibuffer-keyboard-quit)
+  (setq ivy-re-builders-alist
+        '((counsel-rg . ivy--regex-plus)
+          (counsel-projectile-rg . ivy--regex-plus)
+          (counsel-ag . ivy--regex-plus)
+          (counsel-projectile-ag . ivy--regex-plus)
+          (t . ivy--regex-fuzzy)))
   (setq ivy-use-virtual-buffers t
         ivy-count-format "(%d/%d) "
-        ivy-re-builders-alist '((t . ivy--regex-fuzzy))
         ivy-initial-inputs-alist nil))
 
 (use-package all-the-icons-ivy :config (all-the-icons-ivy-setup))
@@ -287,9 +293,9 @@
 (use-package ivy-rich
   :init
   (defun ivy-rich-switch-buffer-icon (candidate)
-  (with-current-buffer
-      (get-buffer candidate)
-    (all-the-icons-icon-for-mode major-mode)))
+    (with-current-buffer
+        (get-buffer candidate)
+      (all-the-icons-icon-for-mode major-mode)))
   (setq ivy-rich-display-transformers-list ; max column width sum = (ivy-poframe-width - 1)
         '(ivy-switch-buffer
           (:columns
@@ -456,12 +462,13 @@
 (use-package projectile
   :diminish
   :config
+  (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-find-file)
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-find-file) ; counsel
+  (define-key projectile-mode-map (kbd "s-F") 'projectile-ripgrep) ; counsel
   (setq projectile-sort-order 'recentf
         projectile-indexing-method 'hybrid
-        projectile-completion-system 'ivy)
-  (projectile-mode +1))
+        projectile-completion-system 'ivy))
 
 (use-package smex :config (global-set-key (kbd "M-x") 'smex))
 
