@@ -278,7 +278,7 @@
   :after ivy
   :diminish
   :config
-  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center))
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center))
         ivy-posframe-height-alist '((t . 20))
         ivy-posframe-parameters '((internal-border-width . 10)))
   (setq ivy-posframe-width 70)
@@ -286,10 +286,15 @@
 
 (use-package ivy-rich
   :init
+  (defun ivy-rich-switch-buffer-icon (candidate)
+  (with-current-buffer
+      (get-buffer candidate)
+    (all-the-icons-icon-for-mode major-mode)))
   (setq ivy-rich-display-transformers-list ; max column width sum = (ivy-poframe-width - 1)
         '(ivy-switch-buffer
           (:columns
-           ((ivy-rich-candidate (:width 40))
+           ((ivy-rich-switch-buffer-icon (:width 2))
+            (ivy-rich-candidate (:width 35))
             (ivy-rich-switch-buffer-project (:width 15 :face success))
             (ivy-rich-switch-buffer-major-mode (:width 13 :face warning)))
            :predicate
@@ -310,10 +315,12 @@
            ((counsel-describe-variable-transformer (:width 35))
             (ivy-rich-counsel-variable-docstring (:width 34 :face font-lock-doc-face))))
 
-          counsel-recentf
+          package-install
           (:columns
-           ((ivy-rich-candidate (:width 69))
-            (ivy-rich-file-last-modified-time (:face font-lock-comment-face))))))
+           ((ivy-rich-candidate (:width 25))
+            (ivy-rich-package-version (:width 12 :face font-lock-comment-face))
+            (ivy-rich-package-archive-summary (:width 7 :face font-lock-builtin-face))
+            (ivy-rich-package-install-summary (:width 23 :face font-lock-doc-face))))))
   :config
   (ivy-rich-mode +1)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
