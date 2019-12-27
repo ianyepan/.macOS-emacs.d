@@ -66,7 +66,7 @@
 
 (use-package "window"
   :ensure nil
-  :config
+  :preface
   (defun ian/split-and-follow-horizontally ()
     "Split window below."
     (interactive)
@@ -77,6 +77,7 @@
     (interactive)
     (split-window-right)
     (other-window 1))
+  :config
   (global-set-key (kbd "C-x 2") 'ian/split-and-follow-horizontally)
   (global-set-key (kbd "C-x 3") 'ian/split-and-follow-vertically))
 
@@ -158,7 +159,7 @@
 
 (use-package faces
   :ensure nil
-  :config
+  :preface
   (defun ian/disable-bold-and-fringe-bg-face-globally ()
     "Disable bold face and fringe backgroung in Emacs."
     (interactive)
@@ -166,6 +167,7 @@
     (mapc (lambda (face)
             (when (eq (face-attribute face :weight) 'bold)
               (set-face-attribute face nil :weight 'normal))) (face-list)))
+  :config
   (add-hook 'after-init-hook 'ian/disable-bold-and-fringe-bg-face-globally))
 
 (use-package flyspell
@@ -195,6 +197,8 @@
 
 ;;; Third-party Packages
 
+;; GUI enhancements
+
 (use-package doom-themes
   :custom-face (cursor ((t (:background "#eeaf2c"))))
   :config (load-theme 'doom-dracula t))
@@ -206,7 +210,73 @@
   (solaire-global-mode)
   (solaire-mode-swap-bg))
 
-(use-package diminish :demand t)
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-startup-banner 'logo
+        dashboard-banner-logo-title "Dangerously powerful"
+        dashboard-items nil
+        dashboard-set-footer nil))
+
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
+  :config
+  (setq inhibit-compacting-font-caches t
+        doom-modeline-buffer-file-name-style 'relative-from-project
+        doom-modeline-bar-width 1
+        doom-modeline-minor-modes t
+        doom-modeline-indent-info t
+        doom-modeline-modal-icon nil
+        doom-modeline-height 15
+        doom-modeline-env-python-executable "python3"))
+
+(use-package all-the-icons
+  :config (setq all-the-icons-scale-factor 1.0))
+
+(use-package all-the-icons-ivy
+  :config (all-the-icons-ivy-setup))
+
+(use-package centaur-tabs
+  :demand
+  :init (setq centaur-tabs-set-bar 'over)
+  :config
+  (centaur-tabs-mode +1)
+  (centaur-tabs-headline-match)
+  (setq centaur-tabs-set-modified-marker t
+        centaur-tabs-modified-marker " ● "
+        centaur-tabs-cycle-scope 'tabs
+        centaur-tabs-height 30
+        centaur-tabs-set-icons t
+        centaur-tabs-close-button " × ")
+  (centaur-tabs-change-fonts "Arial" 130)
+  (centaur-tabs-group-by-projectile-project)
+  :bind
+  ("C-S-<tab>" . centaur-tabs-backward)
+  ("C-<tab>" . centaur-tabs-forward))
+
+(use-package highlight-indent-guides
+  :hook (prog-mode . highlight-indent-guides-mode)
+  :diminish
+  :config
+  (setq highlight-indent-guides-method 'character)
+  (setq highlight-indent-guides-character 9615) ; left-align vertical bar
+  (setq highlight-indent-guides-auto-character-face-perc 20))
+
+(use-package highlight-symbol
+  :diminish
+  :hook (prog-mode . highlight-symbol-mode)
+  :config (setq highlight-symbol-idle-delay 0.3))
+
+(use-package highlight-numbers
+  :hook (prog-mode . highlight-numbers-mode))
+
+(use-package highlight-operators
+  :hook (prog-mode . highlight-operators-mode))
+
+(use-package highlight-escape-sequences
+  :hook (prog-mode . hes-mode))
+
+;; Vi keybindings
 
 (use-package evil
   :diminish undo-tree-mode
@@ -214,15 +284,16 @@
   (setq evil-want-C-u-scroll t)
   (setq evil-shift-width ian/indent-width)
   :hook (after-init . evil-mode)
+  :preface
+  (defun ian/save-and-kill-this-buffer ()
+    (interactive)
+    (save-buffer)
+    (kill-this-buffer))
   :config
   (with-eval-after-load 'evil-maps ; avoid conflict with company tooltip selection
     (define-key evil-insert-state-map (kbd "C-n") nil)
     (define-key evil-insert-state-map (kbd "C-p") nil))
   (evil-set-initial-state 'term-mode 'emacs)
-  (defun ian/save-and-kill-this-buffer ()
-    (interactive)
-    (save-buffer)
-    (kill-this-buffer))
   (evil-ex-define-cmd "q" 'kill-this-buffer)
   (evil-ex-define-cmd "wq" 'ian/save-and-kill-this-buffer)
   (use-package evil-commentary
@@ -230,26 +301,21 @@
     :diminish
     :config (evil-commentary-mode +1)))
 
-(use-package company
-  :diminish
-  :hook (prog-mode . company-mode)
-  :config
-  (setq company-minimum-prefix-length 1
-        company-idle-delay 0.1
-        company-selection-wrap-around t
-        company-tooltip-align-annotations t
-        company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
-                            company-echo-metadata-frontend))
-  (with-eval-after-load 'company
-    (define-key company-active-map (kbd "C-n") 'company-select-next)
-    (define-key company-active-map (kbd "C-p") 'company-select-previous)))
+(use-package evil-magit)
 
-(use-package flycheck
-  :hook (prog-mode . flycheck-mode)
+;; Git integration
+
+(use-package magit
+  :bind ("C-x g" . magit-status)
+  :config (add-hook 'with-editor-mode-hook 'evil-insert-state))
+
+(use-package diff-hl
   :config
-  (setq flycheck-python-flake8-executable "python3")
-  (setq flycheck-flake8rc "~/.config/flake8")
-  (setq-default flycheck-disabled-checkers '(python-pylint)))
+  (global-diff-hl-mode +1)
+  (diff-hl-flydiff-mode +1)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh t))
+
+;; Searching enhancements & project management
 
 (use-package flx)
 
@@ -260,7 +326,8 @@
   (global-set-key (kbd "s-P") 'counsel-M-x)
   (setq counsel-rg-base-command "rg --vimgrep %s"))
 
-(use-package counsel-projectile :config (counsel-projectile-mode +1))
+(use-package counsel-projectile
+  :config (counsel-projectile-mode +1))
 
 (use-package ivy
   :diminish
@@ -278,11 +345,11 @@
         ivy-count-format "(%d/%d) "
         ivy-initial-inputs-alist nil))
 
-(use-package all-the-icons-ivy :config (all-the-icons-ivy-setup))
-
 (use-package ivy-posframe
   :after ivy
   :diminish
+  :custom-face
+  (ivy-posframe-border ((t (:background "#ffffff"))))
   :config
   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center))
         ivy-posframe-height-alist '((t . 20))
@@ -291,11 +358,12 @@
   (ivy-posframe-mode +1))
 
 (use-package ivy-rich
-  :init
+  :preface
   (defun ivy-rich-switch-buffer-icon (candidate)
     (with-current-buffer
         (get-buffer candidate)
       (all-the-icons-icon-for-mode major-mode)))
+  :init
   (setq ivy-rich-display-transformers-list ; max column width sum = (ivy-poframe-width - 1)
         '(ivy-switch-buffer
           (:columns
@@ -331,11 +399,60 @@
   (ivy-rich-mode +1)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
-(use-package magit
-  :bind ("C-x g" . magit-status)
-  :config (add-hook 'with-editor-mode-hook 'evil-insert-state))
+(use-package projectile
+  :diminish
+  :config
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-find-file) ; counsel
+  (define-key projectile-mode-map (kbd "s-F") 'projectile-ripgrep) ; counsel
+  (setq projectile-sort-order 'recentf
+        projectile-indexing-method 'hybrid
+        projectile-completion-system 'ivy))
 
-(use-package evil-magit)
+;; Programming language support and utilities
+
+(use-package lsp-mode
+  :hook ((c-mode         ; clangd
+          c-or-c++-mode  ; clangd
+          java-mode      ; eclipse-jdtls
+          js-mode        ; typescript-language-server
+          python-mode    ; pyls
+          dart-mode      ; dart analysis server
+          ) . lsp)
+  :commands lsp
+  :config
+  (setq lsp-prefer-flymake nil)
+  (setq lsp-enable-symbol-highlighting nil)
+  (setq lsp-signature-auto-activate nil))
+
+(use-package lsp-java
+  :after lsp)
+
+(use-package company-lsp
+  :commands company-lsp
+  :config (setq company-lsp-cache-candidates 'auto))
+
+(use-package company
+  :diminish
+  :hook (prog-mode . company-mode)
+  :config
+  (setq company-minimum-prefix-length 1
+        company-idle-delay 0.1
+        company-selection-wrap-around t
+        company-tooltip-align-annotations t
+        company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
+                            company-echo-metadata-frontend))
+  (with-eval-after-load 'company
+    (define-key company-active-map (kbd "C-n") 'company-select-next)
+    (define-key company-active-map (kbd "C-p") 'company-select-previous)))
+
+(use-package flycheck
+  :hook (prog-mode . flycheck-mode)
+  :config
+  (setq flycheck-python-flake8-executable "python3")
+  (setq flycheck-flake8rc "~/.config/flake8")
+  (setq-default flycheck-disabled-checkers '(python-pylint)))
 
 (use-package org
   :hook ((org-mode . visual-line-mode)
@@ -345,24 +462,8 @@
     (define-key org-mode-map (kbd "C-<tab>") nil))
   (use-package org-bullets :hook (org-mode . org-bullets-mode)))
 
-(use-package highlight-numbers :hook (prog-mode . highlight-numbers-mode))
-(use-package highlight-operators :hook (prog-mode . highlight-operators-mode))
-(use-package highlight-escape-sequences :hook (prog-mode . hes-mode))
-
-(use-package which-key
-  :diminish
-  :config
-  (which-key-mode +1)
-  (setq which-key-idle-delay 0.4
-        which-key-idle-secondary-delay 0.4))
-
-(use-package dashboard
-  :config
-  (dashboard-setup-startup-hook)
-  (setq dashboard-startup-banner 'logo
-        dashboard-banner-logo-title "Dangerously powerful"
-        dashboard-items nil
-        dashboard-set-footer nil))
+(use-package markdown-mode
+  :hook (markdown-mode . visual-line-mode))
 
 (use-package yasnippet-snippets
   :config
@@ -377,14 +478,31 @@
                 (when (equal my-company-point (point))
                   (yas-expand)))))
 
-(use-package markdown-mode :hook (markdown-mode . visual-line-mode))
 (use-package kotlin-mode)
+
 (use-package dart-mode)
+
 (use-package json-mode)
+
 (use-package csv-mode)
 
-(use-package format-all
+(use-package web-mode
+  :mode (("\\.tsx?\\'" . web-mode)
+         ("\\.html?\\'" . web-mode))
   :config
+  (setq web-mode-markup-indent-offset ian/indent-width
+        web-mode-code-indent-offset ian/indent-width
+        web-mode-css-indent-offset ian/indent-width))
+
+(use-package emmet-mode
+  :hook ((html-mode . emmet-mode)
+         (css-mode . emmet-mode)
+         (js-mode . emmet-mode)
+         (web-mode . emmet-mode))
+  :config (setq emmet-expand-jsx-className? t))
+
+(use-package format-all
+  :preface
   (defun ian/format-code ()
     "Auto-format whole buffer."
     (interactive)
@@ -396,107 +514,21 @@
     (interactive)
     (ian/format-code)))
 
+;; Miscellaneous
+
+(use-package diminish
+  :demand t)
+
+(use-package which-key
+  :diminish
+  :config
+  (which-key-mode +1)
+  (setq which-key-idle-delay 0.4
+        which-key-idle-secondary-delay 0.4))
+
 (use-package exec-path-from-shell
   :config (when (memq window-system '(mac ns x))
             (exec-path-from-shell-initialize)))
-
-(use-package highlight-symbol
-  :diminish
-  :hook (prog-mode . highlight-symbol-mode)
-  :config (setq highlight-symbol-idle-delay 0.3))
-
-(use-package lsp-mode
-  :hook ((c-mode ; clangd
-          c-or-c++-mode ; clangd
-          java-mode ; eclipse-jdtls
-          js-mode ; typescript-language-server
-          python-mode ; pyls
-          dart-mode ; dart analysis server
-          web-mode) . lsp)
-  :commands lsp
-  :config
-  (setq lsp-prefer-flymake nil)
-  (setq lsp-enable-symbol-highlighting nil)
-  (setq lsp-signature-auto-activate nil)
-  (use-package lsp-java :after lsp))
-
-(use-package company-lsp
-  :commands company-lsp
-  :config (setq company-lsp-cache-candidates 'auto))
-
-(use-package web-mode
-  :mode (("\\.tsx?\\'" . web-mode)
-         ("\\.html?\\'" . web-mode))
-  :config
-  (setq web-mode-markup-indent-offset ian/indent-width
-        web-mode-code-indent-offset ian/indent-width
-        web-mode-css-indent-offset ian/indent-width))
-
-(use-package all-the-icons :config (setq all-the-icons-scale-factor 1.0))
-
-(use-package centaur-tabs
-  :demand
-  :init (setq centaur-tabs-set-bar 'over)
-  :config
-  (centaur-tabs-mode +1)
-  (centaur-tabs-headline-match)
-  (setq centaur-tabs-set-modified-marker t
-        centaur-tabs-modified-marker " ● "
-        centaur-tabs-cycle-scope 'tabs
-        centaur-tabs-height 30
-        centaur-tabs-set-icons t
-        centaur-tabs-close-button " × ")
-  (centaur-tabs-change-fonts "Arial" 130)
-  (centaur-tabs-group-by-projectile-project)
-  :bind
-  ("C-S-<tab>" . centaur-tabs-backward)
-  ("C-<tab>" . centaur-tabs-forward))
-
-(use-package emmet-mode
-  :hook ((html-mode . emmet-mode)
-         (css-mode . emmet-mode)
-         (js-mode . emmet-mode)
-         (web-mode . emmet-mode))
-  :config (setq emmet-expand-jsx-className? t))
-
-(use-package projectile
-  :diminish
-  :config
-  (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-find-file) ; counsel
-  (define-key projectile-mode-map (kbd "s-F") 'projectile-ripgrep) ; counsel
-  (setq projectile-sort-order 'recentf
-        projectile-indexing-method 'hybrid
-        projectile-completion-system 'ivy))
-
-(use-package smex :config (global-set-key (kbd "M-x") 'smex))
-
-(use-package doom-modeline
-  :hook (after-init . doom-modeline-mode)
-  :config
-  (setq inhibit-compacting-font-caches t
-        doom-modeline-buffer-file-name-style 'relative-from-project
-        doom-modeline-bar-width 1
-        doom-modeline-minor-modes t
-        doom-modeline-indent-info t
-        doom-modeline-modal-icon nil
-        doom-modeline-height 15
-        doom-modeline-env-python-executable "python3"))
-
-(use-package highlight-indent-guides
-  :hook (prog-mode . highlight-indent-guides-mode)
-  :diminish
-  :config
-  (setq highlight-indent-guides-method 'character)
-  (setq highlight-indent-guides-character 9615) ; left-align vertical bar
-  (setq highlight-indent-guides-auto-character-face-perc 20))
-
-(use-package diff-hl
-  :config
-  (global-diff-hl-mode +1)
-  (diff-hl-flydiff-mode +1)
-  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh t))
 
 (provide 'init)
 ;;; init.el ends here
