@@ -189,7 +189,12 @@
 
 (use-package dired
   :ensure nil
-  :config (setq delete-by-moving-to-trash t))
+  :config
+  (setq delete-by-moving-to-trash t)
+  (eval-after-load "dired"
+    (lambda ()
+      (put 'dired-find-alternate-file 'disabled nil)
+      (define-key dired-mode-map (kbd "RET") #'dired-find-alternate-file))))
 
 (use-package saveplace :config (save-place-mode +1))
 
