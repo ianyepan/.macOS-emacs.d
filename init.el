@@ -315,14 +315,14 @@
   (diff-hl-flydiff-mode +1)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh t))
 
-;; Searching enhancements & project management
+;; Searching/sorting enhancements & project management
 
 (use-package flx)
 
 (use-package counsel
   :diminish
+  :hook (ivy-mode . counsel-mode)
   :config
-  (counsel-mode +1)
   (global-set-key (kbd "s-P") 'counsel-M-x)
   (setq counsel-rg-base-command "rg --vimgrep %s"))
 
@@ -331,8 +331,13 @@
 
 (use-package ivy
   :diminish
+  :hook (after-init . ivy-mode)
+  :custom-face
+  (ivy-minibuffer-match-face-1 ((t (:foreground "#bbbbbb" :weight normal :background nil))))
+  (ivy-minibuffer-match-face-2 ((t (:foreground "#ffffff" :weight normal :background nil))))
+  (ivy-minibuffer-match-face-3 ((t (:foreground "#ffffff" :weight normal :background nil))))
+  (ivy-minibuffer-match-face-4 ((t (:foreground "#ffffff" :weight normal :background nil))))
   :config
-  (ivy-mode +1)
   (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
   (define-key ivy-minibuffer-map (kbd "<escape>") #'minibuffer-keyboard-quit)
   (setq ivy-re-builders-alist
@@ -348,8 +353,7 @@
 (use-package ivy-posframe
   :after ivy
   :diminish
-  :custom-face
-  (ivy-posframe-border ((t (:background "#ffffff"))))
+  :custom-face (ivy-posframe-border ((t (:background "#ffffff"))))
   :config
   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center))
         ivy-posframe-height-alist '((t . 20))
@@ -373,22 +377,18 @@
             (ivy-rich-switch-buffer-major-mode (:width 13 :face warning)))
            :predicate
            (lambda (cand) (get-buffer cand)))
-
           counsel-M-x
           (:columns
            ((counsel-M-x-transformer (:width 35))
             (ivy-rich-counsel-function-docstring (:width 34 :face font-lock-doc-face))))
-
           counsel-describe-function
           (:columns
            ((counsel-describe-function-transformer (:width 35))
             (ivy-rich-counsel-function-docstring (:width 34 :face font-lock-doc-face))))
-
           counsel-describe-variable
           (:columns
            ((counsel-describe-variable-transformer (:width 35))
             (ivy-rich-counsel-variable-docstring (:width 34 :face font-lock-doc-face))))
-
           package-install
           (:columns
            ((ivy-rich-candidate (:width 25))
@@ -409,6 +409,21 @@
   (setq projectile-sort-order 'recentf
         projectile-indexing-method 'hybrid
         projectile-completion-system 'ivy))
+
+(use-package prescient
+  :config
+  (setq prescient-filter-method '(literal regexp initialism fuzzy))
+  (prescient-persist-mode +1))
+
+(use-package ivy-prescient
+  :after (prescient ivy)
+  :config
+  (setq ivy-prescient-retain-classic-highlighting t)
+  (ivy-prescient-mode +1))
+
+(use-package company-prescient
+  :after (prescient company)
+  :config (company-prescient-mode +1))
 
 ;; Programming language support and utilities
 
