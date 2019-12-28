@@ -315,6 +315,10 @@
   :config (add-hook 'with-editor-mode-hook 'evil-insert-state))
 
 (use-package diff-hl
+  :custom-face
+  (diff-hl-insert ((t (:foreground "#55bb55" :background nil))))
+  (diff-hl-delete ((t (:foreground "#ff6666" :background nil))))
+  (diff-hl-change ((t (:foreground "#99bbdd" :background nil))))
   :config
   (global-diff-hl-mode +1)
   (diff-hl-flydiff-mode +1)
@@ -337,12 +341,8 @@
 (use-package ivy
   :diminish
   :hook (after-init . ivy-mode)
-  :custom-face
-  (ivy-minibuffer-match-face-1 ((t (:foreground "#ffffff" :weight normal :background nil))))
-  (ivy-minibuffer-match-face-2 ((t (:foreground "#ffffff" :weight normal :background nil))))
-  (ivy-minibuffer-match-face-3 ((t (:foreground "#ffffff" :weight normal :background nil))))
-  (ivy-minibuffer-match-face-4 ((t (:foreground "#ffffff" :weight normal :background nil))))
   :config
+  (setq ivy-display-style nil)
   (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
   (define-key ivy-minibuffer-map (kbd "<escape>") #'minibuffer-keyboard-quit)
   (setq ivy-re-builders-alist
