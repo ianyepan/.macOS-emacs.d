@@ -31,7 +31,6 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-(setq custom-file "~/.emacs.d/to-be-dumped.el") ; custom generated, don't load
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -40,29 +39,45 @@
   (setq use-package-always-ensure t
         use-package-expand-minimally t))
 
-(setq user-full-name "Ian Y.E. Pan"
-      frame-title-format '("Emacs")
-      ring-bell-function 'ignore
-      default-directory "~/"
-      frame-resize-pixelwise t
-      scroll-conservatively 10000
-      scroll-preserve-screen-position t
-      auto-window-vscroll nil
-      load-prefer-newer t)
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
-(column-number-mode +1)
-(defvar ian/indent-width 2)
-(setq-default line-spacing 3
-              indent-tabs-mode nil
-              tab-width ian/indent-width)
+;;; Settings without corresponding packages
+
+(use-package emacs
+  :preface
+  (defvar ian/indent-width 2)
+  :config
+  (setq user-full-name "Ian Y.E. Pan"
+        frame-title-format '("Emacs")
+        ring-bell-function 'ignore
+        default-directory "~/"
+        frame-resize-pixelwise t
+        scroll-conservatively 10000
+        scroll-preserve-screen-position t
+        auto-window-vscroll nil
+        load-prefer-newer t)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (setq-default line-spacing 3
+                indent-tabs-mode nil
+                tab-width ian/indent-width))
 
 ;;; Built-in packages
 
 (use-package "startup"
   :ensure nil
   :config (setq inhibit-startup-screen t))
+
+(use-package cus-edit
+  :ensure nil
+  :config
+  (setq custom-file "~/.emacs.d/to-be-dumped.el"))
+
+(use-package scroll-bar
+  :ensure nil
+  :config (scroll-bar-mode -1))
+
+(use-package simple
+  :ensure nil
+  :config (column-number-mode +1))
 
 (use-package "window"
   :ensure nil
