@@ -239,7 +239,7 @@
   :config (setq all-the-icons-scale-factor 1.0))
 
 (use-package all-the-icons-ivy
-  :config (all-the-icons-ivy-setup))
+  :hook (after-init . all-the-icons-ivy-setup))
 
 (use-package centaur-tabs
   :demand
@@ -338,7 +338,7 @@
   :diminish
   :hook (after-init . ivy-mode)
   :custom-face
-  (ivy-minibuffer-match-face-1 ((t (:foreground "#bbbbbb" :weight normal :background nil))))
+  (ivy-minibuffer-match-face-1 ((t (:foreground "#ffffff" :weight normal :background nil))))
   (ivy-minibuffer-match-face-2 ((t (:foreground "#ffffff" :weight normal :background nil))))
   (ivy-minibuffer-match-face-3 ((t (:foreground "#ffffff" :weight normal :background nil))))
   (ivy-minibuffer-match-face-4 ((t (:foreground "#ffffff" :weight normal :background nil))))
@@ -358,7 +358,6 @@
 (use-package ivy-posframe
   :after ivy
   :diminish
-  :custom-face (ivy-posframe-border ((t (:background "#ffffff"))))
   :config
   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center))
         ivy-posframe-height-alist '((t . 20))
