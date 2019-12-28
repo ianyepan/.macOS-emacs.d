@@ -54,6 +54,7 @@
         scroll-preserve-screen-position t
         auto-window-vscroll nil
         load-prefer-newer t)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (setq-default line-spacing 3
