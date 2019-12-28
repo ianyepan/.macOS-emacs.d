@@ -414,6 +414,11 @@
         projectile-indexing-method 'hybrid
         projectile-completion-system 'ivy))
 
+(use-package wgrep
+  :config
+  (setq wgrep-enable-key (kbd "C-c C-w")) ; change to wgrep mode
+  (setq wgrep-auto-save-buffer t))
+
 (use-package prescient
   :config
   (setq prescient-filter-method '(literal regexp initialism fuzzy))
