@@ -13,16 +13,16 @@
 (defvar ian/gc-cons-threshold 20000000)
 
 (add-hook 'emacs-startup-hook ; hook run after loading init files
-          (lambda ()
-            (setq gc-cons-threshold ian/gc-cons-threshold
-                  gc-cons-percentage 0.1
-                  file-name-handler-alist file-name-handler-alist-original)))
+          #'(lambda ()
+              (setq gc-cons-threshold ian/gc-cons-threshold
+                    gc-cons-percentage 0.1
+                    file-name-handler-alist file-name-handler-alist-original)))
 
-(add-hook 'minibuffer-setup-hook (lambda ()
-                                   (setq gc-cons-threshold (* ian/gc-cons-threshold 2))))
-(add-hook 'minibuffer-exit-hook (lambda ()
-                                  (garbage-collect)
-                                  (setq gc-cons-threshold ian/gc-cons-threshold)))
+(add-hook 'minibuffer-setup-hook #'(lambda ()
+                                     (setq gc-cons-threshold (* ian/gc-cons-threshold 2))))
+(add-hook 'minibuffer-exit-hook #'(lambda ()
+                                    (garbage-collect)
+                                    (setq gc-cons-threshold ian/gc-cons-threshold)))
 
 (require 'package)
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
@@ -94,8 +94,8 @@
     (split-window-right)
     (other-window 1))
   :config
-  (global-set-key (kbd "C-x 2") 'ian/split-and-follow-horizontally)
-  (global-set-key (kbd "C-x 3") 'ian/split-and-follow-vertically))
+  (global-set-key (kbd "C-x 2") #'ian/split-and-follow-horizontally)
+  (global-set-key (kbd "C-x 3") #'ian/split-and-follow-vertically))
 
 (use-package delsel
   :ensure nil
@@ -130,8 +130,8 @@
 (use-package xref
   :ensure nil
   :config
-  (define-key prog-mode-map (kbd "s-b") 'xref-find-definitions)
-  (define-key prog-mode-map (kbd "s-[") 'xref-pop-marker-stack))
+  (define-key prog-mode-map (kbd "s-b") #'xref-find-definitions)
+  (define-key prog-mode-map (kbd "s-[") #'xref-pop-marker-stack))
 
 (use-package cc-vars
   :ensure nil
@@ -171,7 +171,7 @@
 
 (use-package ediff
   :ensure nil
-  :config (setq ediff-split-window-function 'split-window-horizontally))
+  :config (setq ediff-split-window-function #'split-window-horizontally))
 
 (use-package faces
   :ensure nil
@@ -180,11 +180,11 @@
     "Disable bold face and fringe backgroung in Emacs."
     (interactive)
     (set-face-attribute 'fringe nil :background nil)
-    (mapc (lambda (face)
-            (when (eq (face-attribute face :weight) 'bold)
-              (set-face-attribute face nil :weight 'normal))) (face-list)))
+    (mapc #'(lambda (face)
+              (when (eq (face-attribute face :weight) 'bold)
+                (set-face-attribute face nil :weight 'normal))) (face-list)))
   :config
-  (add-hook 'after-init-hook 'ian/disable-bold-and-fringe-bg-face-globally))
+  (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally))
 
 (use-package flyspell
   :ensure nil
@@ -208,9 +208,9 @@
   :config
   (setq delete-by-moving-to-trash t)
   (eval-after-load "dired"
-    (lambda ()
-      (put 'dired-find-alternate-file 'disabled nil)
-      (define-key dired-mode-map (kbd "RET") #'dired-find-alternate-file))))
+    #'(lambda ()
+        (put 'dired-find-alternate-file 'disabled nil)
+        (define-key dired-mode-map (kbd "RET") #'dired-find-alternate-file))))
 
 (use-package saveplace :config (save-place-mode +1))
 
@@ -315,8 +315,8 @@
     (define-key evil-insert-state-map (kbd "C-n") nil)
     (define-key evil-insert-state-map (kbd "C-p") nil))
   (evil-set-initial-state 'term-mode 'emacs)
-  (evil-ex-define-cmd "q" 'kill-this-buffer)
-  (evil-ex-define-cmd "wq" 'ian/save-and-kill-this-buffer)
+  (evil-ex-define-cmd "q" #'kill-this-buffer)
+  (evil-ex-define-cmd "wq" #'ian/save-and-kill-this-buffer)
   (use-package evil-commentary
     :after evil
     :diminish
@@ -328,7 +328,7 @@
 
 (use-package magit
   :bind ("C-x g" . magit-status)
-  :config (add-hook 'with-editor-mode-hook 'evil-insert-state))
+  :config (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
 (use-package diff-hl
   :custom-face
@@ -338,7 +338,7 @@
   :config
   (global-diff-hl-mode +1)
   (diff-hl-flydiff-mode +1)
-  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh t))
+  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh t))
 
 ;; Searching/sorting enhancements & project management
 
@@ -348,7 +348,7 @@
   :diminish
   :hook (ivy-mode . counsel-mode)
   :config
-  (global-set-key (kbd "s-P") 'counsel-M-x)
+  (global-set-key (kbd "s-P") #'counsel-M-x)
   (setq counsel-rg-base-command "rg --vimgrep %s"))
 
 (use-package counsel-projectile
@@ -366,6 +366,7 @@
           (counsel-projectile-rg . ivy--regex-plus)
           (counsel-ag . ivy--regex-plus)
           (counsel-projectile-ag . ivy--regex-plus)
+          (swiper . ivy--regex-plus)
           (t . ivy--regex-fuzzy)))
   (setq ivy-use-virtual-buffers t
         ivy-count-format "(%d/%d) "
@@ -396,7 +397,7 @@
             (ivy-rich-switch-buffer-project (:width 15 :face success))
             (ivy-rich-switch-buffer-major-mode (:width 13 :face warning)))
            :predicate
-           (lambda (cand) (get-buffer cand)))
+           #'(lambda (cand) (get-buffer cand)))
           counsel-M-x
           (:columns
            ((counsel-M-x-transformer (:width 35))
@@ -423,9 +424,9 @@
   :diminish
   :config
   (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-find-file) ; counsel
-  (define-key projectile-mode-map (kbd "s-F") 'projectile-ripgrep) ; counsel
+  (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map)
+  (define-key projectile-mode-map (kbd "s-p") #'projectile-find-file) ; counsel
+  (define-key projectile-mode-map (kbd "s-F") #'projectile-ripgrep) ; counsel
   (setq projectile-sort-order 'recentf
         projectile-indexing-method 'hybrid
         projectile-completion-system 'ivy))
@@ -484,8 +485,8 @@
         company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
                             company-echo-metadata-frontend))
   (with-eval-after-load 'company
-    (define-key company-active-map (kbd "C-n") 'company-select-next)
-    (define-key company-active-map (kbd "C-p") 'company-select-previous)))
+    (define-key company-active-map (kbd "C-n") #'company-select-next)
+    (define-key company-active-map (kbd "C-p") #'company-select-previous)))
 
 (use-package flycheck
   :hook (prog-mode . flycheck-mode)
@@ -510,13 +511,13 @@
   (yas-global-mode +1)
   (advice-add 'company-complete-common
               :before
-              (lambda ()
-                (setq my-company-point (point))))
+              #'(lambda ()
+                  (setq my-company-point (point))))
   (advice-add 'company-complete-common
               :after
-              (lambda ()
-                (when (equal my-company-point (point))
-                  (yas-expand)))))
+              #'(lambda ()
+                  (when (equal my-company-point (point))
+                    (yas-expand)))))
 
 (use-package kotlin-mode)
 
