@@ -157,9 +157,8 @@
 
 (use-package paren
   :ensure nil
-  :config
-  (setq show-paren-delay 0)
-  (show-paren-mode +1))
+  :init (setq show-paren-delay 0)
+  :config (show-paren-mode +1))
 
 (use-package frame
   :ensure nil
@@ -177,14 +176,13 @@
   :ensure nil
   :preface
   (defun ian/disable-bold-and-fringe-bg-face-globally ()
-    "Disable bold face and fringe backgroung in Emacs."
+    "Disable bold face and fringe background in Emacs."
     (interactive)
     (set-face-attribute 'fringe nil :background nil)
     (mapc #'(lambda (face)
               (when (eq (face-attribute face :weight) 'bold)
                 (set-face-attribute face nil :weight 'normal))) (face-list)))
-  :config
-  (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally))
+  :config (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally))
 
 (use-package flyspell
   :ensure nil
