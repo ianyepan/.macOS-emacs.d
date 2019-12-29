@@ -372,6 +372,14 @@
         ivy-count-format "(%d/%d) "
         ivy-initial-inputs-alist nil))
 
+(use-package swiper
+  :after ivy
+  :custom-face (swiper-line-face ((t (:foreground "#ffffff" :background "#60648E"))))
+  :config
+  (global-set-key (kbd "s-f") #'swiper)
+  (setq swiper-action-recenter t)
+  (setq swiper-goto-start-of-match t))
+
 (use-package ivy-posframe
   :after ivy
   :diminish
