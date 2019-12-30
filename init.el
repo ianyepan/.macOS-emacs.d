@@ -345,6 +345,7 @@
   :hook (ivy-mode . counsel-mode)
   :config
   (global-set-key (kbd "s-P") #'counsel-M-x)
+  (global-set-key (kbd "s-f") #'counsel-grep-or-swiper)
   (setq counsel-rg-base-command "rg --vimgrep %s"))
 
 (use-package counsel-projectile
@@ -372,7 +373,6 @@
   :after ivy
   :custom-face (swiper-line-face ((t (:foreground "#ffffff" :background "#60648E"))))
   :config
-  (global-set-key (kbd "s-f") #'swiper)
   (setq swiper-action-recenter t)
   (setq swiper-goto-start-of-match t))
 
@@ -448,6 +448,8 @@
 (use-package ivy-prescient
   :after (prescient ivy)
   :config
+  (setq ivy-prescient-sort-commands
+        '(:not swiper counsel-grep ivy-switch-buffer))
   (setq ivy-prescient-retain-classic-highlighting t)
   (ivy-prescient-mode +1))
 
