@@ -242,7 +242,9 @@
 (use-package smart-mode-line
   :config
   (when (member "Menlo" (font-family-list))
-    (set-face-attribute 'mode-line nil :height 120 :font "Menlo"))
+    (progn
+      (set-face-attribute 'mode-line nil :height 120 :font "Menlo")
+      (set-face-attribute 'mode-line-inactive nil :height 120 :font "Menlo")))
   (setq sml/no-confirm-load-theme t
         sml/theme 'atom-one-dark)
   (sml/setup))
