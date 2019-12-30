@@ -166,7 +166,7 @@
   (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (blink-cursor-mode -1)
   (when (member "Source Code Pro" (font-family-list))
-    (set-frame-font "source code pro-13:weight=regular" t t)))
+    (set-frame-font "Source Code Pro-13:weight=regular" t t)))
 
 (use-package ediff
   :ensure nil
@@ -241,8 +241,8 @@
 
 (use-package smart-mode-line
   :config
-  (when (member "Menlo" (font-family-list))
-    (set-face-attribute 'mode-line nil :height 120 :font "Menlo"))
+  (when (member "Droid Sans Mono Slashed" (font-family-list))
+    (set-face-attribute 'mode-line nil :height 120 :font "Droid Sans Mono Slashed"))
   (setq sml/no-confirm-load-theme t
         sml/theme 'atom-one-dark)
   (sml/setup))
@@ -381,8 +381,10 @@
   :diminish
   :config
   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center))
-        ivy-posframe-height-alist '((t . 20))
-        ivy-posframe-parameters '((internal-border-width . 10)))
+        ivy-posframe-height-alist '((t . 20)))
+  (if (member "Droid Sans Mono Slashed" (font-family-list))
+      (setq ivy-posframe-parameters '((internal-border-width . 10) (font . "Droid Sans Mono Slashed-13")))
+    ivy-posframe-parameters '((internal-border-width . 10)))
   (setq ivy-posframe-width 70)
   (ivy-posframe-mode +1))
 
