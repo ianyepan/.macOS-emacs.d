@@ -502,6 +502,7 @@
 (use-package flycheck
   :hook (prog-mode . flycheck-mode)
   :config
+  (setq flycheck-check-syntax-automatically '(save mode-enabled newline))
   (setq flycheck-python-flake8-executable "python3")
   (setq flycheck-flake8rc "~/.config/flake8")
   (setq-default flycheck-disabled-checkers '(python-pylint)))
