@@ -241,8 +241,8 @@
 
 (use-package smart-mode-line
   :config
-  (when (member "Droid Sans Mono Slashed" (font-family-list))
-    (set-face-attribute 'mode-line nil :height 120 :font "Droid Sans Mono Slashed"))
+  (when (member "Menlo" (font-family-list))
+    (set-face-attribute 'mode-line nil :height 120 :font "Menlo"))
   (setq sml/no-confirm-load-theme t
         sml/theme 'atom-one-dark)
   (sml/setup))
@@ -265,7 +265,8 @@
         centaur-tabs-height 30
         centaur-tabs-set-icons t
         centaur-tabs-close-button " × ")
-  (centaur-tabs-change-fonts "Arial" 130)
+  (when (member "Arial" (font-family-list))
+      (centaur-tabs-change-fonts "Arial" 130))
   (centaur-tabs-group-by-projectile-project)
   :bind
   ("C-S-<tab>" . centaur-tabs-backward)
@@ -382,8 +383,8 @@
   :config
   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center))
         ivy-posframe-height-alist '((t . 20)))
-  (if (member "Droid Sans Mono Slashed" (font-family-list))
-      (setq ivy-posframe-parameters '((internal-border-width . 10) (font . "Droid Sans Mono Slashed-13")))
+  (if (member "Menlo" (font-family-list))
+      (setq ivy-posframe-parameters '((internal-border-width . 10) (font . "Menlo")))
     ivy-posframe-parameters '((internal-border-width . 10)))
   (setq ivy-posframe-width 70)
   (ivy-posframe-mode +1))
