@@ -20,7 +20,7 @@ mv ~/.emacs.d ~/.emacs.d.bak
 
 Git clone my configuration to your new `~/.emacs.d/` :
 ```
-git clone https://github.com/ianpan870102/.use-package.emacs.d.git ~/.emacs.d
+git clone https://github.com/ianpan870102/.personal-emacs.d.git ~/.emacs.d
 ```
 
 ### "Rolling" Release
