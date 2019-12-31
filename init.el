@@ -384,10 +384,8 @@
   :diminish
   :config
   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center))
-        ivy-posframe-height-alist '((t . 20)))
-  (if (member "Menlo" (font-family-list))
-      (setq ivy-posframe-parameters '((internal-border-width . 10) (font . "Menlo")))
-    ivy-posframe-parameters '((internal-border-width . 10)))
+        ivy-posframe-height-alist '((t . 20))
+        ivy-posframe-parameters '((internal-border-width . 10)))
   (setq ivy-posframe-width 70)
   (ivy-posframe-mode +1))
 
