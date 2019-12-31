@@ -531,13 +531,7 @@
                   (when (equal my-company-point (point))
                     (yas-expand)))))
 
-(use-package kotlin-mode)
-
-(use-package dart-mode)
-
 (use-package json-mode)
-
-(use-package csv-mode)
 
 (use-package web-mode
   :mode (("\\.tsx?\\'" . web-mode)
