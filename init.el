@@ -575,5 +575,11 @@
   :config (when (memq window-system '(mac ns x))
             (exec-path-from-shell-initialize)))
 
+(use-package ranger
+  :config
+  (setq ranger-cleanup-eagerly t
+        ranger-width-preview 0.5
+        ranger-width-parents 0.125))
+
 (provide 'init)
 ;;; init.el ends here
