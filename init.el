@@ -70,7 +70,7 @@
 (use-package cus-edit
   :ensure nil
   :config
-  (setq custom-file "~/.emacs.d/to-be-dumped.el"))
+  (setq custom-file "~/.config/emacs/to-be-dumped.el"))
 
 (use-package scroll-bar
   :ensure nil
