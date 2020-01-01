@@ -31,7 +31,6 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -319,7 +318,9 @@
 
 (use-package evil-collection
   :after evil
-  :config (evil-collection-init))
+  :config
+  (setq evil-collection-company-use-tng nil)
+  (evil-collection-init))
 
 (use-package evil-commentary
   :after evil
