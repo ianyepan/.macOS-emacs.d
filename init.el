@@ -487,7 +487,11 @@
   :after lsp)
 
 (use-package lsp-python-ms
-  :hook (python-mode . (lambda () (require 'lsp-python-ms))))
+  :hook (python-mode . (lambda () (require 'lsp-python-ms)))
+  :config
+  (setq
+   lsp-python-ms-executable
+   "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer"))
 
 (use-package pyvenv
   :diminish
