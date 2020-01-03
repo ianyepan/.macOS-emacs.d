@@ -147,7 +147,9 @@
 
 (use-package python
   :ensure nil
-  :config (setq python-indent-offset ian/indent-width))
+  :config
+  (setq python-indent-offset ian/indent-width
+        python-shell-interpreter "python3"))
 
 (use-package mwheel
   :ensure nil
@@ -337,9 +339,9 @@
 
 (use-package diff-hl
   :custom-face
-  (diff-hl-insert ((t (:foreground "#55bb55" :background nil))))
-  (diff-hl-delete ((t (:foreground "#ff6666" :background nil))))
-  (diff-hl-change ((t (:foreground "#99bbdd" :background nil))))
+  (diff-hl-insert ((t (:foreground "#50fa7b" :background nil)))) ; dracula
+  (diff-hl-delete ((t (:foreground "#ff5555" :background nil)))) ; dracula
+  (diff-hl-change ((t (:foreground "#8be9fd" :background nil)))) ; dracula
   :config
   (global-diff-hl-mode +1)
   (diff-hl-flydiff-mode +1)
@@ -484,6 +486,13 @@
 
 (use-package lsp-java
   :after lsp)
+
+(use-package pyvenv
+  :diminish
+  :config
+  (setq pyvenv-mode-line-indicator
+        '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
+  (pyvenv-mode +1))
 
 (use-package company-lsp
   :commands company-lsp
