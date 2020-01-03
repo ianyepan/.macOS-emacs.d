@@ -475,8 +475,7 @@
           c-or-c++-mode  ; clangd
           java-mode      ; eclipse-jdtls
           js-mode        ; typescript-language-server
-          python-mode    ; pyls
-          dart-mode      ; dart analysis server
+          python-mode    ; mspyls
           ) . lsp)
   :commands lsp
   :config
@@ -486,6 +485,9 @@
 
 (use-package lsp-java
   :after lsp)
+
+(use-package lsp-python-ms
+  :hook (python-mode . (lambda () (require 'lsp-python-ms))))
 
 (use-package pyvenv
   :diminish
