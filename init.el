@@ -537,18 +537,22 @@
 (use-package markdown-mode
   :hook (markdown-mode . visual-line-mode))
 
-(use-package yasnippet-snippets
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :preface (defvar tmp/company-point nil)
   :config
   (yas-global-mode +1)
   (advice-add 'company-complete-common
               :before
               #'(lambda ()
-                  (setq my-company-point (point))))
+                  (setq tmp/company-point (point))))
   (advice-add 'company-complete-common
               :after
               #'(lambda ()
-                  (when (equal my-company-point (point))
+                  (when (equal tmp/company-point (point))
                     (yas-expand)))))
+
+(use-package yasnippet-snippets)
 
 (use-package json-mode)
 
