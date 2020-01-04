@@ -221,7 +221,7 @@
 
 (use-package doom-themes
   :custom-face (cursor ((t (:background "#eeaf2c"))))
-  :config (load-theme 'doom-one t))
+  :config (load-theme 'doom-dracula t))
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -339,12 +339,9 @@
 
 (use-package diff-hl
   :custom-face
-  ;; (diff-hl-insert ((t (:foreground "#50fa7b" :background nil)))) ; dracula
-  ;; (diff-hl-delete ((t (:foreground "#ff5555" :background nil)))) ; dracula
-  ;; (diff-hl-change ((t (:foreground "#8be9fd" :background nil)))) ; dracula
-  (diff-hl-insert ((t (:foreground "#98C379" :background nil)))) ; atom one dark
-  (diff-hl-delete ((t (:foreground "#E06D75" :background nil)))) ; atom one dark
-  (diff-hl-change ((t (:foreground "#62AEEE" :background nil)))) ; atom one dark
+  (diff-hl-insert ((t (:foreground "#50fa7b" :background nil)))) ; dracula
+  (diff-hl-delete ((t (:foreground "#ff5555" :background nil)))) ; dracula
+  (diff-hl-change ((t (:foreground "#8be9fd" :background nil)))) ; dracula
   :config
   (global-diff-hl-mode +1)
   (diff-hl-flydiff-mode +1)
