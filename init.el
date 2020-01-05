@@ -285,6 +285,7 @@
 
 (use-package highlight-symbol
   :diminish
+  :custom-face (highlight-symbol-face ((t (:background "#3e3e4e")))) ; dracula
   :hook (prog-mode . highlight-symbol-mode)
   :config (setq highlight-symbol-idle-delay 0.3))
 
