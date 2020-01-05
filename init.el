@@ -198,10 +198,6 @@
   :ensure nil
   :hook (before-save . whitespace-cleanup))
 
-(use-package display-line-numbers
-  :ensure nil
-  :bind ("s-j" . global-display-line-numbers-mode))
-
 (use-package dired
   :ensure nil
   :config
@@ -339,10 +335,10 @@
   :config (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
 (use-package diff-hl
-  :custom-face
-  (diff-hl-insert ((t (:foreground "#50fa7b" :background nil)))) ; dracula
-  (diff-hl-delete ((t (:foreground "#ff5555" :background nil)))) ; dracula
-  (diff-hl-change ((t (:foreground "#8be9fd" :background nil)))) ; dracula
+  :custom-face ; dracula
+  (diff-hl-insert ((t (:foreground "#50fa7b" :background nil))))
+  (diff-hl-delete ((t (:foreground "#ff5555" :background nil))))
+  (diff-hl-change ((t (:foreground "#8be9fd" :background nil))))
   :config
   (global-diff-hl-mode +1)
   (diff-hl-flydiff-mode +1)
@@ -584,6 +580,33 @@
     "Auto-format whole buffer (VSCode syntax)."
     (interactive)
     (ian/format-code)))
+
+;; Terminal emulation
+
+(use-package vterm
+  :custom-face ; dracula
+  (vterm-color-default ((t (:foreground "#F8F8F2" :background nil))))
+  (vterm-color-black   ((t (:foreground "#000000" :background nil))))
+  (vterm-color-red     ((t (:foreground "#FF5555" :background nil))))
+  (vterm-color-green   ((t (:foreground "#50FA7B" :background nil))))
+  (vterm-color-yellow  ((t (:foreground "#F1FA8C" :background nil))))
+  (vterm-color-blue    ((t (:foreground "#BD93F9" :background nil))))
+  (vterm-color-magenta ((t (:foreground "#FF79C6" :background nil))))
+  (vterm-color-cyan    ((t (:foreground "#8BE9FD" :background nil))))
+  (vterm-color-white   ((t (:foreground "#BBBBBB" :background nil)))))
+
+(use-package vterm-toggle
+  :after evil
+  :config
+  (evil-set-initial-state 'vterm-mode 'emacs)
+  (global-set-key (kbd "C-`") 'vterm-toggle)
+  (global-set-key (kbd "s-j") 'vterm-toggle)
+  (setq vterm-toggle-fullscreen-p nil)
+  (add-to-list 'display-buffer-alist
+               '("^v?term.*"
+                 (display-buffer-reuse-window display-buffer-at-bottom)
+                 (reusable-frames . visible)
+                 (window-height . 0.5))))
 
 ;; Miscellaneous
 
