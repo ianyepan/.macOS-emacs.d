@@ -587,6 +587,10 @@ Return a list of strings as the completion candidates."
         web-mode-code-indent-offset ian/indent-width
         web-mode-css-indent-offset ian/indent-width))
 
+(use-package js2-mode
+  :hook (js-mode . js2-minor-mode)
+  :config (setq js2-strict-missing-semi-warning nil))
+
 (use-package emmet-mode
   :diminish
   :hook ((html-mode . emmet-mode)
