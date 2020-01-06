@@ -265,7 +265,7 @@
         centaur-tabs-set-icons t
         centaur-tabs-close-button " × ")
   (when (member "Arial" (font-family-list))
-      (centaur-tabs-change-fonts "Arial" 130))
+    (centaur-tabs-change-fonts "Arial" 130))
   (centaur-tabs-group-by-projectile-project)
   :bind
   ("C-S-<tab>" . centaur-tabs-backward)
@@ -623,12 +623,6 @@
 (use-package exec-path-from-shell
   :config (when (memq window-system '(mac ns x))
             (exec-path-from-shell-initialize)))
-
-(use-package ranger
-  :config
-  (setq ranger-cleanup-eagerly t
-        ranger-width-preview 0.5
-        ranger-width-parents 0.125))
 
 (provide 'init)
 ;;; init.el ends here
