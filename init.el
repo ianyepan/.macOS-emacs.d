@@ -215,9 +215,12 @@
 
 ;; GUI enhancements
 
-(use-package doom-themes
-  :custom-face (cursor ((t (:background "#eeaf2c"))))
-  :config (load-theme 'doom-dracula t))
+;; (use-package doom-themes
+;;   :custom-face (cursor ((t (:background "#eeaf2c"))))
+;;   :config (load-theme 'doom-dracula t))
+
+(add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
+(load-theme 'twilight t)
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -242,8 +245,8 @@
     (progn
       (set-face-attribute 'mode-line nil :height 120 :font "Menlo")
       (set-face-attribute 'mode-line-inactive nil :height 120 :font "Menlo")))
-  (setq sml/no-confirm-load-theme t
-        sml/theme 'atom-one-dark)
+  (setq sml/no-confirm-load-theme t)
+  ;; (setq sml/theme 'atom-one-dark)
   (sml/setup))
 
 (use-package all-the-icons
@@ -379,7 +382,7 @@
 
 (use-package swiper
   :after ivy
-  :custom-face (swiper-line-face ((t (:foreground "#ffffff" :background "#60648E"))))
+  ;; :custom-face (swiper-line-face ((t (:foreground "#ffffff" :background "#60648E"))))
   :config
   (setq swiper-action-recenter t)
   (setq swiper-goto-start-of-match t))
