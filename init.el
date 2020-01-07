@@ -476,9 +476,9 @@
           ) . lsp)
   :commands lsp
   :config
-  (setq lsp-prefer-flymake nil)
-  (setq lsp-enable-symbol-highlighting nil)
-  (setq lsp-signature-auto-activate nil))
+  (setq lsp-prefer-flymake nil
+        lsp-enable-symbol-highlighting nil
+        lsp-signature-auto-activate nil))
 
 (use-package lsp-java
   :after lsp)
