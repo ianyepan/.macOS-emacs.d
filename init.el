@@ -215,9 +215,12 @@
 
 ;; GUI enhancements
 
-(use-package doom-themes
-  :custom-face (cursor ((t (:background "#eeaf2c"))))
-  :config (load-theme 'doom-dracula t))
+;; (use-package doom-themes
+;;   :custom-face (cursor ((t (:background "#eeaf2c"))))
+;;   :config (load-theme 'doom-dracula t))
+
+(add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
+(load-theme 'twilight t)
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -242,8 +245,8 @@
     (progn
       (set-face-attribute 'mode-line nil :height 120 :font "Menlo")
       (set-face-attribute 'mode-line-inactive nil :height 120 :font "Menlo")))
-  (setq sml/no-confirm-load-theme t
-        sml/theme 'atom-one-dark)
+  (setq sml/no-confirm-load-theme t)
+  ;; (setq sml/theme 'atom-one-dark)
   (sml/setup))
 
 (use-package all-the-icons
@@ -379,7 +382,7 @@
 
 (use-package swiper
   :after ivy
-  :custom-face (swiper-line-face ((t (:foreground "#ffffff" :background "#60648E"))))
+  ;; :custom-face (swiper-line-face ((t (:foreground "#ffffff" :background "#60648E"))))
   :config
   (setq swiper-action-recenter t)
   (setq swiper-goto-start-of-match t))
@@ -476,9 +479,9 @@
           ) . lsp)
   :commands lsp
   :config
-  (setq lsp-prefer-flymake nil)
-  (setq lsp-enable-symbol-highlighting nil)
-  (setq lsp-signature-auto-activate nil))
+  (setq lsp-prefer-flymake nil
+        lsp-enable-symbol-highlighting nil
+        lsp-signature-auto-activate nil))
 
 (use-package lsp-java
   :after lsp)
@@ -614,24 +617,24 @@ Return a list of strings as the completion candidates."
 
 ;; Terminal emulation
 
-(use-package vterm
+(use-package vterm ; when installing, evaluate exec-path first (else 'command not found')
   :custom-face ; dracula
-  (vterm-color-default ((t (:foreground "#F8F8F2" :background nil))))
-  (vterm-color-black   ((t (:foreground "#000000" :background nil))))
-  (vterm-color-red     ((t (:foreground "#FF5555" :background nil))))
-  (vterm-color-green   ((t (:foreground "#50FA7B" :background nil))))
-  (vterm-color-yellow  ((t (:foreground "#F1FA8C" :background nil))))
-  (vterm-color-blue    ((t (:foreground "#BD93F9" :background nil))))
-  (vterm-color-magenta ((t (:foreground "#FF79C6" :background nil))))
-  (vterm-color-cyan    ((t (:foreground "#8BE9FD" :background nil))))
-  (vterm-color-white   ((t (:foreground "#BBBBBB" :background nil)))))
+  (vterm-color-default ((t (:foreground "#F8F8F2"))))
+  (vterm-color-black   ((t (:foreground "#000000"))))
+  (vterm-color-red     ((t (:foreground "#FF5555"))))
+  (vterm-color-green   ((t (:foreground "#50FA7B"))))
+  (vterm-color-yellow  ((t (:foreground "#F1FA8C"))))
+  (vterm-color-blue    ((t (:foreground "#BD93F9"))))
+  (vterm-color-magenta ((t (:foreground "#FF79C6"))))
+  (vterm-color-cyan    ((t (:foreground "#8BE9FD"))))
+  (vterm-color-white   ((t (:foreground "#BBBBBB")))))
 
 (use-package vterm-toggle
   :after evil
   :config
   (evil-set-initial-state 'vterm-mode 'emacs)
-  (global-set-key (kbd "C-`") 'vterm-toggle)
-  (global-set-key (kbd "s-j") 'vterm-toggle)
+  (global-set-key (kbd "C-`") #'vterm-toggle)
+  (global-set-key (kbd "s-j") #'vterm-toggle)
   (setq vterm-toggle-fullscreen-p nil)
   (add-to-list 'display-buffer-alist
                '("^v?term.*"
