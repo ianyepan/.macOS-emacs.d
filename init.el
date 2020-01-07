@@ -167,7 +167,7 @@
   (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (blink-cursor-mode -1)
   (when (member "Source Code Pro" (font-family-list))
-    (set-frame-font "Source Code Pro-13:weight=regular" t t)))
+    (set-frame-font "Source Code Pro-12:weight=regular" t t)))
 
 (use-package ediff
   :ensure nil
@@ -284,7 +284,8 @@
 
 (use-package highlight-symbol
   :diminish
-  :custom-face (highlight-symbol-face ((t (:background "#3e3e4e")))) ; dracula
+  ;; :custom-face (highlight-symbol-face ((t (:background "#3e3e4e")))) ; dracula
+  :custom-face (highlight-symbol-face ((t (:background "#383439")))) ; twilight
   :hook (prog-mode . highlight-symbol-mode)
   :config (setq highlight-symbol-idle-delay 0.3))
 
@@ -338,10 +339,10 @@
   :config (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
 (use-package diff-hl
-  :custom-face ; dracula
-  (diff-hl-insert ((t (:foreground "#50fa7b" :background nil))))
-  (diff-hl-delete ((t (:foreground "#ff5555" :background nil))))
-  (diff-hl-change ((t (:foreground "#8be9fd" :background nil))))
+  ;; :custom-face ; dracula
+  ;; (diff-hl-insert ((t (:foreground "#50fa7b"))))
+  ;; (diff-hl-delete ((t (:foreground "#ff5555"))))
+  ;; (diff-hl-change ((t (:foreground "#8be9fd"))))
   :config
   (global-diff-hl-mode +1)
   (diff-hl-flydiff-mode +1)
@@ -584,6 +585,7 @@ Return a list of strings as the completion candidates."
 
 (use-package web-mode
   :mode (("\\.tsx?\\'" . web-mode)
+         ("\\.css\\'" . web-mode)
          ("\\.html?\\'" . web-mode))
   :config
   (setq web-mode-markup-indent-offset ian/indent-width
@@ -619,15 +621,26 @@ Return a list of strings as the completion candidates."
 
 (use-package vterm ; when installing, evaluate exec-path first (else 'command not found')
   :custom-face ; dracula
-  (vterm-color-default ((t (:foreground "#F8F8F2"))))
+  ;; (vterm-color-default ((t (:foreground "#F8F8F2"))))
+  ;; (vterm-color-black   ((t (:foreground "#000000"))))
+  ;; (vterm-color-red     ((t (:foreground "#FF5555"))))
+  ;; (vterm-color-green   ((t (:foreground "#50FA7B"))))
+  ;; (vterm-color-yellow  ((t (:foreground "#F1FA8C"))))
+  ;; (vterm-color-blue    ((t (:foreground "#BD93F9"))))
+  ;; (vterm-color-magenta ((t (:foreground "#FF79C6"))))
+  ;; (vterm-color-cyan    ((t (:foreground "#8BE9FD"))))
+  ;; (vterm-color-white   ((t (:foreground "#BBBBBB"))))
+
+  ; twilight
+  (vterm-color-default ((t (:foreground "#CCCCCC"))))
   (vterm-color-black   ((t (:foreground "#000000"))))
-  (vterm-color-red     ((t (:foreground "#FF5555"))))
-  (vterm-color-green   ((t (:foreground "#50FA7B"))))
-  (vterm-color-yellow  ((t (:foreground "#F1FA8C"))))
-  (vterm-color-blue    ((t (:foreground "#BD93F9"))))
-  (vterm-color-magenta ((t (:foreground "#FF79C6"))))
-  (vterm-color-cyan    ((t (:foreground "#8BE9FD"))))
-  (vterm-color-white   ((t (:foreground "#BBBBBB")))))
+  (vterm-color-red     ((t (:foreground "#C06D44"))))
+  (vterm-color-green   ((t (:foreground "#A6C176"))))
+  (vterm-color-yellow  ((t (:foreground "#CDA869"))))
+  (vterm-color-blue    ((t (:foreground "#7587A6"))))
+  (vterm-color-magenta ((t (:foreground "#B4BE7C"))))
+  (vterm-color-cyan    ((t (:foreground "#7F9F98"))))
+  (vterm-color-white   ((t (:foreground "#E0E0DF")))))
 
 (use-package vterm-toggle
   :after evil
