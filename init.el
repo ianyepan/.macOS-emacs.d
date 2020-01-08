@@ -243,8 +243,8 @@
   :config
   (when (member "Menlo" (font-family-list))
     (progn
-      (set-face-attribute 'mode-line nil :height 120 :font "Menlo")
-      (set-face-attribute 'mode-line-inactive nil :height 120 :font "Menlo")))
+      (set-face-attribute 'mode-line nil :height 110 :font "Menlo")
+      (set-face-attribute 'mode-line-inactive nil :height 110 :font "Menlo")))
   (setq sml/no-confirm-load-theme t)
   ;; (setq sml/theme 'atom-one-dark)
   (sml/setup))
@@ -268,7 +268,7 @@
         centaur-tabs-set-icons t
         centaur-tabs-close-button " × ")
   (when (member "Arial" (font-family-list))
-    (centaur-tabs-change-fonts "Arial" 130))
+    (centaur-tabs-change-fonts "Arial" 120))
   (centaur-tabs-group-by-projectile-project)
   :bind
   ("C-S-<tab>" . centaur-tabs-backward)
@@ -285,7 +285,7 @@
 (use-package highlight-symbol
   :diminish
   ;; :custom-face (highlight-symbol-face ((t (:background "#3e3e4e")))) ; dracula
-  :custom-face (highlight-symbol-face ((t (:background "#3b373c")))) ; twilight
+  :custom-face (highlight-symbol-face ((t (:background "#383439")))) ; twilight
   :hook (prog-mode . highlight-symbol-mode)
   :config (setq highlight-symbol-idle-delay 0.3))
 
