@@ -671,5 +671,11 @@ Return a list of strings as the completion candidates."
   :config (when (memq window-system '(mac ns x))
             (exec-path-from-shell-initialize)))
 
+(use-package rainbow-mode
+  :hook (prog-mode . rainbow-mode))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 (provide 'init)
 ;;; init.el ends here
