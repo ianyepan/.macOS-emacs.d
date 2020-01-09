@@ -56,9 +56,9 @@
    `(default ((,class (:background ,bg1 :foreground ,fg1))))
 
    `(company-preview-common ((t (:foreground unspecified :background ,bg2))))
-   `(company-scrollbar-bg ((t (:background ,bg0))))
+   `(company-scrollbar-bg ((t (:background ,bg00))))
    `(company-scrollbar-fg ((t (:background ,comment))))
-   `(company-tooltip ((t (:inherit default :background ,bg0))))
+   `(company-tooltip ((t (:inherit default :background ,bg00))))
    `(company-tooltip-common ((t (:inherit font-lock-constant-face))))
    `(company-tooltip-selection ((t (:background ,bg3))))
 
