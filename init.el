@@ -202,7 +202,7 @@
   :ensure nil
   :config
   (setq delete-by-moving-to-trash t)
-  (eval-after-load "dired"
+  (with-eval-after-load 'dired
     #'(lambda ()
         (put 'dired-find-alternate-file 'disabled nil)
         (define-key dired-mode-map (kbd "RET") #'dired-find-alternate-file))))
