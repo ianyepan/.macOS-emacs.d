@@ -43,16 +43,17 @@
 (use-package emacs
   :preface
   (defvar ian/indent-width 2)
+  :custom
+  (user-full-name "Ian Y.E. Pan")
+  (frame-title-format '("Emacs"))
+  (ring-bell-function 'ignore)
+  (default-directory "~/")
+  (frame-resize-pixelwise t)
+  (scroll-conservatively 10000)
+  (scroll-preserve-screen-position t)
+  (auto-window-vscroll nil)
+  (load-prefer-newer t)
   :config
-  (setq user-full-name "Ian Y.E. Pan"
-        frame-title-format '("Emacs")
-        ring-bell-function 'ignore
-        default-directory "~/"
-        frame-resize-pixelwise t
-        scroll-conservatively 10000
-        scroll-preserve-screen-position t
-        auto-window-vscroll nil
-        load-prefer-newer t)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)
@@ -64,20 +65,23 @@
 
 (use-package "startup"
   :ensure nil
-  :config (setq inhibit-startup-screen t))
+  :custom
+  (inhibit-startup-screen t))
 
 (use-package cus-edit
   :ensure nil
-  :config
-  (setq custom-file "~/.config/emacs/to-be-dumped.el"))
+  :custom
+  (custom-file "~/.config/emacs/to-be-dumped.el"))
 
 (use-package scroll-bar
   :ensure nil
-  :config (scroll-bar-mode -1))
+  :config
+  (scroll-bar-mode -1))
 
 (use-package simple
   :ensure nil
-  :config (column-number-mode +1))
+  :config
+  (column-number-mode +1))
 
 (use-package "window"
   :ensure nil
@@ -98,33 +102,37 @@
 
 (use-package delsel
   :ensure nil
-  :config (delete-selection-mode +1))
+  :config
+  (delete-selection-mode +1))
 
 (use-package files
   :ensure nil
-  :config
-  (setq confirm-kill-processes nil
-        make-backup-files nil))
+  :custom
+  (confirm-kill-processes nil)
+  (make-backup-files nil))
 
 (use-package autorevert
   :ensure nil
+  :custom
+  (auto-revert-interval 2)
+  (auto-revert-check-vc-info t)
+  (global-auto-revert-non-file-buffers t)
+  (auto-revert-verbose nil)
   :config
-  (global-auto-revert-mode +1)
-  (setq auto-revert-interval 2
-        auto-revert-check-vc-info t
-        global-auto-revert-non-file-buffers t
-        auto-revert-verbose nil))
+  (global-auto-revert-mode +1))
 
 (use-package eldoc
   :ensure nil
   :diminish
   :hook (prog-mode . eldoc-mode)
-  :config (setq eldoc-idle-delay 0.4))
+  :custom
+  (eldoc-idle-delay 0.4))
 
 (use-package js
   :ensure nil
   :mode ("\\.jsx?\\'" . js-mode)
-  :config (setq js-indent-level ian/indent-width))
+  :custom
+  (js-indent-level ian/indent-width))
 
 (use-package xref
   :ensure nil
@@ -134,44 +142,51 @@
 
 (use-package cc-vars
   :ensure nil
+  :custom
+  (c-default-style '((java-mode . "java")
+                     (awk-mode . "awk")
+                     (other . "k&r")))
   :config
-  (setq-default c-basic-offset ian/indent-width)
-  (setq c-default-style '((java-mode . "java")
-                          (awk-mode . "awk")
-                          (other . "k&r"))))
+  (setq-default c-basic-offset ian/indent-width))
 
 (use-package prolog
   :ensure nil
   :mode (("\\.pl\\'" . prolog-mode))
-  :config (setq prolog-indent-width ian/indent-width))
+  :custom
+  (prolog-indent-width ian/indent-width))
 
 (use-package python
   :ensure nil
-  :config
-  (setq python-indent-offset ian/indent-width
-        python-shell-interpreter "python3"))
+  :custom
+  (python-indent-offset ian/indent-width)
+  (python-shell-interpreter "python3"))
 
 (use-package mwheel
   :ensure nil
-  :config (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))
-                mouse-wheel-progressive-speed nil))
+  :custom
+  (mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+  (mouse-wheel-progressive-speed nil))
 
 (use-package paren
   :ensure nil
-  :init (setq show-paren-delay 0)
-  :config (show-paren-mode +1))
+  :init
+  (setq show-paren-delay 0)
+  :config
+  (show-paren-mode +1))
 
 (use-package frame
   :ensure nil
+  :custom
+  (initial-frame-alist (quote ((fullscreen . maximized))))
   :config
-  (setq initial-frame-alist (quote ((fullscreen . maximized))))
   (blink-cursor-mode -1)
   (when (member "Source Code Pro" (font-family-list))
     (set-frame-font "Source Code Pro-12:weight=regular" t t)))
 
 (use-package ediff
   :ensure nil
-  :config (setq ediff-split-window-function #'split-window-horizontally))
+  :custom
+  (ediff-split-window-function #'split-window-horizontally))
 
 (use-package faces
   :ensure nil
@@ -183,12 +198,14 @@
     (mapc #'(lambda (face)
               (when (eq (face-attribute face :weight) 'bold)
                 (set-face-attribute face nil :weight 'normal))) (face-list)))
-  :config (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally))
+  :config
+  (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally))
 
 (use-package flyspell
   :ensure nil
   :diminish
-  :config (setq ispell-program-name "/usr/local/bin/aspell"))
+  :custom
+  (ispell-program-name "/usr/local/bin/aspell"))
 
 (use-package elec-pair
   :ensure nil
@@ -200,16 +217,16 @@
 
 (use-package dired
   :ensure nil
+  :custom
+  (delete-by-moving-to-trash t))
+
+(use-package saveplace
   :config
-  (setq delete-by-moving-to-trash t)
-  (with-eval-after-load 'dired
-    #'(lambda ()
-        (put 'dired-find-alternate-file 'disabled nil)
-        (define-key dired-mode-map (kbd "RET") #'dired-find-alternate-file))))
+  (save-place-mode +1))
 
-(use-package saveplace :config (save-place-mode +1))
-
-(use-package recentf :config (recentf-mode +1))
+(use-package recentf
+  :config
+  (recentf-mode +1))
 
 ;;; Third-party Packages
 
@@ -217,7 +234,8 @@
 
 ;; (use-package doom-themes
 ;;   :custom-face (cursor ((t (:background "#eeaf2c"))))
-;;   :config (load-theme 'doom-dracula t))
+;;   :config
+;;   (load-theme 'doom-dracula t))
 
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
 (load-theme 'twilight t)
@@ -230,27 +248,29 @@
   (solaire-mode-swap-bg))
 
 (use-package dashboard
+  :custom
+  (dashboard-startup-banner 'logo)
+  (dashboard-banner-logo-title "Dangerously powerful")
+  (dashboard-items nil)
+  (dashboard-set-footer nil)
   :config
-  (dashboard-setup-startup-hook)
-  (setq dashboard-startup-banner 'logo
-        dashboard-banner-logo-title "Dangerously powerful"
-        dashboard-items nil
-        dashboard-set-footer nil))
+  (dashboard-setup-startup-hook))
 
 (use-package smart-mode-line-atom-one-dark-theme)
 
 (use-package smart-mode-line
+  :custom
+  (sml/no-confirm-load-theme t)
+  ;; (sml/theme 'atom-one-dark)
   :config
   (when (member "Menlo" (font-family-list))
-    (progn
-      (set-face-attribute 'mode-line nil :height 110 :font "Menlo")
-      (set-face-attribute 'mode-line-inactive nil :height 110 :font "Menlo")))
-  (setq sml/no-confirm-load-theme t)
-  ;; (setq sml/theme 'atom-one-dark)
+    (set-face-attribute 'mode-line nil :height 110 :font "Menlo")
+    (set-face-attribute 'mode-line-inactive nil :height 110 :font "Menlo"))
   (sml/setup))
 
 (use-package all-the-icons
-  :config (setq all-the-icons-scale-factor 1.0))
+  :custom
+  (all-the-icons-scale-factor 1.0))
 
 (use-package all-the-icons-ivy
   :hook (after-init . all-the-icons-ivy-setup))
@@ -258,36 +278,37 @@
 (use-package centaur-tabs
   :demand
   :init (setq centaur-tabs-set-bar 'over)
+  :bind (("C-S-<tab>" . centaur-tabs-backward)
+         ("C-<tab>" . centaur-tabs-forward))
+  :custom
+  (centaur-tabs-set-modified-marker t)
+  (centaur-tabs-modified-marker " ● ")
+  (centaur-tabs-cycle-scope 'tabs)
+  (centaur-tabs-height 30)
+  (centaur-tabs-set-icons t)
+  (centaur-tabs-close-button " × ")
   :config
   (centaur-tabs-mode +1)
   (centaur-tabs-headline-match)
-  (setq centaur-tabs-set-modified-marker t
-        centaur-tabs-modified-marker " ● "
-        centaur-tabs-cycle-scope 'tabs
-        centaur-tabs-height 30
-        centaur-tabs-set-icons t
-        centaur-tabs-close-button " × ")
-  (when (member "Arial" (font-family-list))
-    (centaur-tabs-change-fonts "Arial" 120))
   (centaur-tabs-group-by-projectile-project)
-  :bind
-  ("C-S-<tab>" . centaur-tabs-backward)
-  ("C-<tab>" . centaur-tabs-forward))
+  (when (member "Arial" (font-family-list))
+    (centaur-tabs-change-fonts "Arial" 120)))
 
 (use-package highlight-indent-guides
-  :hook (prog-mode . highlight-indent-guides-mode)
   :diminish
-  :config
-  (setq highlight-indent-guides-method 'character)
-  (setq highlight-indent-guides-character 9615) ; left-align vertical bar
-  (setq highlight-indent-guides-auto-character-face-perc 20))
+  :hook (prog-mode . highlight-indent-guides-mode)
+  :custom
+  (highlight-indent-guides-method 'character)
+  (highlight-indent-guides-character 9615) ; left-align vertical bar
+  (highlight-indent-guides-auto-character-face-perc 20))
 
 (use-package highlight-symbol
   :diminish
+  :hook (prog-mode . highlight-symbol-mode)
   ;; :custom-face (highlight-symbol-face ((t (:background "#3e3e4e")))) ; dracula
   :custom-face (highlight-symbol-face ((t (:background "#383439")))) ; twilight
-  :hook (prog-mode . highlight-symbol-mode)
-  :config (setq highlight-symbol-idle-delay 0.3))
+  :custom
+  (highlight-symbol-idle-delay 0.3))
 
 (use-package highlight-numbers
   :hook (prog-mode . highlight-numbers-mode))
@@ -321,14 +342,16 @@
 
 (use-package evil-collection
   :after evil
+  :custom
+  (evil-collection-company-use-tng nil)
   :config
-  (setq evil-collection-company-use-tng nil)
   (evil-collection-init))
 
 (use-package evil-commentary
   :after evil
   :diminish
-  :config (evil-commentary-mode +1))
+  :config
+  (evil-commentary-mode +1))
 
 (use-package evil-magit)
 
@@ -336,7 +359,8 @@
 
 (use-package magit
   :bind ("C-x g" . magit-status)
-  :config (add-hook 'with-editor-mode-hook #'evil-insert-state))
+  :config
+  (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
 (use-package diff-hl
   ;; :custom-face ; dracula
@@ -355,47 +379,50 @@
 (use-package counsel
   :diminish
   :hook (ivy-mode . counsel-mode)
+  :custom
+  (counsel-rg-base-command "rg --vimgrep %s")
   :config
   (global-set-key (kbd "s-P") #'counsel-M-x)
-  (global-set-key (kbd "s-f") #'counsel-grep-or-swiper)
-  (setq counsel-rg-base-command "rg --vimgrep %s"))
+  (global-set-key (kbd "s-f") #'counsel-grep-or-swiper))
 
 (use-package counsel-projectile
-  :config (counsel-projectile-mode +1))
+  :config
+  (counsel-projectile-mode +1))
 
 (use-package ivy
   :diminish
   :hook (after-init . ivy-mode)
+  :custom
+  (ivy-display-style nil)
+  (ivy-re-builders-alist '((counsel-rg . ivy--regex-plus)
+                           (counsel-projectile-rg . ivy--regex-plus)
+                           (counsel-ag . ivy--regex-plus)
+                           (counsel-projectile-ag . ivy--regex-plus)
+                           (swiper . ivy--regex-plus)
+                           (t . ivy--regex-fuzzy)))
+  (ivy-use-virtual-buffers t)
+  (ivy-count-format "(%d/%d) ")
+  (ivy-initial-inputs-alist nil)
   :config
-  (setq ivy-display-style nil)
   (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
-  (define-key ivy-minibuffer-map (kbd "<escape>") #'minibuffer-keyboard-quit)
-  (setq ivy-re-builders-alist
-        '((counsel-rg . ivy--regex-plus)
-          (counsel-projectile-rg . ivy--regex-plus)
-          (counsel-ag . ivy--regex-plus)
-          (counsel-projectile-ag . ivy--regex-plus)
-          (swiper . ivy--regex-plus)
-          (t . ivy--regex-fuzzy)))
-  (setq ivy-use-virtual-buffers t
-        ivy-count-format "(%d/%d) "
-        ivy-initial-inputs-alist nil))
+  (define-key ivy-minibuffer-map (kbd "<escape>") #'minibuffer-keyboard-quit))
 
 (use-package swiper
   :after ivy
   ;; :custom-face (swiper-line-face ((t (:foreground "#ffffff" :background "#60648E"))))
-  :config
-  (setq swiper-action-recenter t)
-  (setq swiper-goto-start-of-match t))
+  :custom
+  (swiper-action-recenter t)
+  (swiper-goto-start-of-match t))
 
 (use-package ivy-posframe
   :after ivy
   :diminish
+  :custom
+  (ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
+  (ivy-posframe-height-alist '((t . 20)))
+  (ivy-posframe-parameters '((internal-border-width . 10)))
+  (ivy-posframe-width 70)
   :config
-  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center))
-        ivy-posframe-height-alist '((t . 20))
-        ivy-posframe-parameters '((internal-border-width . 10)))
-  (setq ivy-posframe-width 70)
   (ivy-posframe-mode +1))
 
 (use-package ivy-rich
@@ -438,23 +465,24 @@
 
 (use-package projectile
   :diminish
+  :custom
+  (projectile-sort-order 'recentf)
+  (projectile-indexing-method 'hybrid)
+  (projectile-completion-system 'ivy)
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map)
-  (define-key projectile-mode-map (kbd "s-p") #'projectile-find-file) ; counsel
-  (define-key projectile-mode-map (kbd "s-F") #'projectile-ripgrep) ; counsel
-  (setq projectile-sort-order 'recentf
-        projectile-indexing-method 'hybrid
-        projectile-completion-system 'ivy))
+  (define-key projectile-mode-map (kbd "s-p") #'projectile-find-file)
+  (define-key projectile-mode-map (kbd "s-F") #'projectile-ripgrep))
 
 (use-package wgrep
-  :config
-  (setq wgrep-enable-key (kbd "C-c C-w")) ; change to wgrep mode
-  (setq wgrep-auto-save-buffer t))
+  :custom
+  (wgrep-auto-save-buffer t))
 
 (use-package prescient
+  :custom
+  (prescient-filter-method '(literal regexp initialism fuzzy))
   :config
-  (setq prescient-filter-method '(literal regexp initialism fuzzy))
   (prescient-persist-mode +1))
 
 (use-package ivy-prescient
@@ -627,7 +655,7 @@ Return a list of strings as the completion candidates."
   ;; (vterm-color-cyan    ((t (:foreground "#8BE9FD"))))
   ;; (vterm-color-white   ((t (:foreground "#BBBBBB"))))
 
-  ; twilight
+                                        ; twilight
   (vterm-color-default ((t (:foreground "#CCCCCC"))))
   (vterm-color-black   ((t (:foreground "#000000"))))
   (vterm-color-red     ((t (:foreground "#C06D44"))))
