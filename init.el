@@ -232,11 +232,6 @@
 
 ;; GUI enhancements
 
-;; (use-package doom-themes
-;;   :custom-face (cursor ((t (:background "#eeaf2c"))))
-;;   :config
-;;   (load-theme 'doom-dracula t))
-
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
 (load-theme 'twilight t)
 
@@ -256,12 +251,9 @@
   :config
   (dashboard-setup-startup-hook))
 
-(use-package smart-mode-line-atom-one-dark-theme)
-
 (use-package smart-mode-line
   :custom
   (sml/no-confirm-load-theme t)
-  ;; (sml/theme 'atom-one-dark)
   :config
   (when (member "Menlo" (font-family-list))
     (set-face-attribute 'mode-line nil :height 110 :font "Menlo")
@@ -305,7 +297,6 @@
 (use-package highlight-symbol
   :diminish
   :hook (prog-mode . highlight-symbol-mode)
-  ;; :custom-face (highlight-symbol-face ((t (:background "#3e3e4e")))) ; dracula
   :custom-face (highlight-symbol-face ((t (:background "#383439")))) ; twilight
   :custom
   (highlight-symbol-idle-delay 0.3))
@@ -362,10 +353,6 @@
   (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
 (use-package diff-hl
-  ;; :custom-face ; dracula
-  ;; (diff-hl-insert ((t (:foreground "#50fa7b"))))
-  ;; (diff-hl-delete ((t (:foreground "#ff5555"))))
-  ;; (diff-hl-change ((t (:foreground "#8be9fd"))))
   :config
   (global-diff-hl-mode +1)
   (diff-hl-flydiff-mode +1)
@@ -649,18 +636,7 @@ Return a list of strings as the completion candidates."
 ;; Terminal emulation
 
 (use-package vterm ; when installing, evaluate exec-path first (else 'command not found')
-  :custom-face ; dracula
-  ;; (vterm-color-default ((t (:foreground "#F8F8F2"))))
-  ;; (vterm-color-black   ((t (:foreground "#000000"))))
-  ;; (vterm-color-red     ((t (:foreground "#FF5555"))))
-  ;; (vterm-color-green   ((t (:foreground "#50FA7B"))))
-  ;; (vterm-color-yellow  ((t (:foreground "#F1FA8C"))))
-  ;; (vterm-color-blue    ((t (:foreground "#BD93F9"))))
-  ;; (vterm-color-magenta ((t (:foreground "#FF79C6"))))
-  ;; (vterm-color-cyan    ((t (:foreground "#8BE9FD"))))
-  ;; (vterm-color-white   ((t (:foreground "#BBBBBB"))))
-
-  ;; twilight
+  :custom-face ; twilight
   (vterm-color-default ((t (:foreground "#CCCCCC"))))
   (vterm-color-black   ((t (:foreground "#000000"))))
   (vterm-color-red     ((t (:foreground "#C06D44"))))
