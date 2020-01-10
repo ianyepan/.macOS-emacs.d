@@ -233,7 +233,7 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
-(load-theme 'vscode-dark t)
+(load-theme 'vscode-dark-plus t)
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -248,7 +248,7 @@
   (dashboard-startup-banner 'logo)
   (dashboard-banner-logo-title "Dangerously powerful")
   (dashboard-items nil)
-  (dashboard-set-footer nil)
+  (dashboard-footer "It was hot, the night we burned Chrome.")
   :config
   (dashboard-setup-startup-hook))
 
