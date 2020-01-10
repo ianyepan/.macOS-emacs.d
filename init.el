@@ -270,7 +270,8 @@
 
 (use-package centaur-tabs
   :demand
-  :init (setq centaur-tabs-set-bar 'over)
+  :init
+  (setq centaur-tabs-set-bar 'over)
   :bind (("C-S-<tab>" . centaur-tabs-backward)
          ("C-<tab>" . centaur-tabs-forward))
   :custom
@@ -334,9 +335,8 @@
 
 (use-package evil-collection
   :after evil
-  :custom
-  (evil-collection-company-use-tng nil)
   :config
+  (setq evil-collection-company-use-tng nil)
   (evil-collection-init))
 
 (use-package evil-commentary
