@@ -233,7 +233,7 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
-(load-theme 'twilight t)
+(load-theme 'vscode-default-dark t)
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -243,6 +243,7 @@
   (solaire-mode-swap-bg))
 
 (use-package dashboard
+  :hook (dashboard-mode . (lambda () (setq default-directory "~/")))
   :custom
   (dashboard-startup-banner 'logo)
   (dashboard-banner-logo-title "Dangerously powerful")
