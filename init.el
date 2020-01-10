@@ -232,13 +232,8 @@
 
 ;; GUI enhancements
 
-;; (use-package doom-themes
-;;   :custom-face (cursor ((t (:background "#eeaf2c"))))
-;;   :config
-;;   (load-theme 'doom-dracula t))
-
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
-(load-theme 'twilight t)
+(load-theme 'vscode-default-dark t)
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -248,6 +243,7 @@
   (solaire-mode-swap-bg))
 
 (use-package dashboard
+  :hook (dashboard-mode . (lambda () (setq default-directory "~/")))
   :custom
   (dashboard-startup-banner 'logo)
   (dashboard-banner-logo-title "Dangerously powerful")
@@ -256,12 +252,9 @@
   :config
   (dashboard-setup-startup-hook))
 
-(use-package smart-mode-line-atom-one-dark-theme)
-
 (use-package smart-mode-line
   :custom
   (sml/no-confirm-load-theme t)
-  ;; (sml/theme 'atom-one-dark)
   :config
   (when (member "Menlo" (font-family-list))
     (set-face-attribute 'mode-line nil :height 110 :font "Menlo")
@@ -305,7 +298,6 @@
 (use-package highlight-symbol
   :diminish
   :hook (prog-mode . highlight-symbol-mode)
-  ;; :custom-face (highlight-symbol-face ((t (:background "#3e3e4e")))) ; dracula
   :custom-face (highlight-symbol-face ((t (:background "#383439")))) ; twilight
   :custom
   (highlight-symbol-idle-delay 0.3))
@@ -363,10 +355,6 @@
   (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
 (use-package diff-hl
-  ;; :custom-face ; dracula
-  ;; (diff-hl-insert ((t (:foreground "#50fa7b"))))
-  ;; (diff-hl-delete ((t (:foreground "#ff5555"))))
-  ;; (diff-hl-change ((t (:foreground "#8be9fd"))))
   :config
   (global-diff-hl-mode +1)
   (diff-hl-flydiff-mode +1)
@@ -487,15 +475,16 @@
 
 (use-package ivy-prescient
   :after (prescient ivy)
+  :custom
+  (ivy-prescient-sort-commands '(:not swiper counsel-grep ivy-switch-buffer))
+  (ivy-prescient-retain-classic-highlighting t)
   :config
-  (setq ivy-prescient-sort-commands
-        '(:not swiper counsel-grep ivy-switch-buffer))
-  (setq ivy-prescient-retain-classic-highlighting t)
   (ivy-prescient-mode +1))
 
 (use-package company-prescient
   :after (prescient company)
-  :config (company-prescient-mode +1))
+  :config
+  (company-prescient-mode +1))
 
 ;; Programming language support and utilities
 
@@ -507,32 +496,32 @@
           python-mode    ; mspyls
           ) . lsp)
   :commands lsp
-  :config
-  (setq lsp-prefer-flymake nil
-        lsp-enable-symbol-highlighting nil
-        lsp-signature-auto-activate nil))
+  :custom
+  (lsp-prefer-flymake nil)
+  (lsp-enable-symbol-highlighting nil)
+  (lsp-signature-auto-activate nil))
 
 (use-package lsp-java
   :after lsp)
 
 (use-package lsp-python-ms
   :hook (python-mode . (lambda () (require 'lsp-python-ms)))
-  :config
-  (setq
-   lsp-python-ms-executable
+  :custom
+  (lsp-python-ms-executable
    "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer"))
 
 (use-package pyvenv
   :diminish
+  :custom
+  (pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
   :config
-  (setq pyvenv-mode-line-indicator
-        '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
   (pyvenv-mode +1))
 
 (use-package company-lsp
   :commands company-lsp
+  :custom
+  (company-lsp-cache-candidates 'auto)
   :config
-  (setq company-lsp-cache-candidates 'auto)
   (add-to-list 'company-lsp-filter-candidates '(mspyls . t))
   (defun company-lsp--on-completion (response prefix)
     "Handle completion RESPONSE.
@@ -562,23 +551,25 @@ Return a list of strings as the completion candidates."
 (use-package company
   :diminish
   :hook (prog-mode . company-mode)
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.1)
+  (company-selection-wrap-around t)
+  (company-tooltip-align-annotations t)
+  (company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
+                       company-echo-metadata-frontend))
   :config
-  (setq company-minimum-prefix-length 1
-        company-idle-delay 0.1
-        company-selection-wrap-around t
-        company-tooltip-align-annotations t
-        company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
-                            company-echo-metadata-frontend))
   (with-eval-after-load 'company
     (define-key company-active-map (kbd "C-n") #'company-select-next)
     (define-key company-active-map (kbd "C-p") #'company-select-previous)))
 
 (use-package flycheck
   :hook (prog-mode . flycheck-mode)
+  :custom
+  (flycheck-check-syntax-automatically '(save mode-enabled newline))
+  (flycheck-python-flake8-executable "python3")
+  (flycheck-flake8rc "~/.config/flake8")
   :config
-  (setq flycheck-check-syntax-automatically '(save mode-enabled newline))
-  (setq flycheck-python-flake8-executable "python3")
-  (setq flycheck-flake8rc "~/.config/flake8")
   (setq-default flycheck-disabled-checkers '(python-pylint)))
 
 (use-package org
@@ -586,15 +577,18 @@ Return a list of strings as the completion candidates."
          (org-mode . org-indent-mode))
   :config
   (with-eval-after-load 'org
-    (define-key org-mode-map (kbd "C-<tab>") nil))
-  (use-package org-bullets :hook (org-mode . org-bullets-mode)))
+    (define-key org-mode-map (kbd "C-<tab>") nil)))
+
+(use-package org-bullets
+  :hook (org-mode . org-bullets-mode))
 
 (use-package markdown-mode
   :hook (markdown-mode . visual-line-mode))
 
 (use-package yasnippet
   :diminish yas-minor-mode
-  :preface (defvar tmp/company-point nil)
+  :preface
+  (defvar tmp/company-point nil)
   :config
   (yas-global-mode +1)
   (advice-add 'company-complete-common
@@ -615,10 +609,10 @@ Return a list of strings as the completion candidates."
   :mode (("\\.tsx?\\'" . web-mode)
          ("\\.css\\'" . web-mode)
          ("\\.html?\\'" . web-mode))
-  :config
-  (setq web-mode-markup-indent-offset ian/indent-width
-        web-mode-code-indent-offset ian/indent-width
-        web-mode-css-indent-offset ian/indent-width))
+  :custom
+  (web-mode-markup-indent-offset ian/indent-width)
+  (web-mode-code-indent-offset ian/indent-width)
+  (web-mode-css-indent-offset ian/indent-width))
 
 (use-package emmet-mode
   :diminish
@@ -644,18 +638,7 @@ Return a list of strings as the completion candidates."
 ;; Terminal emulation
 
 (use-package vterm ; when installing, evaluate exec-path first (else 'command not found')
-  :custom-face ; dracula
-  ;; (vterm-color-default ((t (:foreground "#F8F8F2"))))
-  ;; (vterm-color-black   ((t (:foreground "#000000"))))
-  ;; (vterm-color-red     ((t (:foreground "#FF5555"))))
-  ;; (vterm-color-green   ((t (:foreground "#50FA7B"))))
-  ;; (vterm-color-yellow  ((t (:foreground "#F1FA8C"))))
-  ;; (vterm-color-blue    ((t (:foreground "#BD93F9"))))
-  ;; (vterm-color-magenta ((t (:foreground "#FF79C6"))))
-  ;; (vterm-color-cyan    ((t (:foreground "#8BE9FD"))))
-  ;; (vterm-color-white   ((t (:foreground "#BBBBBB"))))
-
-                                        ; twilight
+  :custom-face ; twilight
   (vterm-color-default ((t (:foreground "#CCCCCC"))))
   (vterm-color-black   ((t (:foreground "#000000"))))
   (vterm-color-red     ((t (:foreground "#C06D44"))))
@@ -668,11 +651,12 @@ Return a list of strings as the completion candidates."
 
 (use-package vterm-toggle
   :after evil
+  :custom
+  (vterm-toggle-fullscreen-p nil)
   :config
   (evil-set-initial-state 'vterm-mode 'emacs)
   (global-set-key (kbd "C-`") #'vterm-toggle)
   (global-set-key (kbd "s-j") #'vterm-toggle)
-  (setq vterm-toggle-fullscreen-p nil)
   (add-to-list 'display-buffer-alist
                '("^v?term.*"
                  (display-buffer-reuse-window display-buffer-at-bottom)
@@ -686,19 +670,23 @@ Return a list of strings as the completion candidates."
 
 (use-package which-key
   :diminish
+  :custom
+  (which-key-idle-delay 0.4)
+  (which-key-idle-secondary-delay 0.4)
   :config
-  (which-key-mode +1)
-  (setq which-key-idle-delay 0.4
-        which-key-idle-secondary-delay 0.4))
+  (which-key-mode +1))
 
 (use-package exec-path-from-shell
-  :config (when (memq window-system '(mac ns x))
-            (exec-path-from-shell-initialize)))
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 (use-package rainbow-mode
+  :diminish
   :hook (prog-mode . rainbow-mode))
 
 (use-package rainbow-delimiters
+  :diminish
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (provide 'init)
