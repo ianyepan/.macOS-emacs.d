@@ -233,7 +233,7 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
-(load-theme 'vscode-default-dark t)
+(load-theme 'vscode-dark t)
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)

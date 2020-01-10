@@ -1,4 +1,4 @@
-;;; vscode-default-dark-theme.el --- A port of the classic old-school theme
+;;; vscode-dark-theme.el --- a complete port of the Visual Studio Code Dark theme for Emacs
 
 ;; Copyright (C) 2019 , Ian Y.E. Pan
 
@@ -23,7 +23,7 @@
 
 ;;; Code:
 
-(deftheme vscode-default-dark)
+(deftheme vscode-dark)
 (let ((class '((class color) (min-colors 89)))
       (fg0     "#AEAFAD")
       (fg1     "#d4d4d4")
@@ -41,20 +41,20 @@
       (tw-g    "#4A7F00")
       (tw-b    "#207FA1")
       (key2    "#db8e73")
-      (key3    "#85ddff")
+      (key3    "#d4d4d4")
       (accent  "#ffffff")
       (builtin "#d4d4d4")
       (keyword "#339cdb")
       (const   "#339CDB")
       (comment "#579C4C")
       (doc     "#777778")
-      (func    "#D9DAA2")
+      (func    "#d4d4d4")
       (str     "#DB8E73")
-      (type    "#35CDAF")
-      (var     "#85DDFF")
+      (type    "#d4d4d4")
+      (var     "#d4d4d4")
       (warning "#ef2929"))
   (custom-theme-set-faces
-   'vscode-default-dark
+   'vscode-dark
    `(default ((,class (:background ,bg1 :foreground ,fg1))))
 
    `(company-preview-common ((t (:foreground unspecified :background ,bg2))))
@@ -322,6 +322,6 @@
    `(sml/modes     ((t :foreground ,fg1 :weight normal)))
    ))
 
-(provide-theme 'vscode-default-dark)
+(provide-theme 'vscode-dark)
 
 ;;; wilmersdorf-theme.el ends here
