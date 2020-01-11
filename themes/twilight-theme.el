@@ -77,7 +77,7 @@
 
    `(region ((,class (:background ,bg2))))
    `(highlight ((,class (:foreground ,bg3 :background ,fg3))))
-   `(hl-line ((,class (:background  ,bg2))))
+   `(hl-line ((,class (:background ,bg2))))
    `(fringe ((,class (:background ,bg1 :foreground ,fg4))))
    `(cursor ((,class (:background ,fg1))))
    `(show-paren-match-face ((,class (:background ,warning))))
@@ -109,7 +109,7 @@
    `(org-footnote  ((,class (:underline t :foreground ,fg4))))
    `(org-link ((,class (:underline t :foreground ,type ))))
    `(org-special-keyword ((,class (:foreground ,func))))
-   `(org-block ((,class (:foreground ,fg2 :background ,bg0))))
+   `(org-block ((,class (:foreground ,fg2 :background ,bg0 :extend t))))
    `(org-quote ((,class (:inherit org-block :slant italic))))
    `(org-verse ((,class (:inherit org-block :slant italic))))
    `(org-todo ((,class (:box (:line-width 1 :color ,fg3) :foreground ,keyword :bold t))))
