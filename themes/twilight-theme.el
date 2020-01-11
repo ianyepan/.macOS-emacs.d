@@ -288,7 +288,7 @@
 
 
    `(ivy-confirm-face ((t (:inherit minibuffer-prompt :foreground ,keyword))))
-   `(ivy-current-match ((t (:background ,bg3))))
+   `(ivy-current-match ((t (:background ,bg3 :extend t))))
    `(ivy-highlight-face ((t (:inherit font-lock-builtin-face))))
    `(ivy-match-required-face ((t (:inherit minibuffer-prompt :foreground ,warning))))
    `(ivy-minibuffer-match-face-1 ((t (:inherit isearch))))
