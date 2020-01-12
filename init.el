@@ -19,7 +19,7 @@
                     file-name-handler-alist file-name-handler-alist-original)))
 
 (add-hook 'minibuffer-setup-hook #'(lambda ()
-                                     (setq gc-cons-threshold (* ian/gc-cons-threshold 2))))
+                                     (setq gc-cons-threshold most-positive-fixnum)))
 (add-hook 'minibuffer-exit-hook #'(lambda ()
                                     (garbage-collect)
                                     (setq gc-cons-threshold ian/gc-cons-threshold)))
