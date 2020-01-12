@@ -233,7 +233,7 @@
 ;; GUI enhancements
 
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
-(load-theme 'vscode-dark-plus t)
+(load-theme 'twilight t)
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -397,7 +397,6 @@
 
 (use-package swiper
   :after ivy
-  ;; :custom-face (swiper-line-face ((t (:foreground "#ffffff" :background "#60648E"))))
   :custom
   (swiper-action-recenter t)
   (swiper-goto-start-of-match t))

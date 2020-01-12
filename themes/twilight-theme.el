@@ -1,6 +1,6 @@
 ;;; twilight-theme.el --- A port of the classic old-school theme
 
-;; Copyright (C) 2019 , Ian Y.E. Pan
+;; Copyright (C) 2020 , Ian Y.E. Pan
 
 ;; Author: Ian Y.E. Pan
 
@@ -286,7 +286,6 @@
    `(solaire-hl-line-face ((t (:inherit hl-line :background ,bg1))))
    `(solaire-org-hide-face ((t (:inherit org-hide :background ,bg0))))
 
-
    `(ivy-confirm-face ((t (:inherit minibuffer-prompt :foreground ,keyword))))
    `(ivy-current-match ((t (:background ,bg3 :extend t))))
    `(ivy-highlight-face ((t (:inherit font-lock-builtin-face))))
@@ -306,8 +305,7 @@
    `(swiper-match-face-2 ((t (:inherit ivy-minibuffer-match-face-2))))
    `(swiper-match-face-3 ((t (:inherit ivy-minibuffer-match-face-3))))
    `(swiper-match-face-4 ((t (:inherit ivy-minibuffer-match-face-4))))
-   `(swiper-line-face ((t (:foreground ,fg0 :background ,bg4))))
-
+   `(swiper-line-face ((t (:foreground ,fg0 :background ,bg3 :extend t))))
 
    `(diff-hl-insert ((t (:foreground ,tw-g))))
    `(diff-hl-delete ((t (:foreground ,tw-r))))
@@ -318,8 +316,11 @@
    `(sml/prefix    ((t :foreground ,fg3     :weight normal)))
    `(sml/read-only ((t :foreground ,keyword :weight normal)))
    `(sml/modes     ((t :foreground ,type    :weight normal)))
+
+   `(evil-ex-substitute-matches     ((t :foreground "#ff0000" :weight bold :strike-through t)))
+   `(evil-ex-substitute-replacement ((t :foreground "#0ff000" :weight bold)))
    ))
 
 (provide-theme 'twilight)
 
-;;; wilmersdorf-theme.el ends here
+;;; twilight-theme.el ends here

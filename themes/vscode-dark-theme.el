@@ -1,6 +1,6 @@
 ;;; vscode-dark-theme.el --- a complete port of the Visual Studio Code Dark theme for Emacs
 
-;; Copyright (C) 2019 , Ian Y.E. Pan
+;; Copyright (C) 2020 , Ian Y.E. Pan
 
 ;; Author: Ian Y.E. Pan
 
@@ -285,7 +285,7 @@
 
    `(solaire-default-face ((t (:inherit default :background ,bg2))))
    `(solaire-minibuffer-face ((t (:inherit default :background ,bg2))))
-   `(solaire-hl-line-face ((t (:inherit hl-line :background ,bg3))))
+   `(solaire-hl-line-face ((t (:inherit hl-line :background ,bg3 :extend t))))
    `(solaire-org-hide-face ((t (:inherit org-hide :background ,bg2))))
 
 
@@ -308,7 +308,7 @@
    `(swiper-match-face-2 ((t (:inherit ivy-minibuffer-match-face-2))))
    `(swiper-match-face-3 ((t (:inherit ivy-minibuffer-match-face-3))))
    `(swiper-match-face-4 ((t (:inherit ivy-minibuffer-match-face-4))))
-   `(swiper-line-face ((t (:foreground ,fg0 :background ,bg4))))
+   `(swiper-line-face ((t (:foreground ,fg0 :background ,bg4 :extend t))))
 
 
    `(diff-hl-insert ((t (:foreground ,tw-g))))
@@ -320,8 +320,11 @@
    `(sml/prefix    ((t :foreground ,fg1 :weight normal)))
    `(sml/read-only ((t :foreground ,fg1 :weight normal)))
    `(sml/modes     ((t :foreground ,fg1 :weight normal)))
+
+   `(evil-ex-substitute-matches     ((t :foreground "#ff0000" :weight bold :strike-through t)))
+   `(evil-ex-substitute-replacement ((t :foreground "#0ff000" :weight bold)))
    ))
 
 (provide-theme 'vscode-dark)
 
-;;; wilmersdorf-theme.el ends here
+;;; vscode-dark-theme.el ends here
