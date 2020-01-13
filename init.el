@@ -171,6 +171,7 @@
   :ensure nil
   :init
   (setq show-paren-delay 0)
+  :custom-face (show-paren-match ((t (:foreground "#ffffff" :underline t))))
   :config
   (show-paren-mode +1))
 
@@ -232,8 +233,9 @@
 
 ;; GUI enhancements
 
-(add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
-(load-theme 'twilight t)
+(use-package doom-themes
+  :config
+  (load-theme 'doom-dracula t))
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
@@ -299,7 +301,7 @@
 (use-package highlight-symbol
   :diminish
   :hook (prog-mode . highlight-symbol-mode)
-  :custom-face (highlight-symbol-face ((t (:background "#383439")))) ; twilight
+  :custom-face (highlight-symbol-face ((t (:background "#44475a"))))
   :custom
   (highlight-symbol-idle-delay 0.3))
 
@@ -380,6 +382,7 @@
 (use-package ivy
   :diminish
   :hook (after-init . ivy-mode)
+  :custom-face (ivy-current-match ((t (:extend t))))
   :custom
   (ivy-display-style nil)
   (ivy-re-builders-alist '((counsel-rg . ivy--regex-plus)
@@ -397,6 +400,8 @@
 
 (use-package swiper
   :after ivy
+  :custom-face
+  (swiper-line-face ((t (:foreground "#f8f8f2" :background "#44475a" :extend t))))
   :custom
   (swiper-action-recenter t)
   (swiper-goto-start-of-match t))
@@ -643,16 +648,16 @@ Return a list of strings as the completion candidates."
 ;; Terminal emulation
 
 (use-package vterm ; when installing, evaluate exec-path first (else 'command not found')
-  :custom-face ; twilight
-  (vterm-color-default ((t (:foreground "#CCCCCC"))))
+  :custom-face
+  (vterm-color-default ((t (:foreground "#f8f8f2"))))
   (vterm-color-black   ((t (:foreground "#000000"))))
-  (vterm-color-red     ((t (:foreground "#C06D44"))))
-  (vterm-color-green   ((t (:foreground "#A6C176"))))
-  (vterm-color-yellow  ((t (:foreground "#CDA869"))))
-  (vterm-color-blue    ((t (:foreground "#7587A6"))))
-  (vterm-color-magenta ((t (:foreground "#B4BE7C"))))
-  (vterm-color-cyan    ((t (:foreground "#7F9F98"))))
-  (vterm-color-white   ((t (:foreground "#E0E0DF")))))
+  (vterm-color-red     ((t (:foreground "#ff5555"))))
+  (vterm-color-green   ((t (:foreground "#50fa7b"))))
+  (vterm-color-yellow  ((t (:foreground "#f1fa8c"))))
+  (vterm-color-blue    ((t (:foreground "#bd93f9"))))
+  (vterm-color-magenta ((t (:foreground "#ff79c6"))))
+  (vterm-color-cyan    ((t (:foreground "#8be9fd"))))
+  (vterm-color-white   ((t (:foreground "#bbbbbb")))))
 
 (use-package vterm-toggle
   :after evil
