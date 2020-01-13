@@ -418,17 +418,11 @@
   (ivy-posframe-mode +1))
 
 (use-package ivy-rich
-  :preface
-  (defun ivy-rich-switch-buffer-icon (candidate)
-    (with-current-buffer
-        (get-buffer candidate)
-      (all-the-icons-icon-for-mode major-mode)))
   :init
   (setq ivy-rich-display-transformers-list ; max column width sum = (ivy-poframe-width - 1)
         '(ivy-switch-buffer
           (:columns
-           ((ivy-rich-switch-buffer-icon (:width 2))
-            (ivy-rich-candidate (:width 35))
+           ((ivy-rich-candidate (:width 35))
             (ivy-rich-switch-buffer-project (:width 15 :face success))
             (ivy-rich-switch-buffer-major-mode (:width 13 :face warning)))
            :predicate
