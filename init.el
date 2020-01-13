@@ -234,6 +234,7 @@
 ;; GUI enhancements
 
 (use-package doom-themes
+  :custom-face (cursor ((t (:background "#eeeeee"))))
   :config
   (load-theme 'doom-dracula t))
 
@@ -254,9 +255,12 @@
   :config
   (dashboard-setup-startup-hook))
 
+(use-package smart-mode-line-atom-one-dark-theme)
+
 (use-package smart-mode-line
   :custom
   (sml/no-confirm-load-theme t)
+  (sml/theme 'atom-one-dark)
   :config
   (when (member "Menlo" (font-family-list))
     (set-face-attribute 'mode-line nil :height 110 :font "Menlo")
