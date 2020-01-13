@@ -475,7 +475,13 @@
 (use-package ivy-prescient
   :after (prescient ivy)
   :custom
-  (ivy-prescient-sort-commands '(:not swiper counsel-grep ivy-switch-buffer))
+  (ivy-prescient-sort-commands
+   '(:not swiper
+          counsel-grep
+          counsel-rg
+          counsel-projectile-rg
+          ivy-switch-buffer
+          counsel-switch-buffer))
   (ivy-prescient-retain-classic-highlighting t)
   :config
   (ivy-prescient-mode +1))
