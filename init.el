@@ -171,7 +171,8 @@
   :ensure nil
   :init
   (setq show-paren-delay 0)
-  :custom-face (show-paren-match ((t (:foreground "#ffffff" :underline t))))
+  :custom-face
+  (show-paren-match ((t (:foreground "#ffffff" :underline t))))
   :config
   (show-paren-mode +1))
 
@@ -234,7 +235,8 @@
 ;; GUI enhancements
 
 (use-package doom-themes
-  :custom-face (cursor ((t (:background "#eeeeee"))))
+  :custom-face
+  (cursor ((t (:background "#eeeeee"))))
   :config
   (load-theme 'doom-dracula t))
 
@@ -305,7 +307,8 @@
 (use-package highlight-symbol
   :diminish
   :hook (prog-mode . highlight-symbol-mode)
-  :custom-face (highlight-symbol-face ((t (:background "#44475a"))))
+  :custom-face
+  (highlight-symbol-face ((t (:background "#44475a"))))
   :custom
   (highlight-symbol-idle-delay 0.3))
 
@@ -386,7 +389,8 @@
 (use-package ivy
   :diminish
   :hook (after-init . ivy-mode)
-  :custom-face (ivy-current-match ((t (:extend t))))
+  :custom-face
+  (ivy-current-match ((t (:extend t))))
   :custom
   (ivy-display-style nil)
   (ivy-re-builders-alist '((counsel-rg . ivy--regex-plus)
@@ -694,17 +698,13 @@ Return a list of strings as the completion candidates."
   :hook (prog-mode . rainbow-mode))
 
 (use-package rainbow-delimiters
+  :diminish
   :custom-face
   (rainbow-delimiters-depth-1-face ((t (:foreground "Gold"))))
   (rainbow-delimiters-depth-2-face ((t (:foreground "Orchid"))))
   (rainbow-delimiters-depth-3-face ((t (:foreground "LightSkyBlue"))))
-  (rainbow-delimiters-depth-4-face ((t (:foreground "Gold"))))
-  (rainbow-delimiters-depth-5-face ((t (:foreground "Orchid"))))
-  (rainbow-delimiters-depth-6-face ((t (:foreground "LightSkyBlue"))))
-  (rainbow-delimiters-depth-7-face ((t (:foreground "Gold"))))
-  (rainbow-delimiters-depth-8-face ((t (:foreground "Orchid"))))
-  (rainbow-delimiters-depth-9-face ((t (:foreground "LightSkyBlue"))))
-  :diminish
+  :custom
+  (rainbow-delimiters-max-face-count 3)
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (provide 'init)
