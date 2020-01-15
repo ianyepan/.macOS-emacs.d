@@ -2,6 +2,7 @@
 ;;  Author: Ian Y.E. Pan
 ;;; Commentary:
 ;;  This is my personal Emacs configuration
+;; Installation: brew install emacs-plus --HEAD --without-spacemacs-icon --with-jansson
 ;;; Code:
 (defvar file-name-handler-alist-original file-name-handler-alist)
 
