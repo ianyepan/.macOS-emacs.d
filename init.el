@@ -257,17 +257,20 @@
   :config
   (dashboard-setup-startup-hook))
 
-(use-package smart-mode-line-atom-one-dark-theme)
-
-(use-package smart-mode-line
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
   :custom
-  (sml/no-confirm-load-theme t)
-  (sml/theme 'atom-one-dark)
+  (inhibit-compacting-font-caches t)
+  (doom-modeline-buffer-file-name-style 'relative-from-project)
+  (doom-modeline-bar-width 1)
+  (doom-modeline-indent-info t)
+  (doom-modeline-modal-icon nil)
+  (doom-modeline-height 15)
+  (doom-modeline-env-python-executable "python3")
   :config
   (when (member "Menlo" (font-family-list))
     (set-face-attribute 'mode-line nil :height 110 :font "Menlo")
-    (set-face-attribute 'mode-line-inactive nil :height 110 :font "Menlo"))
-  (sml/setup))
+    (set-face-attribute 'mode-line-inactive nil :height 110 :font "Menlo")))
 
 (use-package all-the-icons
   :custom
