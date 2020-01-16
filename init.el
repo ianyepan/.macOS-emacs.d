@@ -534,7 +534,8 @@
   :config
   (add-to-list 'company-lsp-filter-candidates '(mspyls . t))
   (defun company-lsp--on-completion (response prefix)
-    "Handle completion RESPONSE.
+    " This is a (hack) workaround for candidate filtering issues in mspyls.
+Handle completion RESPONSE.
 PREFIX is a string of the prefix when the completion is requested.
 Return a list of strings as the completion candidates."
     (let* ((incomplete (and (hash-table-p response) (gethash "isIncomplete" response)))
@@ -611,10 +612,9 @@ Return a list of strings as the completion candidates."
 (use-package yasnippet-snippets)
 
 (use-package web-mode
-  :mode (("\\.tsx?\\'" . web-mode)
-         ("\\.json\\'" . web-mode)
+  :mode (("\\.html?\\'" . web-mode)
          ("\\.css\\'" . web-mode)
-         ("\\.html?\\'" . web-mode))
+         ("\\.json\\'" . web-mode))
   :custom
   (web-mode-markup-indent-offset ian/indent-width)
   (web-mode-code-indent-offset ian/indent-width)
