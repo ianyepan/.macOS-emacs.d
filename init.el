@@ -533,6 +533,9 @@
   :custom
   (pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
   :config
+  (add-hook 'pyvenv-post-activate-hooks
+            #'(lambda ()
+                (call-interactively #'lsp-workspace-restart)))
   (pyvenv-mode +1))
 
 (use-package company-lsp
@@ -620,10 +623,9 @@ Return a list of strings as the completion candidates."
 
 (use-package yasnippet-snippets)
 
-(use-package json-mode)
-
 (use-package web-mode
   :mode (("\\.tsx?\\'" . web-mode)
+         ("\\.json\\'" . web-mode)
          ("\\.css\\'" . web-mode)
          ("\\.html?\\'" . web-mode))
   :custom
@@ -637,7 +639,9 @@ Return a list of strings as the completion candidates."
          (css-mode . emmet-mode)
          (js-mode . emmet-mode)
          (web-mode . emmet-mode))
-  :config (setq emmet-expand-jsx-className? t))
+  :custom
+  (emmet-expand-jsx-className? t)
+  (emmet-insert-flash-time 0.1))
 
 (use-package format-all
   :preface
@@ -700,7 +704,7 @@ Return a list of strings as the completion candidates."
 
 (use-package rainbow-mode
   :diminish
-  :hook (prog-mode . rainbow-mode))
+  :hook (web-mode . rainbow-mode))
 
 (use-package rainbow-delimiters
   :diminish
