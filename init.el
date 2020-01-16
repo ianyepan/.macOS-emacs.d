@@ -711,5 +711,11 @@ Return a list of strings as the completion candidates."
   (rainbow-delimiters-max-face-count 3)
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package writeroom-mode
+  :custom
+  (writeroom-fullscreen-effect 'maximized)
+  :config
+  (global-set-key (kbd "C-c w") #'writeroom-mode))
+
 (provide 'init)
 ;;; init.el ends here
