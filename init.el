@@ -497,11 +497,12 @@
 ;; Programming language support and utilities
 
 (use-package lsp-mode
-  :hook ((c-mode         ; clangd
-          c-or-c++-mode  ; clangd
-          java-mode      ; eclipse-jdtls
-          js-mode        ; typescript-language-server
-          python-mode    ; mspyls
+  :hook ((c-mode          ; clangd
+          c-or-c++-mode   ; clangd
+          java-mode       ; eclipse-jdtls
+          javascript-mode ; ts-ls (tsserver wrapper)
+          typescript-mode ; ts-ls (tsserver wrapper)
+          python-mode     ; mspyls
           ) . lsp)
   :commands lsp
   :custom
@@ -610,6 +611,8 @@ Return a list of strings as the completion candidates."
                     (yas-expand)))))
 
 (use-package yasnippet-snippets)
+
+(use-package typescript-mode)
 
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode)
