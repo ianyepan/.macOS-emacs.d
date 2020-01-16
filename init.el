@@ -224,12 +224,19 @@
   (delete-by-moving-to-trash t))
 
 (use-package saveplace
+  :ensure nil
   :config
   (save-place-mode +1))
 
 (use-package recentf
+  :ensure nil
   :config
   (recentf-mode +1))
+
+(use-package hl-line
+  :ensure nil
+  :config
+  (global-hl-line-mode +1))
 
 ;;; Third-party Packages
 
@@ -363,11 +370,22 @@
   :config
   (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
-(use-package diff-hl
+;; (use-package diff-hl
+;;   :config
+;;   (global-diff-hl-mode +1)
+;;   (diff-hl-flydiff-mode +1)
+;;   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh t))
+
+(use-package git-gutter-fringe
   :config
-  (global-diff-hl-mode +1)
-  (diff-hl-flydiff-mode +1)
-  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh t))
+  (global-git-gutter-mode +1)
+  (setq-default fringes-outside-margins t)
+  (define-fringe-bitmap 'git-gutter-fr:added [224]
+    nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224]
+    nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
+    nil nil 'bottom))
 
 ;; Searching/sorting enhancements & project management
 
