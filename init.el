@@ -54,6 +54,7 @@
   (scroll-preserve-screen-position t)
   (auto-window-vscroll nil)
   (load-prefer-newer t)
+  (message-truncate-lines t)
   :config
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
