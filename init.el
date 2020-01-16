@@ -59,6 +59,7 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (setq-default line-spacing 3
+                word-wrap t
                 indent-tabs-mode nil
                 tab-width ian/indent-width))
 
@@ -598,8 +599,7 @@ Return a list of strings as the completion candidates."
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode))
 
-(use-package markdown-mode
-  :hook (markdown-mode . visual-line-mode))
+(use-package markdown-mode)
 
 (use-package yasnippet
   :diminish yas-minor-mode
