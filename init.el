@@ -522,7 +522,7 @@
   :hook ((c-mode          ; clangd
           c-or-c++-mode   ; clangd
           java-mode       ; eclipse-jdtls
-          javascript-mode ; ts-ls (tsserver wrapper)
+          js-mode         ; ts-ls (tsserver wrapper)
           typescript-mode ; ts-ls (tsserver wrapper)
           python-mode     ; mspyls
           ) . lsp)
