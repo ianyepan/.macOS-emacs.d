@@ -235,6 +235,8 @@
 
 (use-package hl-line
   :ensure nil
+  :custom-face
+  (hl-line ((t (:background "#34374a"))))
   :config
   (global-hl-line-mode +1))
 
