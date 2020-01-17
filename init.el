@@ -389,8 +389,6 @@
 
 ;; Searching/sorting enhancements & project management
 
-(use-package flx)
-
 (use-package counsel
   :hook (ivy-mode . counsel-mode)
   :custom
