@@ -126,7 +126,6 @@
 
 (use-package eldoc
   :ensure nil
-  :diminish
   :hook (prog-mode . eldoc-mode)
   :custom
   (eldoc-idle-delay 0.4))
@@ -208,7 +207,6 @@
 
 (use-package flyspell
   :ensure nil
-  :diminish
   :custom
   (ispell-program-name "/usr/local/bin/aspell"))
 
@@ -226,12 +224,19 @@
   (delete-by-moving-to-trash t))
 
 (use-package saveplace
+  :ensure nil
   :config
   (save-place-mode +1))
 
 (use-package recentf
+  :ensure nil
   :config
   (recentf-mode +1))
+
+(use-package hl-line
+  :ensure nil
+  :config
+  (global-hl-line-mode +1))
 
 ;;; Third-party Packages
 
@@ -303,7 +308,6 @@
     (centaur-tabs-change-fonts "Arial" 120)))
 
 (use-package highlight-indent-guides
-  :diminish
   :hook (prog-mode . highlight-indent-guides-mode)
   :custom
   (highlight-indent-guides-method 'character)
@@ -311,7 +315,6 @@
   (highlight-indent-guides-auto-character-face-perc 20))
 
 (use-package highlight-symbol
-  :diminish
   :hook (prog-mode . highlight-symbol-mode)
   :custom-face
   (highlight-symbol-face ((t (:background "#44475a"))))
@@ -330,7 +333,6 @@
 ;; Vi keybindings
 
 (use-package evil
-  :diminish undo-tree-mode
   :init
   (setq evil-want-C-u-scroll t
         evil-want-keybinding nil
@@ -356,7 +358,6 @@
 
 (use-package evil-commentary
   :after evil
-  :diminish
   :config
   (evil-commentary-mode +1))
 
@@ -369,18 +370,28 @@
   :config
   (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
-(use-package diff-hl
+;; (use-package diff-hl
+;;   :config
+;;   (global-diff-hl-mode +1)
+;;   (diff-hl-flydiff-mode +1)
+;;   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh t))
+
+(use-package git-gutter-fringe
   :config
-  (global-diff-hl-mode +1)
-  (diff-hl-flydiff-mode +1)
-  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh t))
+  (global-git-gutter-mode +1)
+  (setq-default fringes-outside-margins t)
+  (define-fringe-bitmap 'git-gutter-fr:added [224]
+    nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224]
+    nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
+    nil nil 'bottom))
 
 ;; Searching/sorting enhancements & project management
 
 (use-package flx)
 
 (use-package counsel
-  :diminish
   :hook (ivy-mode . counsel-mode)
   :custom
   (counsel-rg-base-command "rg --vimgrep %s")
@@ -393,7 +404,6 @@
   (counsel-projectile-mode +1))
 
 (use-package ivy
-  :diminish
   :hook (after-init . ivy-mode)
   :custom-face
   (ivy-current-match ((t (:extend t))))
@@ -422,7 +432,6 @@
 
 (use-package ivy-posframe
   :after ivy
-  :diminish
   :custom
   (ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
   (ivy-posframe-height-alist '((t . 20)))
@@ -464,7 +473,6 @@
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package projectile
-  :diminish
   :custom
   (projectile-sort-order 'recentf)
   (projectile-indexing-method 'hybrid)
@@ -507,11 +515,12 @@
 ;; Programming language support and utilities
 
 (use-package lsp-mode
-  :hook ((c-mode         ; clangd
-          c-or-c++-mode  ; clangd
-          java-mode      ; eclipse-jdtls
-          js-mode        ; typescript-language-server
-          python-mode    ; mspyls
+  :hook ((c-mode          ; clangd
+          c-or-c++-mode   ; clangd
+          java-mode       ; eclipse-jdtls
+          javascript-mode ; ts-ls (tsserver wrapper)
+          typescript-mode ; ts-ls (tsserver wrapper)
+          python-mode     ; mspyls
           ) . lsp)
   :commands lsp
   :custom
@@ -529,7 +538,6 @@
    "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer"))
 
 (use-package pyvenv
-  :diminish
   :custom
   (pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
   :config
@@ -545,7 +553,8 @@
   :config
   (add-to-list 'company-lsp-filter-candidates '(mspyls . t))
   (defun company-lsp--on-completion (response prefix)
-    "Handle completion RESPONSE.
+    " This is a (hack) workaround for candidate filtering issues in mspyls.
+Handle completion RESPONSE.
 PREFIX is a string of the prefix when the completion is requested.
 Return a list of strings as the completion candidates."
     (let* ((incomplete (and (hash-table-p response) (gethash "isIncomplete" response)))
@@ -570,7 +579,6 @@ Return a list of strings as the completion candidates."
         candidates))))
 
 (use-package company
-  :diminish
   :hook (prog-mode . company-mode)
   :custom
   (company-minimum-prefix-length 1)
@@ -609,7 +617,6 @@ Return a list of strings as the completion candidates."
 (use-package markdown-mode)
 
 (use-package yasnippet
-  :diminish yas-minor-mode
   :preface
   (defvar tmp/company-point nil)
   :config
@@ -626,18 +633,18 @@ Return a list of strings as the completion candidates."
 
 (use-package yasnippet-snippets)
 
+(use-package typescript-mode)
+
 (use-package web-mode
-  :mode (("\\.tsx?\\'" . web-mode)
-         ("\\.json\\'" . web-mode)
+  :mode (("\\.html?\\'" . web-mode)
          ("\\.css\\'" . web-mode)
-         ("\\.html?\\'" . web-mode))
+         ("\\.json\\'" . web-mode))
   :custom
   (web-mode-markup-indent-offset ian/indent-width)
   (web-mode-code-indent-offset ian/indent-width)
   (web-mode-css-indent-offset ian/indent-width))
 
 (use-package emmet-mode
-  :diminish
   :hook ((html-mode . emmet-mode)
          (css-mode . emmet-mode)
          (js-mode . emmet-mode)
@@ -689,11 +696,7 @@ Return a list of strings as the completion candidates."
 
 ;; Miscellaneous
 
-(use-package diminish
-  :demand t)
-
 (use-package which-key
-  :diminish
   :custom
   (which-key-idle-delay 0.4)
   (which-key-idle-secondary-delay 0.4)
@@ -706,11 +709,9 @@ Return a list of strings as the completion candidates."
     (exec-path-from-shell-initialize)))
 
 (use-package rainbow-mode
-  :diminish
   :hook (web-mode . rainbow-mode))
 
 (use-package rainbow-delimiters
-  :diminish
   :custom-face
   (rainbow-delimiters-depth-1-face ((t (:foreground "Gold"))))
   (rainbow-delimiters-depth-2-face ((t (:foreground "Orchid"))))
