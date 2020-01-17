@@ -235,10 +235,14 @@
 
 (use-package hl-line
   :ensure nil
+  :hook ((prog-mode . hl-line-mode)
+         (package-menu-mode . hl-line-mode)
+         (ivy-occur-mode . hl-line-mode)
+         (dired-mode . hl-line-mode)
+         (help-mode . hl-line-mode))
   :custom-face
   (hl-line ((t (:background "#34374a"))))
-  :config
-  (global-hl-line-mode +1))
+  (solaire-hl-line-face ((t (:background "#34374a")))))
 
 ;;; Third-party Packages
 
