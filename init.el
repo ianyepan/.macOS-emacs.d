@@ -590,8 +590,11 @@ Return a list of strings as the completion candidates."
   (flycheck-check-syntax-automatically '(save mode-enabled newline))
   (flycheck-python-flake8-executable "python3")
   (flycheck-flake8rc "~/.config/flake8")
-  :config
-  (setq-default flycheck-disabled-checkers '(python-pylint)))
+  :config ; prefer flake8 for python & eslint for javascript
+  (setq-default flycheck-disabled-checkers '(python-pylint
+                                             python-pycompile
+                                             javascript-jshint
+                                             javascript-standard)))
 
 (use-package org
   :hook ((org-mode . visual-line-mode)
