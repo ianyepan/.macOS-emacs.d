@@ -376,12 +376,6 @@
   :config
   (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
-;; (use-package diff-hl
-;;   :config
-;;   (global-diff-hl-mode +1)
-;;   (diff-hl-flydiff-mode +1)
-;;   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh t))
-
 (use-package git-gutter-fringe
   :config
   (global-git-gutter-mode +1)
