@@ -233,11 +233,8 @@
 
 (use-package hl-line
   :ensure nil
-  :hook ((prog-mode . hl-line-mode)
-         (package-menu-mode . hl-line-mode)
-         (ivy-occur-mode . hl-line-mode)
-         (dired-mode . hl-line-mode)
-         (help-mode . hl-line-mode)))
+  :config
+  (global-hl-line-mode +1))
 
 ;;; Third-party Packages
 
@@ -673,7 +670,9 @@ Return a list of strings as the completion candidates."
 
 ;; Terminal emulation
 
-(use-package vterm) ; when installing, evaluate exec-path first (else 'command not found')
+(use-package vterm ; when installing, evaluate exec-path first (else 'command not found')
+  :hook (vterm-mode . (lambda ()
+                        (setq-local global-hl-line-mode nil))))
 
 (use-package vterm-toggle
   :after evil
