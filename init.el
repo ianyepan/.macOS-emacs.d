@@ -236,15 +236,25 @@
   :config
   (global-hl-line-mode +1))
 
+(use-package display-line-numbers
+  :ensure nil
+  :hook (prog-mode . display-line-numbers-mode)
+  :config
+  (setq-default display-line-numbers-width 3))
+
 ;;; Third-party Packages
 
 ;; GUI enhancements
 
 (use-package doom-themes
   :custom-face
-  (cursor                          ((t (:background "#eeeeee"))))
-  (show-paren-match                ((t (:foreground "#ffffff" :underline t))))
+  (cursor                          ((t (:background "#f8f8f2"))))
+  (show-paren-match                ((t (:foreground "#f8f8f2" :underline t))))
   (highlight-symbol-face           ((t (:background "#44475a"))))
+  (highlight-numbers-number        ((t (:foreground "#bd93f9"))))
+  (highlight-operators-face        ((t (:foreground "#ff79c6"))))
+  (line-number                     ((t (:foreground "#6272a4"))))
+  (line-number-current-line        ((t (:foreground "#6272a4"))))
   (hl-line                         ((t (:background "#34374a"))))
   (solaire-hl-line-face            ((t (:background "#34374a"))))
   (ivy-current-match               ((t (:background "#34374a" :extend t))))
@@ -339,7 +349,11 @@
   :hook (prog-mode . highlight-numbers-mode))
 
 (use-package highlight-operators
-  :hook (prog-mode . highlight-operators-mode))
+  :hook (prog-mode . highlight-operators-mode)
+  :custom
+  (highlight-operators-regexp
+   (regexp-opt '("+" "-" "*" "/" "%" "!" "&" "^"
+                 "~" "|" "=" "<" ">" ":" "?"))))
 
 (use-package highlight-escape-sequences
   :hook (prog-mode . hes-mode))
