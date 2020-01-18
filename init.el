@@ -331,7 +331,7 @@
   (centaur-tabs-headline-match)
   (centaur-tabs-group-by-projectile-project)
   (when (member "Arial" (font-family-list))
-    (centaur-tabs-change-fonts "Arial" 120)))
+    (centaur-tabs-change-fonts "Arial" 130)))
 
 (use-package highlight-indent-guides
   :hook (prog-mode . highlight-indent-guides-mode)
