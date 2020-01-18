@@ -173,8 +173,6 @@
   :ensure nil
   :init
   (setq show-paren-delay 0)
-  :custom-face
-  (show-paren-match ((t (:foreground "#ffffff" :underline t))))
   :config
   (show-paren-mode +1))
 
@@ -239,10 +237,7 @@
          (package-menu-mode . hl-line-mode)
          (ivy-occur-mode . hl-line-mode)
          (dired-mode . hl-line-mode)
-         (help-mode . hl-line-mode))
-  :custom-face
-  (hl-line ((t (:background "#34374a"))))
-  (solaire-hl-line-face ((t (:background "#34374a")))))
+         (help-mode . hl-line-mode)))
 
 ;;; Third-party Packages
 
@@ -250,7 +245,25 @@
 
 (use-package doom-themes
   :custom-face
-  (cursor ((t (:background "#eeeeee"))))
+  (cursor                          ((t (:background "#eeeeee"))))
+  (show-paren-match                ((t (:foreground "#ffffff" :underline t))))
+  (highlight-symbol-face           ((t (:background "#44475a"))))
+  (hl-line                         ((t (:background "#34374a"))))
+  (solaire-hl-line-face            ((t (:background "#34374a"))))
+  (ivy-current-match               ((t (:background "#34374a" :extend t))))
+  (swiper-line-face                ((t (:foreground "#f8f8f2" :background "#44475a" :extend t))))
+  (vterm-color-default             ((t (:foreground "#f8f8f2"))))
+  (vterm-color-black               ((t (:foreground "#000000"))))
+  (vterm-color-red                 ((t (:foreground "#ff5555"))))
+  (vterm-color-green               ((t (:foreground "#50fa7b"))))
+  (vterm-color-yellow              ((t (:foreground "#f1fa8c"))))
+  (vterm-color-blue                ((t (:foreground "#bd93f9"))))
+  (vterm-color-magenta             ((t (:foreground "#ff79c6"))))
+  (vterm-color-cyan                ((t (:foreground "#8be9fd"))))
+  (vterm-color-white               ((t (:foreground "#bbbbbb"))))
+  (rainbow-delimiters-depth-1-face ((t (:foreground "Gold"))))
+  (rainbow-delimiters-depth-2-face ((t (:foreground "Orchid"))))
+  (rainbow-delimiters-depth-3-face ((t (:foreground "LightSkyBlue"))))
   :config
   (load-theme 'doom-dracula t))
 
@@ -322,8 +335,6 @@
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
-  :custom-face
-  (highlight-symbol-face ((t (:background "#44475a"))))
   :custom
   (highlight-symbol-idle-delay 0.3))
 
@@ -403,8 +414,6 @@
 
 (use-package ivy
   :hook (after-init . ivy-mode)
-  :custom-face
-  (ivy-current-match ((t (:extend t))))
   :custom
   (ivy-display-style nil)
   (ivy-re-builders-alist '((counsel-rg . ivy--regex-plus)
@@ -422,8 +431,6 @@
 
 (use-package swiper
   :after ivy
-  :custom-face
-  (swiper-line-face ((t (:foreground "#f8f8f2" :background "#44475a" :extend t))))
   :custom
   (swiper-action-recenter t)
   (swiper-goto-start-of-match t))
@@ -666,17 +673,7 @@ Return a list of strings as the completion candidates."
 
 ;; Terminal emulation
 
-(use-package vterm ; when installing, evaluate exec-path first (else 'command not found')
-  :custom-face
-  (vterm-color-default ((t (:foreground "#f8f8f2"))))
-  (vterm-color-black   ((t (:foreground "#000000"))))
-  (vterm-color-red     ((t (:foreground "#ff5555"))))
-  (vterm-color-green   ((t (:foreground "#50fa7b"))))
-  (vterm-color-yellow  ((t (:foreground "#f1fa8c"))))
-  (vterm-color-blue    ((t (:foreground "#bd93f9"))))
-  (vterm-color-magenta ((t (:foreground "#ff79c6"))))
-  (vterm-color-cyan    ((t (:foreground "#8be9fd"))))
-  (vterm-color-white   ((t (:foreground "#bbbbbb")))))
+(use-package vterm) ; when installing, evaluate exec-path first (else 'command not found')
 
 (use-package vterm-toggle
   :after evil
@@ -710,10 +707,6 @@ Return a list of strings as the completion candidates."
   :hook (web-mode . rainbow-mode))
 
 (use-package rainbow-delimiters
-  :custom-face
-  (rainbow-delimiters-depth-1-face ((t (:foreground "Gold"))))
-  (rainbow-delimiters-depth-2-face ((t (:foreground "Orchid"))))
-  (rainbow-delimiters-depth-3-face ((t (:foreground "LightSkyBlue"))))
   :custom
   (rainbow-delimiters-max-face-count 3)
   :hook (prog-mode . rainbow-delimiters-mode))
