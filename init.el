@@ -54,7 +54,6 @@
   (scroll-preserve-screen-position t)
   (auto-window-vscroll nil)
   (load-prefer-newer t)
-  (message-truncate-lines t)
   :config
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
@@ -253,8 +252,8 @@
   (highlight-symbol-face           ((t (:background "#44475a"))))
   (highlight-numbers-number        ((t (:foreground "#bd93f9"))))
   (highlight-operators-face        ((t (:foreground "#ff79c6"))))
-  (line-number                     ((t (:foreground "#6272a4"))))
-  (line-number-current-line        ((t (:foreground "#6272a4"))))
+  (line-number                     ((t (:foreground "#6272a4" :background "#282a36"))))
+  (line-number-current-line        ((t (:foreground "#6272a4" :background "#282a36"))))
   (hl-line                         ((t (:background "#34374a"))))
   (solaire-hl-line-face            ((t (:background "#34374a"))))
   (ivy-current-match               ((t (:background "#34374a" :extend t))))
@@ -681,6 +680,13 @@ Return a list of strings as the completion candidates."
     "Auto-format whole buffer (VSCode syntax)."
     (interactive)
     (ian/format-code)))
+
+(use-package dumb-jump ; install rg/ag
+  :custom
+  (dumb-jump-selector 'ivy)
+  (dumb-jump-prefer-searcher 'rg)
+  :config
+  (global-set-key (kbd "s-B") #'dumb-jump-go))
 
 ;; Terminal emulation
 
