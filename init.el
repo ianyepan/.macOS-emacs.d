@@ -125,7 +125,6 @@
 
 (use-package eldoc
   :ensure nil
-  :hook (prog-mode . eldoc-mode)
   :custom
   (eldoc-idle-delay 0.4))
 
@@ -534,7 +533,6 @@
           c-or-c++-mode   ; clangd
           java-mode       ; eclipse-jdtls
           js-mode         ; ts-ls (tsserver wrapper)
-          typescript-mode ; ts-ls (tsserver wrapper)
           python-mode     ; mspyls
           ) . lsp)
   :commands lsp
@@ -647,8 +645,6 @@ Return a list of strings as the completion candidates."
                     (yas-expand)))))
 
 (use-package yasnippet-snippets)
-
-(use-package typescript-mode)
 
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode)
