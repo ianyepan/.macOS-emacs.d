@@ -681,6 +681,13 @@ Return a list of strings as the completion candidates."
     (interactive)
     (ian/format-code)))
 
+(use-package dumb-jump ; install rg/ag
+  :custom
+  (dumb-jump-selector 'ivy)
+  (dumb-jump-prefer-searcher 'rg)
+  :config
+  (global-set-key (kbd "s-B") #'dumb-jump-go))
+
 ;; Terminal emulation
 
 (use-package vterm ; when installing, evaluate exec-path first (else 'command not found')
