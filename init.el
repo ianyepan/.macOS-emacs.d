@@ -125,7 +125,6 @@
 
 (use-package eldoc
   :ensure nil
-  :hook (prog-mode . eldoc-mode)
   :custom
   (eldoc-idle-delay 0.4))
 
@@ -218,7 +217,9 @@
 (use-package dired
   :ensure nil
   :custom
-  (delete-by-moving-to-trash t))
+  (delete-by-moving-to-trash t)
+  :config
+  (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package saveplace
   :ensure nil
@@ -311,6 +312,9 @@
 
 (use-package all-the-icons-ivy
   :hook (after-init . all-the-icons-ivy-setup))
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
 
 (use-package centaur-tabs
   :demand
@@ -534,7 +538,6 @@
           c-or-c++-mode   ; clangd
           java-mode       ; eclipse-jdtls
           js-mode         ; ts-ls (tsserver wrapper)
-          typescript-mode ; ts-ls (tsserver wrapper)
           python-mode     ; mspyls
           ) . lsp)
   :commands lsp
@@ -550,7 +553,8 @@
   :hook (python-mode . (lambda () (require 'lsp-python-ms)))
   :custom
   (lsp-python-ms-executable
-   "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer"))
+   "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
+  (lsp-python-ms-python-executable-cmd "python3"))
 
 (use-package pyvenv
   :custom
@@ -647,8 +651,6 @@ Return a list of strings as the completion candidates."
                     (yas-expand)))))
 
 (use-package yasnippet-snippets)
-
-(use-package typescript-mode)
 
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode)
