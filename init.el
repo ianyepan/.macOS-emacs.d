@@ -259,6 +259,8 @@
   (solaire-hl-line-face            ((t (:background "#34374a"))))
   (ivy-current-match               ((t (:background "#34374a" :extend t))))
   (swiper-line-face                ((t (:foreground "#f8f8f2" :background "#44475a" :extend t))))
+  (company-tooltip-selection       ((t (:background "#44475a" :extend t))))
+  (company-tooltip                 ((t (:background "#1e2029"))))
   (company-box-selection           ((t (:background "#44475a" :extend t))))
   (company-box-background          ((t (:background "#1e2029"))))
   (vterm-color-default             ((t (:foreground "#f8f8f2"))))
@@ -317,6 +319,39 @@
 
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
+
+(use-package company-posframe
+  :config
+  (company-posframe-mode +1))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode)
+  :custom
+  (company-box-show-single-candidate t)
+  (company-box-max-candidates 50)
+  (company-box-doc-enable nil)
+  (company-box-icons-alist 'company-box-icons-all-the-icons)
+  (company-box-icons-all-the-icons
+   `((Unknown       . ,(all-the-icons-faicon "cog"       :face 'all-the-icons-purple))
+     (Text          . ,(all-the-icons-faicon "file-text" :face 'all-the-icons-green))
+     (Method        . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-blue))
+     (Function      . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-blue))
+     (Constructor   . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-blue))
+     (Field         . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-blue))
+     (Variable      . ,(all-the-icons-faicon "cog"       :face 'all-the-icons-purple))
+     (Class         . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-green))
+     (Interface     . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-green))
+     (Module        . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-green))
+     (Property      . ,(all-the-icons-faicon "wrench"    :face 'all-the-icons-purple))
+     (Enum          . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-purple))
+     (Keyword       . ,(all-the-icons-faicon "wrench"    :face 'all-the-icons-purple))
+     (Snippet       . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-white))
+     (Color         . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-blue))
+     (File          . ,(all-the-icons-faicon "file"      :face 'all-the-icons-blue))
+     (Folder        . ,(all-the-icons-faicon "folder"    :face 'all-the-icons-white))
+     (Struct        . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-green))
+     (Event         . ,(all-the-icons-faicon "bolt"      :face 'all-the-icons-blue))
+     (TypeParameter . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-blue)))))
 
 (use-package centaur-tabs
   :demand
@@ -747,36 +782,6 @@ Return a list of strings as the completion candidates."
   :config
   (global-set-key (kbd "C-c w") #'writeroom-mode))
 
-(use-package company-box
-  :hook (company-mode . company-box-mode)
-  :custom
-  (company-box-show-single-candidate t)
-  (company-box-max-candidates 50)
-  (company-box-doc-enable nil)
-  (company-box-icons-alist 'company-box-icons-all-the-icons)
-  (company-box-icons-all-the-icons
-   `((Unknown       . ,(all-the-icons-faicon "cog"        :face 'all-the-icons-purple))
-     (Text          . ,(all-the-icons-faicon "file-text"  :face 'all-the-icons-green))
-     (Method        . ,(all-the-icons-faicon "cube"       :face 'all-the-icons-blue))
-     (Function      . ,(all-the-icons-faicon "cube"       :face 'all-the-icons-blue))
-     (Constructor   . ,(all-the-icons-faicon "cube"       :face 'all-the-icons-blue))
-     (Field         . ,(all-the-icons-faicon "cube"       :face 'all-the-icons-blue))
-     (Variable      . ,(all-the-icons-faicon "cog"        :face 'all-the-icons-blue))
-     (Class         . ,(all-the-icons-faicon "cogs"       :face 'all-the-icons-blue))
-     (Interface     . ,(all-the-icons-faicon "cogs"       :face 'all-the-icons-blue))
-     (Module        . ,(all-the-icons-faicon "cogs"       :face 'all-the-icons-blue))
-     (Property      . ,(all-the-icons-faicon "wrench"     :face 'all-the-icons-blue))
-     (Enum          . ,(all-the-icons-faicon "cogs"       :face 'all-the-icons-blue))
-     (Keyword       . ,(all-the-icons-faicon "wrench"     :face 'all-the-icons-purple))
-     (Snippet       . ,(all-the-icons-faicon "cogs"       :face 'all-the-icons-blue))
-     (Color         . ,(all-the-icons-faicon "cube"       :face 'all-the-icons-blue))
-     (File          . ,(all-the-icons-faicon "file"       :face 'all-the-icons-blue))
-     (Folder        . ,(all-the-icons-faicon "folder"     :face 'all-the-icons-blue))
-     (Struct        . ,(all-the-icons-faicon "cogs"       :face 'all-the-icons-blue))
-     (Event         . ,(all-the-icons-faicon "bolt"       :face 'all-the-icons-blue))
-     (TypeParameter . ,(all-the-icons-faicon "cogs"       :face 'all-the-icons-blue)))))
-
-(provide 'init)
 (use-package dired-single
   :preface
   (defun my-dired-init ()
@@ -788,5 +793,5 @@ Return a list of strings as the completion candidates."
       (my-dired-init)
     (add-hook 'dired-load-hook #'my-dired-init)))
 
-  (provide 'init)
+(provide 'init)
 ;;; init.el ends here
