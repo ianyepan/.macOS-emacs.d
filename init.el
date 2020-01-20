@@ -26,9 +26,9 @@
                                     (setq gc-cons-threshold ian/gc-cons-threshold)))
 
 (require 'package)
-(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
+(add-to-list 'package-archives '("org"   . "https://orgmode.org/elpa/"))
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -143,9 +143,9 @@
 (use-package cc-vars
   :ensure nil
   :custom
-  (c-default-style '((java-mode . "java")
-                     (awk-mode . "awk")
-                     (other . "k&r")))
+  (c-default-style '((java-mode  . "java")
+                     (awk-mode   . "awk")
+                     (other      . "k&r")))
   :config
   (setq-default c-basic-offset ian/indent-width))
 
@@ -282,8 +282,8 @@
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
          (minibuffer-setup . solaire-mode-in-minibuffer))
   :config
-  (solaire-global-mode)
-  (solaire-mode-swap-bg))
+  (solaire-mode-swap-bg)
+  (solaire-global-mode +1))
 
 (use-package dashboard
   :hook (dashboard-mode . (lambda () (setq default-directory "~/")))
@@ -472,12 +472,12 @@
   :hook (after-init . ivy-mode)
   :custom
   (ivy-display-style nil)
-  (ivy-re-builders-alist '((counsel-rg . ivy--regex-plus)
-                           (counsel-projectile-rg . ivy--regex-plus)
-                           (counsel-ag . ivy--regex-plus)
-                           (counsel-projectile-ag . ivy--regex-plus)
-                           (swiper . ivy--regex-plus)
-                           (t . ivy--regex-fuzzy)))
+  (ivy-re-builders-alist '((counsel-rg             . ivy--regex-plus)
+                           (counsel-projectile-rg  . ivy--regex-plus)
+                           (counsel-ag             . ivy--regex-plus)
+                           (counsel-projectile-ag  . ivy--regex-plus)
+                           (swiper                 . ivy--regex-plus)
+                           (t                      . ivy--regex-fuzzy)))
   (ivy-use-virtual-buffers t)
   (ivy-count-format "(%d/%d) ")
   (ivy-initial-inputs-alist nil)
@@ -506,29 +506,29 @@
   (setq ivy-rich-display-transformers-list ; max column width sum = (ivy-poframe-width - 1)
         '(ivy-switch-buffer
           (:columns
-           ((ivy-rich-candidate (:width 35))
-            (ivy-rich-switch-buffer-project (:width 15 :face success))
-            (ivy-rich-switch-buffer-major-mode (:width 13 :face warning)))
+           ((ivy-rich-candidate                    (:width 35))
+            (ivy-rich-switch-buffer-project        (:width 15 :face success))
+            (ivy-rich-switch-buffer-major-mode     (:width 13 :face warning)))
            :predicate
            #'(lambda (cand) (get-buffer cand)))
           counsel-M-x
           (:columns
-           ((counsel-M-x-transformer (:width 35))
-            (ivy-rich-counsel-function-docstring (:width 34 :face font-lock-doc-face))))
+           ((counsel-M-x-transformer               (:width 35))
+            (ivy-rich-counsel-function-docstring   (:width 34 :face font-lock-doc-face))))
           counsel-describe-function
           (:columns
            ((counsel-describe-function-transformer (:width 35))
-            (ivy-rich-counsel-function-docstring (:width 34 :face font-lock-doc-face))))
+            (ivy-rich-counsel-function-docstring   (:width 34 :face font-lock-doc-face))))
           counsel-describe-variable
           (:columns
            ((counsel-describe-variable-transformer (:width 35))
-            (ivy-rich-counsel-variable-docstring (:width 34 :face font-lock-doc-face))))
+            (ivy-rich-counsel-variable-docstring   (:width 34 :face font-lock-doc-face))))
           package-install
           (:columns
-           ((ivy-rich-candidate (:width 25))
-            (ivy-rich-package-version (:width 12 :face font-lock-comment-face))
-            (ivy-rich-package-archive-summary (:width 7 :face font-lock-builtin-face))
-            (ivy-rich-package-install-summary (:width 23 :face font-lock-doc-face))))))
+           ((ivy-rich-candidate                    (:width 25))
+            (ivy-rich-package-version              (:width 12 :face font-lock-comment-face))
+            (ivy-rich-package-archive-summary      (:width 7 :face font-lock-builtin-face))
+            (ivy-rich-package-install-summary      (:width 23 :face font-lock-doc-face))))))
   :config
   (ivy-rich-mode +1)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
@@ -577,11 +577,11 @@
 ;; Programming language support and utilities
 
 (use-package lsp-mode
-  :hook ((c-mode          ; clangd
-          c-or-c++-mode   ; clangd
-          java-mode       ; eclipse-jdtls
-          js-mode         ; ts-ls (tsserver wrapper)
-          python-mode     ; mspyls
+  :hook ((c-mode        ; clangd
+          c-or-c++-mode ; clangd
+          java-mode     ; eclipse-jdtls
+          js-mode       ; ts-ls (tsserver wrapper)
+          python-mode   ; mspyls
           ) . lsp)
   :commands lsp
   :custom
@@ -697,19 +697,19 @@ Return a list of strings as the completion candidates."
 (use-package yasnippet-snippets)
 
 (use-package web-mode
-  :mode (("\\.html?\\'" . web-mode)
-         ("\\.css\\'" . web-mode)
-         ("\\.json\\'" . web-mode))
+  :mode (("\\.html?\\'"  . web-mode)
+         ("\\.css\\'"    . web-mode)
+         ("\\.json\\'"   . web-mode))
   :custom
   (web-mode-markup-indent-offset ian/indent-width)
   (web-mode-code-indent-offset ian/indent-width)
   (web-mode-css-indent-offset ian/indent-width))
 
 (use-package emmet-mode
-  :hook ((html-mode . emmet-mode)
-         (css-mode . emmet-mode)
-         (js-mode . emmet-mode)
-         (web-mode . emmet-mode))
+  :hook ((html-mode  . emmet-mode)
+         (css-mode   . emmet-mode)
+         (js-mode    . emmet-mode)
+         (web-mode   . emmet-mode))
   :custom
   (emmet-expand-jsx-className? t)
   (emmet-insert-flash-time 0.1))
