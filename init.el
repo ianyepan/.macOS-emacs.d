@@ -403,6 +403,10 @@
   :config
   (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
+(use-package git-gutter
+  :custom
+  (git-gutter:update-interval 0.2))
+
 (use-package git-gutter-fringe
   :config
   (global-git-gutter-mode +1)
