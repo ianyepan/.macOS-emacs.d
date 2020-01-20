@@ -321,7 +321,8 @@
 (use-package centaur-tabs
   :demand
   :bind (("C-S-<tab>" . centaur-tabs-backward)
-         ("C-<tab>" . centaur-tabs-forward))
+         ("C-<tab>" . centaur-tabs-forward)
+         ("C-x p" . centaur-tabs-counsel-switch-group))
   :custom
   (centaur-tabs-set-bar 'under)
   (x-underline-at-descent-line t)
