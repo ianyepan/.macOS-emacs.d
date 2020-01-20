@@ -259,6 +259,8 @@
   (solaire-hl-line-face            ((t (:background "#34374a"))))
   (ivy-current-match               ((t (:background "#34374a" :extend t))))
   (swiper-line-face                ((t (:foreground "#f8f8f2" :background "#44475a" :extend t))))
+  (company-box-selection           ((t (:background "#44475a" :extend t))))
+  (company-box-background          ((t (:background "#1e2029"))))
   (vterm-color-default             ((t (:foreground "#f8f8f2"))))
   (vterm-color-black               ((t (:foreground "#000000"))))
   (vterm-color-red                 ((t (:foreground "#ff5555"))))
@@ -503,6 +505,7 @@
   (define-key projectile-mode-map (kbd "s-F") #'projectile-ripgrep))
 
 (use-package wgrep
+  :commands wgrep-change-to-wgrep-mode
   :custom
   (wgrep-auto-save-buffer t))
 
@@ -615,6 +618,7 @@ Return a list of strings as the completion candidates."
   :hook (prog-mode . flycheck-mode)
   :custom
   (flycheck-check-syntax-automatically '(save mode-enabled newline))
+  (flycheck-display-errors-delay 0.2)
   (flycheck-python-flake8-executable "python3")
   (flycheck-flake8rc "~/.config/flake8")
   :config ; prefer flake8 for python & eslint for javascript
@@ -737,6 +741,35 @@ Return a list of strings as the completion candidates."
   (writeroom-fullscreen-effect 'maximized)
   :config
   (global-set-key (kbd "C-c w") #'writeroom-mode))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode)
+  :custom
+  (company-box-show-single-candidate t)
+  (company-box-max-candidates 50)
+  (company-box-doc-enable nil)
+  (company-box-icons-alist 'company-box-icons-all-the-icons)
+  (company-box-icons-all-the-icons
+   `((Unknown       . ,(all-the-icons-faicon "cog"          :face 'all-the-icons-purple))
+     (Text          . ,(all-the-icons-faicon "file-text"    :face 'all-the-icons-green))
+     (Method        . ,(all-the-icons-faicon "cube"         :face 'all-the-icons-blue))
+     (Function      . ,(all-the-icons-faicon "cube"         :face 'all-the-icons-blue))
+     (Constructor   . ,(all-the-icons-faicon "cube"         :face 'all-the-icons-blue))
+     (Field         . ,(all-the-icons-faicon "cube"         :face 'all-the-icons-blue))
+     (Variable      . ,(all-the-icons-faicon "cog"          :face 'all-the-icons-blue))
+     (Class         . ,(all-the-icons-faicon "cogs"         :face 'all-the-icons-blue))
+     (Interface     . ,(all-the-icons-faicon "cogs"         :face 'all-the-icons-blue))
+     (Module        . ,(all-the-icons-faicon "cogs"         :face 'all-the-icons-blue))
+     (Property      . ,(all-the-icons-faicon "wrench"       :face 'all-the-icons-blue))
+     (Enum          . ,(all-the-icons-faicon "cogs"         :face 'all-the-icons-blue))
+     (Keyword       . ,(all-the-icons-faicon "wrench"       :face 'all-the-icons-purple))
+     (Snippet       . ,(all-the-icons-faicon "cogs"         :face 'all-the-icons-blue))
+     (Color         . ,(all-the-icons-faicon "cube"         :face 'all-the-icons-blue))
+     (File          . ,(all-the-icons-faicon "file"         :face 'all-the-icons-blue))
+     (Folder        . ,(all-the-icons-faicon "folder"       :face 'all-the-icons-blue))
+     (Struct        . ,(all-the-icons-faicon "cogs"         :face 'all-the-icons-blue))
+     (Event         . ,(all-the-icons-faicon "bolt"         :face 'all-the-icons-blue))
+     (TypeParameter . ,(all-the-icons-faicon "cogs"         :face 'all-the-icons-blue)))))
 
 (provide 'init)
 ;;; init.el ends here
