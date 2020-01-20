@@ -259,10 +259,11 @@
   (solaire-hl-line-face            ((t (:background "#34374a"))))
   (ivy-current-match               ((t (:background "#34374a" :extend t))))
   (swiper-line-face                ((t (:foreground "#f8f8f2" :background "#44475a" :extend t))))
-  (company-tooltip-selection       ((t (:background "#44475a" :extend t))))
   (company-tooltip                 ((t (:background "#1e2029"))))
-  (company-box-selection           ((t (:background "#44475a" :extend t))))
+  (company-tooltip-common          ((t (:foreground "#8be9fd"))))
+  (company-tooltip-selection       ((t (:background "#44475a" :extend t))))
   (company-box-background          ((t (:background "#1e2029"))))
+  (company-box-selection           ((t (:background "#44475a" :extend t))))
   (vterm-color-default             ((t (:foreground "#f8f8f2"))))
   (vterm-color-black               ((t (:foreground "#000000"))))
   (vterm-color-red                 ((t (:foreground "#ff5555"))))
@@ -320,10 +321,6 @@
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
 
-(use-package company-posframe
-  :config
-  (company-posframe-mode +1))
-
 (use-package company-box
   :hook (company-mode . company-box-mode)
   :custom
@@ -333,25 +330,25 @@
   (company-box-icons-alist 'company-box-icons-all-the-icons)
   (company-box-icons-all-the-icons
    `((Unknown       . ,(all-the-icons-faicon "cog"       :face 'all-the-icons-purple))
-     (Text          . ,(all-the-icons-faicon "file-text" :face 'all-the-icons-green))
-     (Method        . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-blue))
-     (Function      . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-blue))
+     (Text          . ,(all-the-icons-faicon "file-text" :face 'all-the-icons-orange))
+     (Method        . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-purple))
+     (Function      . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-purple))
      (Constructor   . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-blue))
-     (Field         . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-blue))
+     (Field         . ,(all-the-icons-faicon "eraser"    :face 'all-the-icons-blue))
      (Variable      . ,(all-the-icons-faicon "cog"       :face 'all-the-icons-purple))
-     (Class         . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-green))
-     (Interface     . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-green))
-     (Module        . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-green))
-     (Property      . ,(all-the-icons-faicon "wrench"    :face 'all-the-icons-purple))
-     (Enum          . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-purple))
+     (Class         . ,(all-the-icons-faicon "database"  :face 'all-the-icons-orange))
+     (Interface     . ,(all-the-icons-faicon "database"  :face 'all-the-icons-orange))
+     (Module        . ,(all-the-icons-faicon "database"  :face 'all-the-icons-orange))
+     (Property      . ,(all-the-icons-faicon "wrench"    :face 'all-the-icons-lsilver))
+     (Enum          . ,(all-the-icons-faicon "wrench"    :face 'all-the-icons-orange))
      (Keyword       . ,(all-the-icons-faicon "wrench"    :face 'all-the-icons-purple))
-     (Snippet       . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-white))
+     (Snippet       . ,(all-the-icons-faicon "database"  :face 'all-the-icons-lsilver))
      (Color         . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-blue))
      (File          . ,(all-the-icons-faicon "file"      :face 'all-the-icons-blue))
-     (Folder        . ,(all-the-icons-faicon "folder"    :face 'all-the-icons-white))
-     (Struct        . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-green))
-     (Event         . ,(all-the-icons-faicon "bolt"      :face 'all-the-icons-blue))
-     (TypeParameter . ,(all-the-icons-faicon "cogs"      :face 'all-the-icons-blue)))))
+     (Folder        . ,(all-the-icons-faicon "folder"    :face 'all-the-icons-lsilver))
+     (Struct        . ,(all-the-icons-faicon "database"  :face 'all-the-icons-orange))
+     (Event         . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-blue))
+     (TypeParameter . ,(all-the-icons-faicon "database"  :face 'all-the-icons-blue)))))
 
 (use-package centaur-tabs
   :demand
@@ -644,7 +641,7 @@ Return a list of strings as the completion candidates."
   :hook (prog-mode . company-mode)
   :custom
   (company-minimum-prefix-length 1)
-  (company-idle-delay 0.1)
+  (company-idle-delay 0.2)
   (company-selection-wrap-around t)
   (company-tooltip-align-annotations t)
   (company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
