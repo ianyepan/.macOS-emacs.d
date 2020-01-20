@@ -548,7 +548,8 @@
   :hook (python-mode . (lambda () (require 'lsp-python-ms)))
   :custom
   (lsp-python-ms-executable
-   "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer"))
+   "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
+  (lsp-python-ms-python-executable-cmd "python3"))
 
 (use-package pyvenv
   :custom
