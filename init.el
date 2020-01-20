@@ -182,7 +182,7 @@
   :config
   (blink-cursor-mode -1)
   (when (member "Source Code Pro" (font-family-list))
-    (set-frame-font "Source Code Pro-12:weight=regular" t t)))
+    (set-frame-font "Source Code Pro-13:weight=regular" t t)))
 
 (use-package ediff
   :ensure nil
