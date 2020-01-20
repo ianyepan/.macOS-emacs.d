@@ -777,4 +777,16 @@ Return a list of strings as the completion candidates."
      (TypeParameter . ,(all-the-icons-faicon "cogs"       :face 'all-the-icons-blue)))))
 
 (provide 'init)
+(use-package dired-single
+  :preface
+  (defun my-dired-init ()
+    (define-key dired-mode-map [return] #'dired-single-buffer)
+    (define-key dired-mode-map [remap dired-mouse-find-file-other-window] #'dired-single-buffer-mouse)
+    (define-key dired-mode-map [remap dired-up-directory] #'dired-single-up-directory))
+  :config
+  (if (boundp 'dired-mode-map)
+      (my-dired-init)
+    (add-hook 'dired-load-hook #'my-dired-init)))
+
+  (provide 'init)
 ;;; init.el ends here
