@@ -217,7 +217,9 @@
 (use-package dired
   :ensure nil
   :custom
-  (delete-by-moving-to-trash t))
+  (delete-by-moving-to-trash t)
+  :config
+  (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package saveplace
   :ensure nil
@@ -310,6 +312,9 @@
 
 (use-package all-the-icons-ivy
   :hook (after-init . all-the-icons-ivy-setup))
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
 
 (use-package centaur-tabs
   :demand
