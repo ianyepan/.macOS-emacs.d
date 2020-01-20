@@ -323,7 +323,8 @@
   :bind (("C-S-<tab>" . centaur-tabs-backward)
          ("C-<tab>" . centaur-tabs-forward))
   :custom
-  (centaur-tabs-set-bar 'over)
+  (centaur-tabs-set-bar 'under)
+  (x-underline-at-descent-line t)
   (centaur-tabs-set-modified-marker t)
   (centaur-tabs-modified-marker " ● ")
   (centaur-tabs-cycle-scope 'tabs)
