@@ -251,6 +251,7 @@
   :custom-face
   (cursor                          ((t (:background "#f8f8f2"))))
   (show-paren-match                ((t (:foreground "#f8f8f2" :underline t))))
+  (font-lock-comment-face          ((t (:italic t))))
   (highlight-symbol-face           ((t (:background "#44475a"))))
   (highlight-numbers-number        ((t (:foreground "#bd93f9"))))
   (highlight-operators-face        ((t (:foreground "#ff79c6"))))
