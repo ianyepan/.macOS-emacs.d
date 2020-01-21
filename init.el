@@ -197,7 +197,8 @@
     (set-face-attribute 'fringe nil :background nil)
     (mapc #'(lambda (face)
               (when (eq (face-attribute face :weight) 'bold)
-                (set-face-attribute face nil :weight 'normal))) (face-list)))
+                (set-face-attribute face nil :weight 'normal)))
+          (face-list)))
   :config
   (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally))
 
@@ -302,7 +303,6 @@
   (inhibit-compacting-font-caches t)
   (doom-modeline-buffer-file-name-style 'relative-from-project)
   (doom-modeline-bar-width 1)
-  (doom-modeline-indent-info t)
   (doom-modeline-modal-icon nil)
   (doom-modeline-height 15)
   (doom-modeline-env-python-executable "python3")
@@ -335,7 +335,7 @@
      (Function      . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-purple))
      (Constructor   . ,(all-the-icons-faicon "cube"      :face 'all-the-icons-blue))
      (Field         . ,(all-the-icons-faicon "eraser"    :face 'all-the-icons-blue))
-     (Variable      . ,(all-the-icons-faicon "cog"       :face 'all-the-icons-purple))
+     (Variable      . ,(all-the-icons-faicon "eraser"    :face 'all-the-icons-purple))
      (Class         . ,(all-the-icons-faicon "database"  :face 'all-the-icons-orange))
      (Interface     . ,(all-the-icons-faicon "database"  :face 'all-the-icons-orange))
      (Module        . ,(all-the-icons-faicon "database"  :face 'all-the-icons-orange))
