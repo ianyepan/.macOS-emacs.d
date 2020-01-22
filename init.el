@@ -631,11 +631,12 @@
 ;; Programming language support and utilities
 
 (use-package lsp-mode
-  :hook ((c-mode        ; clangd
-          c-or-c++-mode ; clangd
-          java-mode     ; eclipse-jdtls
-          js-mode       ; ts-ls (tsserver wrapper)
-          python-mode   ; mspyls
+  :hook ((c-mode          ; clangd
+          c-or-c++-mode   ; clangd
+          java-mode       ; eclipse-jdtls
+          js-mode         ; ts-ls (tsserver wrapper)
+          typescript-mode ; ts-ls (tsserver wrapper)
+          python-mode     ; mspyls
           ) . lsp)
   :commands lsp
   :custom
@@ -661,6 +662,8 @@
             #'(lambda ()
                 (call-interactively #'lsp-workspace-restart)))
   (pyvenv-mode +1))
+
+(use-package typescript-mode)
 
 (use-package company-lsp
   :commands company-lsp
