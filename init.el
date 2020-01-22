@@ -143,9 +143,9 @@
 (use-package cc-vars
   :ensure nil
   :custom
-  (c-default-style '((java-mode  . "java")
-                     (awk-mode   . "awk")
-                     (other      . "k&r")))
+  (c-default-style '((java-mode . "java")
+                     (awk-mode  . "awk")
+                     (other     . "k&r")))
   :config
   (setq-default c-basic-offset ian/indent-width))
 
@@ -481,12 +481,12 @@
   :hook (after-init . ivy-mode)
   :custom
   (ivy-display-style nil)
-  (ivy-re-builders-alist '((counsel-rg             . ivy--regex-plus)
-                           (counsel-projectile-rg  . ivy--regex-plus)
-                           (counsel-ag             . ivy--regex-plus)
-                           (counsel-projectile-ag  . ivy--regex-plus)
-                           (swiper                 . ivy--regex-plus)
-                           (t                      . ivy--regex-fuzzy)))
+  (ivy-re-builders-alist '((counsel-rg            . ivy--regex-plus)
+                           (counsel-projectile-rg . ivy--regex-plus)
+                           (counsel-ag            . ivy--regex-plus)
+                           (counsel-projectile-ag . ivy--regex-plus)
+                           (swiper                . ivy--regex-plus)
+                           (t                     . ivy--regex-fuzzy)))
   (ivy-use-virtual-buffers t)
   (ivy-count-format "(%d/%d) ")
   (ivy-initial-inputs-alist nil)
@@ -706,19 +706,19 @@ Return a list of strings as the completion candidates."
 (use-package yasnippet-snippets)
 
 (use-package web-mode
-  :mode (("\\.html?\\'"  . web-mode)
-         ("\\.css\\'"    . web-mode)
-         ("\\.json\\'"   . web-mode))
+  :mode (("\\.html?\\'" . web-mode)
+         ("\\.css\\'"   . web-mode)
+         ("\\.json\\'"  . web-mode))
   :custom
   (web-mode-markup-indent-offset ian/indent-width)
   (web-mode-code-indent-offset ian/indent-width)
   (web-mode-css-indent-offset ian/indent-width))
 
 (use-package emmet-mode
-  :hook ((html-mode  . emmet-mode)
-         (css-mode   . emmet-mode)
-         (js-mode    . emmet-mode)
-         (web-mode   . emmet-mode))
+  :hook ((html-mode . emmet-mode)
+         (css-mode  . emmet-mode)
+         (js-mode   . emmet-mode)
+         (web-mode  . emmet-mode))
   :custom
   (emmet-expand-jsx-className? t)
   (emmet-insert-flash-time 0.1))
