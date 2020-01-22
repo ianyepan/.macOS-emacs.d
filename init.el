@@ -328,7 +328,9 @@
   (all-the-icons-scale-factor 1.0))
 
 (use-package all-the-icons-ivy
-  :hook (after-init . all-the-icons-ivy-setup))
+  :hook (after-init . all-the-icons-ivy-setup)
+  :custom
+  (all-the-icons-ivy-buffer-commands '()))
 
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
@@ -511,15 +513,24 @@
   (ivy-posframe-mode +1))
 
 (use-package ivy-rich
+  :preface
+  (defun ivy-rich-switch-buffer-icon (cand)
+    (with-current-buffer
+        (get-buffer cand)
+      (let ((icon (all-the-icons-icon-for-mode major-mode)))
+        (if (symbolp icon)
+            (all-the-icons-icon-for-mode 'fundamental-mode)
+          icon))))
   :init
   (setq ivy-rich-display-transformers-list ; max column width sum = (ivy-poframe-width - 1)
         '(ivy-switch-buffer
           (:columns
-           ((ivy-rich-candidate                    (:width 35))
-            (ivy-rich-switch-buffer-project        (:width 15 :face success))
-            (ivy-rich-switch-buffer-major-mode     (:width 13 :face warning)))
+           ((ivy-rich-switch-buffer-icon           (:width 2))
+            (ivy-rich-candidate                    (:width 24))
+            (ivy-rich-switch-buffer-path           (:width 20 :face font-lock-doc-face))
+            (ivy-rich-switch-buffer-project        (:width 19 :face font-lock-doc-face)))
            :predicate
-           #'(lambda (cand) (get-buffer cand)))
+           (lambda (cand) (get-buffer cand)))
           counsel-M-x
           (:columns
            ((counsel-M-x-transformer               (:width 35))
@@ -537,7 +548,8 @@
            ((ivy-rich-candidate                    (:width 25))
             (ivy-rich-package-version              (:width 12 :face font-lock-comment-face))
             (ivy-rich-package-archive-summary      (:width 7 :face font-lock-builtin-face))
-            (ivy-rich-package-install-summary      (:width 23 :face font-lock-doc-face))))))
+            (ivy-rich-package-install-summary      (:width 23 :face font-lock-doc-face))))
+          ))
   :config
   (ivy-rich-mode +1)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
