@@ -230,6 +230,8 @@
 (use-package recentf
   :ensure nil
   :config
+  (add-to-list 'recentf-exclude
+               (format "%s/\\.config/emacs/elpa/.*" (getenv "HOME")))
   (recentf-mode +1))
 
 (use-package hl-line
