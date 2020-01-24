@@ -749,8 +749,9 @@ Return a list of strings as the completion candidates."
 
 (use-package which-key
   :custom
-  (which-key-idle-delay 0.4)
-  (which-key-idle-secondary-delay 0.4)
+  (which-key-show-early-on-C-h t)
+  (which-key-idle-delay 10000)
+  (which-key-idle-secondary-delay 0.05)
   :config
   (which-key-mode +1))
 
