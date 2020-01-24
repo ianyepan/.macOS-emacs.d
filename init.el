@@ -515,8 +515,7 @@
            ((ivy-rich-candidate                    (:width 25))
             (ivy-rich-package-version              (:width 12 :face font-lock-comment-face))
             (ivy-rich-package-archive-summary      (:width 7 :face font-lock-builtin-face))
-            (ivy-rich-package-install-summary      (:width 23 :face font-lock-doc-face))))
-          ))
+            (ivy-rich-package-install-summary      (:width 23 :face font-lock-doc-face))))))
   :config
   (ivy-rich-mode +1)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
@@ -713,10 +712,7 @@ Return a list of strings as the completion candidates."
     (if (derived-mode-p 'prolog-mode)
         (prolog-indent-buffer)
       (format-all-buffer)))
-  (defun format-document()
-    "Auto-format whole buffer (VSCode syntax)."
-    (interactive)
-    (ian/format-code)))
+  (defalias 'format-document #'ian/format-code))
 
 (use-package dumb-jump ; install rg/ag
   :custom
