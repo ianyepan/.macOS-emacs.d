@@ -262,7 +262,7 @@
   (hl-line                   ((t (:background "#3b4253"))))
   (solaire-hl-line-face      ((t (:background "#3b4253"))))
   (ivy-current-match         ((t (:background "#3b4253" :extend t))))
-  (swiper-line-face          ((t (:foreground "#ECEFF4" :background "#3b4253"))))
+  (swiper-line-face          ((t (:foreground "#ECEFF4" :background "#3b4253" :extend t))))
   (company-tooltip           ((t (:background "#272c36"))))
   (company-tooltip-common    ((t (:foreground "#88C0D0"))))
   (company-tooltip-selection ((t (:background "#434c5f" :extend t))))
@@ -372,11 +372,7 @@
   :hook (prog-mode . highlight-numbers-mode))
 
 (use-package highlight-operators
-  :hook (prog-mode . highlight-operators-mode)
-  :custom
-  (highlight-operators-regexp
-   (regexp-opt '("+" "-" "*" "/" "%" "!" "&" "^"
-                 "~" "|" "=" "<" ">" ":" "?"))))
+  :hook (prog-mode . highlight-operators-mode))
 
 (use-package highlight-escape-sequences
   :hook (prog-mode . hes-mode))
