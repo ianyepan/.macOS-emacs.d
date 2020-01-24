@@ -88,19 +88,15 @@
 (use-package "window"
   :ensure nil
   :preface
-  (defun ian/split-and-follow-horizontally ()
-    "Split window below."
-    (interactive)
-    (split-window-below)
-    (other-window 1))
-  (defun ian/split-and-follow-vertically ()
-    "Split window right."
-    (interactive)
-    (split-window-right)
-    (other-window 1))
   :config
-  (global-set-key (kbd "C-x 2") #'ian/split-and-follow-horizontally)
-  (global-set-key (kbd "C-x 3") #'ian/split-and-follow-vertically))
+  (global-set-key (kbd "C-x 2") #'(lambda ()
+                                    (interactive)
+                                    (split-window-below)
+                                    (other-window 1)))
+  (global-set-key (kbd "C-x 3") #'(lambda ()
+                                    (interactive)
+                                    (split-window-right)
+                                    (other-window 1))))
 
 (use-package delsel
   :ensure nil
@@ -132,7 +128,19 @@
   :ensure nil
   :mode ("\\.jsx?\\'" . js-mode)
   :custom
-  (js-indent-level ian/indent-width))
+  (js-indent-level ian/indent-width)
+  :config
+  (add-hook 'flycheck-mode-hook
+            #'(lambda ()
+                (let* ((root (locate-dominating-file
+                              (or (buffer-file-name) default-directory)
+                              "node_modules"))
+                       (eslint
+                        (and root
+                             (expand-file-name "node_modules/.bin/eslint"
+                                               root))))
+                  (when (and eslint (file-executable-p eslint))
+                    (setq-local flycheck-javascript-eslint-executable eslint))))))
 
 (use-package xref
   :ensure nil
@@ -298,7 +306,7 @@
   :custom
   (dashboard-startup-banner 'logo)
   (dashboard-banner-logo-title "Dangerously powerful")
-  (dashboard-init-info "Happy Hacking!")
+  (dashboard-init-info "Happy hacking, console cowboy")
   (dashboard-items nil)
   (dashboard-footer "It was hot, the night we burned Chrome.")
   (dashboard-footer-icon
@@ -419,7 +427,7 @@
 
 (use-package git-gutter
   :custom
-  (git-gutter:update-interval 0.2))
+  (git-gutter:update-interval 0.05))
 
 (use-package git-gutter-fringe
   :config
@@ -648,10 +656,10 @@ Return a list of strings as the completion candidates."
   :hook (prog-mode . flycheck-mode)
   :custom
   (flycheck-check-syntax-automatically '(save mode-enabled newline))
-  (flycheck-display-errors-delay 0.2)
+  (flycheck-display-errors-delay 0.1)
   (flycheck-python-flake8-executable "python3")
   (flycheck-flake8rc "~/.config/flake8")
-  :config ; prefer flake8 for python & eslint for javascript
+  :config ; prefer flake8 for python & eslint for javascript exclusively
   (setq-default flycheck-disabled-checkers '(python-pylint
                                              python-pycompile
                                              javascript-jshint
@@ -702,7 +710,7 @@ Return a list of strings as the completion candidates."
          (web-mode  . emmet-mode))
   :custom
   (emmet-expand-jsx-className? t)
-  (emmet-insert-flash-time 0.1))
+  (emmet-insert-flash-time 0.001))
 
 (use-package format-all
   :preface
@@ -717,9 +725,11 @@ Return a list of strings as the completion candidates."
 (use-package dumb-jump ; install rg/ag
   :custom
   (dumb-jump-selector 'ivy)
-  (dumb-jump-prefer-searcher 'rg)
   :config
   (global-set-key (kbd "s-B") #'dumb-jump-go))
+
+(use-package rainbow-mode
+  :hook (web-mode . rainbow-mode))
 
 ;; Terminal emulation
 
@@ -756,9 +766,6 @@ Return a list of strings as the completion candidates."
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
-(use-package rainbow-mode
-  :hook (web-mode . rainbow-mode))
-
 (use-package writeroom-mode
   :custom
   (writeroom-fullscreen-effect 'maximized)
@@ -767,14 +774,14 @@ Return a list of strings as the completion candidates."
 
 (use-package dired-single
   :preface
-  (defun my-dired-init ()
+  (defun ian/dired-single-init ()
     (define-key dired-mode-map [return] #'dired-single-buffer)
     (define-key dired-mode-map [remap dired-mouse-find-file-other-window] #'dired-single-buffer-mouse)
     (define-key dired-mode-map [remap dired-up-directory] #'dired-single-up-directory))
   :config
   (if (boundp 'dired-mode-map)
-      (my-dired-init)
-    (add-hook 'dired-load-hook #'my-dired-init)))
+      (ian/dired-single-init)
+    (add-hook 'dired-load-hook #'ian/dired-single-init)))
 
 (provide 'init)
 ;;; init.el ends here
