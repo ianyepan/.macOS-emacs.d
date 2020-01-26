@@ -259,31 +259,18 @@
 
 (use-package doom-themes
   :custom-face
-  (cursor                    ((t (:background "#D8DEE9"))))
-  (show-paren-match          ((t (:foreground "#ECEFF4" :underline t))))
-  (font-lock-comment-face    ((t (:foreground "#616d89" :italic t))))
-  (highlight-symbol-face     ((t (:background "#434C5E"))))
-  (highlight-numbers-number  ((t (:foreground "#B48EAD"))))
-  (highlight-operators-face  ((t (:foreground "#81A1C1"))))
-  (line-number               ((t (:foreground "#4A556B" :background "#2E3440"))))
-  (line-number-current-line  ((t (:foreground "#616d89" :background "#2E3440"))))
-  (hl-line                   ((t (:background "#3b4253"))))
-  (solaire-hl-line-face      ((t (:background "#3b4253"))))
-  (ivy-current-match         ((t (:background "#3b4253" :extend t))))
-  (swiper-line-face          ((t (:foreground "#ECEFF4" :background "#3b4253" :extend t))))
-  (company-tooltip           ((t (:background "#272c36"))))
-  (company-tooltip-common    ((t (:foreground "#88C0D0"))))
-  (company-tooltip-selection ((t (:background "#434c5f" :extend t))))
-  (company-scrollbar-bg      ((t (:background "#272c36"))))
-  (company-scrollbar-fg      ((t (:background "#3a4353"))))
-  (git-gutter-fr:added       ((t (:foreground "#A3BE8C"))))
-  (git-gutter-fr:modified    ((t (:foreground "#EBCB8B"))))
-  (git-gutter-fr:deleted     ((t (:foreground "#BF616A"))))
+  (cursor                    ((t (:background "#F92CB4"))))
+  (show-paren-match          ((t (:foreground "#ffffff" :underline t))))
+  (highlight-symbol-face     ((t (:background "#333344"))))
+  (line-number               ((t (:foreground "#314662"))))
+  (line-number-current-line  ((t (:foreground "#546A90"))))
+  (hl-line                   ((t (:background "#181142"))))
+  (solaire-hl-line-face      ((t (:background "#181142"))))
   :custom
   (doom-themes-enable-bold nil)
   (doom-themes-enable-italic t)
   :config
-  (load-theme 'doom-nord t))
+  (load-theme 'doom-outrun-electric t))
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
