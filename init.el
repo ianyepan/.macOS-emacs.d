@@ -253,6 +253,11 @@
   :config
   (setq-default display-line-numbers-width 3))
 
+(use-package newcomment
+  :ensure nil
+  :config
+  (global-set-key (kbd "s-/") #'comment-line))
+
 ;;; Third-party Packages
 
 ;; GUI enhancements
@@ -380,11 +385,6 @@
   :config
   (setq evil-collection-company-use-tng nil)
   (evil-collection-init))
-
-(use-package evil-commentary
-  :after evil
-  :config
-  (evil-commentary-mode +1))
 
 (use-package evil-magit)
 
