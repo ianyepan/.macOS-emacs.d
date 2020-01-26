@@ -358,13 +358,6 @@
   (when (member "Arial" (font-family-list))
     (centaur-tabs-change-fonts "Arial" 130)))
 
-(use-package highlight-indent-guides
-  :hook (prog-mode . highlight-indent-guides-mode)
-  :custom
-  (highlight-indent-guides-method 'character)
-  (highlight-indent-guides-character 9615) ; left-align vertical bar
-  (highlight-indent-guides-auto-character-face-perc 20))
-
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
   :custom
