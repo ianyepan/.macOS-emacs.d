@@ -81,7 +81,7 @@
    `(fringe                                   ((,class (:background ,bg1 :foreground ,fg4))))
    `(cursor                                   ((,class (:background ,fg1))))
    `(show-paren-match-face                    ((,class (:background ,warning))))
-   `(show-paren-match                         ((t (:foreground ,accent :underline t))))
+   `(show-paren-match                         ((t (:foreground ,accent :bold t :underline t))))
    `(show-paren-mismatch                      ((t (:background ,warning))))
    `(isearch                                  ((,class (:bold t :foreground ,accent :background ,bg4))))
    `(vertical-border                          ((,class (:foreground ,bg3))))
@@ -311,6 +311,10 @@
    `(diff-hl-delete                           ((t (:foreground ,tw-r))))
    `(diff-hl-change                           ((t (:foreground ,tw-b))))
 
+   `(git-gutter-fr:added                      ((t (:foreground ,tw-g))))
+   `(git-gutter-fr:modified                   ((t (:foreground ,tw-b))))
+   `(git-gutter-fr:deleted                    ((t (:foreground ,tw-r))))
+
    `(sml/global                               ((t :foreground ,keyword :weight normal)))
    `(sml/filename                             ((t :foreground ,accent  :weight normal)))
    `(sml/prefix                               ((t :foreground ,fg3     :weight normal)))
@@ -319,7 +323,17 @@
 
    `(evil-ex-substitute-matches               ((t :foreground "#ff0000" :weight bold :strike-through t)))
    `(evil-ex-substitute-replacement           ((t :foreground "#0ff000" :weight bold)))
-   ))
+
+   `(vterm-color-default                      ((t (:foreground "#CCCCCC"))))
+   `(vterm-color-black                        ((t (:foreground "#000000"))))
+   `(vterm-color-red                          ((t (:foreground "#C06D44"))))
+   `(vterm-color-green                        ((t (:foreground "#A6C176"))))
+   `(vterm-color-yellow                       ((t (:foreground "#CDA869"))))
+   `(vterm-color-blue                         ((t (:foreground "#7587A6"))))
+   `(vterm-color-magenta                      ((t (:foreground "#B4BE7C"))))
+   `(vterm-color-cyan                         ((t (:foreground "#7F9F98"))))
+   `(vterm-color-white                        ((t (:foreground "#E0E0DF"))))
+  ))
 
 (provide-theme 'twilight)
 
