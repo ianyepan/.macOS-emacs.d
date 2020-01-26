@@ -196,19 +196,19 @@
   :custom
   (ediff-split-window-function #'split-window-horizontally))
 
-;; (use-package faces
-;;   :ensure nil
-;;   :preface
-;;   (defun ian/disable-bold-and-fringe-bg-face-globally ()
-;;     "Disable bold face and fringe background in Emacs."
-;;     (interactive)
-;;     (set-face-attribute 'fringe nil :background nil)
-;;     (mapc #'(lambda (face)
-;;               (when (eq (face-attribute face :weight) 'bold)
-;;                 (set-face-attribute face nil :weight 'normal)))
-;;           (face-list)))
-;;   :config
-;;   (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally))
+(use-package faces
+  :ensure nil
+  :preface
+  (defun ian/disable-bold-and-fringe-bg-face-globally ()
+    "Disable bold face and fringe background in Emacs."
+    (interactive)
+    (set-face-attribute 'fringe nil :background nil)
+    (mapc #'(lambda (face)
+              (when (eq (face-attribute face :weight) 'bold)
+                (set-face-attribute face nil :weight 'normal)))
+          (face-list)))
+  :config
+  (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally))
 
 (use-package flyspell
   :ensure nil
@@ -257,20 +257,16 @@
 
 ;; GUI enhancements
 
-(use-package doom-themes
+(use-package spacemacs-common
+  :ensure spacemacs-theme
   :custom-face
-  (cursor                    ((t (:background "#F92CB4"))))
-  (show-paren-match          ((t (:foreground "#ffffff" :underline t))))
-  (highlight-symbol-face     ((t (:background "#333344"))))
-  (line-number               ((t (:foreground "#314662"))))
-  (line-number-current-line  ((t (:foreground "#546A90"))))
-  (hl-line                   ((t (:background "#181142"))))
-  (solaire-hl-line-face      ((t (:background "#181142"))))
+  (line-number              ((t (:foreground "#414B4f" :background "#282B2E"))))
+  (line-number-current-line ((t (:foreground "#616B6f" :background "#282B2E"))))
   :custom
-  (doom-themes-enable-bold nil)
-  (doom-themes-enable-italic t)
+  (spacemacs-theme-comment-bg nil)
+  (spacemacs-theme-comment-italic t)
   :config
-  (load-theme 'doom-outrun-electric t))
+  (load-theme 'spacemacs-dark t))
 
 (use-package solaire-mode
   :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
