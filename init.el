@@ -196,19 +196,19 @@
   :custom
   (ediff-split-window-function #'split-window-horizontally))
 
-(use-package faces
-  :ensure nil
-  :preface
-  (defun ian/disable-bold-and-fringe-bg-face-globally ()
-    "Disable bold face and fringe background in Emacs."
-    (interactive)
-    (set-face-attribute 'fringe nil :background nil)
-    (mapc #'(lambda (face)
-              (when (eq (face-attribute face :weight) 'bold)
-                (set-face-attribute face nil :weight 'normal)))
-          (face-list)))
-  :config
-  (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally))
+;; (use-package faces
+;;   :ensure nil
+;;   :preface
+;;   (defun ian/disable-bold-and-fringe-bg-face-globally ()
+;;     "Disable bold face and fringe background in Emacs."
+;;     (interactive)
+;;     (set-face-attribute 'fringe nil :background nil)
+;;     (mapc #'(lambda (face)
+;;               (when (eq (face-attribute face :weight) 'bold)
+;;                 (set-face-attribute face nil :weight 'normal)))
+;;           (face-list)))
+;;   :config
+;;   (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally))
 
 (use-package flyspell
   :ensure nil
@@ -265,7 +265,7 @@
   (highlight-symbol-face     ((t (:background "#434C5E"))))
   (highlight-numbers-number  ((t (:foreground "#B48EAD"))))
   (highlight-operators-face  ((t (:foreground "#81A1C1"))))
-  (line-number               ((t (:foreground "#616d89" :background "#2E3440"))))
+  (line-number               ((t (:foreground "#4A556B" :background "#2E3440"))))
   (line-number-current-line  ((t (:foreground "#616d89" :background "#2E3440"))))
   (hl-line                   ((t (:background "#3b4253"))))
   (solaire-hl-line-face      ((t (:background "#3b4253"))))
@@ -276,18 +276,12 @@
   (company-tooltip-selection ((t (:background "#434c5f" :extend t))))
   (company-scrollbar-bg      ((t (:background "#272c36"))))
   (company-scrollbar-fg      ((t (:background "#3a4353"))))
-  (vterm-color-default       ((t (:foreground "#CFD6E4"))))
-  (vterm-color-black         ((t (:foreground "#2D3241"))))
-  (vterm-color-red           ((t (:foreground "#B14A56"))))
-  (vterm-color-green         ((t (:foreground "#92B477"))))
-  (vterm-color-yellow        ((t (:foreground "#E6C274"))))
-  (vterm-color-blue          ((t (:foreground "#6D8EB5"))))
-  (vterm-color-magenta       ((t (:foreground "#A5789E"))))
-  (vterm-color-cyan          ((t (:foreground "#75B3C7"))))
-  (vterm-color-white         ((t (:foreground "#DFE3ED"))))
   (git-gutter-fr:added       ((t (:foreground "#A3BE8C"))))
   (git-gutter-fr:modified    ((t (:foreground "#EBCB8B"))))
   (git-gutter-fr:deleted     ((t (:foreground "#BF616A"))))
+  :custom
+  (doom-themes-enable-bold nil)
+  (doom-themes-enable-italic t)
   :config
   (load-theme 'doom-nord t))
 
