@@ -185,11 +185,11 @@
 (use-package frame
   :ensure nil
   :custom
-  (initial-frame-alist (quote ((fullscreen . maximized))))
+  (initial-frame-alist '((fullscreen . maximized)))
   :config
   (blink-cursor-mode -1)
   (when (member "Source Code Pro" (font-family-list))
-    (set-frame-font "Source Code Pro-13:weight=regular" t t)))
+    (set-frame-font "Source Code Pro-14:weight=regular" t t)))
 
 (use-package ediff
   :ensure nil
@@ -252,11 +252,6 @@
   :hook (prog-mode . display-line-numbers-mode)
   :config
   (setq-default display-line-numbers-width 3))
-
-(use-package newcomment
-  :ensure nil
-  :config
-  (global-set-key (kbd "s-/") #'comment-line))
 
 ;;; Third-party Packages
 
@@ -386,6 +381,11 @@
   (setq evil-collection-company-use-tng nil)
   (evil-collection-init))
 
+(use-package evil-commentary
+  :after evil
+  :config
+  (evil-commentary-mode +1))
+
 (use-package evil-magit)
 
 ;; Git integration
@@ -450,10 +450,11 @@
 (use-package ivy-posframe
   :after ivy
   :custom
-  (ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
+  (ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
   (ivy-posframe-height-alist '((t . 20)))
   (ivy-posframe-parameters '((internal-border-width . 10)))
   (ivy-posframe-width 70)
+  (ivy-posframe-min-width 70)
   :config
   (ivy-posframe-mode +1))
 
