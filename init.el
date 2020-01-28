@@ -217,6 +217,8 @@
 
 (use-package elec-pair
   :ensure nil
+  :custom
+  (electric-pair-preserve-balance nil)
   :hook (prog-mode . electric-pair-mode))
 
 (use-package whitespace
