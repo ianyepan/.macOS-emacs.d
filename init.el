@@ -263,18 +263,12 @@
   (line-number              ((t (:foreground "#414B4f" :background "#282B2E"))))
   (line-number-current-line ((t (:foreground "#616B6f" :background "#282B2E"))))
   (highlight-symbol-face    ((t (:background "#44444f"))))
+  (ivy-posframe             ((t (:background "#212026"))))
   :custom
   (spacemacs-theme-comment-bg nil)
   (spacemacs-theme-comment-italic t)
   :config
   (load-theme 'spacemacs-dark t))
-
-(use-package solaire-mode
-  :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
-         (minibuffer-setup . solaire-mode-in-minibuffer))
-  :config
-  (solaire-mode-swap-bg)
-  (solaire-global-mode +1))
 
 (use-package dashboard
   :after all-the-icons
