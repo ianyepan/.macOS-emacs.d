@@ -217,8 +217,6 @@
 
 (use-package elec-pair
   :ensure nil
-  :custom
-  (electric-pair-preserve-balance nil)
   :hook (prog-mode . electric-pair-mode))
 
 (use-package whitespace
@@ -264,6 +262,7 @@
   :custom-face
   (line-number              ((t (:foreground "#414B4f" :background "#282B2E"))))
   (line-number-current-line ((t (:foreground "#616B6f" :background "#282B2E"))))
+  (highlight-symbol-face    ((t (:background "#44444f"))))
   :custom
   (spacemacs-theme-comment-bg nil)
   (spacemacs-theme-comment-italic t)
