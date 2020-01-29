@@ -695,12 +695,6 @@ Return a list of strings as the completion candidates."
       (format-all-buffer)))
   (defalias 'format-document #'ian/format-code))
 
-(use-package dumb-jump ; install rg/ag
-  :custom
-  (dumb-jump-selector 'ivy)
-  :config
-  (global-set-key (kbd "s-B") #'dumb-jump-go))
-
 (use-package rainbow-mode
   :hook (web-mode . rainbow-mode))
 
