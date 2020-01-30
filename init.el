@@ -59,7 +59,6 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (setq-default line-spacing 3
-                word-wrap t
                 indent-tabs-mode nil
                 tab-width ian/indent-width))
 
