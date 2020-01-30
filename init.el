@@ -18,7 +18,6 @@
               (setq gc-cons-threshold ian/gc-cons-threshold
                     gc-cons-percentage 0.1
                     file-name-handler-alist file-name-handler-alist-original)))
-
 (add-hook 'minibuffer-setup-hook #'(lambda ()
                                      (setq gc-cons-threshold most-positive-fixnum)))
 (add-hook 'minibuffer-exit-hook #'(lambda ()
@@ -188,7 +187,7 @@
   :config
   (blink-cursor-mode -1)
   (when (member "Source Code Pro" (font-family-list))
-    (set-frame-font "Source Code Pro-14:weight=regular" t t)))
+    (set-frame-font "Source Code Pro-13:weight=regular" t t)))
 
 (use-package ediff
   :ensure nil
@@ -259,8 +258,8 @@
 (use-package spacemacs-common
   :ensure spacemacs-theme
   :custom-face
-  (line-number              ((t (:foreground "#414B4f" :background "#282B2E"))))
-  (line-number-current-line ((t (:foreground "#616B6f" :background "#282B2E"))))
+  (line-number              ((t (:foreground "#47404d" :background "#282B2E"))))
+  (line-number-current-line ((t (:foreground "#67606d" :background "#282B2E"))))
   (highlight-symbol-face    ((t (:background "#44444f"))))
   (ivy-posframe             ((t (:background "#212026"))))
   :custom
