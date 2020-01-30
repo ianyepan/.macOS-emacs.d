@@ -632,6 +632,12 @@ Return a list of strings as the completion candidates."
                                              javascript-jshint
                                              javascript-standard)))
 
+(use-package flycheck-posframe
+  :after flycheck
+  :hook (flycheck-mode . flycheck-posframe-mode)
+  :custom
+  (flycheck-posframe-position 'window-bottom-left-corner))
+
 (use-package org
   :hook ((org-mode . visual-line-mode)
          (org-mode . org-indent-mode))
