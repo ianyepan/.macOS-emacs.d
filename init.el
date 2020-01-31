@@ -322,10 +322,13 @@
   :custom
   (all-the-icons-scale-factor 1.0))
 
+;; (use-package all-the-icons-ivy
+;;   :hook (after-init . all-the-icons-ivy-setup)
+;;   :custom
+;;   (all-the-icons-ivy-buffer-commands '()))
+
 (use-package all-the-icons-ivy
-  :hook (after-init . all-the-icons-ivy-setup)
-  :custom
-  (all-the-icons-ivy-buffer-commands '()))
+  :hook (after-init . all-the-icons-ivy-setup))
 
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
@@ -437,6 +440,7 @@
 (use-package ivy
   :hook (after-init . ivy-mode)
   :custom
+  (ivy-height 15)
   (ivy-display-style nil)
   (ivy-re-builders-alist '((counsel-rg            . ivy--regex-plus)
                            (counsel-projectile-rg . ivy--regex-plus)
@@ -457,54 +461,7 @@
   (swiper-action-recenter t)
   (swiper-goto-start-of-match t))
 
-(use-package ivy-posframe
-  :after ivy
-  :custom
-  (ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-  (ivy-posframe-height-alist '((t . 20)))
-  (ivy-posframe-parameters '((internal-border-width . 10)))
-  (ivy-posframe-width 70)
-  (ivy-posframe-min-width 70)
-  :config
-  (ivy-posframe-mode +1))
-
 (use-package ivy-rich
-  :preface
-  (defun ivy-rich-switch-buffer-icon (cand)
-    (with-current-buffer
-        (get-buffer cand)
-      (let ((icon (all-the-icons-icon-for-mode major-mode)))
-        (if (symbolp icon)
-            (all-the-icons-icon-for-mode 'fundamental-mode)
-          icon))))
-  :init
-  (setq ivy-rich-display-transformers-list ; max column width sum = (ivy-poframe-width - 1)
-        '(ivy-switch-buffer
-          (:columns
-           ((ivy-rich-switch-buffer-icon           (:width 2))
-            (ivy-rich-candidate                    (:width 24))
-            (ivy-rich-switch-buffer-path           (:width 20 :face font-lock-doc-face))
-            (ivy-rich-switch-buffer-project        (:width 19 :face font-lock-doc-face)))
-           :predicate
-           (lambda (cand) (get-buffer cand)))
-          counsel-M-x
-          (:columns
-           ((counsel-M-x-transformer               (:width 35))
-            (ivy-rich-counsel-function-docstring   (:width 34 :face font-lock-doc-face))))
-          counsel-describe-function
-          (:columns
-           ((counsel-describe-function-transformer (:width 35))
-            (ivy-rich-counsel-function-docstring   (:width 34 :face font-lock-doc-face))))
-          counsel-describe-variable
-          (:columns
-           ((counsel-describe-variable-transformer (:width 35))
-            (ivy-rich-counsel-variable-docstring   (:width 34 :face font-lock-doc-face))))
-          package-install
-          (:columns
-           ((ivy-rich-candidate                    (:width 25))
-            (ivy-rich-package-version              (:width 12 :face font-lock-comment-face))
-            (ivy-rich-package-archive-summary      (:width 7 :face font-lock-builtin-face))
-            (ivy-rich-package-install-summary      (:width 23 :face font-lock-doc-face))))))
   :config
   (ivy-rich-mode +1)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
