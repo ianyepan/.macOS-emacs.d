@@ -71,7 +71,7 @@
 (use-package cus-edit
   :ensure nil
   :custom
-  (custom-file "~/.config/emacs/to-be-dumped.el"))
+  (custom-file "~/.emacs.d/to-be-dumped.el"))
 
 (use-package scroll-bar
   :ensure nil
@@ -237,7 +237,7 @@
   :ensure nil
   :config
   (add-to-list 'recentf-exclude
-               (format "%s/\\.config/emacs/elpa/.*" (getenv "HOME")))
+               (format "%s/\\.emacs.d/elpa/.*" (getenv "HOME")))
   (recentf-mode +1))
 
 (use-package hl-line
