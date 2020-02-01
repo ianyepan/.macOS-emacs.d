@@ -285,25 +285,6 @@
   (solaire-global-mode +1)
   (solaire-mode-swap-bg))
 
-(use-package dashboard
-  :after all-the-icons
-  :hook ((dashboard-mode . (lambda ()
-                             (setq default-directory "~/")
-                             (setq-local global-hl-line-mode nil))))
-  :custom
-  (dashboard-startup-banner 'logo)
-  (dashboard-banner-logo-title "Dangerously powerful")
-  (dashboard-init-info "Happy hacking, console cowboy")
-  (dashboard-items nil)
-  (dashboard-footer "It was hot, the night we burned Chrome.")
-  (dashboard-footer-icon
-   (all-the-icons-octicon "flame"
-                          :height 1.1
-                          :v-adjust -0.05
-                          :face 'font-lock-builtin-face))
-  :config
-  (dashboard-setup-startup-hook))
-
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
   :custom
