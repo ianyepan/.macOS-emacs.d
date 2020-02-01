@@ -655,8 +655,10 @@ Return a list of strings as the completion candidates."
          (js-mode   . emmet-mode)
          (web-mode  . emmet-mode))
   :custom
-  (emmet-expand-jsx-className? t)
-  (emmet-insert-flash-time 0.001))
+  (emmet-insert-flash-time 0.001)
+  :config
+  (add-hook 'js-mode-hook #'(lambda ()
+                              (setq-local emmet-expand-jsx-className? t))))
 
 (use-package format-all
   :preface
