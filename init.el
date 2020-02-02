@@ -303,17 +303,6 @@
   :custom
   (all-the-icons-scale-factor 1.0))
 
-;; (use-package all-the-icons-ivy
-;;   :hook (after-init . all-the-icons-ivy-setup)
-;;   :custom
-;;   (all-the-icons-ivy-buffer-commands '()))
-
-(use-package all-the-icons-ivy
-  :hook (after-init . all-the-icons-ivy-setup))
-
-(use-package all-the-icons-dired
-  :hook (dired-mode . all-the-icons-dired-mode))
-
 (use-package centaur-tabs
   :demand
   :bind (("C-S-<tab>" . centaur-tabs-backward)
