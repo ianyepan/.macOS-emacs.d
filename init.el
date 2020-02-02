@@ -206,7 +206,10 @@
                 (set-face-attribute face nil :weight 'normal)))
           (face-list)))
   :config
-  (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally))
+  (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally)
+  (when (member "Menlo" (font-family-list))
+    (set-face-attribute 'mode-line nil :height 110 :font "Menlo")
+    (set-face-attribute 'mode-line-inactive nil :height 110 :font "Menlo")))
 
 (use-package flyspell
   :ensure nil
@@ -293,36 +296,11 @@
   (doom-modeline-bar-width 1)
   (doom-modeline-modal-icon nil)
   (doom-modeline-height 15)
-  (doom-modeline-env-python-executable "python3")
-  :config
-  (when (member "Menlo" (font-family-list))
-    (set-face-attribute 'mode-line nil :height 110 :font "Menlo")
-    (set-face-attribute 'mode-line-inactive nil :height 110 :font "Menlo")))
+  (doom-modeline-env-python-executable "python3"))
 
 (use-package all-the-icons
   :custom
   (all-the-icons-scale-factor 1.0))
-
-(use-package centaur-tabs
-  :demand
-  :bind (("C-S-<tab>" . centaur-tabs-backward)
-         ("C-<tab>" . centaur-tabs-forward)
-         ("C-x p" . centaur-tabs-counsel-switch-group))
-  :custom
-  (centaur-tabs-set-bar 'under)
-  (x-underline-at-descent-line t)
-  (centaur-tabs-set-modified-marker t)
-  (centaur-tabs-modified-marker " ● ")
-  (centaur-tabs-cycle-scope 'tabs)
-  (centaur-tabs-height 30)
-  (centaur-tabs-set-icons t)
-  (centaur-tabs-close-button " × ")
-  :config
-  (centaur-tabs-mode +1)
-  (centaur-tabs-headline-match)
-  (centaur-tabs-group-by-projectile-project)
-  (when (member "Arial" (font-family-list))
-    (centaur-tabs-change-fonts "Arial" 130)))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -592,23 +570,6 @@ Return a list of strings as the completion candidates."
   :hook (org-mode . org-bullets-mode))
 
 (use-package markdown-mode)
-
-(use-package yasnippet
-  :preface
-  (defvar tmp/company-point nil)
-  :config
-  (yas-global-mode +1)
-  (advice-add 'company-complete-common
-              :before
-              #'(lambda ()
-                  (setq tmp/company-point (point))))
-  (advice-add 'company-complete-common
-              :after
-              #'(lambda ()
-                  (when (equal tmp/company-point (point))
-                    (yas-expand)))))
-
-(use-package yasnippet-snippets)
 
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode)
