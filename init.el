@@ -253,46 +253,12 @@
 
 ;; GUI enhancements
 
-(use-package doom-themes
-  :custom-face
-  (cursor                   ((t (:background "#dc322f"))))
-  (line-number              ((t (:foreground "#304A51" :background "#002b36"))))
-  (line-number-current-line ((t (:foreground "#506A71" :background "#002b36"))))
-  (show-paren-match         ((t (:foreground "#dc322f" :background nil :underline t))))
-  (highlight-symbol-face    ((t (:background "#073642"))))
-  :config
-  (load-theme 'doom-solarized-dark t))
+;; (set-background-color "#111111")
+;; (set-foreground-color "#eeeeee")
 
-;; (use-package spacemacs-common
-;;   :ensure spacemacs-theme
-;;   :custom-face
-;;   (line-number              ((t (:foreground "#47404d" :background "#282B2E"))))
-;;   (line-number-current-line ((t (:foreground "#67606d" :background "#282B2E"))))
-;;   (highlight-symbol-face    ((t (:background "#44444f"))))
-;;   (ivy-posframe             ((t (:background "#212026"))))
-;;   :custom
-;;   (spacemacs-theme-comment-bg nil)
-;;   (spacemacs-theme-comment-italic t)
-;;   :config
-;;   (load-theme 'spacemacs-dark t))
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
-(use-package solaire-mode
-  :hook (((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
-         (minibuffer-setup . solaire-mode-in-minibuffer))
-  :config
-  (solaire-global-mode +1)
-  (solaire-mode-swap-bg))
-
-(use-package doom-modeline
-  :hook (after-init . doom-modeline-mode)
-  :custom
-  (inhibit-compacting-font-caches t)
-  (doom-modeline-buffer-file-name-style 'relative-from-project)
-  (doom-modeline-bar-width 1)
-  (doom-modeline-modal-icon nil)
-  (doom-modeline-height 15)
-  (doom-modeline-env-python-executable "python3"))
-
+(load-theme 'default-dark t)
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
