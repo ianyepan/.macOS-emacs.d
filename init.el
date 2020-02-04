@@ -243,11 +243,6 @@
                (format "%s/\\.emacs.d/elpa/.*" (getenv "HOME")))
   (recentf-mode +1))
 
-(use-package hl-line
-  :ensure nil
-  :config
-  (global-hl-line-mode +1))
-
 (use-package display-line-numbers
   :ensure nil
   :hook (prog-mode . display-line-numbers-mode)
