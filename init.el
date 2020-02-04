@@ -293,9 +293,6 @@
   (doom-modeline-height 15)
   (doom-modeline-env-python-executable "python3"))
 
-(use-package all-the-icons
-  :custom
-  (all-the-icons-scale-factor 1.0))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
