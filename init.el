@@ -584,14 +584,6 @@ Return a list of strings as the completion candidates."
 
 ;; Miscellaneous
 
-(use-package which-key
-  :custom
-  (which-key-show-early-on-C-h t)
-  (which-key-idle-delay 10000)
-  (which-key-idle-secondary-delay 0.05)
-  :config
-  (which-key-mode +1))
-
 (use-package exec-path-from-shell
   :config
   (when (memq window-system '(mac ns x))
