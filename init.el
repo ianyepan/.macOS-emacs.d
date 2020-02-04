@@ -498,6 +498,13 @@ Return a list of strings as the completion candidates."
     (define-key company-active-map (kbd "C-n") #'company-select-next)
     (define-key company-active-map (kbd "C-p") #'company-select-previous)))
 
+(use-package company-posframe
+  :custom
+  (company-posframe-show-metadata nil)
+  (company-posframe-show-indicator nil)
+  :config
+  (company-posframe-mode +1))
+
 (use-package flycheck
   :hook (prog-mode . flycheck-mode)
   :custom
@@ -544,7 +551,7 @@ Return a list of strings as the completion candidates."
          (js-mode   . emmet-mode)
          (web-mode  . emmet-mode))
   :custom
-  (emmet-insert-flash-time 0.001)
+  (emmet-insert-flash-time 0.001) ; basically disabling it
   :config
   (add-hook 'js-mode-hook #'(lambda ()
                               (setq-local emmet-expand-jsx-className? t))))
