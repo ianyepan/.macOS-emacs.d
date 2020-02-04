@@ -562,6 +562,26 @@ Return a list of strings as the completion candidates."
 (use-package rainbow-mode
   :hook (web-mode . rainbow-mode))
 
+;; Terminal emulation
+
+(use-package vterm ; when installing, evaluate exec-path first (else 'command not found')
+  :hook (vterm-mode . (lambda ()
+                        (setq-local global-hl-line-mode nil))))
+
+(use-package vterm-toggle
+  :after evil
+  :custom
+  (vterm-toggle-fullscreen-p nil)
+  :config
+  (evil-set-initial-state 'vterm-mode 'emacs)
+  (global-set-key (kbd "C-`") #'vterm-toggle)
+  (global-set-key (kbd "s-j") #'vterm-toggle)
+  (add-to-list 'display-buffer-alist
+               '("^v?term.*"
+                 (display-buffer-reuse-window display-buffer-at-bottom)
+                 (reusable-frames . visible)
+                 (window-height . 0.5))))
+
 ;; Miscellaneous
 
 (use-package exec-path-from-shell
