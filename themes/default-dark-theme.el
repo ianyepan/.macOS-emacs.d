@@ -24,6 +24,7 @@
  '(company-tooltip-annotation ((t (:inherit font-lock-builtin-face))))
  '(company-tooltip-selection  ((t (:background "darkolivegreen"))))
  '(ivy-current-match          ((t (:background "darkolivegreen" :extend t))))
+ '(vterm-color-blue           ((t (:foreground "#3484df"))))
  )
 
 (provide-theme 'default-dark)
