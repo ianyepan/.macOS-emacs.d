@@ -22,7 +22,8 @@
  '(company-tooltip            ((t (:inherit default :background "#000000"))))
  '(company-tooltip-common     ((t (:inherit font-lock-constant-face))))
  '(company-tooltip-annotation ((t (:inherit font-lock-builtin-face))))
- '(company-tooltip-selection  ((t (:background "#555555"))))
+ '(company-tooltip-selection  ((t (:background "darkolivegreen"))))
+ '(ivy-current-match          ((t (:background "darkolivegreen" :extend t))))
  )
 
 (provide-theme 'default-dark)
