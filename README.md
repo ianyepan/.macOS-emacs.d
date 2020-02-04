@@ -9,7 +9,9 @@
 </p>
 
 ### Thanks for dropping by!
-This is my personal Emacs configuration (on GNU Emacs 28.0.50). If you prefer an unopinionated Emacs "distro" that you could build upon, check out [this page](https://github.com/ianpan870102/yay-evil-emacs).
+This is my personal Emacs configuration (on GNU Emacs 28.0.50). If you
+prefer an unopinionated Emacs "distro" that you could build upon,
+check out [this page](https://github.com/ianpan870102/yay-evil-emacs).
 
 ### Installation
 Back up your `~/.emacs.d/` first (if you have one):
@@ -28,4 +30,5 @@ git clone https://github.com/ianpan870102/.personal-emacs.d.git ~/.config/emacs/
 ```
 
 ### "Rolling" Release
-I will constantly push new commits since *a real Emacser* is never completely satisfied with his/her setup.
+I will constantly push new commits since *a real Emacser* is never
+completely satisfied with his/her setup.
