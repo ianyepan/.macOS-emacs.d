@@ -589,12 +589,6 @@ Return a list of strings as the completion candidates."
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
-(use-package writeroom-mode
-  :custom
-  (writeroom-fullscreen-effect 'maximized)
-  :config
-  (global-set-key (kbd "C-c w") #'writeroom-mode))
-
 (use-package dired-single
   :preface
   (defun ian/dired-single-init ()
