@@ -522,7 +522,9 @@ Return a list of strings as the completion candidates."
   :after flycheck
   :hook (flycheck-mode . flycheck-posframe-mode)
   :custom
-  (flycheck-posframe-position 'window-bottom-left-corner))
+  (flycheck-posframe-position 'window-bottom-left-corner)
+  :config
+  (flycheck-posframe-configure-pretty-defaults))
 
 (use-package org
   :hook ((org-mode . visual-line-mode)
