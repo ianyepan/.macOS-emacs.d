@@ -25,6 +25,7 @@
  '(company-tooltip-selection  ((t (:background "darkolivegreen"))))
  '(ivy-current-match          ((t (:background "darkolivegreen" :extend t))))
  '(vterm-color-blue           ((t (:foreground "#3484df"))))
+ '(hl-todo                    ((t (:inverse-video t))))
  )
 
 (provide-theme 'default-dark)
