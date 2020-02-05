@@ -315,12 +315,14 @@
   (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
 (use-package git-gutter
+  :diminish
   :custom
-  (git-gutter:update-interval 0.05))
+  (git-gutter:update-interval 0.05)
+  :config
+  (global-git-gutter-mode +1))
 
 (use-package git-gutter-fringe
   :config
-  (global-git-gutter-mode +1)
   (setq-default fringes-outside-margins t)
   (define-fringe-bitmap 'git-gutter-fr:added [224]
     nil nil '(center repeated))
@@ -449,7 +451,7 @@
                 (call-interactively #'lsp-workspace-restart)))
   (pyvenv-mode +1))
 
-(use-package typescript-mode)
+(use-package typescript-mode) ; for looking up JS function definitions
 
 (use-package company-lsp
   :commands company-lsp
@@ -523,6 +525,8 @@ Return a list of strings as the completion candidates."
   :hook (flycheck-mode . flycheck-posframe-mode)
   :custom
   (flycheck-posframe-position 'window-bottom-left-corner)
+  (flycheck-posframe-warning-prefix "\u26a0 ")
+  (flycheck-posframe-error-prefix "\u26a0 ")
   :config
   (flycheck-posframe-configure-pretty-defaults))
 
