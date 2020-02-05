@@ -621,5 +621,26 @@ Return a list of strings as the completion candidates."
   :config
   (minions-mode +1))
 
+(use-package neotree
+  :preface
+  (defun neotree-project-toggle ()
+    "Open NeoTree using the git root."
+    (interactive)
+    (let ((project-dir (projectile-project-root))
+          (file-name (buffer-file-name)))
+      (neotree-toggle)
+      (if project-dir
+          (if (neo-global--window-exists-p)
+              (progn
+                (neotree-dir project-dir)
+                (neotree-find file-name)))
+        (message "Could not find git project root."))))
+  :init
+  (global-set-key (kbd "s-8") #'neotree-project-toggle)
+  :hook (neotree-mode . hl-line-mode)
+  :custom
+  (neo-theme 'nerd)
+  (neo-window-width 30))
+
 (provide 'init)
 ;;; init.el ends here
