@@ -575,6 +575,10 @@ Return a list of strings as the completion candidates."
 (use-package rainbow-mode
   :hook (web-mode . rainbow-mode))
 
+(use-package hl-todo
+  :config
+  (global-hl-todo-mode +1))
+
 ;; Terminal emulation
 
 (use-package vterm ; when installing, evaluate exec-path first (else 'command not found')
@@ -612,6 +616,10 @@ Return a list of strings as the completion candidates."
   (if (boundp 'dired-mode-map)
       (ian/dired-single-init)
     (add-hook 'dired-load-hook #'ian/dired-single-init)))
+
+(use-package minions
+  :config
+  (minions-mode +1))
 
 (provide 'init)
 ;;; init.el ends here
