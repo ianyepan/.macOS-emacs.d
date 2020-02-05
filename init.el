@@ -206,10 +206,7 @@
                 (set-face-attribute face nil :weight 'normal)))
           (face-list)))
   :config
-  (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally)
-  (when (member "Menlo" (font-family-list))
-    (set-face-attribute 'mode-line nil :height 110 :font "Menlo")
-    (set-face-attribute 'mode-line-inactive nil :height 110 :font "Menlo")))
+  (add-hook 'after-init-hook #'ian/disable-bold-and-fringe-bg-face-globally))
 
 (use-package flyspell
   :ensure nil
