@@ -250,11 +250,7 @@
 
 ;; GUI enhancements
 
-;; (set-background-color "#111111")
-;; (set-foreground-color "#eeeeee")
-
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-
 (load-theme 'default-dark t)
 
 (use-package highlight-symbol
@@ -312,7 +308,6 @@
   (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
 (use-package git-gutter
-  :diminish
   :custom
   (git-gutter:update-interval 0.05)
   :config
@@ -614,10 +609,6 @@ Return a list of strings as the completion candidates."
       (ian/dired-single-init)
     (add-hook 'dired-load-hook #'ian/dired-single-init)))
 
-(use-package minions
-  :config
-  (minions-mode +1))
-
 (use-package neotree
   :preface
   (defun neotree-project-toggle ()
@@ -633,11 +624,29 @@ Return a list of strings as the completion candidates."
                 (neotree-find file-name)))
         (message "Could not find git project root."))))
   :init
-  (global-set-key (kbd "s-8") #'neotree-project-toggle)
+  (global-set-key (kbd "s-1") #'neotree-project-toggle)
   :hook (neotree-mode . hl-line-mode)
   :custom
   (neo-theme 'nerd)
+  (neo-show-hidden-files t)
   (neo-window-width 30))
+
+(use-package diminish
+  :preface
+  (defun diminish-most-modes (unused)
+    "Hide most minor modes except the ones listed here."
+    (interactive)
+    (dolist (mode
+             (seq-filter
+              (lambda (elt)
+                (not (seq-contains '(projectile-mode
+                                     lsp-mode
+                                     flycheck-mode)
+                                   elt)))
+              minor-mode-list))
+      (diminish mode)))
+  :config
+  (add-to-list 'after-load-functions #'diminish-most-modes))
 
 (provide 'init)
 ;;; init.el ends here
