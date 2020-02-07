@@ -140,12 +140,6 @@
                   (when (and eslint (file-executable-p eslint))
                     (setq-local flycheck-javascript-eslint-executable eslint))))))
 
-(use-package xref
-  :ensure nil
-  :config
-  (define-key prog-mode-map (kbd "s-b") #'xref-find-definitions)
-  (define-key prog-mode-map (kbd "s-[") #'xref-pop-marker-stack))
-
 (use-package cc-vars
   :ensure nil
   :custom
@@ -283,7 +277,8 @@
   :config
   (with-eval-after-load 'evil-maps ; avoid conflict with company tooltip selection
     (define-key evil-insert-state-map (kbd "C-n") nil)
-    (define-key evil-insert-state-map (kbd "C-p") nil))
+    (define-key evil-insert-state-map (kbd "C-p") nil)
+    (define-key evil-normal-state-map (kbd "gd") #'xref-find-definitions))
   (evil-ex-define-cmd "q" #'kill-this-buffer)
   (evil-ex-define-cmd "wq" #'ian/save-and-kill-this-buffer))
 
@@ -624,7 +619,7 @@ Return a list of strings as the completion candidates."
                 (neotree-find file-name)))
         (message "Could not find git project root."))))
   :init
-  (global-set-key (kbd "s-1") #'neotree-project-toggle)
+  (global-set-key (kbd "s-b") #'neotree-project-toggle)
   :hook (neotree-mode . hl-line-mode)
   :custom
   (neo-theme 'nerd)
