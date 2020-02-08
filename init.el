@@ -491,6 +491,7 @@ Return a list of strings as the completion candidates."
   :custom
   (company-posframe-show-metadata nil)
   (company-posframe-show-indicator nil)
+  (company-posframe-quickhelp-delay nil)
   :config
   (company-posframe-mode +1))
 
