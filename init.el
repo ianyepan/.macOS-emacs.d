@@ -514,9 +514,7 @@ Return a list of strings as the completion candidates."
   :custom
   (flycheck-posframe-position 'window-bottom-left-corner)
   (flycheck-posframe-warning-prefix "\u26a0 ")
-  (flycheck-posframe-error-prefix "\u26a0 ")
-  :config
-  (flycheck-posframe-configure-pretty-defaults))
+  (flycheck-posframe-error-prefix "\u26a0 "))
 
 (use-package org
   :hook ((org-mode . visual-line-mode)
