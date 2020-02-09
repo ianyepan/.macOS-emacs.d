@@ -571,7 +571,8 @@ Return a list of strings as the completion candidates."
 
 (use-package vterm ; when installing, evaluate exec-path first (else 'command not found')
   :hook (vterm-mode . (lambda ()
-                        (setq-local global-hl-line-mode nil))))
+                        (setq-local global-hl-line-mode nil)
+                        (setq-local line-spacing nil))))
 
 (use-package vterm-toggle
   :after evil
