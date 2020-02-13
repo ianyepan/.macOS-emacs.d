@@ -441,6 +441,16 @@
 
 (use-package typescript-mode) ; for looking up JS function definitions
 
+(use-package cobol-mode
+  :custom
+  (cobol-tab-width 2)
+  :config
+  (setq auto-mode-alist
+        (append
+         '(("\\.cob\\'" . cobol-mode)
+           ("\\.cbl\\'" . cobol-mode))
+         auto-mode-alist)))
+
 (use-package company-lsp
   :commands company-lsp
   :custom
