@@ -415,7 +415,7 @@
           ) . lsp)
   :commands lsp
   :custom
-  (lsp-prefer-flymake nil)
+  (lsp-diagnostic-package :none)
   (lsp-enable-symbol-highlighting nil)
   (lsp-enable-on-type-formatting nil)
   (lsp-signature-auto-activate nil))
@@ -507,17 +507,11 @@ Return a list of strings as the completion candidates."
   (company-posframe-mode +1))
 
 (use-package flycheck
-  :hook (prog-mode . flycheck-mode)
+  :hook ((prog-mode   . flycheck-mode))
   :custom
   (flycheck-check-syntax-automatically '(save mode-enabled newline))
   (flycheck-display-errors-delay 0.1)
-  (flycheck-python-flake8-executable "python3")
-  (flycheck-flake8rc "~/.config/flake8")
-  :config ; prefer flake8 for python & eslint for javascript exclusively
-  (setq-default flycheck-disabled-checkers '(python-pylint
-                                             python-pycompile
-                                             javascript-jshint
-                                             javascript-standard)))
+  (flycheck-flake8rc "~/.config/flake8"))
 
 (use-package flycheck-posframe
   :after flycheck
