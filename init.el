@@ -245,8 +245,13 @@
 
 ;; GUI enhancements
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'default-dark t)
+(use-package doom-themes
+  :custom-face
+  (highlight-symbol-face ((t (:background "#404040"))))
+  :custom
+  (doom-themes-enable-bold nil)
+  :config
+  (load-theme 'doom-outrun-electric t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
