@@ -503,13 +503,13 @@ Return a list of strings as the completion candidates."
     (define-key company-active-map (kbd "C-n") #'company-select-next)
     (define-key company-active-map (kbd "C-p") #'company-select-previous)))
 
-(use-package company-posframe
-  :custom
-  (company-posframe-show-metadata nil)
-  (company-posframe-show-indicator nil)
-  (company-posframe-quickhelp-delay nil)
-  :config
-  (company-posframe-mode +1))
+;; (use-package company-posframe
+;;   :custom
+;;   (company-posframe-show-metadata nil)
+;;   (company-posframe-show-indicator nil)
+;;   (company-posframe-quickhelp-delay nil)
+;;   :config
+;;   (company-posframe-mode +1))
 
 (use-package flycheck
   :hook ((prog-mode   . flycheck-mode))
