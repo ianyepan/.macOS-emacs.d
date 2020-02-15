@@ -93,7 +93,7 @@
    `(warning                                  ((,class (:foreground ,warning))))
    `(dired-directory                          ((t (:inherit (font-lock-keyword-face)))))
    `(line-number                              ((,class (:foreground ,bg4))))
-   `(line-number-current-line                 ((,class (:foreground ,comment))))
+   `(line-number-current-line                 ((,class (:foreground ,bg4))))
 
    `(mode-line                                ((,class (:bold nil :foreground ,fg1 :background "#237AD3"))))
    `(mode-line-inactive                       ((,class (:bold nil :foreground ,fg2 :background "#237AD3"))))
