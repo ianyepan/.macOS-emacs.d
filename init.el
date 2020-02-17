@@ -463,7 +463,7 @@
   :config
   (add-to-list 'company-lsp-filter-candidates '(mspyls . t))
   (defun company-lsp--on-completion (response prefix)
-    " This is a (hack) workaround for candidate filtering issues in mspyls.
+    "Note: This is a (hack) workaround for candidate filtering issues in mspyls.
 Handle completion RESPONSE.
 PREFIX is a string of the prefix when the completion is requested.
 Return a list of strings as the completion candidates."
