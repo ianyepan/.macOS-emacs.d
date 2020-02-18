@@ -29,6 +29,7 @@
  '(git-gutter-fr:modified         ((t (:foreground "skyblue"))))
  '(flycheck-posframe-warning-face ((t (:inherit warning))))
  '(flycheck-posframe-error-face   ((t (:inherit error))))
+ '(erc-prompt-face                ((t (:foreground "skyblue" :background nil :box t))))
  )
 
 (provide-theme 'default-dark)
