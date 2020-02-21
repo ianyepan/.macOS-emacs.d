@@ -180,8 +180,8 @@
   (initial-frame-alist '((fullscreen . maximized)))
   :config
   (blink-cursor-mode -1)
-  (when (member "Source Code Pro" (font-family-list))
-    (set-frame-font "Source Code Pro-14:weight=regular" t t)))
+  (when (member "IBM Plex Mono" (font-family-list))
+    (set-frame-font "ibm plex mono-13:weight=regular" t t)))
 
 (use-package ediff
   :ensure nil
