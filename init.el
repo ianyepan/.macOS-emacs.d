@@ -11,7 +11,7 @@
       file-name-handler-alist nil
       site-run-file nil)
 
-(defvar ian/gc-cons-threshold 20000000)
+(defvar ian/gc-cons-threshold 100000000)
 
 (add-hook 'emacs-startup-hook ; hook run after loading init files
           #'(lambda ()
@@ -181,7 +181,7 @@
   :config
   (blink-cursor-mode -1)
   (when (member "Source Code Pro" (font-family-list))
-    (set-frame-font "Source Code Pro-13:weight=regular" t t)))
+    (set-frame-font "Source Code Pro-14:weight=regular" t t)))
 
 (use-package ediff
   :ensure nil
@@ -261,13 +261,16 @@
 
 ;; GUI enhancements
 
-(use-package doom-themes
-  :custom-face
-  (highlight-symbol-face ((t (:background "#404040"))))
-  :custom
-  (doom-themes-enable-bold nil)
-  :config
-  (load-theme 'doom-outrun-electric t))
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'default-dark t)
+
+;; (use-package doom-themes
+;;   :custom-face
+;;   (highlight-symbol-face ((t (:background "#404040"))))
+;;   :custom
+;;   (doom-themes-enable-bold nil)
+;;   :config
+;;   (load-theme 'doom-outrun-electric t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -439,7 +442,10 @@
   (lsp-diagnostic-package :none)
   (lsp-enable-symbol-highlighting nil)
   (lsp-enable-on-type-formatting nil)
-  (lsp-signature-auto-activate nil))
+  (lsp-signature-auto-activate nil)
+  (read-process-output-max (* 1024 1024)) ;; 1mb
+  (lsp-idle-delay 0.5)
+  (lsp-prefer-capf t))
 
 (use-package lsp-java
   :after lsp)
@@ -477,6 +483,7 @@
   :custom
   (company-lsp-cache-candidates 'auto)
   :config
+  (push 'company-lsp company-backends)
   (add-to-list 'company-lsp-filter-candidates '(mspyls . t))
   (defun company-lsp--on-completion (response prefix)
     "Note: This is a (hack) workaround for candidate filtering issues in mspyls.
@@ -519,13 +526,13 @@ Return a list of strings as the completion candidates."
     (define-key company-active-map (kbd "C-n") #'company-select-next)
     (define-key company-active-map (kbd "C-p") #'company-select-previous)))
 
-;; (use-package company-posframe
-;;   :custom
-;;   (company-posframe-show-metadata nil)
-;;   (company-posframe-show-indicator nil)
-;;   (company-posframe-quickhelp-delay nil)
-;;   :config
-;;   (company-posframe-mode +1))
+(use-package company-posframe
+  :custom
+  (company-posframe-show-metadata nil)
+  (company-posframe-show-indicator nil)
+  (company-posframe-quickhelp-delay nil)
+  :config
+  (company-posframe-mode +1))
 
 (use-package flycheck
   :hook ((prog-mode   . flycheck-mode))
