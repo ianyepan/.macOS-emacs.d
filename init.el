@@ -241,22 +241,6 @@
   :config
   (setq-default display-line-numbers-width 3))
 
-;; (use-package erc
-;;   :hook (erc-mode . erc-scrolltobottom-mode)
-;;   :custom
-;;   (erc-autojoin-channels-alist '(("freenode.net" "#emacs")
-;;                                  ("freenode.net" "#vim")
-;;                                  ("freenode.net" "#cyberpunk")))
-;;   (erc-interpret-mirc-color t)
-;;   (erc-nick "bobbyquine_")
-;;   (erc-insert-timestamp-function #'erc-insert-timestamp-left)
-;;   (erc-timestamp-format "%H:%M:%S | ")
-;;   (erc-track-enable-keybindings t)
-;;   :config
-;;   (global-set-key (kbd "C-c C-b") #'erc-switch-to-buffer)
-;;   (with-eval-after-load 'evil
-;;     (evil-set-initial-state 'erc-mode 'emacs)))
-
 ;;; Third-party Packages
 
 ;; GUI enhancements
