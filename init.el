@@ -175,13 +175,21 @@
   (show-paren-mode +1))
 
 (use-package frame
+  :preface
+  (defun ian/set-default-font ()
+    "Change frame font (back) to my default font."
+    (interactive)
+    (when (member "Hack" (font-family-list))
+      (set-face-attribute 'default nil :family "Hack"))
+    (set-face-attribute 'default nil
+                        :height 130
+                        :weight 'normal))
   :ensure nil
   :custom
   (initial-frame-alist '((fullscreen . maximized)))
   :config
   (blink-cursor-mode -1)
-  (when (member "IBM Plex Mono" (font-family-list))
-    (set-frame-font "ibm plex mono-13:weight=regular" t t)))
+  (ian/set-default-font))
 
 (use-package ediff
   :ensure nil
