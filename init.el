@@ -57,9 +57,9 @@
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (setq-default line-spacing 3
-                indent-tabs-mode nil
-                tab-width ian/indent-width))
+  (setq-default line-spacing 3)
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width ian/indent-width))
 
 ;;; Built-in packages
 
