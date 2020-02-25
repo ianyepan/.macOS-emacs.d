@@ -592,6 +592,7 @@ Return a list of strings as the completion candidates."
 
 (use-package hl-todo
   :config
+  (add-to-list 'hl-todo-keyword-faces '("DOING" . "#94bff3")) ; zenburn-blue+1
   (global-hl-todo-mode +1))
 
 ;; Terminal emulation
