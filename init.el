@@ -249,6 +249,11 @@
   :config
   (setq-default display-line-numbers-width 3))
 
+(use-package face-remap
+  :config
+  (when (member "Charter" (font-family-list))
+    (set-face-attribute 'variable-pitch nil :family "Charter" :height 160)))
+
 ;;; Third-party Packages
 
 ;; GUI enhancements
