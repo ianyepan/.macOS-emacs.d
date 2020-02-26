@@ -264,8 +264,10 @@
 
 (use-package zenburn-theme
   :custom-face
-  (highlight-symbol-face  ((t (:background "#5f5f5f")))) ; zenburn-bg+2
-  (git-gutter-fr:modified ((t (:foreground "#94bff3")))) ; zenburn-blue+1
+  (highlight-symbol-face          ((t (:background "#5f5f5f"))))                   ; zenburn-bg+2
+  (git-gutter-fr:modified         ((t (:foreground "#94bff3"))))                   ; zenburn-blue+1
+  (evil-ex-substitute-matches     ((t (:foreground "#ff0000" :strike-through t)))) ; red
+  (evil-ex-substitute-replacement ((t (:foreground "#0ff000"))))                   ; green
   :config
   (load-theme 'zenburn t))
 
