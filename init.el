@@ -372,6 +372,7 @@
   (ivy-initial-inputs-alist nil)
   :config
   (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
+  (define-key ivy-mode-map       (kbd "<escape>") nil)
   (define-key ivy-minibuffer-map (kbd "<escape>") #'minibuffer-keyboard-quit))
 
 (use-package swiper
