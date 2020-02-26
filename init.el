@@ -85,7 +85,8 @@
 
 (use-package "window"
   :ensure nil
-  :preface
+  :custom
+  (split-width-threshold 140)
   :config
   (global-set-key (kbd "C-x 2") #'(lambda ()
                                     (interactive)
