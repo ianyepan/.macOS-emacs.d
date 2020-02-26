@@ -591,8 +591,10 @@ Return a list of strings as the completion candidates."
   :hook (web-mode . rainbow-mode))
 
 (use-package hl-todo
+  :custom-face
+  (hl-todo ((t (:inverse-video t))))
   :config
-  (add-to-list 'hl-todo-keyword-faces '("DOING" . "#94bff3")) ; zenburn-blue+1
+  (add-to-list 'hl-todo-keyword-faces '("DOING" . "#94bff3"))
   (global-hl-todo-mode +1))
 
 ;; Terminal emulation
