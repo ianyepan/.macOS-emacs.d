@@ -303,8 +303,8 @@
     (define-key evil-insert-state-map (kbd "C-n") nil)
     (define-key evil-insert-state-map (kbd "C-p") nil)
     (define-key evil-normal-state-map (kbd "gd") #'xref-find-definitions))
-  (evil-ex-define-cmd "q" #'kill-this-buffer)
-  (evil-ex-define-cmd "wq" #'ian/save-and-kill-this-buffer))
+  (evil-ex-define-cmd "q" nil)
+  (evil-ex-define-cmd "wq" nil))
 
 (use-package evil-collection
   :after evil
