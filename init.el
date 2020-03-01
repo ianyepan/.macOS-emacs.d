@@ -57,7 +57,7 @@
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (setq-default line-spacing 3)
+  (setq-default line-spacing 0)
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width ian/indent-width))
 
@@ -178,12 +178,11 @@
 (use-package frame
   :preface
   (defun ian/set-default-font ()
-    "Change frame font (back) to my default font."
     (interactive)
-    (when (member "Hack" (font-family-list))
-      (set-face-attribute 'default nil :family "Hack"))
+    (when (member "ConsolasHigh" (font-family-list))
+      (set-face-attribute 'default nil :family "ConsolasHigh"))
     (set-face-attribute 'default nil
-                        :height 130
+                        :height 150
                         :weight 'normal))
   :ensure nil
   :custom
