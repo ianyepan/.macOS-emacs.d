@@ -343,22 +343,10 @@
 
 ;; Searching/sorting enhancements & project management
 
-(use-package counsel
-  :hook (ivy-mode . counsel-mode)
-  :custom
-  (counsel-rg-base-command "rg --vimgrep %s")
-  :config
-  (global-set-key (kbd "s-P") #'counsel-M-x)
-  (global-set-key (kbd "s-f") #'counsel-grep-or-swiper))
-
-(use-package counsel-projectile
-  :config
-  (counsel-projectile-mode +1))
-
 (use-package ivy
   :hook (after-init . ivy-mode)
   :custom
-  (ivy-height 15)
+  (ivy-height 12)
   (ivy-display-style nil)
   (ivy-re-builders-alist '((counsel-rg            . ivy--regex-plus)
                            (counsel-projectile-rg . ivy--regex-plus)
@@ -373,6 +361,18 @@
   (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
   (define-key ivy-mode-map       (kbd "<escape>") nil)
   (define-key ivy-minibuffer-map (kbd "<escape>") #'minibuffer-keyboard-quit))
+
+(use-package counsel
+  :hook (ivy-mode . counsel-mode)
+  :custom
+  (counsel-rg-base-command "rg --vimgrep %s")
+  :config
+  (global-set-key (kbd "s-P") #'counsel-M-x)
+  (global-set-key (kbd "s-f") #'counsel-grep-or-swiper))
+
+(use-package counsel-projectile
+  :config
+  (counsel-projectile-mode +1))
 
 (use-package swiper
   :after ivy
@@ -392,6 +392,7 @@
   (projectile-completion-system 'ivy)
   :config
   (projectile-mode +1)
+  ; In practice, the following will become counsel alternatives
   (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map)
   (define-key projectile-mode-map (kbd "s-p") #'projectile-find-file)
   (define-key projectile-mode-map (kbd "s-F") #'projectile-ripgrep))
