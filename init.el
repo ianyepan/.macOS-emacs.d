@@ -679,22 +679,5 @@ Return a list of strings as the completion candidates."
   (neo-show-hidden-files t)
   (neo-window-width 30))
 
-(use-package diminish
-  :preface
-  (defun diminish-most-modes (unused)
-    "Hide most minor modes except the ones listed here."
-    (interactive)
-    (dolist (mode
-             (seq-filter
-              (lambda (elt)
-                (not (seq-contains '(projectile-mode
-                                     lsp-mode
-                                     flycheck-mode)
-                                   elt)))
-              minor-mode-list))
-      (diminish mode)))
-  :config
-  (add-to-list 'after-load-functions #'diminish-most-modes))
-
 (provide 'init)
 ;;; init.el ends here
