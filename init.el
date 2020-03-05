@@ -622,23 +622,6 @@ Return a list of strings as the completion candidates."
                  (reusable-frames . visible)
                  (window-height . 0.5))))
 
-;; IRC relay remote client
-
-(use-package weechat
-  :hook (weechat-mode . (lambda () (visual-line-mode +1)))
-  :custom
-  (weechat-port-default 1234)
-  (weechat-fill-column 80)
-  (weechat-notification-mode t)
-  (weechat-buffer-kill-buffers-on-disconnect t)
-  :config
-  (add-hook 'weechat-connect-hook #'weechat-monitor-all-buffers)
-  (global-set-key (kbd "C-c C-b") #'weechat-switch-buffer)
-  (add-to-list 'weechat-modules 'weechat-notifications)
-  (add-to-list 'weechat-modules 'weechat-tracking)
-  (with-eval-after-load 'evil
-    (evil-set-initial-state 'weechat-mode 'emacs)))
-
 ;; Miscellaneous
 
 (use-package exec-path-from-shell
