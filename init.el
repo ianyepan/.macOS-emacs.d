@@ -353,8 +353,6 @@
   (ivy-display-style nil)
   (ivy-re-builders-alist '((counsel-rg            . ivy--regex-plus)
                            (counsel-projectile-rg . ivy--regex-plus)
-                           (counsel-ag            . ivy--regex-plus)
-                           (counsel-projectile-ag . ivy--regex-plus)
                            (swiper                . ivy--regex-plus)
                            (t                     . ivy--regex-fuzzy)))
   (ivy-use-virtual-buffers t)
