@@ -543,14 +543,6 @@ Return a list of strings as the completion candidates."
   (flycheck-display-errors-delay 0.1)
   (flycheck-flake8rc "~/.config/flake8"))
 
-(use-package flycheck-posframe
-  :after flycheck
-  :hook (flycheck-mode . flycheck-posframe-mode)
-  :custom
-  (flycheck-posframe-position 'window-bottom-left-corner)
-  (flycheck-posframe-warning-prefix "\u26a0 ")
-  (flycheck-posframe-error-prefix "\u26a0 "))
-
 (use-package org
   :hook ((org-mode . visual-line-mode)
          (org-mode . auto-fill-mode)
