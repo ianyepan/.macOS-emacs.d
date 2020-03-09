@@ -267,6 +267,9 @@
   (git-gutter-fr:modified         ((t (:foreground "#94bff3"))))                   ; zenburn-blue+1
   (evil-ex-substitute-matches     ((t (:foreground "#ff0000" :strike-through t)))) ; red
   (evil-ex-substitute-replacement ((t (:foreground "#0ff000"))))                   ; green
+  (hl-todo                        ((t (:inverse-video t))))
+  (flycheck-posframe-warning-face ((t (:foreground "#BDE0F3"))))                   ; zenburn-blue+3
+  (flycheck-posframe-error-face   ((t (:foreground "#BDE0F3"))))                   ; zenburn-blue+3
   :config
   (load-theme 'zenburn t))
 
@@ -470,7 +473,7 @@
 
 (use-package cobol-mode
   :custom
-  (cobol-tab-width 2)
+  (cobol-tab-width ian/indent-width)
   :config
   (setq auto-mode-alist
         (append
@@ -594,8 +597,6 @@ Return a list of strings as the completion candidates."
   :hook (web-mode . rainbow-mode))
 
 (use-package hl-todo
-  :custom-face
-  (hl-todo ((t (:inverse-video t))))
   :config
   (add-to-list 'hl-todo-keyword-faces '("DOING" . "#94bff3"))
   (global-hl-todo-mode +1))

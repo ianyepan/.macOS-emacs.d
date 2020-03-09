@@ -25,7 +25,6 @@
  '(company-tooltip-selection      ((t (:inherit highlight))))
  '(ivy-current-match              ((t (:inherit highlight))))
  '(vterm-color-blue               ((t (:foreground "dodgerblue"))))
- '(hl-todo                        ((t (:inverse-video t))))
  '(git-gutter-fr:modified         ((t (:foreground "skyblue"))))
  '(flycheck-posframe-warning-face ((t (:inherit warning))))
  '(flycheck-posframe-error-face   ((t (:inherit error))))
