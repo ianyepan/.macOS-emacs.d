@@ -395,7 +395,6 @@
   (projectile-completion-system 'ivy)
   :config
   (projectile-mode +1)
-  ; In practice, the following will become counsel alternatives
   (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map)
   (define-key projectile-mode-map (kbd "s-p") #'projectile-find-file)
   (define-key projectile-mode-map (kbd "s-F") #'projectile-ripgrep))
