@@ -443,6 +443,9 @@
   (lsp-enable-symbol-highlighting nil)
   (lsp-enable-on-type-formatting nil)
   (lsp-signature-auto-activate nil)
+  (lsp-enable-folding nil)
+  (lsp-enable-snippet nil)
+  (lsp-enable-completion-at-point nil)
   (read-process-output-max (* 1024 1024)) ;; 1mb
   (lsp-idle-delay 0.5)
   (lsp-prefer-capf t))
