@@ -249,11 +249,6 @@
   :config
   (setq-default display-line-numbers-width 3))
 
-(use-package face-remap
-  :config
-  (when (member "Charter" (font-family-list))
-    (set-face-attribute 'variable-pitch nil :family "Charter" :height 160)))
-
 ;;; Third-party Packages
 
 ;; GUI enhancements
@@ -261,17 +256,24 @@
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 ;; (load-theme 'default-dark t)
 
-(use-package zenburn-theme
+(use-package doom-themes
   :custom-face
-  (highlight-symbol-face          ((t (:background "#5f5f5f"))))                   ; zenburn-bg+2
-  (git-gutter-fr:modified         ((t (:foreground "#94bff3"))))                   ; zenburn-blue+1
-  (evil-ex-substitute-matches     ((t (:foreground "#ff0000" :strike-through t)))) ; red
-  (evil-ex-substitute-replacement ((t (:foreground "#0ff000"))))                   ; green
-  (hl-todo                        ((t (:inverse-video t))))
-  (flycheck-posframe-warning-face ((t (:foreground "#BDE0F3"))))                   ; zenburn-blue+3
-  (flycheck-posframe-error-face   ((t (:foreground "#BDE0F3"))))                   ; zenburn-blue+3
+  (line-number              ((t (:foreground "#5f656f"))))
+  (line-number-current-line ((t (:foreground "#7f858f"))))
+  (hl-todo                  ((t (:inverse-video t))))
   :config
-  (load-theme 'zenburn t))
+  (setq doom-themes-enable-bold nil)
+  (load-theme 'doom-horizon t))
+
+;; (use-package zenburn-theme
+;;   :custom-face
+;;   (highlight-symbol-face          ((t (:background "#5f5f5f"))))                   ; zenburn-bg+2
+;;   (git-gutter-fr:modified         ((t (:foreground "#94bff3"))))                   ; zenburn-blue+1
+;;   (evil-ex-substitute-matches     ((t (:foreground "#ff0000" :strike-through t)))) ; red
+;;   (evil-ex-substitute-replacement ((t (:foreground "#0ff000"))))                   ; green
+;;   (hl-todo                        ((t (:inverse-video t))))
+;;   :config
+;;   (load-theme 'zenburn t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
@@ -439,6 +441,7 @@
           ) . lsp)
   :commands lsp
   :custom
+  (lsp-auto-guess-root t)
   (lsp-diagnostic-package :none)
   (lsp-enable-symbol-highlighting nil)
   (lsp-enable-on-type-formatting nil)
@@ -490,9 +493,9 @@
   (add-to-list 'company-lsp-filter-candidates '(mspyls . t))
   (defun company-lsp--on-completion (response prefix)
     "Note: This is a (hack) workaround for candidate filtering issues in mspyls.
-Handle completion RESPONSE.
-PREFIX is a string of the prefix when the completion is requested.
-Return a list of strings as the completion candidates."
+ Handle completion RESPONSE.
+ PREFIX is a string of the prefix when the completion is requested.
+ Return a list of strings as the completion candidates."
     (let* ((incomplete (and (hash-table-p response) (gethash "isIncomplete" response)))
            (items (cond ((hash-table-p response) (gethash "items" response))
                         ((sequencep response) response)))
