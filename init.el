@@ -249,6 +249,19 @@
   :config
   (setq-default display-line-numbers-width 3))
 
+(use-package ox
+  :ensure nil
+  :config
+  (setq org-export-with-smart-quotes t))
+
+(use-package ox-latex
+  :ensure nil
+  :config
+  (setq org-latex-pdf-process
+        '("/Library/TeX/texbin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f; rm *.tex *.out *.aux *.log"
+          "/Library/TeX/texbin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f; rm *.tex *.out *.aux *.log"
+          "/Library/TeX/texbin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f; rm *.tex *.out *.aux *.log")))
+
 ;;; Third-party Packages
 
 ;; GUI enhancements
