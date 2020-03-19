@@ -257,6 +257,8 @@
 (use-package ox-latex
   :ensure nil
   :config
+  (setq org-latex-packages-alist '(("margin=1in" "geometry" nil)
+                                   ("bitstream-charter" "mathdesign" nil)))
   (setq org-latex-pdf-process
         '("/Library/TeX/texbin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f; rm *.tex *.out *.aux *.log"
           "/Library/TeX/texbin/pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f; rm *.tex *.out *.aux *.log"
