@@ -344,10 +344,9 @@
   (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
 (use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
   :custom
-  (git-gutter:update-interval 0.05)
-  :config
-  (global-git-gutter-mode +1))
+  (git-gutter:update-interval 0.05))
 
 (use-package git-gutter-fringe
   :config
