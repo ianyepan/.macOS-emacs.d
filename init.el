@@ -43,17 +43,16 @@
 (use-package emacs
   :preface
   (defvar ian/indent-width 2)
-  :custom
-  (user-full-name "Ian Y.E. Pan")
-  (frame-title-format '("Emacs"))
-  (ring-bell-function 'ignore)
-  (default-directory "~/")
-  (frame-resize-pixelwise t)
-  (scroll-conservatively 10000)
-  (scroll-preserve-screen-position t)
-  (auto-window-vscroll nil)
-  (load-prefer-newer t)
   :config
+  (setq user-full-name "Ian Y.E. Pan")
+  (setq frame-title-format '("Emacs"))
+  (setq ring-bell-function 'ignore)
+  (setq default-directory "~/")
+  (setq frame-resize-pixelwise t)
+  (setq scroll-conservatively 10000)
+  (setq scroll-preserve-screen-position t)
+  (setq auto-window-vscroll nil)
+  (setq load-prefer-newer t)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)
@@ -65,13 +64,13 @@
 
 (use-package "startup"
   :ensure nil
-  :custom
-  (inhibit-startup-screen t))
+  :config
+  (setq inhibit-startup-screen t))
 
 (use-package cus-edit
   :ensure nil
-  :custom
-  (custom-file "~/.emacs.d/to-be-dumped.el"))
+  :config
+  (setq custom-file "~/.emacs.d/to-be-dumped.el"))
 
 (use-package scroll-bar
   :ensure nil
@@ -85,17 +84,8 @@
 
 (use-package "window"
   :ensure nil
-  :custom
-  (split-width-threshold 140)
   :config
-  (global-set-key (kbd "C-x 2") #'(lambda ()
-                                    (interactive)
-                                    (split-window-below)
-                                    (other-window 1)))
-  (global-set-key (kbd "C-x 3") #'(lambda ()
-                                    (interactive)
-                                    (split-window-right)
-                                    (other-window 1))))
+  (setq split-width-threshold 140))
 
 (use-package delsel
   :ensure nil
@@ -104,31 +94,29 @@
 
 (use-package files
   :ensure nil
-  :custom
-  (confirm-kill-processes nil)
-  (make-backup-files nil))
+  :config
+  (setq confirm-kill-processes nil)
+  (setq make-backup-files nil))
 
 (use-package autorevert
   :ensure nil
-  :custom
-  (auto-revert-interval 2)
-  (auto-revert-check-vc-info t)
-  (global-auto-revert-non-file-buffers t)
-  (auto-revert-verbose nil)
   :config
+  (setq auto-revert-interval 2)
+  (setq auto-revert-check-vc-info t)
+  (setq global-auto-revert-non-file-buffers t)
+  (setq auto-revert-verbose nil)
   (global-auto-revert-mode +1))
 
 (use-package eldoc
   :ensure nil
-  :custom
-  (eldoc-idle-delay 0.4))
+  :config
+  (setq eldoc-idle-delay 0.4))
 
 (use-package js
   :ensure nil
   :mode ("\\.jsx?\\'" . js-mode)
-  :custom
-  (js-indent-level ian/indent-width)
   :config
+  (setq js-indent-level ian/indent-width)
   (add-hook 'flycheck-mode-hook
             #'(lambda ()
                 (let* ((root (locate-dominating-file
@@ -143,30 +131,29 @@
 
 (use-package cc-vars
   :ensure nil
-  :custom
-  (c-default-style '((java-mode . "java")
+  :config
+  (setq c-default-style '((java-mode . "java")
                      (awk-mode  . "awk")
                      (other     . "k&r")))
-  :config
   (setq-default c-basic-offset ian/indent-width))
 
 (use-package prolog
   :ensure nil
   :mode (("\\.pl\\'" . prolog-mode))
-  :custom
-  (prolog-indent-width ian/indent-width))
+  :config
+  (setq prolog-indent-width ian/indent-width))
 
 (use-package python
   :ensure nil
-  :custom
-  (python-indent-offset ian/indent-width)
-  (python-shell-interpreter "python3"))
+  :config
+  (setq python-indent-offset ian/indent-width)
+  (setq python-shell-interpreter "python3"))
 
 (use-package mwheel
   :ensure nil
-  :custom
-  (mouse-wheel-scroll-amount '(1 ((shift) . 1)))
-  (mouse-wheel-progressive-speed nil))
+  :config
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+  (setq mouse-wheel-progressive-speed nil))
 
 (use-package paren
   :ensure nil
@@ -185,17 +172,16 @@
                         :height 150
                         :weight 'normal))
   :ensure nil
-  :custom
-  (initial-frame-alist '((fullscreen . maximized)))
   :config
+  (setq initial-frame-alist '((fullscreen . maximized)))
   (blink-cursor-mode -1)
   (ian/set-default-font))
 
 (use-package ediff
   :ensure nil
-  :custom
-  (ediff-window-setup-function #'ediff-setup-windows-plain)
-  (ediff-split-window-function #'split-window-horizontally))
+  :config
+  (setq ediff-window-setup-function #'ediff-setup-windows-plain)
+  (setq ediff-split-window-function #'split-window-horizontally))
 
 (use-package faces
   :ensure nil
@@ -213,8 +199,8 @@
 
 (use-package flyspell
   :ensure nil
-  :custom
-  (ispell-program-name "/usr/local/bin/aspell"))
+  :config
+  (setq ispell-program-name "/usr/local/bin/aspell"))
 
 (use-package elec-pair
   :ensure nil
@@ -226,9 +212,8 @@
 
 (use-package dired
   :ensure nil
-  :custom
-  (delete-by-moving-to-trash t)
   :config
+  (setq delete-by-moving-to-trash t)
   (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package saveplace
@@ -293,8 +278,8 @@
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
-  :custom
-  (highlight-symbol-idle-delay 0.3))
+  :config
+  (setq highlight-symbol-idle-delay 0.3))
 
 (use-package highlight-numbers
   :hook (prog-mode . highlight-numbers-mode))
@@ -348,8 +333,8 @@
 
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
-  :custom
-  (git-gutter:update-interval 0.05))
+  :config
+  (setq git-gutter:update-interval 0.05))
 
 (use-package git-gutter-fringe
   :config
@@ -365,26 +350,24 @@
 
 (use-package ivy
   :hook (after-init . ivy-mode)
-  :custom
-  (ivy-height 12)
-  (ivy-display-style nil)
-  (ivy-re-builders-alist '((counsel-rg            . ivy--regex-plus)
+  :config
+  (setq ivy-height 12)
+  (setq ivy-display-style nil)
+  (setq ivy-re-builders-alist '((counsel-rg            . ivy--regex-plus)
                            (counsel-projectile-rg . ivy--regex-plus)
                            (swiper                . ivy--regex-plus)
                            (t                     . ivy--regex-fuzzy)))
-  (ivy-use-virtual-buffers t)
-  (ivy-count-format "(%d/%d) ")
-  (ivy-initial-inputs-alist nil)
-  :config
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq ivy-initial-inputs-alist nil)
   (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
   (define-key ivy-mode-map       (kbd "<escape>") nil)
   (define-key ivy-minibuffer-map (kbd "<escape>") #'minibuffer-keyboard-quit))
 
 (use-package counsel
   :hook (ivy-mode . counsel-mode)
-  :custom
-  (counsel-rg-base-command "rg --vimgrep %s")
   :config
+  (setq counsel-rg-base-command "rg --vimgrep %s")
   (global-set-key (kbd "s-P") #'counsel-M-x)
   (global-set-key (kbd "s-f") #'counsel-grep-or-swiper))
 
@@ -394,9 +377,9 @@
 
 (use-package swiper
   :after ivy
-  :custom
-  (swiper-action-recenter t)
-  (swiper-goto-start-of-match t))
+  :config
+  (setq swiper-action-recenter t)
+  (setq swiper-goto-start-of-match t))
 
 (use-package ivy-rich
   :config
@@ -404,11 +387,10 @@
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package projectile
-  :custom
-  (projectile-sort-order 'recentf)
-  (projectile-indexing-method 'hybrid)
-  (projectile-completion-system 'ivy)
   :config
+  (setq projectile-sort-order 'recentf)
+  (setq projectile-indexing-method 'hybrid)
+  (setq projectile-completion-system 'ivy)
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") #'projectile-command-map)
   (define-key projectile-mode-map (kbd "s-p") #'projectile-find-file)
@@ -416,27 +398,25 @@
 
 (use-package wgrep
   :commands wgrep-change-to-wgrep-mode
-  :custom
-  (wgrep-auto-save-buffer t))
+  :config
+  (setq wgrep-auto-save-buffer t))
 
 (use-package prescient
-  :custom
-  (prescient-filter-method '(literal regexp initialism fuzzy))
   :config
+  (setq prescient-filter-method '(literal regexp initialism fuzzy))
   (prescient-persist-mode +1))
 
 (use-package ivy-prescient
   :after (prescient ivy)
-  :custom
-  (ivy-prescient-sort-commands
+  :config
+  (setq ivy-prescient-sort-commands
    '(:not swiper
           counsel-grep
           counsel-rg
           counsel-projectile-rg
           ivy-switch-buffer
           counsel-switch-buffer))
-  (ivy-prescient-retain-classic-highlighting t)
-  :config
+  (setq ivy-prescient-retain-classic-highlighting t)
   (ivy-prescient-mode +1))
 
 (use-package company-prescient
@@ -455,33 +435,32 @@
           python-mode     ; mspyls
           ) . lsp)
   :commands lsp
-  :custom
-  (lsp-auto-guess-root t)
-  (lsp-diagnostic-package :none)
-  (lsp-enable-symbol-highlighting nil)
-  (lsp-enable-on-type-formatting nil)
-  (lsp-signature-auto-activate nil)
-  (lsp-enable-folding nil)
-  (lsp-enable-snippet nil)
-  (lsp-enable-completion-at-point nil)
-  (read-process-output-max (* 1024 1024)) ;; 1mb
-  (lsp-idle-delay 0.5)
-  (lsp-prefer-capf t))
+  :config
+  (setq lsp-auto-guess-root t)
+  (setq lsp-diagnostic-package :none)
+  (setq lsp-enable-symbol-highlighting nil)
+  (setq lsp-enable-on-type-formatting nil)
+  (setq lsp-signature-auto-activate nil)
+  (setq lsp-enable-folding nil)
+  (setq lsp-enable-snippet nil)
+  (setq lsp-enable-completion-at-point nil)
+  (setq read-process-output-max (* 1024 1024)) ;; 1mb
+  (setq lsp-idle-delay 0.5)
+  (setq lsp-prefer-capf t))
 
 (use-package lsp-java
   :after lsp)
 
 (use-package lsp-python-ms
   :hook (python-mode . (lambda () (require 'lsp-python-ms)))
-  :custom
-  (lsp-python-ms-executable
+  :config
+  (setq lsp-python-ms-executable
    "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
-  (lsp-python-ms-python-executable-cmd "python3"))
+  (setq lsp-python-ms-python-executable-cmd "python3"))
 
 (use-package pyvenv
-  :custom
-  (pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
   :config
+  (setq pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
   (add-hook 'pyvenv-post-activate-hooks
             #'(lambda ()
                 (call-interactively #'lsp-workspace-restart)))
@@ -490,9 +469,8 @@
 (use-package typescript-mode) ; for looking up JS function definitions
 
 (use-package cobol-mode
-  :custom
-  (cobol-tab-width ian/indent-width)
   :config
+  (setq cobol-tab-width ian/indent-width)
   (setq auto-mode-alist
         (append
          '(("\\.cob\\'" . cobol-mode)
@@ -501,9 +479,8 @@
 
 (use-package company-lsp
   :commands company-lsp
-  :custom
-  (company-lsp-cache-candidates 'auto)
   :config
+  (setq company-lsp-cache-candidates 'auto)
   (push 'company-lsp company-backends)
   (add-to-list 'company-lsp-filter-candidates '(mspyls . t))
   (defun company-lsp--on-completion (response prefix)
@@ -534,33 +511,31 @@
 
 (use-package company
   :hook (prog-mode . company-mode)
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0)
-  (company-selection-wrap-around t)
-  (company-tooltip-align-annotations t)
-  (company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
-                       company-echo-metadata-frontend))
   :config
+  (setq company-minimum-prefix-length 1)
+  (setq company-idle-delay 0)
+  (setq company-selection-wrap-around t)
+  (setq company-tooltip-align-annotations t)
+  (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
+                       company-echo-metadata-frontend))
   (with-eval-after-load 'company
     (define-key company-active-map (kbd "C-j") nil) ; avoid conflict with emmet-mode
     (define-key company-active-map (kbd "C-n") #'company-select-next)
     (define-key company-active-map (kbd "C-p") #'company-select-previous)))
 
 (use-package company-posframe
-  :custom
-  (company-posframe-show-metadata nil)
-  (company-posframe-show-indicator nil)
-  (company-posframe-quickhelp-delay nil)
   :config
+  (setq company-posframe-show-metadata nil)
+  (setq company-posframe-show-indicator nil)
+  (setq company-posframe-quickhelp-delay nil)
   (company-posframe-mode +1))
 
 (use-package flycheck
   :hook ((prog-mode   . flycheck-mode))
-  :custom
-  (flycheck-check-syntax-automatically '(save mode-enabled newline))
-  (flycheck-display-errors-delay 0.1)
-  (flycheck-flake8rc "~/.config/flake8"))
+  :config
+  (setq flycheck-check-syntax-automatically '(save mode-enabled newline))
+  (setq flycheck-display-errors-delay 0.1)
+  (setq flycheck-flake8rc "~/.config/flake8"))
 
 (use-package org
   :hook ((org-mode . visual-line-mode)
@@ -577,19 +552,18 @@
   :mode (("\\.html?\\'" . web-mode)
          ("\\.css\\'"   . web-mode)
          ("\\.json\\'"  . web-mode))
-  :custom
-  (web-mode-markup-indent-offset ian/indent-width)
-  (web-mode-code-indent-offset ian/indent-width)
-  (web-mode-css-indent-offset ian/indent-width))
+  :config
+  (setq web-mode-markup-indent-offset ian/indent-width)
+  (setq web-mode-code-indent-offset ian/indent-width)
+  (setq web-mode-css-indent-offset ian/indent-width))
 
 (use-package emmet-mode
   :hook ((html-mode . emmet-mode)
          (css-mode  . emmet-mode)
          (js-mode   . emmet-mode)
          (web-mode  . emmet-mode))
-  :custom
-  (emmet-insert-flash-time 0.001) ; basically disabling it
   :config
+  (setq emmet-insert-flash-time 0.001) ; basically disabling it
   (add-hook 'js-mode-hook #'(lambda ()
                               (setq-local emmet-expand-jsx-className? t))))
 
@@ -620,9 +594,8 @@
 
 (use-package vterm-toggle
   :after evil
-  :custom
-  (vterm-toggle-fullscreen-p nil)
   :config
+  (setq vterm-toggle-fullscreen-p nil)
   (with-eval-after-load 'evil
     (evil-set-initial-state 'vterm-mode 'emacs))
   (global-set-key (kbd "C-`") #'vterm-toggle)
@@ -668,10 +641,10 @@
   :init
   (global-set-key (kbd "s-b") #'neotree-project-toggle)
   :hook (neotree-mode . hl-line-mode)
-  :custom
-  (neo-theme 'nerd)
-  (neo-show-hidden-files t)
-  (neo-window-width 30))
+  :config
+  (setq neo-theme 'nerd)
+  (setq neo-show-hidden-files t)
+  (setq neo-window-width 30))
 
 (provide 'init)
 ;;; init.el ends here
