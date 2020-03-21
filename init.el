@@ -133,8 +133,8 @@
   :ensure nil
   :config
   (setq c-default-style '((java-mode . "java")
-                     (awk-mode  . "awk")
-                     (other     . "k&r")))
+                          (awk-mode  . "awk")
+                          (other     . "k&r")))
   (setq-default c-basic-offset ian/indent-width))
 
 (use-package prolog
@@ -340,10 +340,11 @@
   :config
   (setq ivy-height 12)
   (setq ivy-display-style nil)
-  (setq ivy-re-builders-alist '((counsel-rg            . ivy--regex-plus)
-                           (counsel-projectile-rg . ivy--regex-plus)
-                           (swiper                . ivy--regex-plus)
-                           (t                     . ivy--regex-fuzzy)))
+  (setq ivy-re-builders-alist
+        '((counsel-rg            . ivy--regex-plus)
+          (counsel-projectile-rg . ivy--regex-plus)
+          (swiper                . ivy--regex-plus)
+          (t                     . ivy--regex-fuzzy)))
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
   (setq ivy-initial-inputs-alist nil)
@@ -397,12 +398,12 @@
   :after (prescient ivy)
   :config
   (setq ivy-prescient-sort-commands
-   '(:not swiper
-          counsel-grep
-          counsel-rg
-          counsel-projectile-rg
-          ivy-switch-buffer
-          counsel-switch-buffer))
+        '(:not swiper
+               counsel-grep
+               counsel-rg
+               counsel-projectile-rg
+               ivy-switch-buffer
+               counsel-switch-buffer))
   (setq ivy-prescient-retain-classic-highlighting t)
   (ivy-prescient-mode +1))
 
@@ -442,7 +443,7 @@
   :hook (python-mode . (lambda () (require 'lsp-python-ms)))
   :config
   (setq lsp-python-ms-executable
-   "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
+        "~/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
   (setq lsp-python-ms-python-executable-cmd "python3"))
 
 (use-package pyvenv
@@ -504,7 +505,7 @@
   (setq company-selection-wrap-around t)
   (setq company-tooltip-align-annotations t)
   (setq company-frontends '(company-pseudo-tooltip-frontend ; show tooltip even for single candidate
-                       company-echo-metadata-frontend))
+                            company-echo-metadata-frontend))
   (with-eval-after-load 'company
     (define-key company-active-map (kbd "C-j") nil) ; avoid conflict with emmet-mode
     (define-key company-active-map (kbd "C-n") #'company-select-next)
