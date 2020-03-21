@@ -254,9 +254,6 @@
 
 ;; GUI enhancements
 
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; (load-theme 'default-dark t)
-
 (use-package doom-themes
   :custom-face
   (line-number              ((t (:foreground "#5f656f"))))
@@ -264,17 +261,7 @@
   (hl-todo                  ((t (:inverse-video t))))
   :config
   (setq doom-themes-enable-bold nil)
-  (load-theme 'doom-horizon t))
-
-;; (use-package zenburn-theme
-;;   :custom-face
-;;   (highlight-symbol-face          ((t (:background "#5f5f5f"))))                   ; zenburn-bg+2
-;;   (git-gutter-fr:modified         ((t (:foreground "#94bff3"))))                   ; zenburn-blue+1
-;;   (evil-ex-substitute-matches     ((t (:foreground "#ff0000" :strike-through t)))) ; red
-;;   (evil-ex-substitute-replacement ((t (:foreground "#0ff000"))))                   ; green
-;;   (hl-todo                        ((t (:inverse-video t))))
-;;   :config
-;;   (load-theme 'zenburn t))
+  (load-theme 'doom-dark+ t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
