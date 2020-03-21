@@ -613,17 +613,6 @@
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
-(use-package dired-single
-  :preface
-  (defun ian/dired-single-init ()
-    (define-key dired-mode-map [return] #'dired-single-buffer)
-    (define-key dired-mode-map [remap dired-mouse-find-file-other-window] #'dired-single-buffer-mouse)
-    (define-key dired-mode-map [remap dired-up-directory] #'dired-single-up-directory))
-  :config
-  (if (boundp 'dired-mode-map)
-      (ian/dired-single-init)
-    (add-hook 'dired-load-hook #'ian/dired-single-init)))
-
 (use-package neotree
   :preface
   (defun neotree-project-toggle ()
