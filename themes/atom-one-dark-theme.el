@@ -654,6 +654,7 @@
    `(org-document-title                      ((t (:weight normal))))
    `(org-footnote                            ((t (:foreground ,atom-one-dark-cyan))))
    `(org-sexp-date                           ((t (:foreground ,atom-one-dark-cyan))))
+   `(org-code                                ((t (:foreground ,atom-one-dark-orange-1))))
 
    ;; calendar
    `(diary                                   ((t (:inherit warning))))
