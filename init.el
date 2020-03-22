@@ -166,10 +166,10 @@
   :preface
   (defun ian/set-default-font ()
     (interactive)
-    (when (member "ConsolasHigh" (font-family-list))
-      (set-face-attribute 'default nil :family "ConsolasHigh"))
+    (when (member "Meslo LG L" (font-family-list))
+      (set-face-attribute 'default nil :family "Meslo LG L"))
     (set-face-attribute 'default nil
-                        :height 150
+                        :height 140
                         :weight 'normal))
   :ensure nil
   :config
@@ -254,14 +254,8 @@
 
 ;; GUI enhancements
 
-(use-package doom-themes
-  :custom-face
-  (line-number              ((t (:foreground "#5f656f"))))
-  (line-number-current-line ((t (:foreground "#7f858f"))))
-  (hl-todo                  ((t (:inverse-video t))))
-  :config
-  (setq doom-themes-enable-bold nil)
-  (load-theme 'doom-dark+ t))
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'atom-one-dark t)
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
