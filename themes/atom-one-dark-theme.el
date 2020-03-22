@@ -156,19 +156,6 @@
    `(company-scrollbar-bg                    ((t (:background ,atom-one-dark-bg-1))))
    `(company-template-field                  ((t (:inherit highlight))))
 
-   ;; `(company-tooltip                         ((t (:foreground ,atom-one-dark-fg :background ,atom-one-dark-bg-1))))
-   ;; `(company-tooltip-annotation              ((t (:foreground ,atom-one-dark-mono-2 :background ,atom-one-dark-bg-1))))
-   ;; `(company-tooltip-annotation-selection    ((t (:foreground ,atom-one-dark-mono-2 :background ,atom-one-dark-gray))))
-   ;; `(company-tooltip-selection               ((t (:foreground ,atom-one-dark-fg :background ,atom-one-dark-gray))))
-   ;; `(company-tooltip-mouse                   ((t (:background ,atom-one-dark-gray))))
-   ;; `(company-tooltip-common                  ((t (:foreground ,atom-one-dark-orange-2 :background ,atom-one-dark-bg-1))))
-   ;; `(company-tooltip-common-selection        ((t (:foreground ,atom-one-dark-orange-2 :background ,atom-one-dark-gray))))
-   ;; `(company-preview                         ((t (:background ,atom-one-dark-bg))))
-   ;; `(company-preview-common                  ((t (:foreground ,atom-one-dark-orange-2 :background ,atom-one-dark-bg))))
-   ;; `(company-scrollbar-fg                    ((t (:background ,atom-one-dark-mono-1))))
-   ;; `(company-scrollbar-bg                    ((t (:background ,atom-one-dark-bg-1))))
-   ;; `(company-template-field                  ((t (:inherit highlight))))
-
    ;; doom-modeline
    `(doom-modeline-bar                       ((t (:background ,atom-one-dark-accent))))
 
@@ -363,15 +350,19 @@
    `(js2-object-property                     ((t (:foreground ,atom-one-dark-red-1))))
 
    ;; ediff
+   `(ediff-fine-diff-Ancestor                ((t (:background "#885555"))))
    `(ediff-fine-diff-A                       ((t (:background "#885555"))))
    `(ediff-fine-diff-B                       ((t (:background "#558855"))))
    `(ediff-fine-diff-C                       ((t (:background "#555588"))))
+   `(ediff-current-diff-Ancestor             ((t (:background "#663333"))))
    `(ediff-current-diff-A                    ((t (:background "#663333"))))
    `(ediff-current-diff-B                    ((t (:background "#336633"))))
    `(ediff-current-diff-C                    ((t (:background "#333366"))))
+   `(ediff-even-diff-Ancestor                ((t (:background "#181a1f"))))
    `(ediff-even-diff-A                       ((t (:background "#181a1f"))))
    `(ediff-even-diff-B                       ((t (:background "#181a1f"))))
    `(ediff-even-diff-C                       ((t (:background "#181a1f"))))
+   `(ediff-odd-diff-Ancestor                 ((t (:background "#181a1f"))))
    `(ediff-odd-diff-A                        ((t (:background "#181a1f"))))
    `(ediff-odd-diff-B                        ((t (:background "#181a1f"))))
    `(ediff-odd-diff-C                        ((t (:background "#181a1f"))))
