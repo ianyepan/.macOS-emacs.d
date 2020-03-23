@@ -114,7 +114,7 @@
 
 (use-package js
   :ensure nil
-  :mode ("\\.jsx?\\'" . js-mode)
+  :mode ("\\.jsx?\\'" . js-jsx-mode)
   :config
   (setq js-indent-level ian/indent-width)
   (add-hook 'flycheck-mode-hook
@@ -205,6 +205,11 @@
 (use-package elec-pair
   :ensure nil
   :hook (prog-mode . electric-pair-mode))
+
+;; (use-package electric
+;;   :ensure nil
+;;   :config
+;;   (setq electric-indent-mode nil))
 
 (use-package whitespace
   :ensure nil
@@ -413,6 +418,7 @@
           c-or-c++-mode   ; clangd
           java-mode       ; eclipse-jdtls
           js-mode         ; ts-ls (tsserver wrapper)
+          js-jsx-mode     ; ts-ls (tsserver wrapper)
           typescript-mode ; ts-ls (tsserver wrapper)
           python-mode     ; mspyls
           ) . lsp)
@@ -428,7 +434,8 @@
   (setq lsp-enable-completion-at-point nil)
   (setq read-process-output-max (* 1024 1024)) ;; 1mb
   (setq lsp-idle-delay 0.5)
-  (setq lsp-prefer-capf t))
+  (setq lsp-prefer-capf t)
+  (add-to-list 'lsp-language-id-configuration '(js-jsx-mode . "javascriptreact")))
 
 (use-package lsp-java
   :after lsp)
@@ -543,11 +550,12 @@
   :hook ((html-mode . emmet-mode)
          (css-mode  . emmet-mode)
          (js-mode   . emmet-mode)
+         (js-jsx-mode   . emmet-mode)
          (web-mode  . emmet-mode))
   :config
   (setq emmet-insert-flash-time 0.001) ; basically disabling it
-  (add-hook 'js-mode-hook #'(lambda ()
-                              (setq-local emmet-expand-jsx-className? t))))
+  (add-hook 'js-jsx-mode-hook #'(lambda ()
+                                  (setq-local emmet-expand-jsx-className? t))))
 
 (use-package format-all
   :preface
