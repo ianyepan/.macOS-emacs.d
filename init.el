@@ -455,7 +455,10 @@
                 (call-interactively #'lsp-workspace-restart)))
   (pyvenv-mode +1))
 
-(use-package typescript-mode) ; for looking up JS function definitions
+(use-package typescript-mode
+  :mode ("\\.tsx?\\'" . typescript-mode)
+  :config
+  (setq typescript-indent-level ian/indent-width))
 
 (use-package cobol-mode
   :config
