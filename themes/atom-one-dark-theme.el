@@ -99,8 +99,8 @@
    `(font-lock-type-face                     ((t (:foreground ,atom-one-dark-orange-2))))
    `(font-lock-constant-face                 ((t (:foreground ,atom-one-dark-cyan))))
    `(font-lock-variable-name-face            ((t (:foreground ,atom-one-dark-red-1))))
-   `(font-lock-warning-face                  ((t (:foreground ,atom-one-dark-mono-3 :bold t))))
-   `(font-lock-negation-char-face            ((t (:foreground ,atom-one-dark-cyan :bold t))))
+   `(font-lock-warning-face                  ((t (:foreground ,atom-one-dark-mono-3 :bold nil))))
+   `(font-lock-negation-char-face            ((t (:foreground ,atom-one-dark-cyan :bold nil))))
 
    ;; mode-line
    `(mode-line                               ((t (:background ,atom-one-dark-black :foreground ,atom-one-dark-silver :box (:color ,atom-one-dark-border :line-width 1)))))
@@ -253,9 +253,9 @@
    `(ivy-highlight-face                      ((t (:inherit font-lock-builtin-face))))
    `(ivy-match-required-face                 ((t (:inherit minibuffer-prompt :foreground ,atom-one-dark-red-1))))
    `(ivy-minibuffer-match-face-1             ((t (:background ,atom-one-dark-bg-hl))))
-   `(ivy-minibuffer-match-face-2             ((t (:inherit ivy-minibuffer-match-face-1 :background ,atom-one-dark-black :foreground ,atom-one-dark-purple :weight semi-bold))))
-   `(ivy-minibuffer-match-face-3             ((t (:inherit ivy-minibuffer-match-face-2 :background ,atom-one-dark-black :foreground ,atom-one-dark-green :weight semi-bold))))
-   `(ivy-minibuffer-match-face-4             ((t (:inherit ivy-minibuffer-match-face-2 :background ,atom-one-dark-black :foreground ,atom-one-dark-orange-2 :weight semi-bold))))
+   `(ivy-minibuffer-match-face-2             ((t (:inherit ivy-minibuffer-match-face-1 :background ,atom-one-dark-black :foreground ,atom-one-dark-purple :weight normal))))
+   `(ivy-minibuffer-match-face-3             ((t (:inherit ivy-minibuffer-match-face-2 :background ,atom-one-dark-black :foreground ,atom-one-dark-green :weight normal))))
+   `(ivy-minibuffer-match-face-4             ((t (:inherit ivy-minibuffer-match-face-2 :background ,atom-one-dark-black :foreground ,atom-one-dark-orange-2 :weight normal))))
    `(ivy-minibuffer-match-highlight          ((t (:inherit ivy-current-match))))
    `(ivy-modified-buffer                     ((t (:inherit default :foreground ,atom-one-dark-orange-1))))
    `(ivy-virtual                             ((t (:inherit font-lock-builtin-face :slant italic))))
@@ -318,7 +318,7 @@
    `(jabber-roster-user-xa                   ((t (:foreground ,atom-one-dark-red-2))))
    `(jabber-roster-user-dnd                  ((t (:foreground ,atom-one-dark-purple))))
    `(jabber-roster-user-chatty               ((t (:foreground ,atom-one-dark-orange-2))))
-   `(jabber-roster-user-error                ((t (:foreground ,atom-one-dark-red-1 :bold t))))
+   `(jabber-roster-user-error                ((t (:foreground ,atom-one-dark-red-1 :bold nil))))
    `(jabber-roster-user-offline              ((t (:foreground ,atom-one-dark-mono-3))))
    `(jabber-chat-prompt-local                ((t (:foreground ,atom-one-dark-blue))))
    `(jabber-chat-prompt-foreign              ((t (:foreground ,atom-one-dark-orange-2))))
@@ -460,7 +460,7 @@
    `(notmuch-tag-unread                      ((t (:foreground ,atom-one-dark-red-1))))
    `(notmuch-tree-match-author-face          ((t (:inherit notmuch-search-matching-authors))))
    `(notmuch-tree-match-date-face            ((t (:inherit notmuch-search-date))))
-   `(notmuch-tree-match-face                 ((t (:weight semi-bold))))
+   `(notmuch-tree-match-face                 ((t (:weight normal))))
    `(notmuch-tree-match-tag-face             ((t (:inherit notmuch-tag-face))))
    `(notmuch-tree-no-match-face              ((t (:slant italic :weight light :inherit font-lock-comment-face))))
 
@@ -614,9 +614,9 @@
 
    ;; regexp-builder
    `(reb-match-0                             ((t (:background ,atom-one-dark-gray))))
-   `(reb-match-1                             ((t (:background ,atom-one-dark-black :foreground ,atom-one-dark-purple :weight semi-bold))))
-   `(reb-match-2                             ((t (:background ,atom-one-dark-black :foreground ,atom-one-dark-green :weight semi-bold))))
-   `(reb-match-3                             ((t (:background ,atom-one-dark-black :foreground ,atom-one-dark-orange-2 :weight semi-bold))))
+   `(reb-match-1                             ((t (:background ,atom-one-dark-black :foreground ,atom-one-dark-purple :weight normal))))
+   `(reb-match-2                             ((t (:background ,atom-one-dark-black :foreground ,atom-one-dark-green :weight normal))))
+   `(reb-match-3                             ((t (:background ,atom-one-dark-black :foreground ,atom-one-dark-orange-2 :weight normal))))
 
    ;; desktop-entry
    `(desktop-entry-deprecated-keyword-face   ((t (:inherit font-lock-warning-face))))
