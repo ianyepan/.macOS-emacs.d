@@ -683,6 +683,14 @@
    ;; hl-todo
    `(hl-todo                                 ((t (:inverse-video t))))
 
+   ;; neotree
+   `(neo-dir-link-face                       ((t (:foreground "#cdd5e4" :family "Sans Serif"))))
+   `(neo-header-face                         ((t (:foreground "#cdd5e4" :family "Sans Serif"))))
+   `(neo-banner-face                         ((t (:foreground "#cdd5e4" :family "Sans Serif"))))
+   `(neo-root-dir-face                       ((t (:foreground "#cdd5e4" :family "Sans Serif"))))
+   `(neo-file-link-face                      ((t (:foreground "#9da5b4" :family "Sans Serif"))))
+   `(neo-expand-btn-face                     ((t (:foreground "#9da5b4"))))
+
 
    ;; undo-tree
    `(undo-tree-visualizer-current-face       ((t (:foreground ,atom-one-dark-red-1))))
