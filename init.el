@@ -56,7 +56,7 @@
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)
-  (setq-default line-spacing 0)
+  (setq-default line-spacing 3)
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width ian/indent-width))
 
@@ -114,7 +114,7 @@
 
 (use-package js
   :ensure nil
-  :mode ("\\.jsx?\\'" . js-jsx-mode)
+  ;; :mode ("\\.jsx?\\'" . js-jsx-mode)
   :config
   (setq js-indent-level ian/indent-width)
   (add-hook 'flycheck-mode-hook
@@ -166,8 +166,8 @@
   :preface
   (defun ian/set-default-font ()
     (interactive)
-    (when (member "Meslo LG L" (font-family-list))
-      (set-face-attribute 'default nil :family "Meslo LG L"))
+    (when (member "Source Code Pro" (font-family-list))
+      (set-face-attribute 'default nil :family "Source Code Pro"))
     (set-face-attribute 'default nil
                         :height 140
                         :weight 'normal))
@@ -337,7 +337,7 @@
 (use-package ivy
   :hook (after-init . ivy-mode)
   :config
-  (setq ivy-height 12)
+  (setq ivy-height 15)
   (setq ivy-display-style nil)
   (setq ivy-re-builders-alist
         '((counsel-rg            . ivy--regex-plus)
@@ -421,6 +421,7 @@
           js-jsx-mode     ; ts-ls (tsserver wrapper)
           typescript-mode ; ts-ls (tsserver wrapper)
           python-mode     ; mspyls
+          web-mode
           ) . lsp)
   :commands lsp
   :config
@@ -543,21 +544,25 @@
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode)
          ("\\.css\\'"   . web-mode)
+         ("\\.jsx?\\'"  . web-mode)
          ("\\.json\\'"  . web-mode))
   :config
   (setq web-mode-markup-indent-offset ian/indent-width)
   (setq web-mode-code-indent-offset ian/indent-width)
-  (setq web-mode-css-indent-offset ian/indent-width))
+  (setq web-mode-css-indent-offset ian/indent-width)
+  (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
 (use-package emmet-mode
-  :hook ((html-mode . emmet-mode)
-         (css-mode  . emmet-mode)
-         (js-mode   . emmet-mode)
-         (js-jsx-mode   . emmet-mode)
-         (web-mode  . emmet-mode))
+  :hook ((html-mode   . emmet-mode)
+         (css-mode    . emmet-mode)
+         (js-mode     . emmet-mode)
+         (js-jsx-mode . emmet-mode)
+         (web-mode    . emmet-mode))
   :config
   (setq emmet-insert-flash-time 0.001) ; basically disabling it
   (add-hook 'js-jsx-mode-hook #'(lambda ()
+                                  (setq-local emmet-expand-jsx-className? t)))
+  (add-hook 'web-mode-hook #'(lambda ()
                                   (setq-local emmet-expand-jsx-className? t))))
 
 (use-package format-all
