@@ -32,8 +32,8 @@
   "Atom One Dark - An Emacs port of the Atom One Dark theme from Atom.io.")
 
 (defvar atom-one-dark-colors-alist
-  (let* ((256color  (eq (display-color-cells (selected-frame)) 256))
-         (colors `(("atom-one-dark-accent"   . "#528BFF")
+  (let*                                      ((256color  (eq (display-color-cells (selected-frame)) 256))
+         (colors `                           (("atom-one-dark-accent"   . "#528BFF")
                    ("atom-one-dark-fg"       . (if ,256color "color-248" "#ABB2BF"))
                    ("atom-one-dark-bg"       . (if ,256color "color-235" "#282C34"))
                    ("atom-one-dark-bg-1"     . (if ,256color "color-234" "#121417"))
@@ -60,7 +60,7 @@
 (defmacro atom-one-dark-with-color-variables (&rest body)
   "Bind the colors list around BODY."
   (declare (indent 0))
-  `(let ((class '((class color) (min-colors 89)))
+  `(let                                      ((class '((class color) (min-colors 89)))
          ,@ (mapcar (lambda (cons)
                       (list (intern (car cons)) (cdr cons)))
                     atom-one-dark-colors-alist))
@@ -90,7 +90,7 @@
 
    `(font-lock-builtin-face                  ((t (:foreground ,atom-one-dark-cyan))))
    `(font-lock-comment-face                  ((t (:foreground ,atom-one-dark-mono-3 :slant italic))))
-   `(font-lock-comment-delimiter-face ((default (:inherit (font-lock-comment-face)))))
+   `(font-lock-comment-delimiter-face        ((default (:inherit (font-lock-comment-face)))))
    `(font-lock-doc-face                      ((t (:inherit (font-lock-string-face)))))
    `(font-lock-function-name-face            ((t (:foreground ,atom-one-dark-blue))))
    `(font-lock-keyword-face                  ((t (:foreground ,atom-one-dark-purple :weight normal))))
@@ -479,10 +479,10 @@
    `(persp-selected-face                     ((t (:foreground ,atom-one-dark-blue))))
 
    ;; powerline
-   `(powerline-active1 ((,class (:background ,atom-one-dark-bg-hl :foreground ,atom-one-dark-purple))))
-   `(powerline-active2 ((,class (:background ,atom-one-dark-bg-hl :foreground ,atom-one-dark-purple))))
-   `(powerline-inactive1 ((,class (:background ,atom-one-dark-bg :foreground ,atom-one-dark-fg))))
-   `(powerline-inactive2 ((,class (:background ,atom-one-dark-bg :foreground ,atom-one-dark-fg))))
+   `(powerline-active1                       ((,class (:background ,atom-one-dark-bg-hl :foreground ,atom-one-dark-purple))))
+   `(powerline-active2                       ((,class (:background ,atom-one-dark-bg-hl :foreground ,atom-one-dark-purple))))
+   `(powerline-inactive1                     ((,class (:background ,atom-one-dark-bg :foreground ,atom-one-dark-fg))))
+   `(powerline-inactive2                     ((,class (:background ,atom-one-dark-bg :foreground ,atom-one-dark-fg))))
 
    ;; rainbow-delimiters
    `(rainbow-delimiters-depth-1-face         ((t (:foreground ,atom-one-dark-blue))))
@@ -507,8 +507,8 @@
    `(elixir-attribute-face                   ((t (:foreground ,atom-one-dark-red-1))))
 
    ;; show-paren
-   `(show-paren-match ((,class (:foreground ,atom-one-dark-purple :inherit bold :underline t))))
-   `(show-paren-mismatch ((,class (:foreground ,atom-one-dark-red-1 :inherit bold :underline t))))
+   `(show-paren-match                        ((,class (:foreground ,atom-one-dark-purple :inherit bold :underline t))))
+   `(show-paren-mismatch                     ((,class (:foreground ,atom-one-dark-red-1 :inherit bold :underline t))))
 
    ;; sh-mode
    `(sh-heredoc                              ((t (:inherit font-lock-string-face :slant italic))))
@@ -536,14 +536,14 @@
    `(lispyville-special-face                 ((t (:foreground ,atom-one-dark-red-1))))
 
    ;; spaceline
-   `(spaceline-flycheck-error  ((,class (:foreground ,atom-one-dark-red-1))))
-   `(spaceline-flycheck-info   ((,class (:foreground ,atom-one-dark-green))))
-   `(spaceline-flycheck-warning((,class (:foreground ,atom-one-dark-orange-1))))
-   `(spaceline-python-venv ((,class (:foreground ,atom-one-dark-purple))))
+   `(spaceline-flycheck-error                ((,class (:foreground ,atom-one-dark-red-1))))
+   `(spaceline-flycheck-info                 ((,class (:foreground ,atom-one-dark-green))))
+   `(spaceline-flycheck-warning              ((,class (:foreground ,atom-one-dark-orange-1))))
+   `(spaceline-python-venv                   ((,class (:foreground ,atom-one-dark-purple))))
 
    ;; solaire mode
-   `(solaire-default-face ((,class (:inherit default :background ,atom-one-dark-black))))
-   `(solaire-minibuffer-face ((,class (:inherit default :background ,atom-one-dark-black))))
+   `(solaire-default-face                    ((,class (:inherit default :background ,atom-one-dark-black))))
+   `(solaire-minibuffer-face                 ((,class (:inherit default :background ,atom-one-dark-black))))
 
    ;; web-mode
    `(web-mode-doctype-face                   ((t (:inherit font-lock-comment-face))))
@@ -594,15 +594,15 @@
    `(term-color-yellow                       ((t (:foreground ,atom-one-dark-orange-1))))
 
    ;; tabbar
-   `(tabbar-default ((,class (:foreground ,atom-one-dark-fg :background ,atom-one-dark-black))))
-   `(tabbar-highlight ((,class (:underline t))))
-   `(tabbar-button ((,class (:foreground ,atom-one-dark-fg :background ,atom-one-dark-bg))))
-   `(tabbar-button-highlight ((,class (:inherit 'tabbar-button :inverse-video t))))
-   `(tabbar-modified ((,class (:inherit tabbar-button :foreground ,atom-one-dark-purple :weight light :slant italic))))
-   `(tabbar-unselected ((,class (:inherit tabbar-default :foreground ,atom-one-dark-fg :background ,atom-one-dark-black :slant italic :underline nil :box (:line-width 1 :color ,atom-one-dark-bg)))))
-   `(tabbar-unselected-modified ((,class (:inherit tabbar-modified :background ,atom-one-dark-black :underline nil :box (:line-width 1 :color ,atom-one-dark-bg)))))
-   `(tabbar-selected ((,class (:inherit tabbar-default :foreground ,atom-one-dark-fg :background ,atom-one-dark-bg :weight normal :underline nil :box (:line-width 1 :color ,atom-one-dark-bg)))))
-   `(tabbar-selected-modified ((,class (:inherit tabbar-selected :foreground ,atom-one-dark-purple :underline nil :box (:line-width 1 :color ,atom-one-dark-bg)))))
+   `(tabbar-default                          ((,class (:foreground ,atom-one-dark-fg :background ,atom-one-dark-black))))
+   `(tabbar-highlight                        ((,class (:underline t))))
+   `(tabbar-button                           ((,class (:foreground ,atom-one-dark-fg :background ,atom-one-dark-bg))))
+   `(tabbar-button-highlight                 ((,class (:inherit 'tabbar-button :inverse-video t))))
+   `(tabbar-modified                         ((,class (:inherit tabbar-button :foreground ,atom-one-dark-purple :weight light :slant italic))))
+   `(tabbar-unselected                       ((,class (:inherit tabbar-default :foreground ,atom-one-dark-fg :background ,atom-one-dark-black :slant italic :underline nil :box (:line-width 1 :color ,atom-one-dark-bg)))))
+   `(tabbar-unselected-modified              ((,class (:inherit tabbar-modified :background ,atom-one-dark-black :underline nil :box (:line-width 1 :color ,atom-one-dark-bg)))))
+   `(tabbar-selected                         ((,class (:inherit tabbar-default :foreground ,atom-one-dark-fg :background ,atom-one-dark-bg :weight normal :underline nil :box (:line-width 1 :color ,atom-one-dark-bg)))))
+   `(tabbar-selected-modified                ((,class (:inherit tabbar-selected :foreground ,atom-one-dark-purple :underline nil :box (:line-width 1 :color ,atom-one-dark-bg)))))
 
    ;; linum
    `(linum                                   ((t (:foreground ,atom-one-dark-gutter :background ,atom-one-dark-bg))))
@@ -657,8 +657,7 @@
 
    ;; realgud
    `(realgud-overlay-arrow1                  ((t (:foreground ,atom-one-dark-green))))
-   `(realgud-overlay-arrow3                  ((t (:foreground ,atom-one-dark-orange-1))   `(realgud-overlay-arrow2        ((t (:foreground ,atom-one-dark-orange-2))))
-                                              ))
+   `(realgud-overlay-arrow3                  ((t (:foreground ,atom-one-dark-orange-1))   `(realgud-overlay-arrow2        ((t (:foreground ,atom-one-dark-orange-2))))))
    '(realgud-bp-enabled-face                 ((t (:inherit (error)))))
    `(realgud-bp-disabled-face                ((t (:inherit (secondary-selection)))))
    `(realgud-bp-line-enabled-face            ((t (:box (:color ,atom-one-dark-red-1)))))
@@ -748,14 +747,14 @@ Current modes, and their faces, impacted by this variable:
   (interactive)
   (when (or atom-one-dark-theme-force-faces-for-mode (called-interactively-p))
     (atom-one-dark-with-color-variables
-      (cond
-       ((member major-mode '(js2-mode))
-        (face-remap-add-relative 'font-lock-constant-face :foreground atom-one-dark-orange-1)
-        (face-remap-add-relative 'font-lock-doc-face '(:inherit (font-lock-comment-face)))
-        (face-remap-add-relative 'font-lock-variable-name-face :foreground atom-one-dark-mono-1))
-       ((member major-mode '(html-mode))
-        (face-remap-add-relative 'font-lock-function-name-face :foreground atom-one-dark-red-1)
-        (face-remap-add-relative 'font-lock-variable-name-face :foreground atom-one-dark-orange-1))))))
+     (cond
+      ((member major-mode '(js2-mode))
+       (face-remap-add-relative 'font-lock-constant-face :foreground atom-one-dark-orange-1)
+       (face-remap-add-relative 'font-lock-doc-face '(:inherit (font-lock-comment-face)))
+       (face-remap-add-relative 'font-lock-variable-name-face :foreground atom-one-dark-mono-1))
+      ((member major-mode '(html-mode))
+       (face-remap-add-relative 'font-lock-function-name-face :foreground atom-one-dark-red-1)
+       (face-remap-add-relative 'font-lock-variable-name-face :foreground atom-one-dark-orange-1))))))
 
 (add-hook 'after-change-major-mode-hook 'atom-one-dark-theme-change-faces-for-mode)
 
