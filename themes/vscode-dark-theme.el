@@ -53,6 +53,7 @@
       (type    "#d4d4d4")
       (var     "#d4d4d4")
       (warning "#ef2929"))
+
   (custom-theme-set-faces
    'vscode-dark
    `(default                                  ((,class (:background ,bg1 :foreground ,fg1))))
@@ -92,8 +93,8 @@
    `(link                                     ((,class (:foreground ,const :underline t))))
    `(warning                                  ((,class (:foreground ,warning))))
    `(dired-directory                          ((t (:inherit (font-lock-keyword-face)))))
-   `(line-number                              ((,class (:foreground ,bg4))))
-   `(line-number-current-line                 ((,class (:foreground ,comment))))
+   `(line-number                              ((,class (:foreground "#838383" :background nil))))
+   `(line-number-current-line                 ((,class (:foreground "#838383" :background nil))))
 
    `(mode-line                                ((,class (:bold nil :foreground ,fg1 :background "#237AD3"))))
    `(mode-line-inactive                       ((,class (:bold nil :foreground ,fg2 :background "#237AD3"))))
@@ -261,10 +262,29 @@
    `(web-mode-function-name-face              ((,class (:inherit ,font-lock-function-name-face))))
    `(web-mode-string-face                     ((,class (:foreground ,str))))
    `(web-mode-type-face                       ((,class (:inherit ,font-lock-type-face))))
-   `(web-mode-html-attr-name-face             ((,class (:foreground ,func))))
-   `(web-mode-html-attr-value-face            ((,class (:foreground ,keyword))))
+   `(web-mode-html-attr-name-face             ((,class (:foreground ,var))))
+   `(web-mode-html-attr-value-face            ((,class (:foreground ,str))))
    `(web-mode-warning-face                    ((,class (:inherit ,font-lock-warning-face))))
-   `(web-mode-html-tag-face                   ((,class (:foreground ,builtin))))
+   `(web-mode-html-tag-face                   ((,class (:foreground ,keyword))))
+   `(web-mode-html-bracket-face               ((,class (:foreground "#808080"))))
+
+   ;; ediff
+   `(ediff-fine-diff-Ancestor                ((t (:background "#885555"))))
+   `(ediff-fine-diff-A                       ((t (:background "#885555"))))
+   `(ediff-fine-diff-B                       ((t (:background "#558855"))))
+   `(ediff-fine-diff-C                       ((t (:background "#555588"))))
+   `(ediff-current-diff-Ancestor             ((t (:background "#663333"))))
+   `(ediff-current-diff-A                    ((t (:background "#663333"))))
+   `(ediff-current-diff-B                    ((t (:background "#336633"))))
+   `(ediff-current-diff-C                    ((t (:background "#333366"))))
+   `(ediff-even-diff-Ancestor                ((t (:background "#444444"))))
+   `(ediff-even-diff-A                       ((t (:background "#444444"))))
+   `(ediff-even-diff-B                       ((t (:background "#444444"))))
+   `(ediff-even-diff-C                       ((t (:background "#444444"))))
+   `(ediff-odd-diff-Ancestor                 ((t (:background "#444444"))))
+   `(ediff-odd-diff-A                        ((t (:background "#444444"))))
+   `(ediff-odd-diff-B                        ((t (:background "#444444"))))
+   `(ediff-odd-diff-C                        ((t (:background "#444444"))))
 
    `(jde-java-font-lock-package-face          ((t (:foreground ,var))))
    `(jde-java-font-lock-public-face           ((t (:foreground ,keyword))))
@@ -285,7 +305,7 @@
 
    `(solaire-default-face                     ((t (:inherit default :background ,bg2))))
    `(solaire-minibuffer-face                  ((t (:inherit default :background ,bg2))))
-   `(solaire-hl-line-face                     ((t (:inherit hl-line :background ,bg3 :extend t))))
+   `(solaire-hl-line-face                     ((t (:inherit hl-line :background ,bg3))))
    `(solaire-org-hide-face                    ((t (:inherit org-hide :background ,bg2))))
 
 
