@@ -456,10 +456,10 @@
                 (call-interactively #'lsp-workspace-restart)))
   (pyvenv-mode +1))
 
-(use-package typescript-mode
-  :mode ("\\.tsx?\\'" . typescript-mode)
-  :config
-  (setq typescript-indent-level ian/indent-width))
+;; (use-package typescript-mode
+;;   :mode ("\\.tsx?\\'" . typescript-mode)
+;;   :config
+;;   (setq typescript-indent-level ian/indent-width))
 
 (use-package cobol-mode
   :config
@@ -545,6 +545,7 @@
   :mode (("\\.html?\\'" . web-mode)
          ("\\.css\\'"   . web-mode)
          ("\\.jsx?\\'"  . web-mode)
+         ("\\.tsx?\\'"  . web-mode)
          ("\\.json\\'"  . web-mode))
   :config
   (setq web-mode-markup-indent-offset ian/indent-width)
@@ -563,7 +564,7 @@
   (add-hook 'js-jsx-mode-hook #'(lambda ()
                                   (setq-local emmet-expand-jsx-className? t)))
   (add-hook 'web-mode-hook #'(lambda ()
-                                  (setq-local emmet-expand-jsx-className? t))))
+                               (setq-local emmet-expand-jsx-className? t))))
 
 (use-package format-all
   :preface
