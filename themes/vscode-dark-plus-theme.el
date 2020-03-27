@@ -309,7 +309,7 @@
 
 
    `(ivy-confirm-face                         ((t (:inherit minibuffer-prompt :foreground ,keyword))))
-   `(ivy-current-match                        ((t (:background "#08304C" :extend t))))
+   `(ivy-current-match                        ((t (:background ,bg-hl :extend t))))
    `(ivy-highlight-face                       ((t (:inherit font-lock-builtin-face))))
    `(ivy-match-required-face                  ((t (:inherit minibuffer-prompt :foreground ,warning))))
    `(ivy-minibuffer-match-face-1              ((t (:inherit isearch))))
@@ -336,6 +336,14 @@
    `(diff-hl-insert                           ((t (:foreground ,tw-g))))
    `(diff-hl-delete                           ((t (:foreground ,tw-r))))
    `(diff-hl-change                           ((t (:foreground ,tw-b))))
+
+   ;; neotree
+   `(neo-dir-link-face                       ((t (:foreground "#cccccc" :family "Sans Serif"))))
+   `(neo-header-face                         ((t (:foreground "#cccccc" :family "Sans Serif"))))
+   `(neo-banner-face                         ((t (:foreground "#cccccc" :family "Sans Serif"))))
+   `(neo-root-dir-face                       ((t (:foreground "#cccccc" :family "Sans Serif"))))
+   `(neo-file-link-face                      ((t (:foreground "#aaaaaa" :family "Sans Serif"))))
+   `(neo-expand-btn-face                     ((t (:foreground "#aaaaaa"))))
 
    `(sml/global                               ((t :foreground ,fg1 :weight normal)))
    `(sml/filename                             ((t :foreground ,fg1 :weight normal)))
