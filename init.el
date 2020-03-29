@@ -426,7 +426,7 @@
   :commands lsp
   :config
   (setq lsp-auto-guess-root t)
-  (setq lsp-diagnostic-package :none)
+  ;; (setq lsp-diagnostic-package :none)
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-signature-auto-activate nil)
