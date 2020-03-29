@@ -320,7 +320,7 @@
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
   :config
-  (setq git-gutter:update-interval 0.05))
+  (setq git-gutter:update-interval 0.1))
 
 (use-package git-gutter-fringe
   :config
