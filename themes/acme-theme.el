@@ -18,7 +18,6 @@
 ;;; Commentary:
 
 ;;; Credits:
-
 ;; This theme was modified from plan9-theme.el by John Louis Del Rosario
 
 ;;; Code:
