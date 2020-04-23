@@ -44,9 +44,9 @@
     ("yellow-light"  . "#f8fce8")
     ("green"         . "#005500")
     ("green-light"   . "#e8fce8")
-    ("blue"          . "#004488")
+    ("blue"          . "#1054af")
     ("blue-light"    . "#e1faff")
-    ("purple"        . "#555598")
+    ("purple"        . "#555599")
     ("purple-light"  . "#ffeaff")))
 
 (defmacro acme/with-color-variables (&rest body)
@@ -126,14 +126,14 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(font-lock-keyword-face                       ((t (:foreground ,blue :weight bold)))) ; if, else, for, while, return...
    `(font-lock-type-face                          ((t (:foreground ,fg :weight bold)))) ; int, float, string, void...
    `(font-lock-constant-face                      ((t (:foreground ,fg :weight bold)))) ; NULL, nullptr, true, false...
+   `(font-lock-variable-name-face                 ((t (:foreground ,fg :weight normal))))
    `(font-lock-comment-face                       ((t (:foreground ,green :italic nil))))
    `(font-lock-comment-delimiter-face             ((t (:foreground ,green :italic nil))))
    `(font-lock-doc-face                           ((t (:foreground ,yellow :italic t))))
    `(font-lock-negation-char-face                 ((t (:foreground ,red :weight normal))))
-   `(font-lock-preprocessor-face                  ((t (:foreground ,green :weight normal))))
+   `(font-lock-preprocessor-face                  ((t (:foreground ,red :weight normal))))
    `(font-lock-regexp-grouping-construct          ((t (:foreground ,red :weight normal))))
    `(font-lock-regexp-grouping-backslash          ((t (:foreground ,red :weight normal))))
-   `(font-lock-variable-name-face                 ((t (:foreground ,fg))))
    `(font-lock-warning-face                       ((t (:foreground ,red :weight normal))))
 
  ;;;; table
