@@ -37,7 +37,7 @@
     ("fg-light"      . "#CCCCB7")
     ("highlight"     . "#e8eb98")
     ("cyan"          . "#007777")
-    ("cyan-light"    . "#98ece8")
+    ("cyan-light"    . "#a8efeb")
     ("red"           . "#880000")
     ("red-light"     . "#f8e8e8")
     ("yellow"        . "#888838")
@@ -132,8 +132,8 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(font-lock-doc-face                           ((t (:foreground ,yellow :italic t))))
    `(font-lock-negation-char-face                 ((t (:foreground ,red :weight normal))))
    `(font-lock-preprocessor-face                  ((t (:foreground ,red :weight normal))))
-   `(font-lock-regexp-grouping-construct          ((t (:foreground ,red :weight normal))))
-   `(font-lock-regexp-grouping-backslash          ((t (:foreground ,red :weight normal))))
+   `(font-lock-regexp-grouping-construct          ((t (:foreground ,purple :weight normal))))
+   `(font-lock-regexp-grouping-backslash          ((t (:foreground ,purple :weight normal))))
    `(font-lock-warning-face                       ((t (:foreground ,red :weight normal))))
 
  ;;;; table
@@ -283,7 +283,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(flycheck-fringe-info                         ((t (:foreground ,purple :weight normal))))
 
 ;;;;; highlight-symbol
-   `(highlight-symbol-face                        ((t (:background ,blue-light))))
+   `(highlight-symbol-face                        ((t (:background ,bg-alt2))))
 
 ;;;;; highlight-numbers
    `(highlight-numbers-number                     ((t (:foreground ,blue))))
@@ -312,7 +312,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(indent-guide-face                            ((t (:foreground ,highlight))))
 
 ;;;;; ivy
-   `(ivy-current-match                            ((t (:background ,highlight))))
+   `(ivy-current-match                            ((t (:background ,cyan-light))))
    `(ivy-minibuffer-match-face-1                  ((t (:background ,bg-alt))))
    `(ivy-minibuffer-match-face-2                  ((t (:background ,cyan-light))))
    `(ivy-minibuffer-match-face-3                  ((t (:background ,purple-light))))
