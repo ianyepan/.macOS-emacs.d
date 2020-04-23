@@ -1,4 +1,4 @@
-;;; acme-theme.el --- A color theme for Emacs based on Acme
+;;; acme-theme.el --- A color theme for Emacs based on Acme & Sam from Plan 9
 
 ;; Copyright (C) 2020 Ian Yi-En Pan
 
@@ -29,32 +29,25 @@
 (defvar acme-colors-alist
   '(("bg"            . "#FFFFE8")
     ("bg-alt"        . "#FFFFD8")
+    ("bg-alt2"       . "#eFeFd8")
     ("bg-dark"       . "#E5E5D0")
-
     ("fg"            . "#000000")
     ("fg-alt"        . "#B8B09A")
     ("fg-alt-dark"   . "#988d6d")
     ("fg-light"      . "#CCCCB7")
-
     ("highlight"     . "#e8eb98")
-
-    ("cyan"          . "#3f9898")
+    ("cyan"          . "#007777")
     ("cyan-light"    . "#98ece8")
-
-    ("red"           . "#a84c47")
+    ("red"           . "#880000")
     ("red-light"     . "#f8e8e8")
-
     ("yellow"        . "#888838")
     ("yellow-light"  . "#f8fce8")
-
-    ("green"         . "#30784f")
+    ("green"         . "#005500")
     ("green-light"   . "#e8fce8")
-
-    ("blue"          . "#0067a8")
+    ("blue"          . "#004488")
     ("blue-light"    . "#e1faff")
-
-    ("purple"        . "#8888c8")
-    ("purple-light"  . "#e7fcf7")))
+    ("purple"        . "#555598")
+    ("purple-light"  . "#ffeaff")))
 
 (defmacro acme/with-color-variables (&rest body)
   "`let' bind all colors defined in `acme-colors-alist' around BODY.
@@ -80,10 +73,10 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(default                                      ((t (:foreground ,fg :background ,bg))))
    `(cursor                                       ((t (:foreground ,bg :background ,fg))))
    `(escape-glyph                                 ((t (:foreground ,cyan-light :bold nil))))
-   `(fringe                                       ((t (:foreground ,fg :background ,bg-dark))))
-   `(line-number                                  ((t (:foreground ,fg :background ,bg-dark))))
-   `(line-number-current-line                     ((t (:foreground ,fg :background ,bg-dark))))
-   `(header-line                                  ((t (:foreground ,purple :background ,purple-light :box (:line-width -1 :style released-button)))))
+   `(fringe                                       ((t (:foreground ,fg :background ,bg))))
+   `(line-number                                  ((t (:foreground ,fg :background ,bg-alt2))))
+   `(line-number-current-line                     ((t (:foreground ,fg :background ,bg-alt2))))
+   `(header-line                                  ((t (:foreground ,fg :background ,cyan-light :box t))))
    `(highlight                                    ((t (:background ,highlight))))
    `(success                                      ((t (:foreground ,green :weight normal))))
    `(warning                                      ((t (:foreground ,red :weight normal))))
@@ -128,18 +121,18 @@ Also bind `class' to ((class color) (min-colors 89))."
 
 ;;;;; font lock
    `(font-lock-builtin-face                       ((t (:foreground ,fg :weight normal))))
-   `(font-lock-comment-face                       ((t (:foreground ,yellow :italic t))))
-   `(font-lock-comment-delimiter-face             ((t (:foreground ,yellow :italic t))))
-   `(font-lock-constant-face                      ((t (:foreground ,fg :weight bold))))
-   `(font-lock-doc-face                           ((t (:foreground ,yellow :italic t))))
    `(font-lock-function-name-face                 ((t (:foreground ,fg :weight normal))))
+   `(font-lock-string-face                        ((t (:foreground ,red))))
    `(font-lock-keyword-face                       ((t (:foreground ,blue :weight bold)))) ; if, else, for, while, return...
+   `(font-lock-type-face                          ((t (:foreground ,fg :weight bold)))) ; int, float, string, void...
+   `(font-lock-constant-face                      ((t (:foreground ,fg :weight bold)))) ; NULL, nullptr, true, false...
+   `(font-lock-comment-face                       ((t (:foreground ,green :italic nil))))
+   `(font-lock-comment-delimiter-face             ((t (:foreground ,green :italic nil))))
+   `(font-lock-doc-face                           ((t (:foreground ,yellow :italic t))))
    `(font-lock-negation-char-face                 ((t (:foreground ,red :weight normal))))
    `(font-lock-preprocessor-face                  ((t (:foreground ,green :weight normal))))
    `(font-lock-regexp-grouping-construct          ((t (:foreground ,red :weight normal))))
    `(font-lock-regexp-grouping-backslash          ((t (:foreground ,red :weight normal))))
-   `(font-lock-string-face                        ((t (:foreground ,red))))
-   `(font-lock-type-face                          ((t (:foreground ,fg :weight bold)))) ; int, float, string, void...
    `(font-lock-variable-name-face                 ((t (:foreground ,fg))))
    `(font-lock-warning-face                       ((t (:foreground ,red :weight normal))))
 
@@ -289,19 +282,8 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(flycheck-fringe-warning                      ((t (:foreground ,yellow :weight normal))))
    `(flycheck-fringe-info                         ((t (:foreground ,purple :weight normal))))
 
-;;;;; git-gutter
-   `(git-gutter:added                             ((t (:foreground ,green :weight normal))))
-   `(git-gutter:deleted                           ((t (:foreground ,red :weight normal))))
-   `(git-gutter:modified                          ((t (:foreground ,blue :weight normal))))
-   `(git-gutter:unchanged                         ((t (:foreground ,fg :weight normal))))
-
-;;;;; git-gutter-fr
-   `(git-gutter-fr:added                          ((t (:foreground ,green  :weight normal))))
-   `(git-gutter-fr:deleted                        ((t (:foreground ,red :weight normal))))
-   `(git-gutter-fr:modified                       ((t (:foreground ,blue :weight normal))))
-
 ;;;;; highlight-symbol
-   `(highlight-symbol-face                        ((t (:background "#f0f0dd"))))
+   `(highlight-symbol-face                        ((t (:background ,blue-light))))
 
 ;;;;; highlight-numbers
    `(highlight-numbers-number                     ((t (:foreground ,blue))))
@@ -487,6 +469,14 @@ Also bind `class' to ((class color) (min-colors 89))."
 ;;;;; origami
    `(origami-fold-replacement-face                ((t (:foreground ,red :background ,red-light
                                                                    :box (:line-width -1)))))
+
+;;;;; git-gutter
+   `(git-gutter:added                             ((t (:foreground ,green :weight normal))))
+   `(git-gutter:deleted                           ((t (:foreground ,red :weight normal))))
+   `(git-gutter:modified                          ((t (:foreground ,blue :weight normal))))
+   `(git-gutter-fr:added                          ((t (:foreground ,green :weight normal))))
+   `(git-gutter-fr:deleted                        ((t (:foreground ,red :weight normal))))
+   `(git-gutter-fr:modified                       ((t (:foreground ,blue :weight normal))))
 
 ;;;;; mu4e, mail
    `(mu4e-header-highlight-face                   ((t (:background ,highlight))))
