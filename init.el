@@ -318,20 +318,11 @@
   :config
   (add-hook 'with-editor-mode-hook #'evil-insert-state))
 
-(use-package git-gutter
-  :hook (prog-mode . git-gutter-mode)
+(use-package diff-hl
+  :hook ((prog-mode . diff-hl-mode)
+         (diff-hl-mode . diff-hl-flydiff-mode))
   :config
-  (setq git-gutter:update-interval 0.1))
-
-(use-package git-gutter-fringe
-  :config
-  (setq-default fringes-outside-margins t)
-  (define-fringe-bitmap 'git-gutter-fr:added [224]
-    nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:modified [224]
-    nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240]
-    nil nil 'bottom))
+  (setq diff-hl-flydiff-delay 0.05))
 
 ;; Searching/sorting enhancements & project management
 
