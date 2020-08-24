@@ -166,10 +166,10 @@
   :preface
   (defun ian/set-default-font ()
     (interactive)
-    (when (member "Source Code Pro" (font-family-list))
-      (set-face-attribute 'default nil :family "Source Code Pro"))
+    (when (member "Consolas" (font-family-list))
+      (set-face-attribute 'default nil :family "Consolas"))
     (set-face-attribute 'default nil
-                        :height 140
+                        :height 160
                         :weight 'normal))
   :ensure nil
   :config
