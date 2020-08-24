@@ -16,16 +16,18 @@
 
 (custom-theme-set-faces
  'default-dark
- '(default                        ((t (:background "#111111" :foreground "#eeeeee"))))
- '(company-scrollbar-bg           ((t (:background "gray20"))))
- '(company-scrollbar-fg           ((t (:background "gray50"))))
- '(company-tooltip                ((t (:inherit default :background "gray20"))))
- '(company-tooltip-common         ((t (:inherit font-lock-constant-face))))
- '(company-tooltip-annotation     ((t (:inherit font-lock-builtin-face))))
- '(company-tooltip-selection      ((t (:inherit highlight))))
- '(ivy-current-match              ((t (:inherit highlight))))
- '(vterm-color-blue               ((t (:foreground "dodgerblue"))))
- '(git-gutter-fr:modified         ((t (:foreground "skyblue"))))
+ '(default                    ((t (:background "#060606" :foreground "#eeeeee"))))
+ '(company-scrollbar-bg       ((t (:background "gray20"))))
+ '(company-scrollbar-fg       ((t (:background "gray50"))))
+ '(company-tooltip            ((t (:inherit default :background "gray20"))))
+ '(company-tooltip-common     ((t (:inherit font-lock-constant-face))))
+ '(company-tooltip-annotation ((t (:inherit font-lock-builtin-face))))
+ '(company-tooltip-selection  ((t (:inherit highlight))))
+ '(ivy-current-match          ((t (:inherit highlight))))
+ '(vterm-color-blue           ((t (:foreground "dodgerblue"))))
+ '(git-gutter-fr:modified     ((t (:foreground "skyblue"))))
+ '(line-number                ((t (:foreground "#666666" :background nil))))
+ '(line-number-current-line   ((t (:foreground "#666666" :background nil))))
  )
 
 (provide-theme 'default-dark)
