@@ -369,11 +369,6 @@
   (setq swiper-action-recenter t)
   (setq swiper-goto-start-of-match t))
 
-(use-package ivy-rich
-  :config
-  (ivy-rich-mode +1)
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
-
 (use-package projectile
   :config
   (setq projectile-sort-order 'recentf)
