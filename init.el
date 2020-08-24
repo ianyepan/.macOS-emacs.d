@@ -259,8 +259,9 @@
 
 ;; GUI enhancements
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'atom-one-dark t)
+(use-package vscode-dark-plus-theme
+  :config
+  (load-theme 'vscode-dark-plus t))
 
 (use-package highlight-symbol
   :hook (prog-mode . highlight-symbol-mode)
