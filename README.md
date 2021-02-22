@@ -1,5 +1,5 @@
 <div align="center">
- <h3>Ian's Emacs Configuration</h3>
+ <h3>Ian's Emacs Configuration (on macOS)</h3>
 </div>
 
 <hr>
@@ -9,7 +9,7 @@
 </p>
 
 ### Thanks for dropping by!
-This is my personal Emacs configuration (on GNU Emacs 28.0.50). If you
+This is my personal Emacs configuration (tested on GNU Emacs 27 and 28). If you
 prefer an unopinionated Emacs "distro" that you could build upon,
 check out [this page](https://github.com/ianpan870102/yay-evil-emacs).
 
