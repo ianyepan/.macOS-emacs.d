@@ -8,10 +8,16 @@
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/EmacsIcon.svg/120px-EmacsIcon.svg.png" />
 </p>
 
+
+## Note:
+
+My main workstation currently is a Windows 10 and WSL2 Ubuntu 20.04 machine. Therefore, the most up-to-date config that I'm using now is actually right [here](https://github.com/ianpan870102/.wsl-emacs.d). Truth be told, there isn't much difference between the two.
+<br><br><br>
 ### Thanks for dropping by!
 This is my personal Emacs configuration (tested on GNU Emacs 27 and 28). If you
 prefer an unopinionated Emacs "distro" that you could build upon,
 check out [this page](https://github.com/ianpan870102/yay-evil-emacs).
+
 
 ### Installation
 Back up your `~/.emacs.d/` first (if you have one):
@@ -31,4 +37,4 @@ git clone https://github.com/ianpan870102/.personal-emacs.d.git ~/.config/emacs/
 
 ### "Rolling" Release
 I will constantly push new commits since *a real Emacser* is never
-completely satisfied with his/her setup.
+completely satisfied with his/her setup ;-)
