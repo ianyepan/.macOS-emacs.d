@@ -9,9 +9,9 @@
 </p>
 
 
-## Note:
+### Note:
 
-My main workstation currently is a Windows 10 and WSL2 Ubuntu 20.04 machine. Therefore, the most up-to-date config that I'm using now is actually right [here](https://github.com/ianpan870102/.wsl-emacs.d). Truth be told, there isn't much difference between the two.
+My current main workstation is an Arch Linux (WSL2) machine. Therefore, the most up-to-date config that I'm using now is actually right [here](https://github.com/ianpan870102/.wsl-emacs.d).
 <br><br><br>
 ### Thanks for dropping by!
 This is my personal Emacs configuration (tested on GNU Emacs 27 and 28). If you
