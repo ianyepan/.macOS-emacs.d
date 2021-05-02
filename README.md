@@ -9,10 +9,10 @@
 </p>
 
 
-### Note:
+### ⚠ Note:
 
 My current main workstation is an Arch Linux (WSL2) machine. Therefore, the most up-to-date config that I'm using now is actually right [here](https://github.com/ianpan870102/.wsl-emacs.d).
-<br><br><br>
+<br><br>
 ### Thanks for dropping by!
 This is my personal Emacs configuration (tested on GNU Emacs 27 and 28). If you
 prefer an unopinionated Emacs "distro" that you could build upon,
