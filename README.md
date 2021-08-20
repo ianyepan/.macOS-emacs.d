@@ -11,12 +11,12 @@
 
 ### ⚠ Note:
 
-My current workstation is an Arch Linux (WSL2) machine. Therefore, the most up-to-date config that I'm using now is actually [here](https://github.com/ianpan870102/.wsl-emacs.d).
+My current workstation is an Arch Linux (WSL2) machine. Therefore, the most up-to-date config that I'm using now is actually [here](https://github.com/ianyepan/.wsl-emacs.d).
 <br><br>
 ### Thanks for dropping by!
 This is my personal Emacs configuration (tested on GNU Emacs 27 and 28). If you
 prefer an unopinionated Emacs "distro" that you could build upon,
-check out [this page](https://github.com/ianpan870102/yay-evil-emacs).
+check out [this page](https://github.com/ianyepan/yay-evil-emacs).
 
 
 ### Installation
