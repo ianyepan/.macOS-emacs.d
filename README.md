@@ -11,7 +11,9 @@
 
 ### ⚠ Note:
 
-My current workstation is an Arch Linux (WSL2) machine. Therefore, the most up-to-date config that I'm using now is actually [here](https://github.com/ianyepan/.wsl-emacs.d).
+My current workstation is an Arch Linux (WSL2) machine. Therefore, the most up-to-date config that I'm using now is actually [here](https://github.com/ianyepan/.wsl-emacs.d). 
+
+99.9% of the things I configured there will work on macOS too.
 <br><br>
 ### Thanks for dropping by!
 This is my personal Emacs configuration (tested on GNU Emacs 27 and 28). If you
