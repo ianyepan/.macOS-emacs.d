@@ -9,7 +9,7 @@
 </p>
 
 
-### ⚠ Note:
+### ⚠️ Note:
 
 **My current workstation is an Arch Linux (WSL2) machine. Therefore, the most up-to-date config that I'm using now is actually [here](https://github.com/ianyepan/.wsl-emacs.d).**
 
